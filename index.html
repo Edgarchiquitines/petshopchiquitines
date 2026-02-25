@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Petshop Chiquitines - Inicio</title>
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <!-- Desktop Navigation (Centered) -->
+                <nav class="nav-desktop">
+                    <a href="index.html" class="nav-link active">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                        </svg>
+                        <span>Inicio</span>
+                    </a>
+                    <a href="products.html" class="nav-link">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="16.5" y1="9.4" x2="7.5" y2="4.21"></line>
+                            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                            <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                            <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                        </svg>
+                        <span>Productos</span>
+                    </a>
+                </nav>
+
+                <!-- Cart Icon (Right) -->
+                <div class="header-actions">
+                    <a href="cart.html" class="cart-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="9" cy="21" r="1"></circle>
+                            <circle cx="20" cy="21" r="1"></circle>
+                            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                        </svg>
+                        <span class="cart-count" id="cartCount">0</span>
+                    </a>
+                    <button class="mobile-menu-btn" id="mobileMenuBtn">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="3" y1="12" x2="21" y2="12"></line>
+                            <line x1="3" y1="6" x2="21" y2="6"></line>
+                            <line x1="3" y1="18" x2="21" y2="18"></line>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div class="mobile-menu" id="mobileMenu">
+            <nav>
+                <a href="index.html" class="mobile-nav-link">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                    </svg>
+                    <span>Inicio</span>
+                </a>
+                <a href="products.html" class="mobile-nav-link">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                    </svg>
+                    <span>Productos</span>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section with Gradient -->
+    <section class="hero hero-gradient">
+        <div class="container">
+            <div class="hero-content">
+                <h1>
+                    Bienvenido a<br>
+                    <img src="assets/logo.png" alt="PetShop by Chiquitines" class="hero-logo">
+                </h1>
+                <p>Los mejores productos para tu mascota con increíbles descuentos</p>
+                <a href="products.html" class="btn-primary">
+                    <span>Ver Todos los Productos</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>🔥 Productos en Oferta</h2>
+                <p>Aprovecha nuestras mejores ofertas del momento</p>
+            </div>
+
+            <div id="productsGrid" class="products-grid">
+                <!-- Loading skeleton -->
+                <div class="loading-skeleton"></div>
+                <div class="loading-skeleton"></div>
+                <div class="loading-skeleton"></div>
+                <div class="loading-skeleton"></div>
+                <div class="loading-skeleton"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>¿Buscas algo específico?</h2>
+            <p>Explora nuestro catálogo completo con productos para todas las mascotas</p>
+            <a href="products.html" class="btn-primary">
+                <span>Explorar Catálogo</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p class="copyright">© 2026 Chiquitines. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+    <script>
+        // Load products on home page
+        document.addEventListener('DOMContentLoaded', function() {
+            loadHomeProducts();
+        });
+
+        async function loadHomeProducts() {
+    try {
+        const archivos = ['products1.json', 'products2.json'];
+
+        const resultados = await Promise.all(
+            archivos.map(archivo => fetch(archivo).then(r => r.json()))
+        );
+
+        const products = resultados.flat();
+
+        // Lo demás queda IGUAL ↓
+        const onSaleProducts = products.filter(p => p.isOnSale && p.stock > 0);
+        
+        const grid = document.getElementById('productsGrid');
+        
+        if (onSaleProducts.length === 0) {
+            grid.innerHTML = '<div class="empty-state"><p>No hay productos en oferta</p><a href="products.html">Ver todos los productos</a></div>';
+            return;
+        }
+        
+        grid.innerHTML = onSaleProducts.map(product => createProductCard(product)).join('');
+    } catch (error) {
+        console.error('Error loading products:', error);
+        document.getElementById('productsGrid').innerHTML = '<div class="empty-state"><p>Error al cargar productos</p></div>';
+    }
+}
+    </script>
+</body>
+</html>

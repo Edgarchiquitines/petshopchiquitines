@@ -1,0 +1,54 @@
+{
+  "name": "Product",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Nombre del producto"
+    },
+    "description": {
+      "type": "string",
+      "description": "Descripción del producto"
+    },
+    "price": {
+      "type": "number",
+      "description": "Precio del producto"
+    },
+    "originalPrice": {
+      "type": "number",
+      "description": "Precio original antes de oferta"
+    },
+    "brand": {
+      "type": "string",
+      "description": "Marca del producto"
+    },
+    "category": {
+      "type": "string",
+      "enum": ["alimentos", "higiene", "salud", "accesorios", "juguetes", "otros"],
+      "description": "Categoría del producto"
+    },
+    "petType": {
+      "type": "string",
+      "enum": ["perro", "gato", "ave", "roedor", "todos"],
+      "description": "Tipo de mascota"
+    },
+    "stock": {
+      "type": "number",
+      "description": "Cantidad en stock"
+    },
+    "isOnSale": {
+      "type": "boolean",
+      "default": false,
+      "description": "Producto en oferta"
+    },
+    "imageUrl": {
+      "type": "string",
+      "description": "URL de la imagen del producto"
+    },
+    "weight": {
+      "type": "string",
+      "description": "Peso o tamaño del producto (ej: 15kg, 500g)"
+    }
+  },
+  "required": ["name", "price", "brand", "category", "petType", "stock"]
+}
