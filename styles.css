@@ -120,7 +120,7 @@ body {
 }
 
 .hero-gradient {
-    background: linear-gradient(to bottom, #000000 0%, #1a1a1a 10%, #FF6B35 100%);
+    background: linear-gradient(to bottom, #000000 0%, #1a1a1a 20%, #FF6B35 100%);
 }
 
 .hero-content {
@@ -965,4 +965,23 @@ body {
     .products-layout {
         flex-direction: row;
     }
+    /* Nosotros / Contacto Section */
+.about-contact-section {
+    background-color: #000000;
+    color: #ffffff;
+    padding: 2rem 0;
+    text-align: center;
+}
+
+.about-contact-section h2 {
+    font-size: 1.875rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.about-contact-section p {
+    margin-bottom: 0.5rem;
+    color: #ffffff;
+    font-size: 1rem;
+}
 }
