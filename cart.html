@@ -4,11 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carrito - Petshop Chiquitines</title>
-    <meta name="description" content="Revisa tu carrito de compras en Petshop Chiquitines y completa tu pedido de alimentos, juguetes y accesorios para mascotas.">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://edgarchiquitines.github.io/petshopchiquitines/cart.html">
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
     <link rel="stylesheet" href="styles.css">
+    <meta name="robots" content="index, follow">
 </head>
 <body>
     <!-- Header -->
@@ -226,7 +224,7 @@
                         </label>
                         <label class="radio-option">
                             <input type="radio" name="delivery" value="pickup">
-                            <span>Retiro en local</span>
+                            <span>Retiro en local/Pickup</span>
                         </label>
                     </div>
                 </div>
@@ -435,16 +433,16 @@
             
             message += '📦 *Productos:*\n';
             cart.forEach((item, index) => {
-                message += `${index + 1}. ${item.name}\n`;message += `   ${item.weight}\n`;
+                message += `${index + 1}. ${item.name}\n`;
+                message += `   Marca: ${item.brand}\n`;
                 message += `   Cantidad: ${item.quantity}\n`;
                 message += `   Precio unitario: ${formatPrice(item.price)}\n`;
-                message += `   Codigo: ${item.code}\n`;
                 message += `   Subtotal: ${formatPrice(item.price * item.quantity)}\n\n`;
             });
 
             message += `💰 *TOTAL: ${formatPrice(calculateTotal())}*\n\n`;
 
-            message += `🚚 *Entrega:* ${deliveryMethod === 'delivery' ? 'Delivery' : 'Retiro en local'}\n\n`;
+            message += `🚚 *Entrega:* ${deliveryMethod === 'delivery' ? 'Delivery' : 'Retiro en local/Pickup'}\n\n`;
 
             message += `💳 *Método de pago:* ${paymentMethod === 'efectivo' ? 'Efectivo' : 'Transferencia'}\n\n`;
 
