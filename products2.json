@@ -176,5 +176,20 @@
     "isOnSale": true,
     "description": "Alimento balanceado para gatos",
     "code": "69804"
+  },
+  {
+    "id": "26",
+    "name": "Three Cats Gato castrado 2x1",
+    "brand": "Three Cats",
+    "price": 165000,
+    "originalPrice": 330000,
+    "stock": 1,
+    "weight": "3kg",
+    "petType": "gato",
+    "category": "alimentos",
+    "imageUrl": "assets/img/img26.webp",
+    "isOnSale": true,
+    "description": "Alimento balanceado para gatos",
+    "code": "58021"
   }
 ]
