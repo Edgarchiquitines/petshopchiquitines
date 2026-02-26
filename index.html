@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Petshop Chiquitines - Tienda de mascotas con alimentos, accesorios y productos en oferta para perros y gatos. ¡Explora nuestro catálogo hoy!">
     <title>Petshop Chiquitines - Inicio</title>
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
     <link rel="stylesheet" href="styles.css">
@@ -115,7 +116,7 @@
     <section class="cta-section">
         <div class="container">
             <h2>¿Buscas algo específico?</h2>
-            <p>Explora nuestro catálogo completo con productos para todas las mascotas</p>
+            <p>Explora nuestro catálogo completo con más de 1000 productos para todas las mascotas</p>
             <a href="products.html" class="btn-primary">
                 <span>Explorar Catálogo</span>
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -123,7 +124,21 @@
                     <polyline points="12 5 19 12 12 19"></polyline>
                 </svg>
             </a>
+<!-- Nosotros / Contacto Section -->
+<section class="about-contact-section">
+    <div class="container">
+        <h2>Nosotros</h2>
+        <p>
+            En Petshop Chiquitines nos especializamos en ofrecer productos de calidad para todas las mascotas. 
+            Desde alimentos y juguetes hasta accesorios para perros y gatos, nuestro catálogo está pensado para cuidar 
+            la salud y felicidad de tus amigos peludos, y brindamos atención personalizada para cada cliente.
+        </p>
+        <p><strong>Ubicación:</strong> Av. Peru y Gines</p>
+        <p><strong>Contacto:</strong> 0976 106726 | Edgarchiquitinespet@gmail.com</p>
+    </div>
+</section>
         </div>
+        <p></p>
     </section>
 
     <!-- Footer -->
@@ -141,31 +156,30 @@
         });
 
         async function loadHomeProducts() {
-    try {
-        const archivos = ['products1.json', 'products2.json'];
+            try {
+                const archivos = ['products1.json', 'products2.json'];
 
-        const resultados = await Promise.all(
-            archivos.map(archivo => fetch(archivo).then(r => r.json()))
-        );
+                const resultados = await Promise.all(
+                    archivos.map(archivo => fetch(archivo).then(r => r.json()))
+                );
 
-        const products = resultados.flat();
+                const products = resultados.flat();
 
-        // Lo demás queda IGUAL ↓
-        const onSaleProducts = products.filter(p => p.isOnSale && p.stock > 0);
-        
-        const grid = document.getElementById('productsGrid');
-        
-        if (onSaleProducts.length === 0) {
-            grid.innerHTML = '<div class="empty-state"><p>No hay productos en oferta</p><a href="products.html">Ver todos los productos</a></div>';
-            return;
+                const onSaleProducts = products.filter(p => p.isOnSale && p.stock > 0);
+                
+                const grid = document.getElementById('productsGrid');
+                
+                if (onSaleProducts.length === 0) {
+                    grid.innerHTML = '<div class="empty-state"><p>No hay productos en oferta</p><a href="products.html">Ver todos los productos</a></div>';
+                    return;
+                }
+                
+                grid.innerHTML = onSaleProducts.map(product => createProductCard(product)).join('');
+            } catch (error) {
+                console.error('Error loading products:', error);
+                document.getElementById('productsGrid').innerHTML = '<div class="empty-state"><p>Error al cargar productos</p></div>';
+            }
         }
-        
-        grid.innerHTML = onSaleProducts.map(product => createProductCard(product)).join('');
-    } catch (error) {
-        console.error('Error loading products:', error);
-        document.getElementById('productsGrid').innerHTML = '<div class="empty-state"><p>Error al cargar productos</p></div>';
-    }
-}
     </script>
 </body>
 </html>
