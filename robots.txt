@@ -1,8 +1,6 @@
+# Permitir que todos los motores de búsqueda rastreen todo
 User-agent: *
 Allow: /
 
-# Evita que se bloqueen recursos importantes (CSS/JS)
-Disallow: /private/  # Solo si tienes carpetas privadas que no quieras mostrar
-
-# Sitemap
+# Sitemap principal
 Sitemap: https://edgarchiquitines.github.io/petshopchiquitines/sitemap.xml
