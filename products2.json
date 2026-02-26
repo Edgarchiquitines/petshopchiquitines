@@ -1,7 +1,7 @@
 [
   {
     "id": "13",
-    "name": "Alimento para aves",
+    "name": "MegaZoo Alimento para aves",
     "brand": "MegaZoo",
     "price": 38000,
     "originalPrice": 38000,
@@ -11,25 +11,27 @@
     "category": "alimentos",
     "imageUrl": "assets/img/img13.webp",
     "isOnSale": false,
-    "description": "Mezcla de semillas premium"
+    "description": "Mezcla de semillas premium",
+    "code": "77611"
   },
   {
     "id": "14",
     "name": "Jaula para Hamster",
     "brand": "Generico",
-    "price": 160000,
-    "originalPrice": 170000,
+    "price": 330000,
+    "originalPrice": 340000,
     "stock": 10,
     "weight": "1 unidad",
     "petType": "roedor",
     "category": "accesorios",
     "imageUrl": "assets/img/img14.webp",
     "isOnSale": true,
-    "description": "Jaula completa para roedores"
+    "description": "Jaula completa para roedores",
+    "code": "24256"
   },
   {
     "id": "15",
-    "name": "Kit cepillo c/ crema dental",
+    "name": "Kit cepillo y crema dental p/ perros",
     "brand": "Generico",
     "price": 22000,
     "originalPrice": 22000,
@@ -39,7 +41,8 @@
     "category": "higiene",
     "imageUrl": "assets/img/img15.webp",
     "isOnSale": false,
-    "description": "Kit de cepillo y pasta dental"
+    "description": "Kit de cepillo y pasta dental",
+    "code": "20013"
   },
   {
     "id": "16",
@@ -52,7 +55,8 @@
     "category": "accesorios",
     "imageUrl": "assets/img/img16.webp",
     "isOnSale": false,
-    "description": "Cama para gatos/perros grandes"
+    "description": "Cama para gatos/perros grandes",
+    "code": "87405"
   },
   {
     "id": "17",
@@ -66,11 +70,12 @@
     "category": "alimentos",
     "imageUrl": "assets/img/img17.webp",
     "isOnSale": true,
-    "description": "Snacks para limpieza dental"
+    "description": "Snacks para limpieza dental",
+    "code": "71805"
   },
   {
     "id": "18",
-    "name": "Transportadora Falcon P",
+    "name": "Transportadora Falcon rosa",
     "brand": "Generico",
     "price": 70000,
     "stock": 20,
@@ -79,48 +84,53 @@
     "category": "accesorios",
     "imageUrl": "assets/img/img18.webp",
     "isOnSale": false,
-    "description": "Transportadora para gatos y perros pequeños"
+    "description": "Transportadora para gatos y perros pequeños",
+    "code": "94417"
   },
   {
     "id": "19",
-    "name": "Antiparasitario Interno",
+    "name": "Petquantel Antiparasitario Interno",
     "brand": "Petquantel",
     "price": 12000,
     "originalPrice": 12000,
     "stock": 65,
     "weight": "1 tableta",
-    "petType": "todos",
+    "petType": "perro",
     "category": "salud",
     "imageUrl": "assets/img/img19.webp",
     "isOnSale": false,
-    "description": "Tableta desparasitante"
+    "description": "Tableta desparasitante",
+    "code": "78911"
+    
   },
   {
     "id": "20",
     "name": "Plato Doble Acero",
     "brand": "Lili Mascotas",
-    "price": 120000,
+    "price": 150000,
     "stock": 50,
     "weight": "1 unidad",
     "petType": "perro",
     "category": "accesorios",
     "imageUrl": "assets/img/img20.webp",
     "isOnSale": false,
-    "description": "Plato doble de acero inoxidable"
+    "description": "Plato doble de acero inoxidable",
+    "code": "18231"
   },
   {
     "id": "21",
-    "name": "Juguete raton interactivo",
+    "name": "Juguete raton Lili M",
     "brand": "Lili Mascotas",
     "price": 12000,
-    "originalPrice": 15000,
+    "originalPrice": 13000,
     "stock": 25,
     "weight": "1 unidad",
     "petType": "gato",
     "category": "juguetes",
     "imageUrl": "assets/img/img21.webp",
     "isOnSale": true,
-    "description": "Juguete para gato"
+    "description": "Juguete para gato",
+    "code": "71317"
   },
   {
     "id": "22",
@@ -134,7 +144,8 @@
     "category": "alimentos",
     "imageUrl": "assets/img/img22.webp",
     "isOnSale": false,
-    "description": "Alimento balanceado para gatos"
+    "description": "Alimento balanceado para gatos",
+    "code": "01034"
   },
 {
     "id": "23",
@@ -148,7 +159,8 @@
     "category": "alimentos",
     "imageUrl": "assets/img/img23.webp",
     "isOnSale": false,
-    "description": "Alimento balanceado para gatos"
+    "description": "Alimento balanceado para gatos",
+    "code": "01539"
   },
 {
     "id": "24",
@@ -162,6 +174,7 @@
     "category": "alimentos",
     "imageUrl": "assets/img/img24.webp",
     "isOnSale": false,
-    "description": "Alimento balanceado para gatos"
+    "description": "Alimento balanceado para gatos",
+    "code": "01041"
   }
 ]

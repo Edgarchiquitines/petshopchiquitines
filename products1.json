@@ -11,7 +11,8 @@
     "category": "alimentos",
     "imageUrl": "assets/img/img1.webp",
     "isOnSale": false,
-    "description": "Alimento balanceado para perros adultos"
+    "description": "Alimento balanceado para perros adultos",
+    "code": "00990"
   },
   {
     "id": "2",
@@ -25,7 +26,8 @@
     "category": "alimentos",
     "imageUrl": "assets/img/img2.webp",
     "isOnSale": false,
-    "description": "Alimento balanceado para perros adultos"
+    "description": "Alimento balanceado para perros adultos",
+    "code": "01003"
   },
   {
     "id": "3",
@@ -38,7 +40,8 @@
     "category": "alimentos",
     "imageUrl": "assets/img/img3.webp",
     "isOnSale": false,
-    "description": "Alimento balanceado para perros adultos"
+    "description": "Alimento balanceado para perros adultos",
+    "code": "01546"
   },
   {
     "id": "4",
@@ -51,7 +54,8 @@
     "category": "alimentos",
     "imageUrl": "assets/img/img4.webp",
     "isOnSale": false,
-    "description": "Alimento balanceado para perros adultos"
+    "description": "Alimento balanceado para perros adultos",
+    "code": "01010"
   },
   {
     "id": "5",
@@ -64,11 +68,12 @@
     "category": "alimentos",
     "imageUrl": "assets/img/img5.webp",
     "isOnSale": false,
-    "description": "Alimento balanceado para perros adultos"
+    "description": "Alimento balanceado para perros adultos",
+    "code": "00570"
   },
   {
     "id": "6",
-    "name": "Shampoo Antiparasitario",
+    "name": "Kerkus Shampoo Antiparasitario",
     "brand": "Kerkus",
     "price": 16000,
     "originalPrice": 16000,
@@ -78,11 +83,12 @@
     "category": "higiene",
     "imageUrl": "assets/img/img6.webp",
     "isOnSale": false,
-    "description": "Shampoo antiparasitario para perros y gatos"
+    "description": "Shampoo antiparasitario para perros y gatos",
+    "code": "06204"
   },
   {
     "id": "7",
-    "name": "Collar Antiparasitario P",
+    "name": "Scalibor Collar Antiparasitario P",
     "brand": "Scalibor",
     "price": 118000,
     "stock": 40,
@@ -91,11 +97,12 @@
     "category": "salud",
     "imageUrl": "assets/img/img7.webp",
     "isOnSale": false,
-    "description": "Collar antiparasitario de larga duración"
+    "description": "Collar antiparasitario de larga duración",
+    "code": "82866"
   },
   {
     "id": "8",
-    "name": "Arena Sanitaria",
+    "name": "Arena Sanitaria Gattino",
     "brand": "Gattino",
     "price": 18000,
     "originalPrice": 18000,
@@ -105,24 +112,26 @@
     "category": "higiene",
     "imageUrl": "assets/img/img8.webp",
     "isOnSale": false,
-    "description": "Arena para gatos"
+    "description": "Arena para gatos",
+    "code": "06164"
   },
   {
     "id": "9",
-    "name": "Pelota de Goma",
+    "name": "Pelota de Goma Lili M",
     "brand": "Lili Mascotas",
-    "price": 12000,
+    "price": 18000,
     "stock": 100,
     "weight": "1 unidad",
     "petType": "perro",
     "category": "juguetes",
     "imageUrl": "assets/img/img9.webp",
     "isOnSale": false,
-    "description": "Pelota resistente para perros"
+    "description": "Pelota resistente para perros",
+    "code": "42013"
   },
   {
     "id": "10",
-    "name": "Rascador para Gatos",
+    "name": "Rascador para Gatos Lili M",
     "brand": "Lili Mascotas",
     "price": 27500,
     "originalPrice": 27500,
@@ -132,11 +141,12 @@
     "category": "accesorios",
     "imageUrl": "assets/img/img10.webp",
     "isOnSale": false,
-    "description": "Rascador economico para gatos"
+    "description": "Rascador economico para gatos",
+    "code": "72546"
   },
   {
     "id": "11",
-    "name": "Correa tirador",
+    "name": "Correa tirador Lili M",
     "brand": "Lili Mascotas",
     "price": 13000,
     "originalPrice": 13000,
@@ -146,11 +156,12 @@
     "category": "accesorios",
     "imageUrl": "assets/img/img11.webp",
     "isOnSale": false,
-    "description": "Correa tirador simple"
+    "description": "Correa tirador simple",
+    "code": "15902"
   },
   {
     "id": "12",
-    "name": "Antiparasitario canino externo",
+    "name": "Afoxocan Antiparasitario externo",
     "brand": "Afoxocan",
     "price": 8000,
     "originalPrice": 10000,
@@ -160,6 +171,7 @@
     "category": "salud",
     "imageUrl": "assets/img/img12.webp",
     "isOnSale": false,
-    "description": "Antiparasitario canino externo"
+    "description": "Antiparasitario canino externo",
+    "code": "06660"
   }
 ]

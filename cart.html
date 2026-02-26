@@ -432,10 +432,10 @@
             
             message += '📦 *Productos:*\n';
             cart.forEach((item, index) => {
-                message += `${index + 1}. ${item.name}\n`;
-                message += `   Marca: ${item.brand}\n`;
+                message += `${index + 1}. ${item.name}\n`;message += `   ${item.weight}\n`;
                 message += `   Cantidad: ${item.quantity}\n`;
                 message += `   Precio unitario: ${formatPrice(item.price)}\n`;
+                message += `   Codigo: ${item.code}\n`;
                 message += `   Subtotal: ${formatPrice(item.price * item.quantity)}\n\n`;
             });
 
