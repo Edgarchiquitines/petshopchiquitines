@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://edgarchiquitines.github.io/petshopchiquitines/sitemap.xml
