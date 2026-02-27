@@ -204,8 +204,8 @@ body {
 
 .products-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
 }
 
 /* Product Card */
@@ -215,6 +215,8 @@ body {
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     transition: box-shadow 0.3s;
+    display: flex;
+    flex-direction: column;
 }
 
 .product-card:hover {
@@ -268,22 +270,25 @@ body {
 
 .product-content {
     padding: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
 }
 
+/* ── CAMBIO PRINCIPAL: nombre completo sin recorte ── */
 .product-name {
     font-weight: 600;
-    font-size: 0.875rem;
-    margin-bottom: 0.25rem;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    min-height: 2.5rem;
+    font-size: 0.75rem;
+    margin-bottom: 0.35rem;
+    line-height: 1.35;
+    display: block;
+    overflow: visible;
+    white-space: normal;
+    min-height: unset;
 }
 
 .product-brand {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     color: #6b7280;
     margin-bottom: 0.5rem;
 }
@@ -309,6 +314,7 @@ body {
 
 .product-price {
     margin-bottom: 0.75rem;
+    margin-top: auto;
 }
 
 .original-price {
@@ -318,27 +324,27 @@ body {
 }
 
 .current-price {
-    font-size: 1.25rem;
+    font-size: 1rem;
     font-weight: bold;
     color: #FF6B35;
 }
 
 .regular-price {
-    font-size: 1.25rem;
+    font-size: 1rem;
     font-weight: bold;
     color: #1a1a1a;
 }
 
 .add-to-cart-btn {
     width: 100%;
-    padding: 0.5rem;
+    padding: 0.4rem 0.25rem;
     border-radius: 0.5rem;
     font-weight: 600;
-    font-size: 0.875rem;
+    font-size: 0.7rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 0.5rem;
+    gap: 0.25rem;
     border: none;
     cursor: pointer;
     transition: background-color 0.3s;
@@ -856,9 +862,20 @@ body {
         padding: 1rem;
     }
 
+    /* ── Nombre más grande en desktop ── */
     .product-name {
         font-size: 1rem;
-        min-height: 3rem;
+    }
+
+    .current-price,
+    .regular-price {
+        font-size: 1.25rem;
+    }
+
+    .add-to-cart-btn {
+        font-size: 0.875rem;
+        padding: 0.5rem;
+        gap: 0.5rem;
     }
 
     .cart-layout {
@@ -965,23 +982,24 @@ body {
     .products-layout {
         flex-direction: row;
     }
+
     /* Nosotros / Contacto Section */
-.about-contact-section {
-    background-color: #000000;
-    color: #ffffff;
-    padding: 2rem 0;
-    text-align: center;
-}
+    .about-contact-section {
+        background-color: #000000;
+        color: #ffffff;
+        padding: 2rem 0;
+        text-align: center;
+    }
 
-.about-contact-section h2 {
-    font-size: 1.875rem;
-    font-weight: bold;
-    margin-bottom: 1rem;
-}
+    .about-contact-section h2 {
+        font-size: 1.875rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+    }
 
-.about-contact-section p {
-    margin-bottom: 0.5rem;
-    color: #ffffff;
-    font-size: 1rem;
-}
+    .about-contact-section p {
+        margin-bottom: 0.5rem;
+        color: #ffffff;
+        font-size: 1rem;
+    }
 }
