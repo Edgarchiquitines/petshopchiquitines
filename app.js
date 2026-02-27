@@ -44,17 +44,16 @@ function updateQuantity(productId, change) {
     if (item) {
         const newQuantity = item.quantity + change;
         
-        // Check bounds
         if (newQuantity < 1 || newQuantity > item.stock) {
-            return false; // Cannot update, out of bounds
+            return false;
         }
         
         item.quantity = newQuantity;
         saveCart(cart);
-        return true; // Successfully updated
+        return true;
     }
     
-    return false; // Item not found
+    return false;
 }
 
 // Price Formatting
@@ -121,6 +120,47 @@ function createProductCard(product) {
     `;
 }
 
+// ── Auto font-size para nombres largos ──────────────────────────────────────
+// Se llama después de renderizar las tarjetas.
+// Reduce el font-size de .product-name hasta que el texto entre en 2 líneas.
+function fitProductNames() {
+    const MAX_FONT  = 13; // px — tamaño máximo (equivale a ~0.8rem en mobile)
+    const MIN_FONT  = 9;  // px — nunca baja de acá
+    const MAX_LINES = 2;  // altura objetivo: 2 líneas
+
+    document.querySelectorAll('.product-name').forEach(el => {
+        // Resetear por si se llama más de una vez
+        el.style.fontSize = MAX_FONT + 'px';
+
+        // lineHeight real en px
+        const lh = parseFloat(getComputedStyle(el).lineHeight) || MAX_FONT * 1.35;
+        const maxHeight = lh * MAX_LINES;
+
+        let size = MAX_FONT;
+        while (el.scrollHeight > maxHeight + 1 && size > MIN_FONT) {
+            size--;
+            el.style.fontSize = size + 'px';
+        }
+    });
+}
+
+// Llama a fitProductNames cada vez que se renderizan tarjetas.
+// Usamos un MutationObserver para detectar cuando el grid cambia.
+function observeProductGrid() {
+    const grids = document.querySelectorAll('#productsGrid');
+    if (!grids.length) return;
+
+    const observer = new MutationObserver(() => {
+        // Pequeño delay para que el navegador pinte el DOM antes de medir
+        requestAnimationFrame(() => fitProductNames());
+    });
+
+    grids.forEach(grid => {
+        observer.observe(grid, { childList: true, subtree: false });
+    });
+}
+// ────────────────────────────────────────────────────────────────────────────
+
 // Notification
 function showNotification(message) {
     const notification = document.createElement('div');
@@ -156,8 +196,15 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Update cart count on page load
     updateCartCount();
+
+    // Iniciar observer para ajuste de nombres
+    observeProductGrid();
+
+    // También ajustar al redimensionar la ventana
+    window.addEventListener('resize', () => {
+        requestAnimationFrame(() => fitProductNames());
+    });
 });
 
 // Add CSS animations
