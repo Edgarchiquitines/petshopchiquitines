@@ -225,7 +225,7 @@ body {
 
 .product-image {
     position: relative;
-    aspect-ratio: 1;
+    aspect-ratio: 4 / 3;
     overflow: hidden;
     background-color: #f3f4f6;
 }
@@ -279,9 +279,9 @@ body {
 /* Nombre: altura fija 2 líneas, JS reduce font-size si no entra */
 .product-name {
     font-weight: 600;
-    font-size: 13px;
+    font-size: 15px;
     line-height: 1.35;
-    height: calc(13px * 1.35 * 2);
+    height: calc(15px * 1.35 * 2);
     overflow: hidden;
     display: block;
     white-space: normal;
@@ -865,8 +865,8 @@ body {
 
     /* Nombre más grande en desktop, altura proporcional */
     .product-name {
-        font-size: 16px;
-        height: calc(16px * 1.35 * 2);
+        font-size: 17px;
+        height: calc(17px * 1.35 * 2);
     }
 
     .current-price,
