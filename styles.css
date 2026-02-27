@@ -276,15 +276,16 @@ body {
 }
 
 /* ── CAMBIO PRINCIPAL: nombre completo sin recorte ── */
+/* Nombre: altura fija 2 líneas, JS reduce font-size si no entra */
 .product-name {
     font-weight: 600;
-    font-size: 0.75rem;
-    margin-bottom: 0.35rem;
+    font-size: 13px;
     line-height: 1.35;
+    height: calc(13px * 1.35 * 2);
+    overflow: hidden;
     display: block;
-    overflow: visible;
     white-space: normal;
-    min-height: unset;
+    margin-bottom: 0.35rem;
 }
 
 .product-brand {
@@ -862,9 +863,10 @@ body {
         padding: 1rem;
     }
 
-    /* ── Nombre más grande en desktop ── */
+    /* Nombre más grande en desktop, altura proporcional */
     .product-name {
-        font-size: 1rem;
+        font-size: 16px;
+        height: calc(16px * 1.35 * 2);
     }
 
     .current-price,
