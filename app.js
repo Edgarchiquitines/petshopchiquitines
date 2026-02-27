@@ -44,16 +44,17 @@ function updateQuantity(productId, change) {
     if (item) {
         const newQuantity = item.quantity + change;
         
+        // Check bounds
         if (newQuantity < 1 || newQuantity > item.stock) {
-            return false;
+            return false; // Cannot update, out of bounds
         }
         
         item.quantity = newQuantity;
         saveCart(cart);
-        return true;
+        return true; // Successfully updated
     }
     
-    return false;
+    return false; // Item not found
 }
 
 // Price Formatting
@@ -120,44 +121,6 @@ function createProductCard(product) {
     `;
 }
 
-// ── Auto font-size para nombres largos ──────────────────────────────────────
-function fitProductNames() {
-    const isDesktop = window.innerWidth >= 768;
-    const MAX_FONT  = isDesktop ? 17 : 15; // px — tamaño máximo según pantalla
-    const MIN_FONT  = 10;                   // px — nunca baja de acá
-    const MAX_LINES = 2;
-
-    document.querySelectorAll('.product-name').forEach(el => {
-        el.style.fontSize = MAX_FONT + 'px';
-
-        const lh = parseFloat(getComputedStyle(el).lineHeight) || MAX_FONT * 1.35;
-        const maxHeight = lh * MAX_LINES;
-
-        let size = MAX_FONT;
-        while (el.scrollHeight > maxHeight + 1 && size > MIN_FONT) {
-            size--;
-            el.style.fontSize = size + 'px';
-        }
-    });
-}
-
-// Llama a fitProductNames cada vez que se renderizan tarjetas.
-// Usamos un MutationObserver para detectar cuando el grid cambia.
-function observeProductGrid() {
-    const grids = document.querySelectorAll('#productsGrid');
-    if (!grids.length) return;
-
-    const observer = new MutationObserver(() => {
-        // Pequeño delay para que el navegador pinte el DOM antes de medir
-        requestAnimationFrame(() => fitProductNames());
-    });
-
-    grids.forEach(grid => {
-        observer.observe(grid, { childList: true, subtree: false });
-    });
-}
-// ────────────────────────────────────────────────────────────────────────────
-
 // Notification
 function showNotification(message) {
     const notification = document.createElement('div');
@@ -193,15 +156,8 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Update cart count on page load
     updateCartCount();
-
-    // Iniciar observer para ajuste de nombres
-    observeProductGrid();
-
-    // También ajustar al redimensionar la ventana
-    window.addEventListener('resize', () => {
-        requestAnimationFrame(() => fitProductNames());
-    });
 });
 
 // Add CSS animations
