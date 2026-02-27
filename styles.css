@@ -285,6 +285,8 @@ body {
     overflow: hidden;
     display: block;
     white-space: normal;
+    word-break: break-word;
+    overflow-wrap: break-word;
     margin-bottom: 0.35rem;
 }
 
