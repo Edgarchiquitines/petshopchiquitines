@@ -121,18 +121,15 @@ function createProductCard(product) {
 }
 
 // ── Auto font-size para nombres largos ──────────────────────────────────────
-// Se llama después de renderizar las tarjetas.
-// Reduce el font-size de .product-name hasta que el texto entre en 2 líneas.
 function fitProductNames() {
-    const MAX_FONT  = 13; // px — tamaño máximo (equivale a ~0.8rem en mobile)
-    const MIN_FONT  = 9;  // px — nunca baja de acá
-    const MAX_LINES = 2;  // altura objetivo: 2 líneas
+    const isDesktop = window.innerWidth >= 768;
+    const MAX_FONT  = isDesktop ? 17 : 15; // px — tamaño máximo según pantalla
+    const MIN_FONT  = 10;                   // px — nunca baja de acá
+    const MAX_LINES = 2;
 
     document.querySelectorAll('.product-name').forEach(el => {
-        // Resetear por si se llama más de una vez
         el.style.fontSize = MAX_FONT + 'px';
 
-        // lineHeight real en px
         const lh = parseFloat(getComputedStyle(el).lineHeight) || MAX_FONT * 1.35;
         const maxHeight = lh * MAX_LINES;
 
