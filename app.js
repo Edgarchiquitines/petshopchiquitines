@@ -126,7 +126,7 @@ function createProductCard(product) {
 function fitProductNames() {
     const isDesktop = window.innerWidth >= 768;
     const MAX_FONT  = isDesktop ? 17 : 15; // px — tamaño máximo según pantalla
-    const MIN_FONT  = 10;                   // px — nunca baja de acá
+    const MIN_FONT  = 8;                   // px — nunca baja de acá
     const MAX_LINES = 2;
 
     document.querySelectorAll('.product-name').forEach(el => {
