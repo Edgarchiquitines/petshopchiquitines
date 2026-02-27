@@ -162,6 +162,21 @@
     "description": "Alimento balanceado para gatos",
     "code": "01539"
   },
+  {
+    "id": "24",
+    "name": "Pronto Cat",
+    "brand": "Pronto Cat",
+    "price": 210000,
+    "originalPrice": 210000,
+    "stock": 50,
+    "weight": "25kg",
+    "petType": "gato",
+    "category": "alimentos",
+    "imageUrl": "assets/img/img24.webp",
+    "isOnSale": false,
+    "description": "Alimento balanceado para gatos",
+    "code": "01041"
+  },
 {
     "id": "25",
     "name": "Excellent gato adulto",
