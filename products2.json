@@ -600,7 +600,7 @@
     "code": "00420"
   },
     {
-    "id": "86",
+    "id": "87",
     "name": "Whiskas Pate carne x caja",
     "brand": "Whiskas",
     "price": 57000,
@@ -609,13 +609,13 @@
     "weight": "Caja x12",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img86.webp",
+    "imageUrl": "assets/img/img87.webp",
     "isOnSale": false,
     "description": "Pate para gatos",
     "code": "00421"
   },
     {
-    "id": "87",
+    "id": "88",
     "name": "Whiskas Pate pollo",
     "brand": "Whiskas",
     "price": 5500,
@@ -624,13 +624,13 @@
     "weight": "85g",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img87.webp",
+    "imageUrl": "assets/img/img88.webp",
     "isOnSale": false,
     "description": "Pate para gatos",
     "code": "00550"
   },
     {
-    "id": "88",
+    "id": "89",
     "name": "Whiskas Pate pollo x caja",
     "brand": "Whiskas",
     "price": 57000,
@@ -639,13 +639,13 @@
     "weight": "Caja x12",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img88.webp",
+    "imageUrl": "assets/img/img89.webp",
     "isOnSale": false,
     "description": "Pate para gatos",
     "code": "00551"
   },
     {
-    "id": "89",
+    "id": "90",
     "name": "Whiskas Pate sardina",
     "brand": "Whiskas",
     "price": 5500,
@@ -654,13 +654,13 @@
     "weight": "85g",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img89.webp",
+    "imageUrl": "assets/img/img90.webp",
     "isOnSale": false,
     "description": "Pate para gatos",
     "code": "00543"
   },
     {
-    "id": "90",
+    "id": "91",
     "name": "Whiskas Pate sardina x caja",
     "brand": "Whiskas",
     "price": 57000,
@@ -669,13 +669,13 @@
     "weight": "Caja x12",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img90.webp",
+    "imageUrl": "assets/img/img91.webp",
     "isOnSale": false,
     "description": "Pate para gatos",
     "code": "00544"
   },
     {
-    "id": "91",
+    "id": "92",
     "name": "Whiskas Pate salmon",
     "brand": "Whiskas",
     "price": 5500,
@@ -684,13 +684,13 @@
     "weight": "85g",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img91.webp",
+    "imageUrl": "assets/img/img92.webp",
     "isOnSale": false,
     "description": "Pate para gatos",
     "code": "00413"
   },
     {
-    "id": "92",
+    "id": "93",
     "name": "Whiskas Pate salmon x caja",
     "brand": "Whiskas",
     "price": 57000,
@@ -699,13 +699,13 @@
     "weight": "Caja x12",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img92.webp",
+    "imageUrl": "assets/img/img93.webp",
     "isOnSale": false,
     "description": "Pate para gatos",
     "code": "00414"
   },
     {
-    "id": "93",
+    "id": "94",
     "name": "Whiskas Pate pavo",
     "brand": "Whiskas",
     "price": 5500,
@@ -714,13 +714,13 @@
     "weight": "85g",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img93.webp",
+    "imageUrl": "assets/img/img94.webp",
     "isOnSale": false,
     "description": "Pate para gatos",
     "code": "00437"
   },
     {
-    "id": "94",
+    "id": "95",
     "name": "Whiskas Pate carne",
     "brand": "Whiskas",
     "price": 57000,
@@ -729,7 +729,7 @@
     "weight": "Caja x12",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img94.webp",
+    "imageUrl": "assets/img/img95.webp",
     "isOnSale": false,
     "description": "Pate para gatos",
     "code": "00438"
