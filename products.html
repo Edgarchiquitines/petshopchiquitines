@@ -262,7 +262,7 @@
 
             if (petType) {
                 filteredProducts = filteredProducts.filter(p =>
-                    Array.isArray(p.petType) ? p.petType.includes(petType) : p.petType === petType
+                    p.petType === petType || p.petType === 'todos'
                 );
             }
 
