@@ -932,6 +932,54 @@ body {
     margin: 0.85rem 0;
 }
 
+/* Imágenes dentro de las pills — se muestran a 17px sin importar resolución del archivo */
+.cat-pill-img {
+    width: 17px;
+    height: 17px;
+    object-fit: contain;
+    flex-shrink: 0;
+    /* Convierte la imagen a blanco puro para que combine con el fondo oscuro */
+    filter: brightness(0) invert(1);
+    opacity: 0.85;
+    transition: filter 0.2s, opacity 0.2s;
+    /* Evita que el navegador suavice en exceso imágenes pequeñas */
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+}
+
+.cat-pill:hover {
+    background-color: #FF6B35;
+    border-color: #FF6B35;
+    color: #ffffff;
+    transform: translateY(-1px);
+}
+
+.cat-pill:hover svg {
+    opacity: 1;
+}
+
+.cat-pill:hover .cat-pill-img {
+    filter: brightness(0) invert(1);
+    opacity: 1;
+}
+
+.cat-pill--all {
+    border-color: #444;
+    color: #aaa;
+}
+
+.cat-pill--all:hover {
+    background-color: #FF6B35;
+    border-color: #FF6B35;
+    color: #ffffff;
+}
+
+.cat-divider {
+    height: 1px;
+    background-color: #222;
+    margin: 0.85rem 0;
+}
+
 /* ================================================================
    POR QUÉ ELEGIRNOS
    ================================================================ */
