@@ -74,8 +74,8 @@
                 <p>Encuentra todo lo que necesita tu mascota</p>
             </div>
 
-            <!-- Search Bar -->
-            <div class="search-bar">
+            <!-- Search Bar (grande, solo visible cuando está en la parte superior) -->
+            <div class="search-bar" id="searchBarTop">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <circle cx="11" cy="11" r="8"></circle>
                     <path d="m21 21-4.35-4.35"></path>
@@ -84,26 +84,108 @@
                     type="text"
                     id="searchInput"
                     placeholder="Buscar productos, marcas, categorías..."
-                    oninput="applyFilters()">
+                    oninput="syncSearch(this, 'searchInputSidebar'); applyFilters()">
             </div>
 
-            <!-- Filter Toggle (Mobile) -->
-            <button class="filter-toggle-btn" id="filterToggleBtn">
-                <div class="filter-toggle-content">
+            <!-- MOBILE: wrapper sticky (barra de búsqueda + botón filtros + sidebar) -->
+            <div class="mobile-sticky-wrapper" id="mobileStickyWrapper">
+                <!-- Barra de búsqueda mobile sticky -->
+                <div class="search-bar search-bar-mobile-sticky">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
                     </svg>
-                    <span>Filtros</span>
-                    <span class="filter-count" id="filterCount" style="display: none;">0</span>
+                    <input
+                        type="text"
+                        id="searchInputMobile"
+                        placeholder="Buscar productos..."
+                        oninput="syncSearch(this, 'searchInput'); applyFilters()">
                 </div>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <polyline points="6 9 12 15 18 9"></polyline>
-                </svg>
-            </button>
+
+                <!-- Filter Toggle (Mobile) -->
+                <button class="filter-toggle-btn" id="filterToggleBtn">
+                    <div class="filter-toggle-content">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+                        </svg>
+                        <span>Filtros</span>
+                        <span class="filter-count" id="filterCount" style="display: none;">0</span>
+                    </div>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                </button>
+
+                <!-- Filters Sidebar (mobile: se despliega aquí; desktop: se oculta este y usa el del layout) -->
+                <aside class="filters-sidebar mobile-hidden" id="filtersSidebarMobile">
+                    <div class="filters-header">
+                        <h3>Filtros</h3>
+                        <button class="clear-filters-btn" onclick="clearFilters()">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                            </svg>
+                            <span>Limpiar</span>
+                        </button>
+                    </div>
+                    <div class="filter-group">
+                        <label>Categoría</label>
+                        <select id="categoryFilterMobile" onchange="syncFilter('categoryFilter', this); applyFilters()">
+                            <option value="">Todas</option>
+                            <option value="alimentos">Alimentos</option>
+                            <option value="higiene">Higiene</option>
+                            <option value="salud">Salud</option>
+                            <option value="accesorios">Accesorios</option>
+                            <option value="juguetes">Juguetes</option>
+                            <option value="otros">Otros</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Tipo de Mascota</label>
+                        <select id="petTypeFilterMobile" onchange="syncFilter('petTypeFilter', this); applyFilters()">
+                            <option value="">Todas</option>
+                            <option value="perro">Perro</option>
+                            <option value="gato">Gato</option>
+                            <option value="ave">Ave</option>
+                            <option value="roedor">Roedor</option>
+                            <option value="todos">Todos</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Marca</label>
+                        <select id="brandFilterMobile" onchange="syncFilter('brandFilter', this); applyFilters()">
+                            <option value="">Todas</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Ordenar por</label>
+                        <select id="sortFilterMobile" onchange="syncFilter('sortFilter', this); applyFilters()">
+                            <option value="">Más recientes</option>
+                            <option value="price-asc">Precio: Menor a Mayor</option>
+                            <option value="price-desc">Precio: Mayor a Menor</option>
+                            <option value="name-asc">Nombre: A-Z</option>
+                            <option value="name-desc">Nombre: Z-A</option>
+                        </select>
+                    </div>
+                </aside>
+            </div>
 
             <div class="products-layout">
-                <!-- Filters Sidebar -->
-                <aside class="filters-sidebar mobile-hidden" id="filtersSidebar">
+                <!-- Filters Sidebar DESKTOP -->
+                <aside class="filters-sidebar filters-sidebar-desktop" id="filtersSidebar">
+                    <!-- Barra de búsqueda compacta dentro del sidebar (solo visible en desktop al hacer scroll) -->
+                    <div class="search-bar search-bar-sidebar" id="searchBarSidebar">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.35-4.35"></path>
+                        </svg>
+                        <input
+                            type="text"
+                            id="searchInputSidebar"
+                            placeholder="Buscar..."
+                            oninput="syncSearch(this, 'searchInput'); applyFilters()">
+                    </div>
+
                     <div class="filters-header">
                         <h3>Filtros</h3>
                         <button class="clear-filters-btn" id="clearFiltersBtn" onclick="clearFilters()">
@@ -188,7 +270,46 @@
         document.addEventListener('DOMContentLoaded', function() {
             loadProducts();
             setupFilterToggle();
+            setupScrollBehavior();
         });
+
+        // Sincroniza el valor de un input de búsqueda al otro
+        function syncSearch(source, targetId) {
+            const target = document.getElementById(targetId);
+            if (target) target.value = source.value;
+            // También sincroniza el mobile si corresponde
+            const mobileInput = document.getElementById('searchInputMobile');
+            if (mobileInput && source.id !== 'searchInputMobile') mobileInput.value = source.value;
+            if (source.id === 'searchInputMobile') {
+                const topInput = document.getElementById('searchInput');
+                if (topInput) topInput.value = source.value;
+                const sidebarInput = document.getElementById('searchInputSidebar');
+                if (sidebarInput) sidebarInput.value = source.value;
+            }
+        }
+
+        // Sincroniza filtros entre desktop y mobile
+        function syncFilter(desktopId, mobileSelect) {
+            const desktop = document.getElementById(desktopId);
+            if (desktop) desktop.value = mobileSelect.value;
+        }
+
+        // Muestra/oculta la barra del sidebar según scroll
+        function setupScrollBehavior() {
+            const searchBarTop    = document.getElementById('searchBarTop');
+            const searchBarSidebar = document.getElementById('searchBarSidebar');
+
+            if (!searchBarTop || !searchBarSidebar) return;
+
+            const observer = new IntersectionObserver(
+                ([entry]) => {
+                    // Cuando la barra top deja de ser visible → mostrar la del sidebar
+                    searchBarSidebar.classList.toggle('search-bar-sidebar--visible', !entry.isIntersecting);
+                },
+                { threshold: 0, rootMargin: '-10px 0px 0px 0px' }
+            );
+            observer.observe(searchBarTop);
+        }
 
         async function loadProducts() {
             try {
@@ -200,12 +321,17 @@
                 allProducts = resultados.flat();
 
                 const brands = [...new Set(allProducts.map(p => p.brand).filter(Boolean))].sort();
-                const brandFilter = document.getElementById('brandFilter');
-                brands.forEach(brand => {
-                    const option = document.createElement('option');
-                    option.value = brand;
-                    option.textContent = brand;
-                    brandFilter.appendChild(option);
+
+                // Poblar brandFilter desktop y mobile
+                ['brandFilter', 'brandFilterMobile'].forEach(id => {
+                    const el = document.getElementById(id);
+                    if (!el) return;
+                    brands.forEach(brand => {
+                        const option = document.createElement('option');
+                        option.value = brand;
+                        option.textContent = brand;
+                        el.appendChild(option);
+                    });
                 });
 
                 // Leer parámetros de la URL y pre-setear filtros
@@ -215,17 +341,21 @@
                 let urlFilterApplied = false;
 
                 if (pet) {
-                    const petSelect = document.getElementById('petTypeFilter');
-                    if (petSelect) { petSelect.value = pet; urlFilterApplied = true; }
+                    ['petTypeFilter', 'petTypeFilterMobile'].forEach(id => {
+                        const el = document.getElementById(id);
+                        if (el) { el.value = pet; urlFilterApplied = true; }
+                    });
                 }
                 if (category) {
-                    const catSelect = document.getElementById('categoryFilter');
-                    if (catSelect) { catSelect.value = category; urlFilterApplied = true; }
+                    ['categoryFilter', 'categoryFilterMobile'].forEach(id => {
+                        const el = document.getElementById(id);
+                        if (el) { el.value = category; urlFilterApplied = true; }
+                    });
                 }
 
                 // En mobile, abrir sidebar si llegó con filtro desde la home
                 if (urlFilterApplied && window.innerWidth < 768) {
-                    const sidebar = document.getElementById('filtersSidebar');
+                    const sidebar = document.getElementById('filtersSidebarMobile');
                     if (sidebar) sidebar.classList.remove('mobile-hidden');
                 }
 
@@ -239,6 +369,7 @@
         }
 
         function applyFilters() {
+            // Lee siempre desde los selects desktop (fuente de verdad)
             const searchTerm = document.getElementById('searchInput').value.toLowerCase();
             const category   = document.getElementById('categoryFilter').value;
             const petType    = document.getElementById('petTypeFilter').value;
@@ -304,11 +435,17 @@
         }
 
         function clearFilters() {
-            document.getElementById('searchInput').value    = '';
-            document.getElementById('categoryFilter').value = '';
-            document.getElementById('petTypeFilter').value  = '';
-            document.getElementById('brandFilter').value    = '';
-            document.getElementById('sortFilter').value     = '';
+            ['searchInput', 'searchInputSidebar', 'searchInputMobile'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.value = '';
+            });
+            ['categoryFilter', 'categoryFilterMobile',
+             'petTypeFilter',  'petTypeFilterMobile',
+             'brandFilter',    'brandFilterMobile',
+             'sortFilter',     'sortFilterMobile'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.value = '';
+            });
             applyFilters();
         }
 
@@ -331,7 +468,7 @@
 
         function setupFilterToggle() {
             const toggleBtn = document.getElementById('filterToggleBtn');
-            const sidebar   = document.getElementById('filtersSidebar');
+            const sidebar   = document.getElementById('filtersSidebarMobile');
 
             if (toggleBtn && sidebar) {
                 toggleBtn.addEventListener('click', function() {
