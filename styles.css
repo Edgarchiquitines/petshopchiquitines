@@ -431,12 +431,6 @@ body {
     border-radius: 0.5rem;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     padding: 1rem;
-    /* ── STICKY FIX ── */
-    position: sticky;
-    top: 4.5rem;           /* header (4rem) + 0.5rem de respiro */
-    align-self: flex-start; /* imprescindible en flex: no se estira hasta el fondo */
-    max-height: calc(100vh - 5.5rem); /* scroll interno si los filtros son muy largos */
-    overflow-y: auto;
 }
 
 .filters-header {
@@ -1106,12 +1100,6 @@ body {
 
     .products-layout {
         flex-direction: row;
-    }
-
-    /* En desktop el header mide 5rem → ajustamos el sticky */
-    .filters-sidebar {
-        top: 5.5rem;
-        max-height: calc(100vh - 6.5rem);
     }
 
     /* Categorías desktop */
