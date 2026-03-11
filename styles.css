@@ -5,7 +5,9 @@
     box-sizing: border-box;
 }
 
+/* FIX: overflow-x en body (NO en html) para no romper position:sticky */
 body {
+    overflow-x: clip;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     line-height: 1.6;
     color: #1a1a1a;
@@ -424,13 +426,90 @@ body {
     color: #6b7280;
 }
 
-/* Filters Sidebar */
+/* ================================================================
+   SEARCH BAR
+   ================================================================ */
+
+/* Barra grande (desktop + visible arriba en mobile antes de scrollear) */
+.search-bar {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+.search-bar svg {
+    position: absolute;
+    left: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #9ca3af;
+}
+
+.search-bar input {
+    width: 100%;
+    padding: 0.75rem 1rem 0.75rem 2.5rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+}
+
+.search-bar input:focus {
+    outline: none;
+    border-color: #FF6B35;
+    box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
+}
+
+/* En mobile, la barra grande (#searchBarTop) se oculta —
+   la reemplaza la del mobile-sticky-wrapper */
+#searchBarTop {
+    display: none;
+}
+
+/* Barra compacta dentro del sidebar desktop:
+   oculta por defecto, aparece al hacer scroll */
+.search-bar-sidebar {
+    display: none;
+    margin-bottom: 1rem;
+}
+
+.search-bar-sidebar.search-bar-sidebar--visible {
+    display: block;
+}
+
+/* ================================================================
+   MOBILE STICKY WRAPPER
+   Envuelve: barra de búsqueda + botón filtros + sidebar desplegable
+   Solo activo en mobile (<768px)
+   ================================================================ */
+.mobile-sticky-wrapper {
+    position: sticky;
+    top: 4rem;
+    z-index: 100;
+    background-color: #f9fafb;
+    padding: 0.5rem 0;
+    margin-bottom: 0.5rem;
+}
+
+.search-bar-mobile-sticky {
+    margin-bottom: 0.5rem;
+}
+
+/* ================================================================
+   FILTERS SIDEBAR
+   ================================================================ */
 .filters-sidebar {
     width: 16rem;
     background-color: #ffffff;
     border-radius: 0.5rem;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     padding: 1rem;
+}
+
+/* En mobile el sidebar desktop nunca se muestra */
+.filters-sidebar-desktop {
+    display: none;
+}
+
+.filters-sidebar.mobile-hidden {
+    display: none;
 }
 
 .filters-header {
@@ -485,34 +564,9 @@ body {
     box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
 }
 
-/* Search Bar */
-.search-bar {
-    position: relative;
-    margin-bottom: 1.5rem;
-}
-
-.search-bar svg {
-    position: absolute;
-    left: 0.75rem;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #9ca3af;
-}
-
-.search-bar input {
-    width: 100%;
-    padding: 0.75rem 1rem 0.75rem 2.5rem;
-    border: 1px solid #d1d5db;
-    border-radius: 0.5rem;
-}
-
-.search-bar input:focus {
-    outline: none;
-    border-color: #FF6B35;
-    box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
-}
-
-/* Cart Page */
+/* ================================================================
+   CART PAGE
+   ================================================================ */
 .cart-page {
     min-height: calc(100vh - 4rem);
     background-color: #f9fafb;
@@ -550,11 +604,13 @@ body {
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     padding: 1rem;
     transition: opacity 0.3s ease, transform 0.3s ease;
+    min-width: 0;
 }
 
 .cart-item-content {
     display: flex;
     gap: 1rem;
+    min-width: 0;
 }
 
 .cart-item-image {
@@ -562,28 +618,38 @@ body {
     height: 5rem;
     object-fit: cover;
     border-radius: 0.5rem;
+    flex-shrink: 0;
 }
 
 .cart-item-details {
     flex: 1;
+    min-width: 0;
 }
 
 .cart-item-name {
     font-weight: 600;
     font-size: 0.875rem;
     margin-bottom: 0.25rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .cart-item-meta {
     font-size: 0.75rem;
     color: #6b7280;
     margin-bottom: 0.5rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .cart-item-actions {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem;
 }
 
 .quantity-controls {
@@ -632,6 +698,7 @@ body {
     cursor: pointer;
     padding: 0.25rem;
     transition: color 0.3s;
+    flex-shrink: 0;
 }
 
 .remove-btn:hover {
@@ -644,6 +711,7 @@ body {
     border-radius: 0.5rem;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     padding: 1.5rem;
+    min-width: 0;
 }
 
 .order-form h2 {
@@ -794,7 +862,9 @@ body {
     margin-top: 0.25rem;
 }
 
-/* Products Page Layout */
+/* ================================================================
+   PRODUCTS PAGE LAYOUT
+   ================================================================ */
 .products-page {
     min-height: calc(100vh - 4rem);
     background-color: #f9fafb;
@@ -817,7 +887,7 @@ body {
     border-radius: 0.5rem;
     padding: 0.75rem 1rem;
     cursor: pointer;
-    margin-bottom: 1rem;
+    margin-bottom: 0;
 }
 
 .filter-toggle-content {
@@ -834,10 +904,6 @@ body {
     border-radius: 9999px;
 }
 
-.filters-sidebar.mobile-hidden {
-    display: none;
-}
-
 .products-main {
     flex: 1;
 }
@@ -851,7 +917,6 @@ body {
 /* ================================================================
    CATEGORÍAS — Banner de 2 filas
    ================================================================ */
-
 .categories-section {
     background-color: #111111;
     padding: 1.25rem 0;
@@ -870,7 +935,7 @@ body {
     font-weight: 700;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: #555;
+    color: #e0e0e0;
     text-align: center;
 }
 
@@ -888,7 +953,7 @@ body {
     gap: 0.4rem;
     background-color: #1c1c1c;
     color: #e0e0e0;
-    border: 1px solid #2a2a2a;
+    border: 1px solid #FF6B35;
     padding: 0.35rem 0.9rem;
     border-radius: 9999px;
     font-size: 0.8rem;
@@ -904,21 +969,6 @@ body {
     opacity: 0.85;
 }
 
-/* Imágenes dentro de las pills — se muestran a 17px sin importar resolución del archivo */
-.cat-pill-img {
-    width: 17px;
-    height: 17px;
-    object-fit: contain;
-    flex-shrink: 0;
-    /* Convierte la imagen a blanco puro para que combine con el fondo oscuro */
-    filter: brightness(0) invert(1);
-    opacity: 0.85;
-    transition: filter 0.2s, opacity 0.2s;
-    /* Evita que el navegador suavice en exceso imágenes pequeñas */
-    image-rendering: -webkit-optimize-contrast;
-    image-rendering: crisp-edges;
-}
-
 .cat-pill:hover {
     background-color: #FF6B35;
     border-color: #FF6B35;
@@ -927,11 +977,6 @@ body {
 }
 
 .cat-pill:hover svg {
-    opacity: 1;
-}
-
-.cat-pill:hover .cat-pill-img {
-    filter: brightness(0) invert(1);
     opacity: 1;
 }
 
@@ -952,10 +997,25 @@ body {
     margin: 0.85rem 0;
 }
 
+.cat-pill-img {
+    width: 17px;
+    height: 17px;
+    object-fit: contain;
+    flex-shrink: 0;
+    filter: brightness(0) invert(1);
+    opacity: 0.85;
+    transition: filter 0.2s, opacity 0.2s;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+}
+
+.cat-pill:hover .cat-pill-img {
+    opacity: 1;
+}
+
 /* ================================================================
    POR QUÉ ELEGIRNOS
    ================================================================ */
-
 .why-us-section {
     padding: 2rem 0;
     background-color: #f9fafb;
@@ -1005,7 +1065,7 @@ body {
 }
 
 /* ================================================================
-   Nosotros / Contacto
+   NOSOTROS / CONTACTO
    ================================================================ */
 .about-contact-section {
     background-color: #000000;
@@ -1036,7 +1096,7 @@ body {
 }
 
 /* ================================================================
-   Responsive
+   RESPONSIVE — Desktop (≥768px)
    ================================================================ */
 @media (min-width: 768px) {
     .nav-desktop {
@@ -1106,16 +1166,37 @@ body {
         height: 6rem;
     }
 
+    /* En desktop los nombres del carrito pueden mostrarse completos */
     .cart-item-name {
         font-size: 1rem;
+        white-space: normal;
+        overflow: visible;
+        text-overflow: unset;
     }
 
-    .filter-toggle-btn {
+    .cart-item-meta {
+        white-space: normal;
+        overflow: visible;
+        text-overflow: unset;
+    }
+
+    /* En desktop: mostrar barra grande y ocultar wrapper mobile */
+    #searchBarTop {
+        display: block;
+    }
+
+    .mobile-sticky-wrapper {
         display: none;
     }
 
-    .filters-sidebar.mobile-hidden {
+    /* En desktop: mostrar sidebar del layout, sticky */
+    .filters-sidebar-desktop {
         display: block;
+        position: sticky;
+        top: 5.5rem;
+        align-self: flex-start;
+        max-height: calc(100vh - 6.5rem);
+        overflow-y: auto;
     }
 
     .products-layout {
@@ -1134,11 +1215,6 @@ body {
 
     .cat-row-label {
         font-size: 0.65rem;
-    }
-
-    .cat-pill-img {
-        width: 18px;
-        height: 18px;
     }
 
     /* Por qué elegirnos desktop */
