@@ -13,7 +13,6 @@
     <header class="header">
         <div class="container">
             <div class="header-content">
-                <!-- Desktop Navigation (Centered) -->
                 <nav class="nav-desktop">
                     <a href="index.html" class="nav-link">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -28,8 +27,6 @@
                         <span>Productos</span>
                     </a>
                 </nav>
-
-                <!-- Cart Icon (Right) -->
                 <div class="header-actions">
                     <a href="cart.html" class="cart-icon">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -49,8 +46,6 @@
                 </div>
             </div>
         </div>
-
-        <!-- Mobile Menu -->
         <div class="mobile-menu" id="mobileMenu">
             <nav>
                 <a href="index.html" class="mobile-nav-link">
@@ -95,9 +90,17 @@
         </div>
     </footer>
 
+    <!-- Botón flotante WhatsApp -->
+    <a href="https://wa.me/595976106726"
+       class="whatsapp-fab"
+       target="_blank"
+       rel="noopener noreferrer"
+       aria-label="Contactar por WhatsApp">
+        <img src="assets/whatsapp.png" alt="WhatsApp">
+    </a>
+
     <script src="app.js"></script>
     <script>
-        // Check if dependencies are loaded
         if (typeof getCart !== 'function') {
             console.error('app.js no cargado correctamente');
             document.getElementById('cartContent').innerHTML = `
@@ -273,45 +276,28 @@
             `;
         }
 
-        // Optimized quantity change - only update specific elements
         function changeQuantity(productId, change) {
-            if (!updateQuantity(productId, change)) {
-                return; // updateQuantity returns false if bounds are exceeded
-            }
-
-            // Get updated item
+            if (!updateQuantity(productId, change)) return;
             const cart = getCart();
             const item = cart.find(i => i.id === productId);
-            
             if (!item) return;
-
-            // Update only the specific item's display
             const itemElement = document.querySelector(`[data-product-id="${productId}"]`);
             if (itemElement) {
                 const quantityEl = itemElement.querySelector('.quantity-value');
                 const priceEl = itemElement.querySelector('.cart-item-total');
-                
                 if (quantityEl) quantityEl.textContent = item.quantity;
                 if (priceEl) priceEl.textContent = formatPrice(item.price * item.quantity);
             }
-
-            // Update totals
             updateOrderTotal();
         }
 
-        // Remove item with animation
         function removeItemWithAnimation(productId) {
             const itemEl = document.querySelector(`[data-product-id="${productId}"]`);
-            
             if (itemEl) {
                 itemEl.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
                 itemEl.style.opacity = '0';
                 itemEl.style.transform = 'translateX(-20px)';
-                
-                setTimeout(() => {
-                    removeFromCart(productId);
-                    loadCart();
-                }, 300);
+                setTimeout(() => { removeFromCart(productId); loadCart(); }, 300);
             } else {
                 removeFromCart(productId);
                 loadCart();
@@ -322,37 +308,25 @@
             const total = calculateTotal();
             const subtotalEl = document.getElementById('subtotalAmount');
             const totalEl = document.getElementById('totalAmount');
-            
             if (subtotalEl) subtotalEl.textContent = formatPrice(total);
             if (totalEl) totalEl.textContent = formatPrice(total);
         }
 
         function calculateTotal() {
-            const cart = getCart();
-            return cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            return getCart().reduce((sum, item) => sum + (item.price * item.quantity), 0);
         }
 
         function toggleInvoiceFields() {
             const needsInvoice = document.getElementById('needsInvoice').checked;
-            const invoiceFields = document.getElementById('invoiceFields');
-            invoiceFields.style.display = needsInvoice ? 'block' : 'none';
-            
-            // Clear errors when toggling
-            if (!needsInvoice) {
-                clearError('rucError');
-                clearError('invoiceNameError');
-            }
+            document.getElementById('invoiceFields').style.display = needsInvoice ? 'block' : 'none';
+            if (!needsInvoice) { clearError('rucError'); clearError('invoiceNameError'); }
         }
 
-        // Improved validation with visual feedback
         function validateForm() {
             let isValid = true;
-            
-            // Clear all previous errors
             document.querySelectorAll('.error-message').forEach(el => el.textContent = '');
             document.querySelectorAll('input, textarea').forEach(el => el.classList.remove('input-error'));
 
-            // Validate name
             const customerName = document.getElementById('customerName');
             if (!customerName.value.trim()) {
                 showFieldError('nameError', 'Por favor ingresa tu nombre');
@@ -360,25 +334,20 @@
                 isValid = false;
             }
 
-            // Validate invoice fields if needed
-            const needsInvoice = document.getElementById('needsInvoice').checked;
-            if (needsInvoice) {
+            if (document.getElementById('needsInvoice').checked) {
                 const invoiceRuc = document.getElementById('invoiceRuc');
                 const invoiceName = document.getElementById('invoiceName');
-                
                 if (!invoiceRuc.value.trim()) {
                     showFieldError('rucError', 'Por favor ingresa el RUC');
                     invoiceRuc.classList.add('input-error');
                     isValid = false;
                 }
-                
                 if (!invoiceName.value.trim()) {
                     showFieldError('invoiceNameError', 'Por favor ingresa el nombre o razón social');
                     invoiceName.classList.add('input-error');
                     isValid = false;
                 }
             }
-
             return isValid;
         }
 
@@ -395,82 +364,56 @@
 
         function clearError(elementId) {
             const errorEl = document.getElementById(elementId);
-            if (errorEl) {
-                errorEl.textContent = '';
-            }
+            if (errorEl) errorEl.textContent = '';
         }
 
         function sendToWhatsApp() {
-            // Validate form
             if (!validateForm()) {
-                // Scroll to first error
                 const firstError = document.querySelector('.input-error');
-                if (firstError) {
-                    firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    firstError.focus();
-                }
+                if (firstError) { firstError.scrollIntoView({ behavior: 'smooth', block: 'center' }); firstError.focus(); }
                 return;
             }
 
-            // Disable button to prevent double submission
             const submitBtn = document.getElementById('submitBtn');
             const originalText = submitBtn.innerHTML;
             submitBtn.disabled = true;
             submitBtn.innerHTML = '<span>Enviando...</span>';
 
-            // Get form data
-            const customerName = document.getElementById('customerName').value.trim();
+            const customerName   = document.getElementById('customerName').value.trim();
             const deliveryMethod = document.querySelector('input[name="delivery"]:checked').value;
-            const paymentMethod = document.querySelector('input[name="payment"]:checked').value;
-            const needsInvoice = document.getElementById('needsInvoice').checked;
-            const invoiceRuc = document.getElementById('invoiceRuc')?.value.trim();
-            const invoiceName = document.getElementById('invoiceName')?.value.trim();
+            const paymentMethod  = document.querySelector('input[name="payment"]:checked').value;
+            const needsInvoice   = document.getElementById('needsInvoice').checked;
+            const invoiceRuc     = document.getElementById('invoiceRuc')?.value.trim();
+            const invoiceName    = document.getElementById('invoiceName')?.value.trim();
 
-            // Build WhatsApp message
             const cart = getCart();
             let message = '*NUEVO PEDIDO - Petshop Chiquitines*\n\n';
             message += `👤 *Cliente:* ${customerName}\n\n`;
-            
             message += '📦 *Productos:*\n';
             cart.forEach((item, index) => {
                 message += `${index + 1}. ${item.name}\n`;
+                message += `   Marca: ${item.brand}\n`;
                 message += `   Cantidad: ${item.quantity}\n`;
                 message += `   Precio unitario: ${formatPrice(item.price)}\n`;
                 message += `   Subtotal: ${formatPrice(item.price * item.quantity)}\n\n`;
-                message += `   Código: ${item.code}\n`;
             });
-
             message += `💰 *TOTAL: ${formatPrice(calculateTotal())}*\n\n`;
-
             message += `🚚 *Entrega:* ${deliveryMethod === 'delivery' ? 'Delivery' : 'Retiro en local/Pickup'}\n\n`;
-
             message += `💳 *Método de pago:* ${paymentMethod === 'efectivo' ? 'Efectivo' : 'Transferencia'}\n\n`;
-
             if (needsInvoice) {
-                message += '🧾 *Factura:*\n';
-                message += `   RUC: ${invoiceRuc}\n`;
-                message += `   Nombre: ${invoiceName}\n`;
+                message += `🧾 *Factura:*\n   RUC: ${invoiceRuc}\n   Nombre: ${invoiceName}\n`;
             } else {
                 message += '🧾 *Factura:* No requiere\n';
             }
 
-            // Encode and open WhatsApp
             try {
                 const encodedMessage = encodeURIComponent(message);
-                const whatsappNumber = '595976106726'; // CAMBIAR POR TU NÚMERO
-                const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
-
-                window.open(whatsappUrl, '_blank');
-
-                // Clear cart after successful send
+                window.open(`https://wa.me/595976106726?text=${encodedMessage}`, '_blank');
                 setTimeout(() => {
                     localStorage.removeItem('cart');
                     showNotification('¡Pedido enviado con éxito!');
-                    setTimeout(() => {
-                        window.location.href = 'index.html';
-                    }, 1500);
+                    setTimeout(() => { window.location.href = 'index.html'; }, 1500);
                 }, 500);
-                
             } catch (error) {
                 console.error('Error al enviar pedido:', error);
                 showNotification('Error al enviar el pedido. Intenta nuevamente.');
@@ -479,10 +422,8 @@
             }
         }
 
-        // Add input event listeners for real-time validation feedback
         document.addEventListener('DOMContentLoaded', function() {
             setTimeout(() => {
-                // Clear errors on input
                 const nameInput = document.getElementById('customerName');
                 if (nameInput) {
                     nameInput.addEventListener('input', () => {
@@ -501,19 +442,16 @@
             border-color: #ef4444 !important;
             background-color: #fef2f2 !important;
         }
-
         .error-message {
             display: block;
             color: #ef4444;
             font-size: 0.875rem;
             margin-top: 0.25rem;
         }
-
         .submit-btn:disabled {
             opacity: 0.6;
             cursor: not-allowed;
         }
-
         .cart-item {
             transition: opacity 0.3s ease, transform 0.3s ease;
         }
