@@ -431,6 +431,12 @@ body {
     border-radius: 0.5rem;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     padding: 1rem;
+    /* ── STICKY FIX ── */
+    position: sticky;
+    top: 4.5rem;           /* header (4rem) + 0.5rem de respiro */
+    align-self: flex-start; /* imprescindible en flex: no se estira hasta el fondo */
+    max-height: calc(100vh - 5.5rem); /* scroll interno si los filtros son muy largos */
+    overflow-y: auto;
 }
 
 .filters-header {
@@ -932,54 +938,6 @@ body {
     margin: 0.85rem 0;
 }
 
-/* Imágenes dentro de las pills — se muestran a 17px sin importar resolución del archivo */
-.cat-pill-img {
-    width: 17px;
-    height: 17px;
-    object-fit: contain;
-    flex-shrink: 0;
-    /* Convierte la imagen a blanco puro para que combine con el fondo oscuro */
-    filter: brightness(0) invert(1);
-    opacity: 0.85;
-    transition: filter 0.2s, opacity 0.2s;
-    /* Evita que el navegador suavice en exceso imágenes pequeñas */
-    image-rendering: -webkit-optimize-contrast;
-    image-rendering: crisp-edges;
-}
-
-.cat-pill:hover {
-    background-color: #FF6B35;
-    border-color: #FF6B35;
-    color: #ffffff;
-    transform: translateY(-1px);
-}
-
-.cat-pill:hover svg {
-    opacity: 1;
-}
-
-.cat-pill:hover .cat-pill-img {
-    filter: brightness(0) invert(1);
-    opacity: 1;
-}
-
-.cat-pill--all {
-    border-color: #444;
-    color: #aaa;
-}
-
-.cat-pill--all:hover {
-    background-color: #FF6B35;
-    border-color: #FF6B35;
-    color: #ffffff;
-}
-
-.cat-divider {
-    height: 1px;
-    background-color: #222;
-    margin: 0.85rem 0;
-}
-
 /* ================================================================
    POR QUÉ ELEGIRNOS
    ================================================================ */
@@ -1150,6 +1108,12 @@ body {
         flex-direction: row;
     }
 
+    /* En desktop el header mide 5rem → ajustamos el sticky */
+    .filters-sidebar {
+        top: 5.5rem;
+        max-height: calc(100vh - 6.5rem);
+    }
+
     /* Categorías desktop */
     .categories-section {
         padding: 1.75rem 0;
@@ -1201,5 +1165,4 @@ body {
     .products-grid {
         grid-template-columns: repeat(5, 1fr);
     }
-    
 }
