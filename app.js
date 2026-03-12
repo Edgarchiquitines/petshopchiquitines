@@ -33,13 +33,13 @@ function addToCart(product) {
 
 function removeFromCart(productId) {
     const cart = getCart();
-    const updatedCart = cart.filter(item => item.id !== productId);
+    const updatedCart = cart.filter(item => String(item.id) !== String(productId));
     saveCart(updatedCart);
 }
 
 function updateQuantity(productId, change) {
     const cart = getCart();
-    const item = cart.find(item => item.id === productId);
+    const item = cart.find(item => String(item.id) === String(productId));
 
     if (item) {
         const newQuantity = item.quantity + change;
@@ -537,11 +537,70 @@ function openOrdersModal() {
                             <span class="order-item-price">${formatPrice(it.price * it.quantity)}</span>
                         </li>`).join('')}
                 </ul>
+                <div class="order-history-footer">
+                    <button class="order-repeat-btn" onclick="reOrderToCart(${i})">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="1 4 1 10 7 10"></polyline>
+                            <path d="M3.51 15a9 9 0 1 0 .49-4.95"></path>
+                        </svg>
+                        Repetir pedido
+                    </button>
+                </div>
             </div>`).join('');
     }
 
     modal.classList.add('panel--open');
     document.getElementById('panelBackdrop')?.classList.add('panel--open');
+}
+
+async function reOrderToCart(orderIndex) {
+    const orders = getOrders();
+    const order  = orders[orderIndex];
+    if (!order) return;
+
+    // Fuente 1: allProducts en memoria (si estamos en products.html)
+    let freshProducts = null;
+    if (typeof allProducts !== 'undefined' && allProducts.length) {
+        freshProducts = allProducts;
+    }
+
+    // Fuente 2: caché en localStorage
+    if (!freshProducts) {
+        try {
+            const cached = localStorage.getItem('productsCache');
+            if (cached) freshProducts = JSON.parse(cached);
+        } catch(e) {}
+    }
+
+    // Fuente 3: cargar los JSON directamente (siempre funciona)
+    if (!freshProducts) {
+        try {
+            const results = await Promise.all([
+                fetch('products1.json').then(r => r.json()),
+                fetch('products2.json').then(r => r.json())
+            ]);
+            freshProducts = results.flat();
+            // Guardar para la próxima vez
+            try { localStorage.setItem('productsCache', JSON.stringify(freshProducts)); } catch(e) {}
+        } catch(e) {
+            freshProducts = null;
+        }
+    }
+
+    const newCart = order.items.map(it => {
+        if (freshProducts) {
+            const fresh = freshProducts.find(p => String(p.id) === String(it.id));
+            if (fresh) return { ...fresh, quantity: it.quantity };
+        }
+        return { ...it };
+    });
+
+    localStorage.setItem('cart', JSON.stringify(newCart));
+    updateCartCount();
+
+    closePanels();
+    showNotification('🛒 Pedido cargado en el carrito');
+    setTimeout(() => { window.location.href = 'cart.html'; }, 900);
 }
 
 // ── Cerrar todos los paneles ──────────────────────────────────────
