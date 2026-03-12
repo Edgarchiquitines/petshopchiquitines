@@ -95,7 +95,7 @@
   },
   {
     "id": "8",
-    "name": "Arena Sanitaria",
+    "name": "Arena Sanitaria Gattino",
     "brand": "Gattino",
     "price": 18000,
     "originalPrice": 18000,
@@ -150,7 +150,7 @@
   },
   {
     "id": "12",
-    "name": "Antiparasitario canino externo",
+    "name": "Afoxocan Antiparasitario canino externo",
     "brand": "Afoxocan",
     "price": 8000,
     "originalPrice": 10000,
@@ -223,7 +223,7 @@
   },
   {
     "id": "17",
-    "name": "DentaStix raza peq",
+    "name": "DentaStix Raza pequeña",
     "brand": "Pedigree",
     "price": 14000,
     "originalPrice": 14000,
