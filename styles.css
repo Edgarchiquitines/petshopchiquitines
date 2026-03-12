@@ -1847,3 +1847,45 @@ body {
     color: #111;
     flex-shrink: 0;
 }
+
+/* ================================================================
+   BOTÓN VOLVER ARRIBA — solo mobile, centrado horizontalmente
+   ================================================================ */
+.scroll-top-btn {
+    display: none; /* oculto en desktop siempre */
+    position: fixed;
+    bottom: 5rem;
+    left: 50%;
+    transform: translateX(-50%) scale(0.8);
+    z-index: 900;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 9999px;
+    background: rgba(0, 0, 0, 0.55);
+    border: 2px solid #ffffff;
+    color: #ffffff;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+/* Visible solo en mobile y solo cuando tiene la clase --visible */
+@media (max-width: 767px) {
+    .scroll-top-btn {
+        display: flex;
+    }
+
+    .scroll-top-btn--visible {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateX(-50%) scale(1);
+    }
+
+    .scroll-top-btn:active {
+        transform: translateX(-50%) scale(0.92);
+    }
+}
