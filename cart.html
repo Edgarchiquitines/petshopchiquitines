@@ -184,13 +184,14 @@
             cartItems.innerHTML = cart.map(item => `
                 <div class="cart-item" data-product-id="${item.id}">
                     <div class="cart-item-content">
-                        <img src="${item.imageUrl || 'https://images.unsplash.com/photo-1589924691995-400dc9ecc119?w=400'}"
+                        <img src="${item.imageUrl || 'assets/placeholder.png'}"
                              alt="${item.name}"
                              class="cart-item-image"
-                             loading="lazy">
+                             loading="lazy"
+                             onerror="this.src='https://images.unsplash.com/photo-1589924691995-400dc9ecc119?w=400'">
                         <div class="cart-item-details">
                             <h3 class="cart-item-name">${item.name}</h3>
-                            <p class="cart-item-meta">${item.brand} - ${item.weight}</p>
+                            <p class="cart-item-meta">${item.brand || ''}${item.weight ? ' - ' + item.weight : ''}</p>
                             <div class="cart-item-actions">
                                 <div class="quantity-controls">
                                     <button class="quantity-btn" onclick="changeQuantity('${item.id}', -1)" aria-label="Disminuir cantidad">
@@ -295,9 +296,11 @@
         }
 
         function changeQuantity(productId, change) {
-            if (!updateQuantity(productId, change)) return;
             const cart = getCart();
-            const item = cart.find(i => i.id === productId);
+            const realId = cart.find(i => String(i.id) === String(productId))?.id ?? productId;
+            if (!updateQuantity(realId, change)) return;
+            const updatedCart = getCart();
+            const item = updatedCart.find(i => String(i.id) === String(productId));
             if (!item) return;
             const itemElement = document.querySelector(`[data-product-id="${productId}"]`);
             if (itemElement) {
@@ -311,13 +314,16 @@
 
         function removeItemWithAnimation(productId) {
             const itemEl = document.querySelector(`[data-product-id="${productId}"]`);
+            // Buscar el id con el tipo correcto (puede ser number o string en localStorage)
+            const cart = getCart();
+            const realId = cart.find(i => String(i.id) === String(productId))?.id ?? productId;
             if (itemEl) {
                 itemEl.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
                 itemEl.style.opacity = '0';
                 itemEl.style.transform = 'translateX(-20px)';
-                setTimeout(() => { removeFromCart(productId); loadCart(); }, 300);
+                setTimeout(() => { removeFromCart(realId); loadCart(); }, 300);
             } else {
-                removeFromCart(productId);
+                removeFromCart(realId);
                 loadCart();
             }
         }
@@ -435,7 +441,7 @@
                     deliveryMethod,
                     paymentMethod,
                     total: calculateTotal(),
-                    items: cart.map(it => ({ name: it.name, brand: it.brand, quantity: it.quantity, price: it.price }))
+                    items: cart.map(it => ({ ...it }))
                 };
                 saveOrder(orderData);
 
