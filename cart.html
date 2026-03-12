@@ -36,7 +36,7 @@
                         </svg>
                         <span class="cart-count" id="cartCount">0</span>
                     </a>
-                    <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Abrir menú">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <line x1="3" y1="12" x2="21" y2="12"></line>
                             <line x1="3" y1="6" x2="21" y2="6"></line>
@@ -46,6 +46,7 @@
                 </div>
             </div>
         </div>
+        <!-- Mobile Menu -->
         <div class="mobile-menu" id="mobileMenu">
             <nav>
                 <a href="index.html" class="mobile-nav-link">
@@ -166,8 +167,8 @@
             cartItems.innerHTML = cart.map(item => `
                 <div class="cart-item" data-product-id="${item.id}">
                     <div class="cart-item-content">
-                        <img src="${item.imageUrl || 'https://images.unsplash.com/photo-1589924691995-400dc9ecc119?w=400'}" 
-                             alt="${item.name}" 
+                        <img src="${item.imageUrl || 'https://images.unsplash.com/photo-1589924691995-400dc9ecc119?w=400'}"
+                             alt="${item.name}"
                              class="cart-item-image"
                              loading="lazy">
                         <div class="cart-item-details">
@@ -436,25 +437,5 @@
             }, 100);
         });
     </script>
-
-    <style>
-        .input-error {
-            border-color: #ef4444 !important;
-            background-color: #fef2f2 !important;
-        }
-        .error-message {
-            display: block;
-            color: #ef4444;
-            font-size: 0.875rem;
-            margin-top: 0.25rem;
-        }
-        .submit-btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-        }
-        .cart-item {
-            transition: opacity 0.3s ease, transform 0.3s ease;
-        }
-    </style>
 </body>
 </html>
