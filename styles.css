@@ -20,7 +20,9 @@ body {
     padding: 0 1rem;
 }
 
-/* Header */
+/* ================================================================
+   HEADER
+   ================================================================ */
 .header {
     position: sticky;
     top: 0;
@@ -39,7 +41,7 @@ body {
 }
 
 .nav-desktop {
-    display: flex;
+    display: none; /* oculto en mobile, visible en desktop via media query */
     gap: 1.5rem;
     align-items: center;
 }
@@ -94,8 +96,9 @@ body {
     justify-content: center;
 }
 
+/* Botón hamburguesa: visible en mobile, oculto en desktop */
 .mobile-menu-btn {
-    display: none;
+    display: flex;
     background: none;
     border: none;
     color: #ffffff;
@@ -108,11 +111,44 @@ body {
     color: #FF6B35;
 }
 
+/* ================================================================
+   MOBILE MENU — CORREGIDO
+   Por defecto oculto. Se muestra al agregar la clase .active via JS.
+   ================================================================ */
 .mobile-menu {
     display: none;
+    background-color: #000000;
+    padding: 0.5rem 1rem;
+    border-top: 1px solid #222;
 }
 
-/* Hero */
+.mobile-menu.active {
+    display: block;
+}
+
+.mobile-nav-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #ffffff;
+    text-decoration: none;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #222;
+    font-size: 0.95rem;
+    transition: color 0.2s;
+}
+
+.mobile-nav-link:last-child {
+    border-bottom: none;
+}
+
+.mobile-nav-link:hover {
+    color: #FF6B35;
+}
+
+/* ================================================================
+   HERO
+   ================================================================ */
 .hero {
     color: #ffffff;
     padding: 1rem 0;
@@ -169,7 +205,9 @@ body {
     background-color: #f3f4f6;
 }
 
-/* Products Section */
+/* ================================================================
+   PRODUCTS SECTION
+   ================================================================ */
 .products-section {
     padding: 2rem 0;
 }
@@ -195,7 +233,9 @@ body {
     gap: 0.5rem;
 }
 
-/* Product Card */
+/* ================================================================
+   PRODUCT CARD
+   ================================================================ */
 .product-card {
     background-color: #ffffff;
     border-radius: 0.5rem;
@@ -354,7 +394,7 @@ body {
 }
 
 /* ================================================================
-   SKELETON LOADING — forma de tarjeta real
+   SKELETON LOADING
    ================================================================ */
 @keyframes shimmer {
     0%   { background-position: -600px 0; }
@@ -414,7 +454,9 @@ body {
     height: 20rem;
 }
 
-/* Empty State */
+/* ================================================================
+   EMPTY STATE
+   ================================================================ */
 .empty-state {
     text-align: center;
     padding: 3rem 0;
@@ -438,7 +480,9 @@ body {
     text-decoration: underline;
 }
 
-/* CTA Section */
+/* ================================================================
+   CTA SECTION
+   ================================================================ */
 .cta-section {
     background-color: #000000;
     color: #ffffff;
@@ -461,7 +505,9 @@ body {
     margin-right: auto;
 }
 
-/* Footer */
+/* ================================================================
+   FOOTER
+   ================================================================ */
 .footer {
     background-color: #000000;
     color: #ffffff;
@@ -505,7 +551,6 @@ body {
     box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
 }
 
-/* Botón X para limpiar búsqueda */
 .search-clear-btn {
     position: absolute;
     right: 0.6rem;
@@ -529,7 +574,6 @@ body {
     background-color: #fff1ec;
 }
 
-/* Dropdown de autocomplete */
 .autocomplete-dropdown {
     display: none;
     position: absolute;
@@ -941,7 +985,9 @@ body {
     color: #dc2626;
 }
 
-/* Order Form */
+/* ================================================================
+   ORDER FORM
+   ================================================================ */
 .order-form {
     background-color: #ffffff;
     border-radius: 0.5rem;
@@ -1325,67 +1371,6 @@ body {
 }
 
 /* ================================================================
-   RESPONSIVE — Desktop (≥768px)
-   ================================================================ */
-@media (min-width: 768px) {
-    .nav-desktop { display: flex; gap: 2rem; }
-    .nav-link { font-size: 1rem; }
-    .mobile-menu-btn { display: none; }
-    .header-content { height: 5rem; }
-
-    .hero { padding: 1.5rem 0; }
-    .hero h1 { font-size: 2rem; }
-    .hero-logo { max-width: 350px; }
-    .hero p { font-size: 1rem; }
-
-    .products-grid { grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
-    .product-content { padding: 1rem; }
-    .product-name { font-size: 17px; height: calc(17px * 1.35 * 2); }
-    .current-price, .regular-price { font-size: 1.25rem; }
-    .add-to-cart-btn { font-size: 0.875rem; padding: 0.5rem; gap: 0.5rem; }
-
-    .cart-layout { grid-template-columns: 2fr 1fr; }
-    .cart-item-image { width: 6rem; height: 6rem; }
-    .cart-item-name { font-size: 1rem; white-space: normal; overflow: visible; text-overflow: unset; }
-    .cart-item-meta { white-space: normal; overflow: visible; text-overflow: unset; }
-
-    /* Desktop: mostrar barra grande, ocultar wrapper mobile */
-    #searchBarTop { display: block; }
-    .mobile-sticky-wrapper { display: none; }
-
-    /* Desktop: sidebar sticky */
-    .filters-sidebar-desktop {
-        display: block;
-        position: sticky;
-        top: 5.5rem;
-        align-self: flex-start;
-        max-height: calc(100vh - 6.5rem);
-        overflow-y: auto;
-    }
-
-    .products-layout { flex-direction: row; }
-
-    .categories-section { padding: 1.75rem 0; }
-    .cat-pill { font-size: 0.875rem; padding: 0.45rem 1.1rem; }
-    .cat-row-label { font-size: 0.65rem; }
-
-    .why-us-grid { grid-template-columns: repeat(4, 1fr); gap: 1.25rem; }
-    .why-us-item h3 { font-size: 0.95rem; }
-    .why-us-item p { font-size: 0.8rem; }
-}
-
-@media (min-width: 1024px) {
-    .products-grid { grid-template-columns: repeat(4, 1fr); }
-    .hero { padding: 1.5rem 0; }
-    .hero h1 { font-size: 2rem; }
-    .hero-logo { max-width: 400px; }
-}
-
-@media (min-width: 1280px) {
-    .products-grid { grid-template-columns: repeat(5, 1fr); }
-}
-
-/* ================================================================
    BOTÓN FLOTANTE WHATSAPP
    ================================================================ */
 .whatsapp-fab {
@@ -1442,6 +1427,74 @@ body {
 @keyframes fab-pop {
     from { transform: scale(0); opacity: 0; }
     to   { transform: scale(1); opacity: 1; }
+}
+
+/* ================================================================
+   RESPONSIVE — Desktop (≥768px)
+   ================================================================ */
+@media (min-width: 768px) {
+    /* Nav desktop visible, mobile menu y botón hamburguesa ocultos */
+    .nav-desktop { display: flex; gap: 2rem; }
+    .nav-link { font-size: 1rem; }
+    .mobile-menu-btn { display: none; }
+    .mobile-menu { display: none !important; } /* siempre oculto en desktop */
+    .header-content { height: 5rem; }
+
+    .hero { padding: 1.5rem 0; }
+    .hero h1 { font-size: 2rem; }
+    .hero-logo { max-width: 350px; }
+    .hero p { font-size: 1rem; }
+
+    .products-grid { grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .product-content { padding: 1rem; }
+    .product-name { font-size: 17px; height: calc(17px * 1.35 * 2); }
+    .current-price, .regular-price { font-size: 1.25rem; }
+    .add-to-cart-btn { font-size: 0.875rem; padding: 0.5rem; gap: 0.5rem; }
+
+    .cart-layout { grid-template-columns: 2fr 1fr; }
+    .cart-item-image { width: 6rem; height: 6rem; }
+    .cart-item-name { font-size: 1rem; white-space: normal; overflow: visible; text-overflow: unset; }
+    .cart-item-meta { white-space: normal; overflow: visible; text-overflow: unset; }
+
+    /* Desktop: mostrar barra grande, ocultar wrapper mobile */
+    #searchBarTop { display: block; }
+    .mobile-sticky-wrapper { display: none; }
+
+    /* Desktop: sidebar sticky */
+    .filters-sidebar-desktop {
+        display: block;
+        position: sticky;
+        top: 5.5rem;
+        align-self: flex-start;
+        max-height: calc(100vh - 6.5rem);
+        overflow-y: auto;
+    }
+
+    .products-layout { flex-direction: row; }
+
+    .categories-section { padding: 1.75rem 0; }
+    .cat-pill { font-size: 0.875rem; padding: 0.45rem 1.1rem; }
+    .cat-row-label { font-size: 0.65rem; }
+
+    .why-us-grid { grid-template-columns: repeat(4, 1fr); gap: 1.25rem; }
+    .why-us-item h3 { font-size: 0.95rem; }
+    .why-us-item p { font-size: 0.8rem; }
+
+    .whatsapp-fab {
+        bottom: 1.5rem;
+        right: 1.5rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .products-grid { grid-template-columns: repeat(4, 1fr); }
+    .hero { padding: 1.5rem 0; }
+    .hero h1 { font-size: 2rem; }
+    .hero-logo { max-width: 400px; }
+}
+
+@media (min-width: 1280px) {
+    .products-grid { grid-template-columns: repeat(5, 1fr); }
 }
 
 @media (max-width: 767px) {
