@@ -85,13 +85,13 @@
                     placeholder="Buscar productos, marcas, categorías..."
                     oninput="syncSearch(this, 'searchInputSidebar'); handleAutocomplete(this, 'autocompleteTop')"
                     autocomplete="off">
+                <div class="autocomplete-dropdown" id="autocompleteTop"></div>
                 <button class="search-clear-btn" id="searchClearTop" onclick="clearSearch('searchInput', 'autocompleteTop')" style="display:none">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <line x1="18" y1="6" x2="6" y2="18"></line>
                         <line x1="6" y1="6" x2="18" y2="18"></line>
                     </svg>
                 </button>
-                <div class="autocomplete-dropdown" id="autocompleteTop"></div>
             </div>
 
             <!-- MOBILE: wrapper sticky -->
@@ -105,13 +105,13 @@
                         placeholder="Buscar productos..."
                         oninput="syncSearch(this, 'searchInput'); handleAutocomplete(this, 'autocompleteMobile')"
                         autocomplete="off">
+                    <div class="autocomplete-dropdown" id="autocompleteMobile"></div>
                     <button class="search-clear-btn" id="searchClearMobile" onclick="clearSearch('searchInputMobile', 'autocompleteMobile')" style="display:none">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <line x1="18" y1="6" x2="6" y2="18"></line>
                             <line x1="6" y1="6" x2="18" y2="18"></line>
                         </svg>
                     </button>
-                    <div class="autocomplete-dropdown" id="autocompleteMobile"></div>
                 </div>
 
                 <button class="filter-toggle-btn" id="filterToggleBtn">
@@ -210,13 +210,13 @@
                             placeholder="Buscar..."
                             oninput="syncSearch(this, 'searchInput'); handleAutocomplete(this, 'autocompleteSidebar')"
                             autocomplete="off">
+                        <div class="autocomplete-dropdown" id="autocompleteSidebar"></div>
                         <button class="search-clear-btn" id="searchClearSidebar" onclick="clearSearch('searchInputSidebar', 'autocompleteSidebar')" style="display:none">
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <line x1="18" y1="6" x2="6" y2="18"></line>
                                 <line x1="6" y1="6" x2="18" y2="18"></line>
                             </svg>
                         </button>
-                        <div class="autocomplete-dropdown" id="autocompleteSidebar"></div>
                     </div>
 
                     <div class="filters-header">
