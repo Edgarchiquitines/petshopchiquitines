@@ -38,7 +38,7 @@
                         </svg>
                         <span class="cart-count" id="cartCount">0</span>
                     </a>
-                    <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Abrir menú">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <line x1="3" y1="12" x2="21" y2="12"></line>
                             <line x1="3" y1="6" x2="21" y2="6"></line>
@@ -48,6 +48,7 @@
                 </div>
             </div>
         </div>
+        <!-- Mobile Menu -->
         <div class="mobile-menu" id="mobileMenu">
             <nav>
                 <a href="index.html" class="mobile-nav-link">
@@ -296,7 +297,7 @@
                 <div class="products-main">
                     <div class="products-count" id="productsCount">Cargando...</div>
                     <div id="productsGrid" class="products-grid">
-                        <!-- Skeletons con forma de tarjeta real -->
+                        <!-- Skeletons -->
                         <div class="product-card-skeleton">
                             <div class="skeleton-img"></div>
                             <div class="skeleton-body">
@@ -385,7 +386,6 @@
             const query = inputEl.value.trim().toLowerCase();
             const dropdown = document.getElementById(dropdownId);
 
-            // Mostrar/ocultar botón limpiar
             const clearBtnId = inputEl.id === 'searchInput' ? 'searchClearTop'
                              : inputEl.id === 'searchInputMobile' ? 'searchClearMobile'
                              : 'searchClearSidebar';
@@ -409,7 +409,6 @@
             const results = [];
             const seen = new Set();
 
-            // Marcas que coinciden
             const brands = [...new Set(allProducts.map(p => p.brand).filter(Boolean))];
             brands.forEach(brand => {
                 if (brand.toLowerCase().includes(query) && !seen.has('brand:' + brand)) {
@@ -418,7 +417,6 @@
                 }
             });
 
-            // Productos que coinciden (máx 6)
             allProducts.forEach(p => {
                 if (results.filter(r => r.type === 'product').length >= 6) return;
                 if (
@@ -472,16 +470,13 @@
             if (!input) return;
             input.value = label;
 
-            // Sync todos los inputs de búsqueda
             ['searchInput', 'searchInputSidebar', 'searchInputMobile'].forEach(id => {
                 const el = document.getElementById(id);
                 if (el) el.value = label;
             });
 
-            // Ocultar todos los dropdowns
             closeAllDropdowns();
 
-            // Mostrar botones limpiar
             ['searchClearTop', 'searchClearMobile', 'searchClearSidebar'].forEach(id => {
                 const el = document.getElementById(id);
                 if (el) el.style.display = 'flex';
@@ -533,7 +528,6 @@
             let minVal = parseInt(minEl.value);
             let maxVal = parseInt(maxEl.value);
 
-            // Evitar cruce de handles
             if (minVal > maxVal) {
                 if (document.activeElement === minEl) {
                     minEl.value = maxVal;
@@ -547,14 +541,12 @@
             priceMin = minVal;
             priceMax = maxVal;
 
-            // Sync el otro slider
             const otherSuffix = suffix === 'Desktop' ? 'Mobile' : 'Desktop';
             const otherMin = document.getElementById('priceMin' + otherSuffix);
             const otherMax = document.getElementById('priceMax' + otherSuffix);
             if (otherMin) otherMin.value = minVal;
             if (otherMax) otherMax.value = maxVal;
 
-            // Actualizar labels en ambos
             ['Desktop', 'Mobile'].forEach(s => {
                 const minLabel = document.getElementById('priceMinLabel' + s);
                 const maxLabel = document.getElementById('priceMaxLabel' + s);
@@ -621,7 +613,6 @@
                 if (sidebarInput) sidebarInput.value = source.value;
             }
 
-            // Mostrar/ocultar botón limpiar en los tres
             ['searchInput','searchInputMobile','searchInputSidebar'].forEach((id, i) => {
                 const el = document.getElementById(id);
                 const btnIds = ['searchClearTop','searchClearMobile','searchClearSidebar'];
@@ -663,13 +654,11 @@
 
                 allProducts = resultados.flat();
 
-                // Calcular rango de precios real
                 const prices = allProducts.map(p => p.price).filter(p => typeof p === 'number');
                 const minPrice = Math.floor(Math.min(...prices) / 1000) * 1000;
                 const maxPrice = Math.ceil(Math.max(...prices) / 1000) * 1000;
                 initPriceRange(minPrice, maxPrice);
 
-                // Poblar marcas
                 const brands = [...new Set(allProducts.map(p => p.brand).filter(Boolean))].sort();
                 ['brandFilter', 'brandFilterMobile'].forEach(id => {
                     const el = document.getElementById(id);
@@ -682,7 +671,6 @@
                     });
                 });
 
-                // Leer parámetros de URL
                 const params   = new URLSearchParams(window.location.search);
                 const pet      = params.get('pet');
                 const category = params.get('category');
@@ -752,7 +740,6 @@
                 filteredProducts = filteredProducts.filter(p => p.brand === brand);
             }
 
-            // Filtro de precio
             filteredProducts = filteredProducts.filter(p =>
                 p.price >= priceMin && p.price <= priceMax
             );
@@ -800,7 +787,6 @@
                 if (el) el.value = '';
             });
 
-            // Reset precio
             initPriceRange(globalPriceMin, globalPriceMax);
 
             closeAllDropdowns();
