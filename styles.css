@@ -535,12 +535,12 @@ body {
     transform: translateY(-50%);
     color: #9ca3af;
     pointer-events: none;
-    z-index: 1;
+    z-index: 3;
 }
 
 .search-bar input {
     width: 100%;
-    padding: 0.75rem 2.5rem 0.75rem 2.5rem;
+    padding: 0.75rem 2.75rem 0.75rem 2.5rem;
     border: 1px solid #d1d5db;
     border-radius: 0.5rem;
 }
@@ -553,20 +553,20 @@ body {
 
 .search-clear-btn {
     position: absolute;
-    right: 0.6rem;
-    top: 50%;
-    transform: translateY(-50%);
-    background: none;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 2.5rem;
+    background: transparent;
     border: none;
     cursor: pointer;
     color: #9ca3af;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0.25rem;
-    border-radius: 9999px;
-    transition: color 0.2s, background-color 0.2s;
-    z-index: 2;
+    border-radius: 0 0.5rem 0.5rem 0;
+    transition: color 0.2s;
+    /* Sin z-index — simplemente ocupa su espacio natural al final del flex/relative container */
 }
 
 .search-clear-btn:hover {
