@@ -40,19 +40,19 @@ function removeFromCart(productId) {
 function updateQuantity(productId, change) {
     const cart = getCart();
     const item = cart.find(item => item.id === productId);
-    
+
     if (item) {
         const newQuantity = item.quantity + change;
-        
+
         if (newQuantity < 1 || newQuantity > item.stock) {
             return false;
         }
-        
+
         item.quantity = newQuantity;
         saveCart(cart);
         return true;
     }
-    
+
     return false;
 }
 
@@ -75,7 +75,7 @@ function createProductCard(product) {
     return `
         <div class="product-card">
             <div class="product-image">
-                <img src="${product.imageUrl || 'https://images.unsplash.com/photo-1589924691995-400dc9ecc119?w=400'}" 
+                <img src="${product.imageUrl || 'https://images.unsplash.com/photo-1589924691995-400dc9ecc119?w=400'}"
                      alt="${product.name}">
                 ${hasDiscount ? `
                     <div class="discount-badge">
@@ -104,8 +104,8 @@ function createProductCard(product) {
                         <p class="regular-price">${formatPrice(product.price)}</p>
                     `}
                 </div>
-                <button 
-                    class="add-to-cart-btn" 
+                <button
+                    class="add-to-cart-btn"
                     onclick="addToCart(${JSON.stringify(product).replace(/"/g, '&quot;')})"
                     ${product.stock === 0 ? 'disabled' : ''}>
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -121,23 +121,18 @@ function createProductCard(product) {
 }
 
 // ── Auto font-size para nombres largos ──────────────────────────────────────
-// Nombres cortos se quedan al tamaño máximo sin modificarse.
-// Solo reduce el font-size si el nombre no entra en 2 líneas.
 function fitProductNames() {
     const isDesktop = window.innerWidth >= 768;
-    const MAX_FONT  = isDesktop ? 17 : 15; // px — tamaño máximo según pantalla
-    const MIN_FONT  = 10;                   // px — nunca baja de acá
+    const MAX_FONT  = isDesktop ? 17 : 15;
+    const MIN_FONT  = 10;
     const MAX_LINES = 2;
 
     document.querySelectorAll('.product-name').forEach(el => {
-        // Resetear siempre al máximo antes de medir
         el.style.fontSize = MAX_FONT + 'px';
 
         const lh = parseFloat(getComputedStyle(el).lineHeight) || MAX_FONT * 1.35;
         const maxHeight = lh * MAX_LINES;
 
-        // Si entra bien al tamaño máximo, no hace nada.
-        // Solo reduce si el texto desborda.
         let size = MAX_FONT;
         while (el.scrollHeight > maxHeight + 1 && size > MIN_FONT) {
             size--;
@@ -146,8 +141,6 @@ function fitProductNames() {
     });
 }
 
-// MutationObserver: se dispara automáticamente cada vez que
-// se renderizan nuevas tarjetas en el grid
 function observeProductGrid() {
     const grids = document.querySelectorAll('#productsGrid');
     if (!grids.length) return;
@@ -186,14 +179,20 @@ function showNotification(message) {
     }, 2000);
 }
 
-// Mobile Menu Toggle + inicialización
+// ── Mobile Menu Toggle + inicialización ─────────────────────────────────────
 document.addEventListener('DOMContentLoaded', function() {
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileMenu    = document.getElementById('mobileMenu');
 
     if (mobileMenuBtn && mobileMenu) {
+        // Abrir / cerrar al clickear el botón hamburguesa
         mobileMenuBtn.addEventListener('click', function() {
             mobileMenu.classList.toggle('active');
+        });
+
+        // Cerrar automáticamente al tocar un link del menú
+        mobileMenu.querySelectorAll('.mobile-nav-link').forEach(link => {
+            link.addEventListener('click', () => mobileMenu.classList.remove('active'));
         });
     }
 
@@ -207,6 +206,7 @@ document.addEventListener('DOMContentLoaded', function() {
         requestAnimationFrame(() => fitProductNames());
     });
 });
+// ────────────────────────────────────────────────────────────────────────────
 
 // CSS animations
 const style = document.createElement('style');
