@@ -74,27 +74,43 @@
                 <p>Encuentra todo lo que necesita tu mascota</p>
             </div>
 
-            <!-- Barra de búsqueda grande (desktop) -->
-            <div class="search-bar" id="searchBarTop">
+            <!-- Barra de búsqueda grande (desktop) con autocomplete -->
+            <div class="search-bar search-bar--autocomplete" id="searchBarTop">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <circle cx="11" cy="11" r="8"></circle>
                     <path d="m21 21-4.35-4.35"></path>
                 </svg>
                 <input type="text" id="searchInput"
                     placeholder="Buscar productos, marcas, categorías..."
-                    oninput="syncSearch(this, 'searchInputSidebar'); applyFilters()">
+                    oninput="syncSearch(this, 'searchInputSidebar'); handleAutocomplete(this, 'autocompleteTop')"
+                    autocomplete="off">
+                <button class="search-clear-btn" id="searchClearTop" onclick="clearSearch('searchInput', 'autocompleteTop')" style="display:none">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+                <div class="autocomplete-dropdown" id="autocompleteTop"></div>
             </div>
 
             <!-- MOBILE: wrapper sticky -->
             <div class="mobile-sticky-wrapper" id="mobileStickyWrapper">
-                <div class="search-bar search-bar-mobile-sticky">
+                <div class="search-bar search-bar--autocomplete search-bar-mobile-sticky">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <circle cx="11" cy="11" r="8"></circle>
                         <path d="m21 21-4.35-4.35"></path>
                     </svg>
                     <input type="text" id="searchInputMobile"
                         placeholder="Buscar productos..."
-                        oninput="syncSearch(this, 'searchInput'); applyFilters()">
+                        oninput="syncSearch(this, 'searchInput'); handleAutocomplete(this, 'autocompleteMobile')"
+                        autocomplete="off">
+                    <button class="search-clear-btn" id="searchClearMobile" onclick="clearSearch('searchInputMobile', 'autocompleteMobile')" style="display:none">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                    </button>
+                    <div class="autocomplete-dropdown" id="autocompleteMobile"></div>
                 </div>
 
                 <button class="filter-toggle-btn" id="filterToggleBtn">
@@ -149,6 +165,25 @@
                             <option value="">Todas</option>
                         </select>
                     </div>
+                    <!-- Precio mobile -->
+                    <div class="filter-group">
+                        <label>Precio</label>
+                        <div class="price-range-wrapper">
+                            <div class="price-range-track" id="priceTrackMobile">
+                                <div class="price-range-fill" id="priceFillMobile"></div>
+                                <input type="range" class="price-range-input price-range-min" id="priceMinMobile"
+                                    min="0" max="1000000" step="1000" value="0"
+                                    oninput="syncPriceRange('Mobile'); applyFilters()">
+                                <input type="range" class="price-range-input price-range-max" id="priceMaxMobile"
+                                    min="0" max="1000000" step="1000" value="1000000"
+                                    oninput="syncPriceRange('Mobile'); applyFilters()">
+                            </div>
+                            <div class="price-range-labels">
+                                <span id="priceMinLabelMobile">Gs 0</span>
+                                <span id="priceMaxLabelMobile">Gs 1.000.000</span>
+                            </div>
+                        </div>
+                    </div>
                     <div class="filter-group">
                         <label>Ordenar por</label>
                         <select id="sortFilterMobile" onchange="syncFilter('sortFilter', this); applyFilters()">
@@ -165,14 +200,22 @@
             <div class="products-layout">
                 <!-- Sidebar desktop -->
                 <aside class="filters-sidebar filters-sidebar-desktop" id="filtersSidebar">
-                    <div class="search-bar search-bar-sidebar" id="searchBarSidebar">
+                    <div class="search-bar search-bar--autocomplete search-bar-sidebar" id="searchBarSidebar">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <circle cx="11" cy="11" r="8"></circle>
                             <path d="m21 21-4.35-4.35"></path>
                         </svg>
                         <input type="text" id="searchInputSidebar"
                             placeholder="Buscar..."
-                            oninput="syncSearch(this, 'searchInput'); applyFilters()">
+                            oninput="syncSearch(this, 'searchInput'); handleAutocomplete(this, 'autocompleteSidebar')"
+                            autocomplete="off">
+                        <button class="search-clear-btn" id="searchClearSidebar" onclick="clearSearch('searchInputSidebar', 'autocompleteSidebar')" style="display:none">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                            </svg>
+                        </button>
+                        <div class="autocomplete-dropdown" id="autocompleteSidebar"></div>
                     </div>
 
                     <div class="filters-header">
@@ -217,6 +260,26 @@
                         </select>
                     </div>
 
+                    <!-- Precio desktop -->
+                    <div class="filter-group">
+                        <label>Precio</label>
+                        <div class="price-range-wrapper">
+                            <div class="price-range-track" id="priceTrackDesktop">
+                                <div class="price-range-fill" id="priceFillDesktop"></div>
+                                <input type="range" class="price-range-input price-range-min" id="priceMinDesktop"
+                                    min="0" max="1000000" step="1000" value="0"
+                                    oninput="syncPriceRange('Desktop'); applyFilters()">
+                                <input type="range" class="price-range-input price-range-max" id="priceMaxDesktop"
+                                    min="0" max="1000000" step="1000" value="1000000"
+                                    oninput="syncPriceRange('Desktop'); applyFilters()">
+                            </div>
+                            <div class="price-range-labels">
+                                <span id="priceMinLabelDesktop">Gs 0</span>
+                                <span id="priceMaxLabelDesktop">Gs 1.000.000</span>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="filter-group">
                         <label>Ordenar por</label>
                         <select id="sortFilter" onchange="applyFilters()">
@@ -233,10 +296,47 @@
                 <div class="products-main">
                     <div class="products-count" id="productsCount">Cargando...</div>
                     <div id="productsGrid" class="products-grid">
-                        <div class="loading-skeleton"></div>
-                        <div class="loading-skeleton"></div>
-                        <div class="loading-skeleton"></div>
-                        <div class="loading-skeleton"></div>
+                        <!-- Skeletons con forma de tarjeta real -->
+                        <div class="product-card-skeleton">
+                            <div class="skeleton-img"></div>
+                            <div class="skeleton-body">
+                                <div class="skeleton-line skeleton-line--title"></div>
+                                <div class="skeleton-line skeleton-line--subtitle"></div>
+                                <div class="skeleton-line skeleton-line--meta"></div>
+                                <div class="skeleton-line skeleton-line--price"></div>
+                                <div class="skeleton-line skeleton-line--btn"></div>
+                            </div>
+                        </div>
+                        <div class="product-card-skeleton">
+                            <div class="skeleton-img"></div>
+                            <div class="skeleton-body">
+                                <div class="skeleton-line skeleton-line--title"></div>
+                                <div class="skeleton-line skeleton-line--subtitle"></div>
+                                <div class="skeleton-line skeleton-line--meta"></div>
+                                <div class="skeleton-line skeleton-line--price"></div>
+                                <div class="skeleton-line skeleton-line--btn"></div>
+                            </div>
+                        </div>
+                        <div class="product-card-skeleton">
+                            <div class="skeleton-img"></div>
+                            <div class="skeleton-body">
+                                <div class="skeleton-line skeleton-line--title"></div>
+                                <div class="skeleton-line skeleton-line--subtitle"></div>
+                                <div class="skeleton-line skeleton-line--meta"></div>
+                                <div class="skeleton-line skeleton-line--price"></div>
+                                <div class="skeleton-line skeleton-line--btn"></div>
+                            </div>
+                        </div>
+                        <div class="product-card-skeleton">
+                            <div class="skeleton-img"></div>
+                            <div class="skeleton-body">
+                                <div class="skeleton-line skeleton-line--title"></div>
+                                <div class="skeleton-line skeleton-line--subtitle"></div>
+                                <div class="skeleton-line skeleton-line--meta"></div>
+                                <div class="skeleton-line skeleton-line--price"></div>
+                                <div class="skeleton-line skeleton-line--btn"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -259,26 +359,256 @@
         <img src="assets/whatsapp.png" alt="WhatsApp">
     </a>
 
-    <!-- Botón flotante WhatsApp -->
-    <a href="https://wa.me/595976106726"
-       class="whatsapp-fab"
-       target="_blank"
-       rel="noopener noreferrer"
-       aria-label="Contactar por WhatsApp">
-        <img src="assets/whatsapp.png" alt="WhatsApp">
-    </a>
-
     <script src="app.js"></script>
     <script>
         let allProducts = [];
         let filteredProducts = [];
+        let priceMin = 0;
+        let priceMax = 1000000;
+        let globalPriceMin = 0;
+        let globalPriceMax = 1000000;
+        let autocompleteDebounce = null;
 
         document.addEventListener('DOMContentLoaded', function() {
             loadProducts();
             setupFilterToggle();
             setupScrollBehavior();
+            setupAutocompleteClose();
         });
 
+        // ================================================================
+        // AUTOCOMPLETE
+        // ================================================================
+        function handleAutocomplete(inputEl, dropdownId) {
+            applyFilters();
+
+            const query = inputEl.value.trim().toLowerCase();
+            const dropdown = document.getElementById(dropdownId);
+
+            // Mostrar/ocultar botón limpiar
+            const clearBtnId = inputEl.id === 'searchInput' ? 'searchClearTop'
+                             : inputEl.id === 'searchInputMobile' ? 'searchClearMobile'
+                             : 'searchClearSidebar';
+            const clearBtn = document.getElementById(clearBtnId);
+            if (clearBtn) clearBtn.style.display = inputEl.value ? 'flex' : 'none';
+
+            if (!query || query.length < 2) {
+                dropdown.innerHTML = '';
+                dropdown.classList.remove('autocomplete-dropdown--open');
+                return;
+            }
+
+            clearTimeout(autocompleteDebounce);
+            autocompleteDebounce = setTimeout(() => {
+                const suggestions = buildSuggestions(query);
+                renderAutocomplete(dropdown, suggestions, inputEl);
+            }, 150);
+        }
+
+        function buildSuggestions(query) {
+            const results = [];
+            const seen = new Set();
+
+            // Marcas que coinciden
+            const brands = [...new Set(allProducts.map(p => p.brand).filter(Boolean))];
+            brands.forEach(brand => {
+                if (brand.toLowerCase().includes(query) && !seen.has('brand:' + brand)) {
+                    seen.add('brand:' + brand);
+                    results.push({ type: 'brand', label: brand, icon: '🏷️' });
+                }
+            });
+
+            // Productos que coinciden (máx 6)
+            allProducts.forEach(p => {
+                if (results.filter(r => r.type === 'product').length >= 6) return;
+                if (
+                    (p.name?.toLowerCase().includes(query) ||
+                     p.brand?.toLowerCase().includes(query)) &&
+                    !seen.has('product:' + p.name)
+                ) {
+                    seen.add('product:' + p.name);
+                    results.push({
+                        type: 'product',
+                        label: p.name,
+                        sub: p.brand,
+                        icon: '📦'
+                    });
+                }
+            });
+
+            return results.slice(0, 8);
+        }
+
+        function renderAutocomplete(dropdown, suggestions, inputEl) {
+            if (!suggestions.length) {
+                dropdown.innerHTML = '<div class="autocomplete-empty">Sin resultados</div>';
+                dropdown.classList.add('autocomplete-dropdown--open');
+                return;
+            }
+
+            dropdown.innerHTML = suggestions.map((s, i) => `
+                <div class="autocomplete-item" data-index="${i}" onmousedown="selectSuggestion('${escapeHtml(s.label)}', '${inputEl.id}', event)">
+                    <span class="autocomplete-icon">${s.icon}</span>
+                    <div class="autocomplete-text">
+                        <span class="autocomplete-label">${highlightMatch(s.label, inputEl.value.trim())}</span>
+                        ${s.sub ? `<span class="autocomplete-sub">${s.sub}</span>` : ''}
+                    </div>
+                    ${s.type === 'brand' ? '<span class="autocomplete-tag">Marca</span>' : ''}
+                </div>
+            `).join('');
+
+            dropdown.classList.add('autocomplete-dropdown--open');
+        }
+
+        function highlightMatch(text, query) {
+            if (!query) return text;
+            const regex = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+            return text.replace(regex, '<mark>$1</mark>');
+        }
+
+        function selectSuggestion(label, inputId, event) {
+            event.preventDefault();
+            const input = document.getElementById(inputId);
+            if (!input) return;
+            input.value = label;
+
+            // Sync todos los inputs de búsqueda
+            ['searchInput', 'searchInputSidebar', 'searchInputMobile'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.value = label;
+            });
+
+            // Ocultar todos los dropdowns
+            closeAllDropdowns();
+
+            // Mostrar botones limpiar
+            ['searchClearTop', 'searchClearMobile', 'searchClearSidebar'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.style.display = 'flex';
+            });
+
+            applyFilters();
+        }
+
+        function clearSearch(inputId, dropdownId) {
+            const input = document.getElementById(inputId);
+            if (input) input.value = '';
+            ['searchInput', 'searchInputSidebar', 'searchInputMobile'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.value = '';
+            });
+            ['searchClearTop', 'searchClearMobile', 'searchClearSidebar'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.style.display = 'none';
+            });
+            closeAllDropdowns();
+            applyFilters();
+        }
+
+        function closeAllDropdowns() {
+            document.querySelectorAll('.autocomplete-dropdown').forEach(d => {
+                d.innerHTML = '';
+                d.classList.remove('autocomplete-dropdown--open');
+            });
+        }
+
+        function setupAutocompleteClose() {
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.search-bar--autocomplete')) {
+                    closeAllDropdowns();
+                }
+            });
+        }
+
+        function escapeHtml(str) {
+            return str.replace(/'/g, "\\'");
+        }
+
+        // ================================================================
+        // PRECIO RANGE
+        // ================================================================
+        function syncPriceRange(suffix) {
+            const minEl = document.getElementById('priceMin' + suffix);
+            const maxEl = document.getElementById('priceMax' + suffix);
+            let minVal = parseInt(minEl.value);
+            let maxVal = parseInt(maxEl.value);
+
+            // Evitar cruce de handles
+            if (minVal > maxVal) {
+                if (document.activeElement === minEl) {
+                    minEl.value = maxVal;
+                    minVal = maxVal;
+                } else {
+                    maxEl.value = minVal;
+                    maxVal = minVal;
+                }
+            }
+
+            priceMin = minVal;
+            priceMax = maxVal;
+
+            // Sync el otro slider
+            const otherSuffix = suffix === 'Desktop' ? 'Mobile' : 'Desktop';
+            const otherMin = document.getElementById('priceMin' + otherSuffix);
+            const otherMax = document.getElementById('priceMax' + otherSuffix);
+            if (otherMin) otherMin.value = minVal;
+            if (otherMax) otherMax.value = maxVal;
+
+            // Actualizar labels en ambos
+            ['Desktop', 'Mobile'].forEach(s => {
+                const minLabel = document.getElementById('priceMinLabel' + s);
+                const maxLabel = document.getElementById('priceMaxLabel' + s);
+                if (minLabel) minLabel.textContent = formatPriceShort(minVal);
+                if (maxLabel) maxLabel.textContent = formatPriceShort(maxVal);
+                updatePriceFill(s);
+            });
+        }
+
+        function updatePriceFill(suffix) {
+            const minEl = document.getElementById('priceMin' + suffix);
+            const maxEl = document.getElementById('priceMax' + suffix);
+            const fill  = document.getElementById('priceFill' + suffix);
+            if (!minEl || !maxEl || !fill) return;
+
+            const rangeTotal = globalPriceMax - globalPriceMin;
+            if (rangeTotal === 0) return;
+
+            const leftPct  = ((parseInt(minEl.value) - globalPriceMin) / rangeTotal) * 100;
+            const rightPct = ((globalPriceMax - parseInt(maxEl.value)) / rangeTotal) * 100;
+            fill.style.left  = leftPct + '%';
+            fill.style.right = rightPct + '%';
+        }
+
+        function formatPriceShort(val) {
+            if (val >= 1000000) return 'Gs ' + (val / 1000000).toFixed(1).replace('.0','') + 'M';
+            if (val >= 1000)    return 'Gs ' + (val / 1000).toFixed(0) + 'k';
+            return 'Gs ' + val;
+        }
+
+        function initPriceRange(min, max) {
+            globalPriceMin = min;
+            globalPriceMax = max;
+            priceMin = min;
+            priceMax = max;
+
+            ['Desktop', 'Mobile'].forEach(s => {
+                const minEl = document.getElementById('priceMin' + s);
+                const maxEl = document.getElementById('priceMax' + s);
+                if (!minEl || !maxEl) return;
+                minEl.min = min; minEl.max = max; minEl.value = min; minEl.step = Math.max(1000, Math.floor((max - min) / 100));
+                maxEl.min = min; maxEl.max = max; maxEl.value = max; maxEl.step = Math.max(1000, Math.floor((max - min) / 100));
+
+                const minLabel = document.getElementById('priceMinLabel' + s);
+                const maxLabel = document.getElementById('priceMaxLabel' + s);
+                if (minLabel) minLabel.textContent = formatPriceShort(min);
+                if (maxLabel) maxLabel.textContent = formatPriceShort(max);
+                updatePriceFill(s);
+            });
+        }
+
+        // ================================================================
+        // SYNC SEARCH / FILTER
+        // ================================================================
         function syncSearch(source, targetId) {
             const target = document.getElementById(targetId);
             if (target) target.value = source.value;
@@ -290,6 +620,14 @@
                 const sidebarInput = document.getElementById('searchInputSidebar');
                 if (sidebarInput) sidebarInput.value = source.value;
             }
+
+            // Mostrar/ocultar botón limpiar en los tres
+            ['searchInput','searchInputMobile','searchInputSidebar'].forEach((id, i) => {
+                const el = document.getElementById(id);
+                const btnIds = ['searchClearTop','searchClearMobile','searchClearSidebar'];
+                const btn = document.getElementById(btnIds[i]);
+                if (el && btn) btn.style.display = el.value ? 'flex' : 'none';
+            });
         }
 
         function syncFilter(desktopId, mobileSelect) {
@@ -297,6 +635,9 @@
             if (desktop) desktop.value = mobileSelect.value;
         }
 
+        // ================================================================
+        // SCROLL BEHAVIOR
+        // ================================================================
         function setupScrollBehavior() {
             const searchBarTop     = document.getElementById('searchBarTop');
             const searchBarSidebar = document.getElementById('searchBarSidebar');
@@ -310,6 +651,9 @@
             observer.observe(searchBarTop);
         }
 
+        // ================================================================
+        // LOAD PRODUCTS
+        // ================================================================
         async function loadProducts() {
             try {
                 const archivos = ['products1.json', 'products2.json'];
@@ -319,6 +663,13 @@
 
                 allProducts = resultados.flat();
 
+                // Calcular rango de precios real
+                const prices = allProducts.map(p => p.price).filter(p => typeof p === 'number');
+                const minPrice = Math.floor(Math.min(...prices) / 1000) * 1000;
+                const maxPrice = Math.ceil(Math.max(...prices) / 1000) * 1000;
+                initPriceRange(minPrice, maxPrice);
+
+                // Poblar marcas
                 const brands = [...new Set(allProducts.map(p => p.brand).filter(Boolean))].sort();
                 ['brandFilter', 'brandFilterMobile'].forEach(id => {
                     const el = document.getElementById(id);
@@ -364,6 +715,9 @@
             }
         }
 
+        // ================================================================
+        // APPLY FILTERS
+        // ================================================================
         function applyFilters() {
             const searchTerm = document.getElementById('searchInput').value.toLowerCase();
             const category   = document.getElementById('categoryFilter').value;
@@ -398,10 +752,15 @@
                 filteredProducts = filteredProducts.filter(p => p.brand === brand);
             }
 
-            if (sort === 'price-asc')  filteredProducts.sort((a, b) => a.price - b.price);
-            else if (sort === 'price-desc') filteredProducts.sort((a, b) => b.price - a.price);
-            else if (sort === 'name-asc')   filteredProducts.sort((a, b) => a.name.localeCompare(b.name));
-            else if (sort === 'name-desc')  filteredProducts.sort((a, b) => b.name.localeCompare(a.name));
+            // Filtro de precio
+            filteredProducts = filteredProducts.filter(p =>
+                p.price >= priceMin && p.price <= priceMax
+            );
+
+            if (sort === 'price-asc')        filteredProducts.sort((a, b) => a.price - b.price);
+            else if (sort === 'price-desc')  filteredProducts.sort((a, b) => b.price - a.price);
+            else if (sort === 'name-asc')    filteredProducts.sort((a, b) => a.name.localeCompare(b.name));
+            else if (sort === 'name-desc')   filteredProducts.sort((a, b) => b.name.localeCompare(a.name));
 
             displayProducts();
             updateFilterCount();
@@ -410,7 +769,7 @@
         function displayProducts() {
             const grid  = document.getElementById('productsGrid');
             const count = document.getElementById('productsCount');
-            count.textContent = `${filteredProducts.length} productos encontrados`;
+            count.textContent = `${filteredProducts.length} producto${filteredProducts.length !== 1 ? 's' : ''} encontrado${filteredProducts.length !== 1 ? 's' : ''}`;
 
             if (filteredProducts.length === 0) {
                 grid.innerHTML = `
@@ -429,6 +788,10 @@
                 const el = document.getElementById(id);
                 if (el) el.value = '';
             });
+            ['searchClearTop', 'searchClearMobile', 'searchClearSidebar'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.style.display = 'none';
+            });
             ['categoryFilter','categoryFilterMobile',
              'petTypeFilter', 'petTypeFilterMobile',
              'brandFilter',   'brandFilterMobile',
@@ -436,16 +799,22 @@
                 const el = document.getElementById(id);
                 if (el) el.value = '';
             });
+
+            // Reset precio
+            initPriceRange(globalPriceMin, globalPriceMax);
+
+            closeAllDropdowns();
             applyFilters();
         }
 
         function updateFilterCount() {
+            const priceActive = priceMin > globalPriceMin || priceMax < globalPriceMax;
             const activeFilters = [
                 document.getElementById('categoryFilter').value,
                 document.getElementById('petTypeFilter').value,
                 document.getElementById('brandFilter').value,
                 document.getElementById('sortFilter').value
-            ].filter(Boolean).length;
+            ].filter(Boolean).length + (priceActive ? 1 : 0);
 
             const filterCount = document.getElementById('filterCount');
             if (activeFilters > 0) {
