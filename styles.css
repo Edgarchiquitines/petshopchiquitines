@@ -20,9 +20,7 @@ body {
     padding: 0 1rem;
 }
 
-/* ================================================================
-   HEADER
-   ================================================================ */
+/* HEADER */
 .header {
     position: sticky;
     top: 0;
@@ -111,10 +109,8 @@ body {
     color: #FF6B35;
 }
 
-/* ================================================================
-   MOBILE MENU — CORREGIDO
-   Por defecto oculto. Se muestra al agregar la clase .active via JS.
-   ================================================================ */
+/* MOBILE MENU — CORREGIDO
+   Por defecto oculto. Se muestra al agregar la clase .active via JS. */
 .mobile-menu {
     display: none;
     background-color: #000000;
@@ -146,9 +142,7 @@ body {
     color: #FF6B35;
 }
 
-/* ================================================================
-   HERO
-   ================================================================ */
+/* HERO*/
 .hero {
     color: #ffffff;
     padding: 1rem 0;
@@ -205,9 +199,7 @@ body {
     background-color: #f3f4f6;
 }
 
-/* ================================================================
-   PRODUCTS SECTION
-   ================================================================ */
+/* PRODUCTS SECTION */
 .products-section {
     padding: 2rem 0;
 }
@@ -233,9 +225,7 @@ body {
     gap: 0.5rem;
 }
 
-/* ================================================================
-   PRODUCT CARD
-   ================================================================ */
+/* PRODUCT CARD */
 .product-card {
     background-color: #ffffff;
     border-radius: 0.5rem;
@@ -393,9 +383,7 @@ body {
     cursor: not-allowed;
 }
 
-/* ================================================================
-   SKELETON LOADING
-   ================================================================ */
+/* SKELETON LOADING */
 @keyframes shimmer {
     0%   { background-position: -600px 0; }
     100% { background-position: 600px 0; }
@@ -454,9 +442,7 @@ body {
     height: 20rem;
 }
 
-/* ================================================================
-   EMPTY STATE
-   ================================================================ */
+/* EMPTY STATE */
 .empty-state {
     text-align: center;
     padding: 3rem 0;
@@ -480,9 +466,7 @@ body {
     text-decoration: underline;
 }
 
-/* ================================================================
-   CTA SECTION
-   ================================================================ */
+/* CTA SECTION */
 .cta-section {
     background-color: #000000;
     color: #ffffff;
@@ -505,9 +489,7 @@ body {
     margin-right: auto;
 }
 
-/* ================================================================
-   FOOTER
-   ================================================================ */
+/* FOOTER */
 .footer {
     background-color: #000000;
     color: #ffffff;
@@ -520,9 +502,7 @@ body {
     color: #6b7280;
 }
 
-/* ================================================================
-   SEARCH BAR + AUTOCOMPLETE
-   ================================================================ */
+/* SEARCH BAR + AUTOCOMPLETE */
 .search-bar {
     position: relative;
     margin-bottom: 1.5rem;
@@ -676,9 +656,7 @@ body {
     display: block;
 }
 
-/* ================================================================
-   MOBILE STICKY WRAPPER
-   ================================================================ */
+/* MOBILE STICKY WRAPPER */
 .mobile-sticky-wrapper {
     position: sticky;
     top: 4rem;
@@ -692,9 +670,7 @@ body {
     margin-bottom: 0.5rem;
 }
 
-/* ================================================================
-   FILTERS SIDEBAR
-   ================================================================ */
+/* FILTERS SIDEBAR */
 .filters-sidebar {
     width: 16rem;
     background-color: #ffffff;
@@ -763,9 +739,7 @@ body {
     box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
 }
 
-/* ================================================================
-   PRICE RANGE SLIDER
-   ================================================================ */
+/* PRICE RANGE SLIDER */
 .price-range-wrapper {
     display: flex;
     flex-direction: column;
@@ -844,9 +818,7 @@ body {
     margin-top: 0.35rem;
 }
 
-/* ================================================================
-   CART PAGE
-   ================================================================ */
+/* CART PAGE */
 .cart-page {
     min-height: calc(100vh - 4rem);
     background-color: #f9fafb;
@@ -985,9 +957,7 @@ body {
     color: #dc2626;
 }
 
-/* ================================================================
-   ORDER FORM
-   ================================================================ */
+/* ORDER FORM */
 .order-form {
     background-color: #ffffff;
     border-radius: 0.5rem;
@@ -1144,9 +1114,7 @@ body {
     margin-top: 0.25rem;
 }
 
-/* ================================================================
-   PRODUCTS PAGE LAYOUT
-   ================================================================ */
+/* PRODUCTS PAGE LAYOUT */
 .products-page {
     min-height: calc(100vh - 4rem);
     background-color: #f9fafb;
@@ -1196,9 +1164,7 @@ body {
     margin-bottom: 1rem;
 }
 
-/* ================================================================
-   CATEGORÍAS
-   ================================================================ */
+/* CATEGORÍAS */
 .categories-section {
     background-color: #111111;
     padding: 1.25rem 0;
@@ -1288,9 +1254,7 @@ body {
 
 .cat-pill:hover .cat-pill-img { opacity: 1; }
 
-/* ================================================================
-   POR QUÉ ELEGIRNOS
-   ================================================================ */
+/* POR QUÉ ELEGIRNOS */
 .why-us-section {
     padding: 2rem 0;
     background-color: #f9fafb;
@@ -1339,9 +1303,7 @@ body {
     line-height: 1.4;
 }
 
-/* ================================================================
-   NOSOTROS / CONTACTO
-   ================================================================ */
+/* NOSOTROS / CONTACTO */
 .about-contact-section {
     background-color: #000000;
     color: #ffffff;
@@ -1370,9 +1332,7 @@ body {
     text-decoration: underline;
 }
 
-/* ================================================================
-   BOTÓN FLOTANTE WHATSAPP
-   ================================================================ */
+/* BOTÓN FLOTANTE WHATSAPP */
 .whatsapp-fab {
     position: fixed;
     bottom: 1.5rem;
@@ -1429,9 +1389,7 @@ body {
     to   { transform: scale(1); opacity: 1; }
 }
 
-/* ================================================================
-   RESPONSIVE — Desktop (≥768px)
-   ================================================================ */
+/* RESPONSIVE — Desktop */
 @media (min-width: 768px) {
     /* Nav desktop visible, mobile menu y botón hamburguesa ocultos */
     .nav-desktop { display: flex; gap: 2rem; }
@@ -1508,9 +1466,7 @@ body {
     .whatsapp-fab::before { display: none; }
 }
 
-/* ================================================================
-   HEADER ICON BUTTONS (favoritos, pedidos)
-   ================================================================ */
+/* HEADER ICON BUTTONS (favoritos, pedidos) */
 .header-icon-btn {
     position: relative;
     background: none;
@@ -1546,9 +1502,7 @@ body {
     pointer-events: none;
 }
 
-/* ================================================================
-   BOTÓN CORAZÓN EN TARJETA DE PRODUCTO
-   ================================================================ */
+/* BOTÓN CORAZÓN EN TARJETA DE PRODUCTO */
 .fav-btn {
     position: absolute;
     top: 0.4rem;
@@ -1584,9 +1538,7 @@ body {
     stroke: #FF6B35;
 }
 
-/* ================================================================
-   SIDE PANEL (drawer desde la derecha)
-   ================================================================ */
+/* SIDE PANEL (drawer desde la derecha) */
 .panel-backdrop {
     display: none;
     position: fixed;
@@ -1848,9 +1800,7 @@ body {
     flex-shrink: 0;
 }
 
-/* ================================================================
-   BOTÓN VOLVER ARRIBA — solo mobile, centrado horizontalmente
-   ================================================================ */
+/* BOTÓN VOLVER ARRIBA — solo mobile, centrado horizontalmente */
 .scroll-top-btn {
     display: none; /* oculto en desktop siempre */
     position: fixed;
@@ -1890,9 +1840,7 @@ body {
     }
 }
 
-/* ================================================================
-   REPETIR PEDIDO
-   ================================================================ */
+/* REPETIR PEDIDO */
 .order-history-footer {
     padding: 0.6rem 1rem 0.75rem;
     border-top: 1px solid #f3f4f6;
@@ -1923,9 +1871,7 @@ body {
     transform: scale(0.97);
 }
 
-/* ================================================================
-   BOTONES DE ACCIÓN EN TARJETA (agregar + compartir WA)
-   ================================================================ */
+/* BOTONES DE ACCIÓN EN TARJETA (agregar + compartir WA) */
 .product-card-actions {
     display: flex;
     gap: 0.4rem;
