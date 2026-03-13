@@ -122,20 +122,51 @@ function createProductCard(product) {
                         <p class="regular-price">${formatPrice(product.price)}</p>
                     `}
                 </div>
-                <button
-                    class="add-to-cart-btn"
-                    onclick="addToCart(${JSON.stringify(product).replace(/"/g, '&quot;')})"
-                    ${product.stock === 0 ? 'disabled' : ''}>
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="9" cy="21" r="1"></circle>
-                        <circle cx="20" cy="21" r="1"></circle>
-                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-                    </svg>
-                    <span>${product.stock === 0 ? 'Sin Stock' : 'Agregar'}</span>
-                </button>
+                <div class="product-card-actions">
+                    <button
+                        class="add-to-cart-btn"
+                        onclick="addToCart(${JSON.stringify(product).replace(/"/g, '&quot;')})"
+                        ${product.stock === 0 ? 'disabled' : ''}>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="9" cy="21" r="1"></circle>
+                            <circle cx="20" cy="21" r="1"></circle>
+                            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                        </svg>
+                        <span>${product.stock === 0 ? 'Sin Stock' : 'Agregar'}</span>
+                    </button>
+                    <button class="share-wa-btn" onclick="shareProductWA(${JSON.stringify(product).replace(/"/g, '&quot;')})" aria-label="Compartir" title="Compartir por WhatsApp">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="18" cy="5" r="3"></circle>
+                            <circle cx="6" cy="12" r="3"></circle>
+                            <circle cx="18" cy="19" r="3"></circle>
+                            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+                        </svg>
+                    </button>
+                </div>
             </div>
         </div>
     `;
+}
+
+// ── Compartir producto por WhatsApp ─────────────────────────────────────────
+function shareProductWA(product) {
+    const price = new Intl.NumberFormat('es-PY', { style: 'currency', currency: 'PYG', minimumFractionDigits: 0 }).format(product.price);
+    const hasDiscount = product.isOnSale && product.originalPrice;
+    const originalPrice = hasDiscount
+        ? new Intl.NumberFormat('es-PY', { style: 'currency', currency: 'PYG', minimumFractionDigits: 0 }).format(product.originalPrice)
+        : null;
+
+    let msg = `🐾 *${product.name}*\n`;
+    if (product.brand) msg += `Marca: ${product.brand}\n`;
+    if (product.weight) msg += `Peso: ${product.weight}\n`;
+    if (hasDiscount) msg += `~~${originalPrice}~~ → *${price}* 🔥\n`;
+    else msg += `Precio: *${price}*\n`;
+    msg += `\n¡Encontralo en Petshop Chiquitines! 🏪\n`;
+    msg += `📍 Av. Peru y Gines, Asunción\n`;
+    msg += `👉 https://edgarchiquitines.github.io/petshopchiquitines/products.html`;
+
+    window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
 }
 
 // ================================================================
