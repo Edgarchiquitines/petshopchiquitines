@@ -28,7 +28,7 @@ function addToCart(product) {
     }
 
     saveCart(cart);
-    showNotification('Producto agregado al carrito');
+    showAddedToCartModal(product);
 }
 
 function removeFromCart(productId) {
@@ -680,4 +680,147 @@ function injectPanels() {
 
     // Cerrar con Escape
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closePanels(); });
+}
+
+
+// ================================================================
+// MODAL "AGREGADO AL CARRITO" + PRODUCTOS RELACIONADOS
+// ================================================================
+function getRelatedProducts(product, max = 3) {
+    // Obtener pool de productos: memoria o caché
+    let pool = [];
+    if (typeof allProducts !== 'undefined' && allProducts.length) {
+        pool = allProducts;
+    } else {
+        try {
+            const cached = localStorage.getItem('productsCache');
+            if (cached) pool = JSON.parse(cached);
+        } catch(e) {}
+    }
+    if (!pool.length) return [];
+
+    // Excluir el producto actual y los ya en el carrito
+    const cartIds = new Set(getCart().map(i => String(i.id)));
+    const candidates = pool.filter(p =>
+        String(p.id) !== String(product.id) &&
+        !cartIds.has(String(p.id)) &&
+        p.stock > 0
+    );
+
+    // Puntuar: misma marca (+2) y/o misma categoría + mascota (+1 cada uno)
+    const scored = candidates.map(p => {
+        let score = 0;
+        if (p.brand && p.brand === product.brand) score += 2;
+        if (p.category && p.category === product.category) score += 1;
+        const petA = Array.isArray(p.petType) ? p.petType : [p.petType];
+        const petB = Array.isArray(product.petType) ? product.petType : [product.petType];
+        if (petA.some(t => petB.includes(t))) score += 1;
+        return { p, score };
+    });
+
+    // Ordenar: mayor score primero, luego mezclar los de igual score
+    scored.sort((a, b) => b.score - a.score || Math.random() - 0.5);
+
+    // Devolver solo los que tienen alguna relación (score > 0), sino cualquiera
+    const related = scored.filter(s => s.score > 0).slice(0, max);
+    if (related.length < max) {
+        const fill = scored.filter(s => s.score === 0).slice(0, max - related.length);
+        related.push(...fill);
+    }
+    return related.map(s => s.p);
+}
+
+function showAddedToCartModal(product) {
+    // Cerrar modal anterior si existe
+    closeAddedToCartModal();
+
+    const related = getRelatedProducts(product);
+    const imgSrc = product.imageUrl || 'https://images.unsplash.com/photo-1589924691995-400dc9ecc119?w=400';
+
+    const relatedHTML = related.length ? `
+        <div class="atc-related">
+            <p class="atc-related-title">También te puede interesar</p>
+            <div class="atc-related-grid">
+                ${related.map(p => {
+                    const rImg = p.imageUrl || 'https://images.unsplash.com/photo-1589924691995-400dc9ecc119?w=400';
+                    const hasDiscount = p.isOnSale && p.originalPrice;
+                    return `
+                    <div class="atc-related-card">
+                        <div class="atc-related-img-wrap">
+                            <img src="${rImg}" alt="${p.name}" loading="lazy"
+                                 onerror="this.src='https://images.unsplash.com/photo-1589924691995-400dc9ecc119?w=400'">
+                            ${hasDiscount ? `<span class="atc-discount-badge">-${Math.round(((p.originalPrice-p.price)/p.originalPrice)*100)}%</span>` : ''}
+                        </div>
+                        <div class="atc-related-info">
+                            <p class="atc-related-name">${p.name}</p>
+                            <p class="atc-related-brand">${p.brand || ''}</p>
+                            <p class="atc-related-price">${formatPrice(p.price)}</p>
+                            <button class="atc-add-btn" onclick="addToCart(${JSON.stringify(p).replace(/"/g,'&quot;')})">
+                                + Agregar
+                            </button>
+                        </div>
+                    </div>`;
+                }).join('')}
+            </div>
+        </div>` : '';
+
+    const overlay = document.createElement('div');
+    overlay.id = 'atcModal';
+    overlay.innerHTML = `
+        <div class="atc-backdrop" onclick="closeAddedToCartModal()"></div>
+        <div class="atc-modal">
+            <button class="atc-close" onclick="closeAddedToCartModal()" aria-label="Cerrar">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+
+            <!-- Producto agregado -->
+            <div class="atc-confirmed">
+                <div class="atc-check">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                </div>
+                <div class="atc-confirmed-info">
+                    <p class="atc-confirmed-label">¡Agregado al carrito!</p>
+                    <img src="${imgSrc}" alt="${product.name}" class="atc-confirmed-img"
+                         onerror="this.src='https://images.unsplash.com/photo-1589924691995-400dc9ecc119?w=400'">
+                    <div class="atc-confirmed-details">
+                        <p class="atc-confirmed-name">${product.name}</p>
+                        <p class="atc-confirmed-price">${formatPrice(product.price)}</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Acciones -->
+            <div class="atc-actions">
+                <button class="atc-btn-continue" onclick="closeAddedToCartModal()">Seguir comprando</button>
+                <a href="cart.html" class="atc-btn-cart">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle>
+                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                    </svg>
+                    Ver carrito
+                </a>
+            </div>
+
+            ${relatedHTML}
+        </div>
+    `;
+
+    document.body.appendChild(overlay);
+    requestAnimationFrame(() => overlay.classList.add('atc-modal--open'));
+
+    // Cerrar con Escape
+    const onKey = e => { if (e.key === 'Escape') { closeAddedToCartModal(); document.removeEventListener('keydown', onKey); } };
+    document.addEventListener('keydown', onKey);
+}
+
+function closeAddedToCartModal() {
+    const modal = document.getElementById('atcModal');
+    if (!modal) return;
+    modal.classList.remove('atc-modal--open');
+    modal.classList.add('atc-modal--closing');
+    setTimeout(() => modal.remove(), 250);
 }
