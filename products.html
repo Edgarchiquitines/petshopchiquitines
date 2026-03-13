@@ -678,6 +678,9 @@
 
                 allProducts = resultados.flat();
 
+                // Guardar caché para que reOrderToCart pueda enriquecer pedidos viejos
+                try { localStorage.setItem('productsCache', JSON.stringify(allProducts)); } catch(e) {}
+
                 const prices = allProducts.map(p => p.price).filter(p => typeof p === 'number');
                 const minPrice = Math.floor(Math.min(...prices) / 1000) * 1000;
                 const maxPrice = Math.ceil(Math.max(...prices) / 1000) * 1000;
