@@ -401,9 +401,7 @@
             setupAutocompleteClose();
         });
 
-        // ================================================================
-        // AUTOCOMPLETE
-        // ================================================================
+        // AUTOCOMPLETE //
         function handleAutocomplete(inputEl, dropdownId) {
             applyFilters();
 
@@ -596,8 +594,8 @@
         }
 
         function formatPriceShort(val) {
-            if (val >= 1000000) return 'Gs ' + (val / 1000000).toFixed(1).replace('.0','') + 'M';
-            if (val >= 1000)    return 'Gs ' + (val / 1000).toFixed(0) + 'k';
+            if (val >= 1000000) return 'Gs ' + (val / 1000000).toFixed(1).replace('.0','') + 'Millon';
+            if (val >= 1000)    return 'Gs ' + (val / 1000).toFixed(0) + 'Mil';
             return 'Gs ' + val;
         }
 
