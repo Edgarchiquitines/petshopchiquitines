@@ -701,6 +701,11 @@
                 const params   = new URLSearchParams(window.location.search);
                 const pet      = params.get('pet');
                 const category = params.get('category');
+                const brand    = params.get('brand');
+                const sort     = params.get('sort');
+                const search   = params.get('q');
+                const pmin     = params.get('pmin');
+                const pmax     = params.get('pmax');
                 let urlFilterApplied = false;
 
                 if (pet) {
@@ -714,6 +719,42 @@
                         const el = document.getElementById(id);
                         if (el) { el.value = category; urlFilterApplied = true; }
                     });
+                }
+                if (brand) {
+                    ['brandFilter', 'brandFilterMobile'].forEach(id => {
+                        const el = document.getElementById(id);
+                        if (el) { el.value = brand; urlFilterApplied = true; }
+                    });
+                }
+                if (sort) {
+                    ['sortFilter', 'sortFilterMobile'].forEach(id => {
+                        const el = document.getElementById(id);
+                        if (el) el.value = sort;
+                    });
+                }
+                if (search) {
+                    ['searchInput', 'searchInputSidebar', 'searchInputMobile'].forEach(id => {
+                        const el = document.getElementById(id);
+                        if (el) el.value = search;
+                    });
+                    ['searchClearTop', 'searchClearMobile', 'searchClearSidebar'].forEach(id => {
+                        const el = document.getElementById(id);
+                        if (el) el.style.display = 'flex';
+                    });
+                }
+                if (pmin || pmax) {
+                    const minVal = pmin ? parseInt(pmin) : globalPriceMin;
+                    const maxVal = pmax ? parseInt(pmax) : globalPriceMax;
+                    priceMin = minVal;
+                    priceMax = maxVal;
+                    ['Desktop', 'Mobile'].forEach(s => {
+                        const minEl = document.getElementById('priceMin' + s);
+                        const maxEl = document.getElementById('priceMax' + s);
+                        if (minEl) minEl.value = minVal;
+                        if (maxEl) maxEl.value = maxVal;
+                    });
+                    syncPriceRange('Desktop');
+                    urlFilterApplied = true;
                 }
 
                 if (urlFilterApplied && window.innerWidth < 768) {
@@ -751,33 +792,56 @@
                 );
             }
 
-            if (category) {
-                filteredProducts = filteredProducts.filter(p => p.category === category);
-            }
+            if (category) filteredProducts = filteredProducts.filter(p => p.category === category);
 
             if (petType) {
                 filteredProducts = filteredProducts.filter(p =>
-                    Array.isArray(p.petType)
-                        ? p.petType.includes(petType)
-                        : p.petType === petType
+                    Array.isArray(p.petType) ? p.petType.includes(petType) : p.petType === petType
                 );
             }
 
-            if (brand) {
-                filteredProducts = filteredProducts.filter(p => p.brand === brand);
-            }
+            if (brand) filteredProducts = filteredProducts.filter(p => p.brand === brand);
 
             filteredProducts = filteredProducts.filter(p =>
                 p.price >= priceMin && p.price <= priceMax
             );
 
-            if (sort === 'price-asc')        filteredProducts.sort((a, b) => a.price - b.price);
-            else if (sort === 'price-desc')  filteredProducts.sort((a, b) => b.price - a.price);
-            else if (sort === 'name-asc')    filteredProducts.sort((a, b) => a.name.localeCompare(b.name));
-            else if (sort === 'name-desc')   filteredProducts.sort((a, b) => b.name.localeCompare(a.name));
+            if (sort === 'price-asc')       filteredProducts.sort((a, b) => a.price - b.price);
+            else if (sort === 'price-desc') filteredProducts.sort((a, b) => b.price - a.price);
+            else if (sort === 'name-asc')   filteredProducts.sort((a, b) => a.name.localeCompare(b.name));
+            else if (sort === 'name-desc')  filteredProducts.sort((a, b) => b.name.localeCompare(a.name));
 
             displayProducts();
             updateFilterCount();
+            syncURL(searchTerm, category, petType, brand, sort);
+        }
+
+        // ── Sincronizar filtros activos en la URL ──────────────────────
+        function syncURL(search, category, petType, brand, sort) {
+            const params = new URLSearchParams();
+            if (search)   params.set('q',        search);
+            if (category) params.set('category', category);
+            if (petType)  params.set('pet',      petType);
+            if (brand)    params.set('brand',    brand);
+            if (sort)     params.set('sort',     sort);
+            if (priceMin > globalPriceMin) params.set('pmin', priceMin);
+            if (priceMax < globalPriceMax) params.set('pmax', priceMax);
+
+            const newUrl = params.toString()
+                ? `${location.pathname}?${params.toString()}`
+                : location.pathname;
+
+            history.replaceState(null, '', newUrl);
+        }
+
+        // ── Botón para copiar/compartir URL de filtros actuales ────────
+        function shareFilteredURL() {
+            const url = location.href;
+            if (navigator.share) {
+                navigator.share({ title: 'Petshop Chiquitines', url });
+            } else {
+                navigator.clipboard.writeText(url).then(() => showNotification('🔗 Link copiado'));
+            }
         }
 
         function displayProducts() {
