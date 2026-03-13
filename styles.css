@@ -1889,3 +1889,36 @@ body {
         transform: translateX(-50%) scale(0.92);
     }
 }
+
+/* ================================================================
+   REPETIR PEDIDO
+   ================================================================ */
+.order-history-footer {
+    padding: 0.6rem 1rem 0.75rem;
+    border-top: 1px solid #f3f4f6;
+}
+
+.order-repeat-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    background-color: #FF6B35;
+    color: #ffffff;
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.55rem 1rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.order-repeat-btn:hover {
+    background-color: #E55A2B;
+}
+
+.order-repeat-btn:active {
+    transform: scale(0.97);
+}
