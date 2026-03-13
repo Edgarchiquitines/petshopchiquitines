@@ -1922,3 +1922,39 @@ body {
 .order-repeat-btn:active {
     transform: scale(0.97);
 }
+
+/* ================================================================
+   BOTONES DE ACCIÓN EN TARJETA (agregar + compartir WA)
+   ================================================================ */
+.product-card-actions {
+    display: flex;
+    gap: 0.4rem;
+    align-items: stretch;
+}
+
+.product-card-actions .add-to-cart-btn {
+    flex: 1;
+}
+
+.share-wa-btn {
+    flex-shrink: 0;
+    width: 2.25rem;
+    background-color: #e0e0e0;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s, transform 0.15s;
+    padding: 0;
+}
+
+.share-wa-btn:hover {
+    background-color: #e0e0e0;
+    transform: scale(1.05);
+}
+
+.share-wa-btn:active {
+    transform: scale(0.95);
+}
