@@ -333,7 +333,9 @@
                 loadRecommendedSection(products);
 
             } catch (error) {
-                // silenciar errores de red
+                // FIX: mostrar error al usuario en lugar de silenciarlo
+                const grid = document.getElementById('productsGrid');
+                if (grid) grid.innerHTML = '<div class="empty-state"><p>No se pudieron cargar los productos</p><a href="products.html">Reintentar</a></div>';
             }
         }
     </script>
