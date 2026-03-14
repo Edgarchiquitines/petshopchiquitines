@@ -566,7 +566,6 @@ body {
     justify-content: center;
     border-radius: 0 0.5rem 0.5rem 0;
     transition: color 0.2s;
-    /* Sin z-index — simplemente ocupa su espacio natural al final del flex/relative container */
 }
 
 .search-clear-btn:hover {
@@ -1953,6 +1952,50 @@ body {
 }
 
 /* ================================================================
+   BOTONES DE ACCIÓN EN TARJETA (agregar + compartir WA)
+   ================================================================ */
+.product-card-actions {
+    display: flex;
+    gap: 0.25rem;
+    align-items: stretch;
+}
+
+.product-card-actions .add-to-cart-btn {
+    flex: 1;
+}
+
+.share-wa-btn {
+    flex-shrink: 0;
+    width: 1.6rem;
+    background-color: #e5e7eb;
+    border: none;
+    border-radius: 0.375rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s, transform 0.15s, color 0.15s;
+    padding: 0;
+    color: #6b7280;
+}
+
+.share-wa-btn:hover {
+    background-color: #d1d5db;
+    color: #111;
+    transform: scale(1.05);
+}
+
+.share-wa-btn:active {
+    transform: scale(0.95);
+}
+
+@media (min-width: 768px) {
+    .share-wa-btn {
+        width: 2rem;
+    }
+}
+
+/* ================================================================
    RESUMEN COLAPSABLE DEL PEDIDO — solo mobile
    ================================================================ */
 .order-summary-collapsible {
@@ -2017,7 +2060,6 @@ body {
     flex-shrink: 0;
 }
 
-/* Cuerpo colapsable — cerrado por defecto */
 .order-summary-body {
     max-height: 0;
     overflow: hidden;
@@ -2078,50 +2120,6 @@ body {
 .summary-total-row strong {
     color: #FF6B35;
     font-size: 1rem;
-}
-
-/* ================================================================
-   BOTONES DE ACCIÓN EN TARJETA (agregar + compartir WA)
-   ================================================================ */
-.product-card-actions {
-    display: flex;
-    gap: 0.25rem;
-    align-items: stretch;
-}
-
-.product-card-actions .add-to-cart-btn {
-    flex: 1;
-}
-
-.share-wa-btn {
-    flex-shrink: 0;
-    width: 1.6rem;
-    background-color: #e5e7eb;
-    border: none;
-    border-radius: 0.375rem;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background-color 0.2s, transform 0.15s, color 0.15s;
-    padding: 0;
-    color: #6b7280;
-}
-
-.share-wa-btn:hover {
-    background-color: #d1d5db;
-    color: #111;
-    transform: scale(1.05);
-}
-
-.share-wa-btn:active {
-    transform: scale(0.95);
-}
-
-@media (min-width: 768px) {
-    .share-wa-btn {
-        width: 2rem;
-    }
 }
 
 /* ================================================================
@@ -2193,7 +2191,6 @@ body {
 
 .atc-close:hover { background: #e5e7eb; color: #111; }
 
-/* Producto confirmado */
 .atc-confirmed {
     display: flex;
     align-items: center;
@@ -2223,7 +2220,7 @@ body {
 }
 
 .atc-confirmed-label {
-    display: none; /* está el check de reemplazo */
+    display: none;
 }
 
 .atc-confirmed-img {
@@ -2256,7 +2253,6 @@ body {
     margin-top: 0.1rem;
 }
 
-/* Botones de acción */
 .atc-actions {
     display: flex;
     gap: 0.5rem;
@@ -2296,7 +2292,6 @@ body {
 
 .atc-btn-cart:hover { background: #E55A2B; }
 
-/* Relacionados */
 .atc-related {
     border-top: 1px solid #e5e7eb;
     padding-top: 1rem;
@@ -2399,7 +2394,6 @@ body {
 
 .atc-add-btn:hover { background: #E55A2B; }
 
-/* Mobile: modal desde abajo */
 @media (max-width: 767px) {
     #atcModal {
         align-items: flex-end;
