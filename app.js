@@ -181,6 +181,11 @@ function openImageZoom(src, alt) {
 
     const overlay = document.createElement('div');
     overlay.id = 'imgZoomOverlay';
+
+    // FIX: texto del hint según si es dispositivo táctil o no
+    const isTouchDevice = ('ontouchstart' in window);
+    const hintText = isTouchDevice ? 'Pellizca para hacer zoom' : 'Usa la rueda para hacer zoom';
+
     overlay.innerHTML = `
         <div class="imgzoom-backdrop"></div>
         <div class="imgzoom-container">
@@ -191,7 +196,7 @@ function openImageZoom(src, alt) {
                     <line x1="6" y1="6" x2="18" y2="18"></line>
                 </svg>
             </button>
-            <div class="imgzoom-hint">Pellizca para hacer zoom</div>
+            <div class="imgzoom-hint">${hintText}</div>
         </div>
     `;
     document.body.appendChild(overlay);
@@ -275,20 +280,22 @@ function openImageZoom(src, alt) {
         }
     }, { passive: false });
 
+    // FIX: un solo listener touchend que maneja drag, pinch y doble tap
+    let lastTap = 0;
     img.addEventListener('touchend', (e) => {
         if (e.touches.length < 2) isDragging = false;
         if (scale <= 1) { scale = 1; posX = 0; posY = 0; applyTransform(); }
-    }, { passive: true });
 
-    let lastTap = 0;
-    img.addEventListener('touchend', (e) => {
-        const now = Date.now();
-        if (now - lastTap < 300) {
-            if (scale > 1) { scale = 1; posX = 0; posY = 0; }
-            else           { scale = 2.5; }
-            applyTransform();
+        // Solo registrar doble tap si fue con un dedo
+        if (e.changedTouches.length === 1) {
+            const now = Date.now();
+            if (now - lastTap < 300) {
+                if (scale > 1) { scale = 1; posX = 0; posY = 0; }
+                else           { scale = 2.5; }
+                applyTransform();
+            }
+            lastTap = now;
         }
-        lastTap = now;
     }, { passive: true });
 
     overlay.querySelector('.imgzoom-container').addEventListener('wheel', (e) => {
@@ -417,7 +424,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// CSS animations + notificación carrito
+// CSS animations + notificación carrito + FIX: estilos del imgzoom-hint
 const style = document.createElement('style');
 style.textContent = `
     @keyframes slideIn {
@@ -522,6 +529,26 @@ style.textContent = `
         .atcn-inner {
             max-width: 100%;
         }
+    }
+
+    /* ── FIX: Estilos del hint del lightbox de zoom ── */
+    .imgzoom-hint {
+        position: absolute;
+        bottom: 1rem;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0,0,0,0.6);
+        color: #fff;
+        font-size: 0.75rem;
+        padding: 0.3rem 0.75rem;
+        border-radius: 9999px;
+        pointer-events: none;
+        transition: opacity 0.4s ease;
+        opacity: 1;
+        white-space: nowrap;
+    }
+    .imgzoom-hint--hidden {
+        opacity: 0;
     }
 `;
 document.head.appendChild(style);
@@ -892,21 +919,16 @@ function getRecommendedProducts(allProds, max = 10) {
             const petList  = Array.isArray(p.petType) ? p.petType : [p.petType];
             const petMatch = petList.some(pt => topPets.includes(pt));
 
-            // Categoría: más peso que marca para favorecer variedad
             if (catIdx === 0)        score += 5;
             else if (catIdx > 0)     score += 2.5;
 
-            // Marca: pesa menos que categoría a propósito
             if (brandIdx === 0)      score += 2;
             else if (brandIdx > 0)   score += 1;
 
-            // Tipo de mascota
             if (petMatch)            score += 3;
 
-            // Bonus por oferta
             if (p.isOnSale)          score += 0.5;
 
-            // Pequeño ruido aleatorio para que no sea siempre idéntico
             score += Math.random() * 0.4;
 
             return { p, score };
@@ -917,7 +939,7 @@ function getRecommendedProducts(allProds, max = 10) {
     const MAX_PER_BRAND = 2;
     const brandCount    = {};
     const result        = [];
-    const leftover      = []; // los que quedaron afuera por límite de marca
+    const leftover      = [];
 
     for (const { p, score } of scored) {
         const brand = p.brand || '__sin_marca__';
@@ -930,13 +952,11 @@ function getRecommendedProducts(allProds, max = 10) {
         if (result.length >= max) break;
     }
 
-    // Si aún faltan productos para llegar a `max`, rellenar con el leftover
     if (result.length < max) {
         const fill = leftover.slice(0, max - result.length);
         result.push(...fill);
     }
 
-    // Si sigue faltando (pocos productos en stock), agregar random del pool general
     if (result.length < max) {
         const resultIds = new Set(result.map(p => String(p.id)));
         const extra = available
@@ -954,7 +974,6 @@ function refreshRecommendedIfVisible() {
     const grid = document.getElementById('recommendedGrid');
     if (!grid || !_recommendedPool) return;
 
-    // Pequeño delay para que la actividad ya esté guardada en localStorage
     setTimeout(() => {
         loadRecommendedSection(_recommendedPool);
     }, 80);
@@ -962,7 +981,6 @@ function refreshRecommendedIfVisible() {
 
 // Función pública para que index.html la llame (primera carga)
 function loadRecommendedSection(allProds) {
-    // Guardar el pool para refrescos posteriores
     if (allProds && allProds.length) _recommendedPool = allProds;
 
     const section  = document.getElementById('recommendedSection');
@@ -979,7 +997,6 @@ function loadRecommendedSection(allProds) {
         return;
     }
 
-    // ── Título dinámico ───────────────────────────────────────────────
     if (hasActivity) {
         title.textContent    = '✨ Basado en tu actividad reciente';
         subtitle.textContent = 'Productos seleccionados según tus gustos y búsquedas';
@@ -988,7 +1005,6 @@ function loadRecommendedSection(allProds) {
         subtitle.textContent = 'Una selección especial para vos y tu mascota';
     }
 
-    // ── Render con animación suave al actualizar ──────────────────────
     const wasVisible = section.style.display !== 'none';
     if (wasVisible) {
         grid.style.opacity = '0';
