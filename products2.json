@@ -2098,5 +2098,35 @@
     "isOnSale": false,
     "description": "Alimento balanceado para perros",
     "code": "02777"
+  },
+    {
+    "id": "216",
+    "name": "Dogui Cachorro",
+    "brand": "Dogui",
+    "price": 130000,
+    "originalPrice": 130000,
+    "stock": 1,
+    "weight": "8kg",
+    "petType": "perro",
+    "category": "alimentos",
+    "imageUrl": "assets/img/img216.webp",
+    "isOnSale": false,
+    "description": "Alimento balanceado para perros",
+    "code": "13264"
+  },
+    {
+    "id": "217",
+    "name": "Dogui Adulto todos los tamaños",
+    "brand": "Dogui",
+    "price": 125000,
+    "originalPrice": 125000,
+    "stock": 1,
+    "weight": "8kg",
+    "petType": "perro",
+    "category": "alimentos",
+    "imageUrl": "assets/img/img217.webp",
+    "isOnSale": false,
+    "description": "Alimento balanceado para perros",
+    "code": "13455"
   }
 ]
