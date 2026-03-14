@@ -218,6 +218,27 @@
         </div>
     </section>
 
+    <!-- Sección de Recomendaciones Personalizadas -->
+    <section class="products-section recommended-section" id="recommendedSection" style="display:none; background-color:#f9fafb; padding-top:0.5rem;">
+        <div class="container">
+            <div class="section-header">
+                <h2 id="recommendedTitle">💡 Productos que te podrían interesar</h2>
+                <p id="recommendedSubtitle">Una selección especial para vos y tu mascota</p>
+            </div>
+            <div id="recommendedGrid" class="products-grid">
+            </div>
+            <div style="text-align:center; margin-top:1.5rem;">
+                <a href="products.html" class="btn-primary" style="background-color:#000; color:#fff; display:inline-flex;">
+                    <span>Ver catálogo completo</span>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
     <!-- CTA Section -->
     <section class="cta-section">
         <div class="container">
@@ -279,7 +300,8 @@
         <img src="assets/whatsapp.png" alt="WhatsApp">
     </a>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="app.js"></script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    <script src="app.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             loadHomeProducts();
@@ -292,16 +314,26 @@
                     archivos.map(archivo => fetch(archivo).then(r => r.json()))
                 );
                 const products = resultados.flat();
+
+                // Guardar en caché para uso de recomendaciones
+                try { localStorage.setItem('productsCache', JSON.stringify(products)); } catch(e) {}
+
+                // Sección de ofertas
                 const onSaleProducts = products.filter(p => p.isOnSale && p.stock > 0);
                 const grid = document.getElementById('productsGrid');
 
                 if (onSaleProducts.length === 0) {
                     grid.innerHTML = '<div class="empty-state"><p>No hay productos en oferta</p><a href="products.html">Ver todos los productos</a></div>';
-                    return;
+                } else {
+                    grid.innerHTML = onSaleProducts.map(product => createProductCard(product)).join('');
+                    requestAnimationFrame(() => fitProductNames());
                 }
 
-                grid.innerHTML = onSaleProducts.map(product => createProductCard(product)).join('');
+                // Sección de recomendaciones (siempre se carga, con o sin actividad)
+                loadRecommendedSection(products);
+
             } catch (error) {
+                // silenciar errores de red
             }
         }
     </script>
