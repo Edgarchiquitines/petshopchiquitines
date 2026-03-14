@@ -28,7 +28,11 @@ function addToCart(product) {
     }
 
     saveCart(cart);
-    showAddedToCartModal(product);
+
+    // Registrar actividad del usuario
+    trackUserActivity('cart', product);
+
+    showAddedToCartNotification(product);
 }
 
 function removeFromCart(productId) {
@@ -171,10 +175,8 @@ function shareProductWA(product) {
 
 // ================================================================
 // IMAGE ZOOM LIGHTBOX
-// Funciona con pinch-to-zoom nativo en mobile y rueda en desktop.
 // ================================================================
 function openImageZoom(src, alt) {
-    // Evitar duplicados
     if (document.getElementById('imgZoomOverlay')) return;
 
     const overlay = document.createElement('div');
@@ -194,17 +196,14 @@ function openImageZoom(src, alt) {
     `;
     document.body.appendChild(overlay);
 
-    // Pequeña animación de entrada
     requestAnimationFrame(() => overlay.classList.add('imgzoom--open'));
 
     const img       = overlay.querySelector('.imgzoom-img');
     const closeBtn  = overlay.querySelector('.imgzoom-close');
     const hint      = overlay.querySelector('.imgzoom-hint');
 
-    // Ocultar hint luego de 2 s
     setTimeout(() => hint.classList.add('imgzoom-hint--hidden'), 2000);
 
-    // Cerrar
     function closeZoom() {
         overlay.classList.remove('imgzoom--open');
         overlay.classList.add('imgzoom--closing');
@@ -214,13 +213,11 @@ function openImageZoom(src, alt) {
     closeBtn.addEventListener('click', closeZoom);
     overlay.querySelector('.imgzoom-backdrop').addEventListener('click', closeZoom);
 
-    // Cerrar con tecla Escape
     function onKeyDown(e) {
         if (e.key === 'Escape') { closeZoom(); document.removeEventListener('keydown', onKeyDown); }
     }
     document.addEventListener('keydown', onKeyDown);
 
-    // ── Pinch-to-zoom + drag para mobile ────────────────────────────────
     let scale     = 1;
     let minScale  = 1;
     let maxScale  = 5;
@@ -230,8 +227,6 @@ function openImageZoom(src, alt) {
     let isDragging = false;
     let dragStartX = 0;
     let dragStartY = 0;
-    let lastPosX   = 0;
-    let lastPosY   = 0;
 
     function applyTransform() {
         img.style.transform = `translate(${posX}px, ${posY}px) scale(${scale})`;
@@ -282,11 +277,9 @@ function openImageZoom(src, alt) {
 
     img.addEventListener('touchend', (e) => {
         if (e.touches.length < 2) isDragging = false;
-        // Si volvió a escala 1 o menos, resetear posición
         if (scale <= 1) { scale = 1; posX = 0; posY = 0; applyTransform(); }
     }, { passive: true });
 
-    // Doble tap para zoom x2 / reset
     let lastTap = 0;
     img.addEventListener('touchend', (e) => {
         const now = Date.now();
@@ -298,7 +291,6 @@ function openImageZoom(src, alt) {
         lastTap = now;
     }, { passive: true });
 
-    // ── Scroll con rueda del mouse en desktop ────────────────────────────
     overlay.querySelector('.imgzoom-container').addEventListener('wheel', (e) => {
         e.preventDefault();
         scale = Math.min(maxScale, Math.max(minScale, scale - e.deltaY * 0.002));
@@ -329,7 +321,7 @@ function fitProductNames() {
 }
 
 function observeProductGrid() {
-    const grids = document.querySelectorAll('#productsGrid');
+    const grids = document.querySelectorAll('#productsGrid, #recommendedGrid');
     if (!grids.length) return;
 
     const observer = new MutationObserver(() => {
@@ -340,7 +332,41 @@ function observeProductGrid() {
         observer.observe(grid, { childList: true, subtree: false });
     });
 }
-// ────────────────────────────────────────────────────────────────────────────
+
+// ================================================================
+// NOTIFICACIÓN SIMPLE AL AGREGAR AL CARRITO (reemplaza el modal)
+// ================================================================
+function showAddedToCartNotification(product) {
+    // Eliminar notificación anterior si existe
+    const existing = document.getElementById('atcNotif');
+    if (existing) existing.remove();
+
+    const notif = document.createElement('div');
+    notif.id = 'atcNotif';
+    notif.innerHTML = `
+        <div class="atcn-inner">
+            <div class="atcn-check">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+            </div>
+            <img src="${product.imageUrl || 'https://images.unsplash.com/photo-1589924691995-400dc9ecc119?w=400'}" alt="${product.name}" class="atcn-img" onerror="this.src='https://images.unsplash.com/photo-1589924691995-400dc9ecc119?w=400'">
+            <div class="atcn-text">
+                <span class="atcn-label">¡Agregado!</span>
+                <span class="atcn-name">${product.name}</span>
+            </div>
+            <a href="cart.html" class="atcn-btn">Ver carrito</a>
+        </div>
+    `;
+    document.body.appendChild(notif);
+
+    requestAnimationFrame(() => notif.classList.add('atcn--visible'));
+
+    setTimeout(() => {
+        notif.classList.remove('atcn--visible');
+        setTimeout(() => notif.remove(), 350);
+    }, 3000);
+}
 
 // Notification
 function showNotification(message) {
@@ -384,16 +410,14 @@ document.addEventListener('DOMContentLoaded', function() {
     injectPanels();
     updateFavCount();
 
-    // Iniciar observer para ajuste automático de nombres
     observeProductGrid();
 
     window.addEventListener('resize', () => {
         requestAnimationFrame(() => fitProductNames());
     });
 });
-// ────────────────────────────────────────────────────────────────────────────
 
-// CSS animations
+// CSS animations + notificación carrito
 const style = document.createElement('style');
 style.textContent = `
     @keyframes slideIn {
@@ -403,6 +427,101 @@ style.textContent = `
     @keyframes slideOut {
         from { transform: translateX(0);    opacity: 1; }
         to   { transform: translateX(100%); opacity: 0; }
+    }
+
+    /* ── Notificación toast carrito ── */
+    #atcNotif {
+        position: fixed;
+        top: 5rem;
+        right: 1rem;
+        z-index: 9999;
+        opacity: 0;
+        transform: translateX(110%);
+        transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+        pointer-events: none;
+    }
+    #atcNotif.atcn--visible {
+        opacity: 1;
+        transform: translateX(0);
+        pointer-events: auto;
+    }
+    .atcn-inner {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        background: #111;
+        color: #fff;
+        padding: 0.65rem 0.85rem;
+        border-radius: 0.75rem;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.28);
+        min-width: 240px;
+        max-width: 320px;
+    }
+    .atcn-check {
+        width: 1.5rem;
+        height: 1.5rem;
+        border-radius: 9999px;
+        background: #10b981;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        color: #fff;
+    }
+    .atcn-img {
+        width: 2.25rem;
+        height: 2.25rem;
+        object-fit: cover;
+        border-radius: 0.375rem;
+        flex-shrink: 0;
+        background: #333;
+    }
+    .atcn-text {
+        flex: 1;
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.05rem;
+    }
+    .atcn-label {
+        font-size: 0.7rem;
+        font-weight: 700;
+        color: #10b981;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+    }
+    .atcn-name {
+        font-size: 0.78rem;
+        font-weight: 500;
+        color: #e5e7eb;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    .atcn-btn {
+        flex-shrink: 0;
+        background: #FF6B35;
+        color: #fff;
+        text-decoration: none;
+        font-size: 0.72rem;
+        font-weight: 700;
+        padding: 0.35rem 0.65rem;
+        border-radius: 0.5rem;
+        transition: background 0.15s;
+        white-space: nowrap;
+    }
+    .atcn-btn:hover { background: #E55A2B; }
+
+    @media (max-width: 767px) {
+        #atcNotif {
+            top: auto;
+            bottom: 5rem;
+            right: 0.75rem;
+            left: 0.75rem;
+        }
+        .atcn-inner {
+            max-width: 100%;
+        }
     }
 `;
 document.head.appendChild(style);
@@ -428,9 +547,9 @@ function toggleFavorite(product) {
     } else {
         favs.push(product);
         showNotification('❤️ Guardado en favoritos');
+        trackUserActivity('favorite', product);
     }
     saveFavorites(favs);
-    // Actualizar todos los botones de corazón visibles para este producto
     document.querySelectorAll(`.fav-btn[data-id="${product.id}"]`).forEach(btn => {
         refreshFavBtn(btn, product.id);
     });
@@ -522,9 +641,14 @@ function checkFavPanelEmpty() {
 // ================================================================
 function saveOrder(orderData) {
     const orders = JSON.parse(localStorage.getItem('orderHistory') || '[]');
-    orders.unshift(orderData); // más reciente primero
-    if (orders.length > 20) orders.splice(20); // máximo 20 pedidos
+    orders.unshift(orderData);
+    if (orders.length > 20) orders.splice(20);
     localStorage.setItem('orderHistory', JSON.stringify(orders));
+
+    // Registrar actividad por cada producto del pedido
+    if (orderData.items) {
+        orderData.items.forEach(item => trackUserActivity('order', item));
+    }
 }
 
 function getOrders() {
@@ -589,13 +713,11 @@ async function reOrderToCart(orderIndex) {
     const order  = orders[orderIndex];
     if (!order) return;
 
-    // Fuente 1: allProducts en memoria (si estamos en products.html)
     let freshProducts = null;
     if (typeof allProducts !== 'undefined' && allProducts.length) {
         freshProducts = allProducts;
     }
 
-    // Fuente 2: caché en localStorage
     if (!freshProducts) {
         try {
             const cached = localStorage.getItem('productsCache');
@@ -603,7 +725,6 @@ async function reOrderToCart(orderIndex) {
         } catch(e) {}
     }
 
-    // Fuente 3: cargar los JSON directamente (siempre funciona)
     if (!freshProducts) {
         try {
             const results = await Promise.all([
@@ -611,7 +732,6 @@ async function reOrderToCart(orderIndex) {
                 fetch('products2.json').then(r => r.json())
             ]);
             freshProducts = results.flat();
-            // Guardar para la próxima vez
             try { localStorage.setItem('productsCache', JSON.stringify(freshProducts)); } catch(e) {}
         } catch(e) {
             freshProducts = null;
@@ -650,7 +770,6 @@ function injectPanels() {
     backdrop.onclick = closePanels;
     document.body.appendChild(backdrop);
 
-    // Panel Favoritos
     const favPanel = document.createElement('div');
     favPanel.id = 'favoritesModal';
     favPanel.className = 'side-panel';
@@ -664,7 +783,6 @@ function injectPanels() {
         <div class="panel-body"></div>`;
     document.body.appendChild(favPanel);
 
-    // Panel Historial
     const ordPanel = document.createElement('div');
     ordPanel.id = 'ordersModal';
     ordPanel.className = 'side-panel';
@@ -678,149 +796,216 @@ function injectPanels() {
         <div class="panel-body"></div>`;
     document.body.appendChild(ordPanel);
 
-    // Cerrar con Escape
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closePanels(); });
 }
 
+// ================================================================
+// SEGUIMIENTO DE ACTIVIDAD DEL USUARIO
+// Registra interacciones para personalizar recomendaciones
+// ================================================================
+function trackUserActivity(type, product) {
+    const activity = getUserActivity();
 
-// ================================================================
-// MODAL "AGREGADO AL CARRITO" + PRODUCTOS RELACIONADOS
-// ================================================================
-function getRelatedProducts(product, max = 3) {
-    // Obtener pool de productos: memoria o caché
-    let pool = [];
-    if (typeof allProducts !== 'undefined' && allProducts.length) {
-        pool = allProducts;
-    } else {
-        try {
-            const cached = localStorage.getItem('productsCache');
-            if (cached) pool = JSON.parse(cached);
-        } catch(e) {}
+    // Guardar categorías, marcas y tipo de mascota interactuados
+    if (product.category) {
+        activity.categories[product.category] = (activity.categories[product.category] || 0) + 1;
     }
-    if (!pool.length) return [];
-
-    // Excluir el producto actual y los ya en el carrito
-    const cartIds = new Set(getCart().map(i => String(i.id)));
-    const candidates = pool.filter(p =>
-        String(p.id) !== String(product.id) &&
-        !cartIds.has(String(p.id)) &&
-        p.stock > 0
-    );
-
-    // Puntuar: misma marca (+2) y/o misma categoría + mascota (+1 cada uno)
-    const scored = candidates.map(p => {
-        let score = 0;
-        if (p.brand && p.brand === product.brand) score += 2;
-        if (p.category && p.category === product.category) score += 1;
-        const petA = Array.isArray(p.petType) ? p.petType : [p.petType];
-        const petB = Array.isArray(product.petType) ? product.petType : [product.petType];
-        if (petA.some(t => petB.includes(t))) score += 1;
-        return { p, score };
+    if (product.brand) {
+        activity.brands[product.brand] = (activity.brands[product.brand] || 0) + 1;
+    }
+    const pets = Array.isArray(product.petType) ? product.petType : [product.petType];
+    pets.forEach(pet => {
+        if (pet) activity.pets[pet] = (activity.pets[pet] || 0) + 1;
     });
 
-    // Ordenar: mayor score primero, luego mezclar los de igual score
-    scored.sort((a, b) => b.score - a.score || Math.random() - 0.5);
-
-    // Devolver solo los que tienen alguna relación (score > 0), sino cualquiera
-    const related = scored.filter(s => s.score > 0).slice(0, max);
-    if (related.length < max) {
-        const fill = scored.filter(s => s.score === 0).slice(0, max - related.length);
-        related.push(...fill);
+    // IDs vistos recientemente (máx 30)
+    if (!activity.seenIds.includes(String(product.id))) {
+        activity.seenIds.unshift(String(product.id));
+        if (activity.seenIds.length > 30) activity.seenIds.pop();
     }
-    return related.map(s => s.p);
+
+    activity.hasActivity = true;
+    activity.lastUpdated = Date.now();
+
+    saveUserActivity(activity);
+
+    // Refrescar la sección de recomendaciones en tiempo real si estamos en index
+    refreshRecommendedIfVisible();
 }
 
-function showAddedToCartModal(product) {
-    // Cerrar modal anterior si existe
-    closeAddedToCartModal();
-
-    const related = getRelatedProducts(product);
-    const imgSrc = product.imageUrl || 'https://images.unsplash.com/photo-1589924691995-400dc9ecc119?w=400';
-
-    const relatedHTML = related.length ? `
-        <div class="atc-related">
-            <p class="atc-related-title">También te puede interesar</p>
-            <div class="atc-related-grid">
-                ${related.map(p => {
-                    const rImg = p.imageUrl || 'https://images.unsplash.com/photo-1589924691995-400dc9ecc119?w=400';
-                    const hasDiscount = p.isOnSale && p.originalPrice;
-                    return `
-                    <div class="atc-related-card">
-                        <div class="atc-related-img-wrap">
-                            <img src="${rImg}" alt="${p.name}" loading="lazy"
-                                 onerror="this.src='https://images.unsplash.com/photo-1589924691995-400dc9ecc119?w=400'">
-                            ${hasDiscount ? `<span class="atc-discount-badge">-${Math.round(((p.originalPrice-p.price)/p.originalPrice)*100)}%</span>` : ''}
-                        </div>
-                        <div class="atc-related-info">
-                            <p class="atc-related-name">${p.name}</p>
-                            <p class="atc-related-brand">${p.brand || ''}</p>
-                            <p class="atc-related-price">${formatPrice(p.price)}</p>
-                            <button class="atc-add-btn" onclick="addToCart(${JSON.stringify(p).replace(/"/g,'&quot;')})">
-                                + Agregar
-                            </button>
-                        </div>
-                    </div>`;
-                }).join('')}
-            </div>
-        </div>` : '';
-
-    const overlay = document.createElement('div');
-    overlay.id = 'atcModal';
-    overlay.innerHTML = `
-        <div class="atc-backdrop" onclick="closeAddedToCartModal()"></div>
-        <div class="atc-modal">
-            <button class="atc-close" onclick="closeAddedToCartModal()" aria-label="Cerrar">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                    <line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line>
-                </svg>
-            </button>
-
-            <!-- Producto agregado -->
-            <div class="atc-confirmed">
-                <div class="atc-check">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                        <polyline points="20 6 9 17 4 12"></polyline>
-                    </svg>
-                </div>
-                <div class="atc-confirmed-info">
-                    <p class="atc-confirmed-label">¡Agregado al carrito!</p>
-                    <img src="${imgSrc}" alt="${product.name}" class="atc-confirmed-img"
-                         onerror="this.src='https://images.unsplash.com/photo-1589924691995-400dc9ecc119?w=400'">
-                    <div class="atc-confirmed-details">
-                        <p class="atc-confirmed-name">${product.name}</p>
-                        <p class="atc-confirmed-price">${formatPrice(product.price)}</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Acciones -->
-            <div class="atc-actions">
-                <button class="atc-btn-continue" onclick="closeAddedToCartModal()">Seguir comprando</button>
-                <a href="cart.html" class="atc-btn-cart">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle>
-                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-                    </svg>
-                    Ver carrito
-                </a>
-            </div>
-
-            ${relatedHTML}
-        </div>
-    `;
-
-    document.body.appendChild(overlay);
-    requestAnimationFrame(() => overlay.classList.add('atc-modal--open'));
-
-    // Cerrar con Escape
-    const onKey = e => { if (e.key === 'Escape') { closeAddedToCartModal(); document.removeEventListener('keydown', onKey); } };
-    document.addEventListener('keydown', onKey);
+function getUserActivity() {
+    try {
+        return JSON.parse(localStorage.getItem('userActivity') || 'null') || {
+            hasActivity: false,
+            categories: {},
+            brands: {},
+            pets: {},
+            seenIds: [],
+            lastUpdated: null
+        };
+    } catch(e) {
+        return { hasActivity: false, categories: {}, brands: {}, pets: {}, seenIds: [], lastUpdated: null };
+    }
 }
 
-function closeAddedToCartModal() {
-    const modal = document.getElementById('atcModal');
-    if (!modal) return;
-    modal.classList.remove('atc-modal--open');
-    modal.classList.add('atc-modal--closing');
-    setTimeout(() => modal.remove(), 250);
+function saveUserActivity(activity) {
+    try {
+        localStorage.setItem('userActivity', JSON.stringify(activity));
+    } catch(e) {}
+}
+
+function hasUserActivity() {
+    const activity = getUserActivity();
+    return activity.hasActivity === true;
+}
+
+// ================================================================
+// RECOMENDACIONES PERSONALIZADAS PARA INDEX.HTML
+// ================================================================
+
+// Caché del pool de productos para refrescos en tiempo real
+let _recommendedPool = null;
+
+function getRecommendedProducts(allProds, max = 10) {
+    const activity  = getUserActivity();
+    const available = allProds.filter(p => p.stock > 0);
+
+    // ── Sin actividad: random con mix de ofertas y productos normales ──
+    if (!activity.hasActivity) {
+        const onSale = available.filter(p => p.isOnSale).sort(() => Math.random() - 0.5);
+        const noSale = available.filter(p => !p.isOnSale).sort(() => Math.random() - 0.5);
+        return [...onSale.slice(0, 6), ...noSale.slice(0, 4)].slice(0, max);
+    }
+
+    // ── Con actividad: scoring por afinidad ───────────────────────────
+    const topCats   = Object.entries(activity.categories).sort((a,b) => b[1]-a[1]).map(e => e[0]);
+    const topBrands = Object.entries(activity.brands).sort((a,b) => b[1]-a[1]).map(e => e[0]);
+    const topPets   = Object.entries(activity.pets).sort((a,b) => b[1]-a[1]).map(e => e[0]);
+    const seenSet   = new Set(activity.seenIds);
+
+    const scored = available
+        .filter(p => !seenSet.has(String(p.id)))
+        .map(p => {
+            let score = 0;
+            const catIdx   = topCats.indexOf(p.category);
+            const brandIdx = topBrands.indexOf(p.brand);
+            const petList  = Array.isArray(p.petType) ? p.petType : [p.petType];
+            const petMatch = petList.some(pt => topPets.includes(pt));
+
+            // Categoría: más peso que marca para favorecer variedad
+            if (catIdx === 0)        score += 5;
+            else if (catIdx > 0)     score += 2.5;
+
+            // Marca: pesa menos que categoría a propósito
+            if (brandIdx === 0)      score += 2;
+            else if (brandIdx > 0)   score += 1;
+
+            // Tipo de mascota
+            if (petMatch)            score += 3;
+
+            // Bonus por oferta
+            if (p.isOnSale)          score += 0.5;
+
+            // Pequeño ruido aleatorio para que no sea siempre idéntico
+            score += Math.random() * 0.4;
+
+            return { p, score };
+        })
+        .sort((a, b) => b.score - a.score);
+
+    // ── Límite de diversidad: máx 2 productos por marca ───────────────
+    const MAX_PER_BRAND = 2;
+    const brandCount    = {};
+    const result        = [];
+    const leftover      = []; // los que quedaron afuera por límite de marca
+
+    for (const { p, score } of scored) {
+        const brand = p.brand || '__sin_marca__';
+        if ((brandCount[brand] || 0) < MAX_PER_BRAND) {
+            brandCount[brand] = (brandCount[brand] || 0) + 1;
+            result.push(p);
+        } else {
+            leftover.push(p);
+        }
+        if (result.length >= max) break;
+    }
+
+    // Si aún faltan productos para llegar a `max`, rellenar con el leftover
+    if (result.length < max) {
+        const fill = leftover.slice(0, max - result.length);
+        result.push(...fill);
+    }
+
+    // Si sigue faltando (pocos productos en stock), agregar random del pool general
+    if (result.length < max) {
+        const resultIds = new Set(result.map(p => String(p.id)));
+        const extra = available
+            .filter(p => !resultIds.has(String(p.id)) && !seenSet.has(String(p.id)))
+            .sort(() => Math.random() - 0.5)
+            .slice(0, max - result.length);
+        result.push(...extra);
+    }
+
+    return result.slice(0, max);
+}
+
+// Refresca la sección en tiempo real si el grid existe en el DOM
+function refreshRecommendedIfVisible() {
+    const grid = document.getElementById('recommendedGrid');
+    if (!grid || !_recommendedPool) return;
+
+    // Pequeño delay para que la actividad ya esté guardada en localStorage
+    setTimeout(() => {
+        loadRecommendedSection(_recommendedPool);
+    }, 80);
+}
+
+// Función pública para que index.html la llame (primera carga)
+function loadRecommendedSection(allProds) {
+    // Guardar el pool para refrescos posteriores
+    if (allProds && allProds.length) _recommendedPool = allProds;
+
+    const section  = document.getElementById('recommendedSection');
+    const grid     = document.getElementById('recommendedGrid');
+    const title    = document.getElementById('recommendedTitle');
+    const subtitle = document.getElementById('recommendedSubtitle');
+    if (!section || !grid || !_recommendedPool) return;
+
+    const hasActivity = hasUserActivity();
+    const products    = getRecommendedProducts(_recommendedPool, 10);
+
+    if (!products.length) {
+        section.style.display = 'none';
+        return;
+    }
+
+    // ── Título dinámico ───────────────────────────────────────────────
+    if (hasActivity) {
+        title.textContent    = '✨ Basado en tu actividad reciente';
+        subtitle.textContent = 'Productos seleccionados según tus gustos y búsquedas';
+    } else {
+        title.textContent    = '💡 Productos que te podrían interesar';
+        subtitle.textContent = 'Una selección especial para vos y tu mascota';
+    }
+
+    // ── Render con animación suave al actualizar ──────────────────────
+    const wasVisible = section.style.display !== 'none';
+    if (wasVisible) {
+        grid.style.opacity = '0';
+        grid.style.transform = 'translateY(6px)';
+        grid.style.transition = 'opacity 0.25s ease, transform 0.25s ease';
+    }
+
+    grid.innerHTML = products.map(p => createProductCard(p)).join('');
+    section.style.display = 'block';
+
+    requestAnimationFrame(() => {
+        fitProductNames();
+        if (wasVisible) {
+            requestAnimationFrame(() => {
+                grid.style.opacity = '1';
+                grid.style.transform = 'translateY(0)';
+            });
+        }
+    });
 }
