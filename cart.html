@@ -293,6 +293,18 @@
                     Enviar Pedido por WhatsApp
                 </button>
             `;
+
+            // FIX: listener del input customerName agregado directamente aquí,
+            // eliminando el setTimeout frágil que antes estaba en DOMContentLoaded
+            const nameInput = document.getElementById('customerName');
+            if (nameInput) {
+                nameInput.addEventListener('input', () => {
+                    if (nameInput.value.trim()) {
+                        nameInput.classList.remove('input-error');
+                        clearError('nameError');
+                    }
+                });
+            }
         }
 
         function changeQuantity(productId, change) {
@@ -314,7 +326,6 @@
 
         function removeItemWithAnimation(productId) {
             const itemEl = document.querySelector(`[data-product-id="${productId}"]`);
-            // Buscar el id con el tipo correcto (puede ser number o string en localStorage)
             const cart = getCart();
             const realId = cart.find(i => String(i.id) === String(productId))?.id ?? productId;
             if (itemEl) {
@@ -434,7 +445,6 @@
                 const encodedMessage = encodeURIComponent(message);
                 window.open(`https://wa.me/595976106726?text=${encodedMessage}`, '_blank');
 
-                // Guardar en historial de pedidos
                 const orderData = {
                     date: new Date().toLocaleDateString('es-PY', { day:'2-digit', month:'2-digit', year:'numeric', hour:'2-digit', minute:'2-digit' }),
                     customerName,
@@ -457,20 +467,6 @@
                 submitBtn.innerHTML = originalText;
             }
         }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            setTimeout(() => {
-                const nameInput = document.getElementById('customerName');
-                if (nameInput) {
-                    nameInput.addEventListener('input', () => {
-                        if (nameInput.value.trim()) {
-                            nameInput.classList.remove('input-error');
-                            clearError('nameError');
-                        }
-                    });
-                }
-            }, 100);
-        });
     </script>
 </body>
 </html>
