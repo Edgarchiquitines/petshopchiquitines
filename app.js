@@ -262,7 +262,7 @@ function openImageZoom(src, alt) {
 // ── Auto font-size para nombres largos ──────────────────────────────────────
 function fitProductNames() {
     const isDesktop = window.innerWidth >= 768;
-    const MAX_FONT  = isDesktop ? 17 : 15;
+    const MAX_FONT  = isDesktop ? 17 : 11;
     const MIN_FONT  = 10;
     const MAX_LINES = 2;
     document.querySelectorAll('.product-name').forEach(el => {
