@@ -9,6 +9,14 @@
     <link rel="canonical" href="https://edgarchiquitines.github.io/petshopchiquitines/">
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
     <link rel="stylesheet" href="styles.css">
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#000000">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Chiquitines">
+    <link rel="apple-touch-icon" href="assets/icons/icon-192.png">
 </head>
 <body>
     <!-- Header -->
@@ -34,14 +42,12 @@
                     </a>
                 </nav>
                 <div class="header-actions">
-                    <!-- Favoritos -->
                     <button class="header-icon-btn" onclick="openFavoritesModal()" aria-label="Mis favoritos" title="Mis favoritos">
                         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
                         </svg>
                         <span class="fav-count" id="favCount" style="display:none">0</span>
                     </button>
-                    <!-- Historial de pedidos -->
                     <button class="header-icon-btn" onclick="openOrdersModal()" aria-label="Mis pedidos" title="Mis pedidos">
                         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"></path>
@@ -50,7 +56,6 @@
                             <line x1="9" y1="16" x2="13" y2="16"></line>
                         </svg>
                     </button>
-                    <!-- Carrito -->
                     <a href="cart.html" class="cart-icon">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <circle cx="9" cy="21" r="1"></circle>
@@ -69,7 +74,6 @@
                 </div>
             </div>
         </div>
-        <!-- Mobile Menu -->
         <div class="mobile-menu" id="mobileMenu">
             <nav>
                 <a href="index.html" class="mobile-nav-link">
@@ -88,7 +92,6 @@
         </div>
     </header>
 
-    <!-- Hero Section -->
     <section class="hero hero-gradient">
         <div class="container">
             <div class="hero-content">
@@ -108,7 +111,6 @@
         </div>
     </section>
 
-    <!-- Categorías -->
     <section class="categories-section">
         <div class="container">
             <div class="cat-row">
@@ -165,7 +167,6 @@
         </div>
     </section>
 
-    <!-- Por qué elegirnos -->
     <section class="why-us-section">
         <div class="container">
             <div class="why-us-grid">
@@ -201,7 +202,6 @@
         </div>
     </section>
 
-    <!-- Productos en Oferta -->
     <section class="products-section">
         <div class="container">
             <div class="section-header">
@@ -218,15 +218,13 @@
         </div>
     </section>
 
-    <!-- Sección de Recomendaciones Personalizadas -->
     <section class="products-section recommended-section" id="recommendedSection" style="display:none; background-color:#f9fafb; padding-top:0.5rem;">
         <div class="container">
             <div class="section-header">
                 <h2 id="recommendedTitle">💡 Productos que te podrían interesar</h2>
                 <p id="recommendedSubtitle">Una selección especial para vos y tu mascota</p>
             </div>
-            <div id="recommendedGrid" class="products-grid">
-            </div>
+            <div id="recommendedGrid" class="products-grid"></div>
             <div style="text-align:center; margin-top:1.5rem;">
                 <a href="products.html" class="btn-primary" style="background-color:#000; color:#fff; display:inline-flex;">
                     <span>Ver catálogo completo</span>
@@ -239,7 +237,6 @@
         </div>
     </section>
 
-    <!-- CTA Section -->
     <section class="cta-section">
         <div class="container">
             <h2>¿Buscas algo específico?</h2>
@@ -254,7 +251,6 @@
         </div>
     </section>
 
-    <!-- Nosotros / Contacto -->
     <section class="about-contact-section">
         <div class="container">
             <h2>Nosotros</h2>
@@ -276,27 +272,19 @@
             </p>
             <p>
                 <strong>Contacto:</strong>
-                <a href="https://wa.me/595976106726" target="_blank" rel="noopener noreferrer">
-                    0976 106726
-                </a>
+                <a href="https://wa.me/595976106726" target="_blank" rel="noopener noreferrer">0976 106726</a>
                 | <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="236647444251404b4a52564a574a4d465053465763444e424a4f0d404c4e">[email&#160;protected]</a>
             </p>
         </div>
     </section>
 
-    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <p class="copyright">© 2026 Chiquitines. Todos los derechos reservados.</p>
         </div>
     </footer>
 
-    <!-- Botón flotante WhatsApp -->
-    <a href="https://wa.me/595976106726"
-       class="whatsapp-fab"
-       target="_blank"
-       rel="noopener noreferrer"
-       aria-label="Contactar por WhatsApp">
+    <a href="https://wa.me/595976106726" class="whatsapp-fab" target="_blank" rel="noopener noreferrer" aria-label="Contactar por WhatsApp">
         <img src="assets/whatsapp.png" alt="WhatsApp">
     </a>
 
@@ -314,11 +302,8 @@
                     archivos.map(archivo => fetch(archivo).then(r => r.json()))
                 );
                 const products = resultados.flat();
-
-                // Guardar en caché para uso de recomendaciones
                 try { localStorage.setItem('productsCache', JSON.stringify(products)); } catch(e) {}
 
-                // Sección de ofertas
                 const onSaleProducts = products.filter(p => p.isOnSale && p.stock > 0);
                 const grid = document.getElementById('productsGrid');
 
@@ -329,14 +314,21 @@
                     requestAnimationFrame(() => fitProductNames());
                 }
 
-                // Sección de recomendaciones (siempre se carga, con o sin actividad)
                 loadRecommendedSection(products);
 
             } catch (error) {
-                // FIX: mostrar error al usuario en lugar de silenciarlo
                 const grid = document.getElementById('productsGrid');
                 if (grid) grid.innerHTML = '<div class="empty-state"><p>No se pudieron cargar los productos</p><a href="products.html">Reintentar</a></div>';
             }
+        }
+    </script>
+    <!-- PWA Service Worker -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .catch(err => console.warn('[PWA] SW no registrado:', err));
+            });
         }
     </script>
 </body>
