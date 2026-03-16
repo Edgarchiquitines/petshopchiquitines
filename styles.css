@@ -225,14 +225,13 @@ body {
 }
 
 /* ================================================================
-   PRODUCTS GRID — mobile base: 2 columnas simétricas fijas
+   PRODUCTS GRID — mobile base: 3 columnas simétricas fijas
    ================================================================ */
 .products-grid {
     display: grid;
-    /* Mobile: 2 columnas iguales, ancho calculado sobre el contenedor
-       menos el padding del .container (1rem c/lado) y el gap entre columnas */
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.5rem;
+    /* Mobile: 3 columnas iguales — igual que la web en móvil */
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.4rem;
 }
 
 /* ================================================================
@@ -305,7 +304,7 @@ body {
 
 /* ── Contenido de la tarjeta: padding y altura controlados ── */
 .product-content {
-    padding: 0.5rem;          /* mobile: padding reducido y uniforme */
+    padding: 0.35rem;         /* mobile 3 cols: padding ajustado */
     display: flex;
     flex-direction: column;
     flex: 1;
@@ -316,15 +315,15 @@ body {
 
 .product-name {
     font-weight: 600;
-    font-size: 13px;
+    font-size: 11px;
     line-height: 1.35;
-    height: calc(13px * 1.35 * 2);  /* exactamente 2 líneas */
+    height: calc(11px * 1.35 * 2);  /* exactamente 2 líneas */
     overflow: hidden;
     display: block;
     white-space: normal;
     word-break: break-word;
     overflow-wrap: break-word;
-    margin-bottom: 0.3rem;
+    margin-bottom: 0.25rem;
 }
 
 .product-brand {
@@ -337,7 +336,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    font-size: 0.65rem;      /* más pequeño en mobile para no desbordar */
+    font-size: 0.58rem;      /* 3 cols mobile: muy compacto */
     color: #6b7280;
     margin-bottom: 0.35rem;
     gap: 0.25rem;
@@ -366,19 +365,19 @@ body {
 }
 
 .original-price {
-    font-size: 0.65rem;
+    font-size: 0.58rem;
     color: #9ca3af;
     text-decoration: line-through;
 }
 
 .current-price {
-    font-size: 0.9rem;
+    font-size: 0.78rem;
     font-weight: bold;
     color: #FF6B35;
 }
 
 .regular-price {
-    font-size: 0.9rem;
+    font-size: 0.78rem;
     font-weight: bold;
     color: #1a1a1a;
 }
@@ -389,7 +388,7 @@ body {
     gap: 0.25rem;
     align-items: stretch;
     /* Altura fija garantiza que los botones nunca se corten */
-    height: 2rem;
+    height: 1.75rem;
     flex-shrink: 0;
 }
 
@@ -403,11 +402,11 @@ body {
     padding: 0 0.25rem;
     border-radius: 0.4rem;
     font-weight: 600;
-    font-size: 0.65rem;
+    font-size: 0.58rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 0.2rem;
+    gap: 0.15rem;
     border: none;
     cursor: pointer;
     transition: background-color 0.3s;
@@ -417,8 +416,8 @@ body {
 
 .add-to-cart-btn svg {
     flex-shrink: 0;
-    width: 13px;
-    height: 13px;
+    width: 11px;
+    height: 11px;
 }
 
 .add-to-cart-btn:not(:disabled) {
@@ -439,7 +438,7 @@ body {
 /* ── Botón compartir: tamaño fijo, nunca se corta ── */
 .share-wa-btn {
     flex-shrink: 0;
-    width: 2rem;              /* ancho fijo en mobile */
+    width: 1.6rem;            /* ancho fijo en mobile 3 cols */
     height: 100%;
     background-color: #e5e7eb;
     border: none;
@@ -455,8 +454,8 @@ body {
 
 .share-wa-btn svg {
     flex-shrink: 0;
-    width: 13px;
-    height: 13px;
+    width: 11px;
+    height: 11px;
 }
 
 .share-wa-btn:hover {
@@ -1626,7 +1625,7 @@ body {
     .quantity-value { width: 1.5rem; }
 
     /* Skeleton body mismo padding que product-content en mobile */
-    .skeleton-body { padding: 0.5rem; }
+    .skeleton-body { padding: 0.35rem; }
 }
 
 /* ================================================================
