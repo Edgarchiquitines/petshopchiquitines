@@ -1,0 +1,43 @@
+{
+  "name": "Pet Shop Chiquitines",
+  "short_name": "Chiquitines",
+  "description": "Tienda de mascotas con alimentos, accesorios y productos en oferta para perros y gatos.",
+  "start_url": "/petshopchiquitines/index.html",
+  "scope": "/petshopchiquitines/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "lang": "es",
+  "categories": ["shopping", "lifestyle"],
+  "icons": [
+    {
+      "src": "assets/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Ver productos",
+      "short_name": "Productos",
+      "description": "Explorar el catálogo completo",
+      "url": "/petshopchiquitines/products.html",
+      "icons": [{ "src": "assets/icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Ver carrito",
+      "short_name": "Carrito",
+      "description": "Ir al carrito de compras",
+      "url": "/petshopchiquitines/cart.html",
+      "icons": [{ "src": "assets/icons/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}
