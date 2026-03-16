@@ -9,9 +9,16 @@
     <link rel="canonical" href="https://edgarchiquitines.github.io/petshopchiquitines/products.html">
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
     <link rel="stylesheet" href="styles.css">
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#000000">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Chiquitines">
+    <link rel="apple-touch-icon" href="assets/icons/icon-192.png">
 </head>
 <body>
-    <!-- Header -->
     <header class="header">
         <div class="container">
             <div class="header-content">
@@ -30,14 +37,12 @@
                     </a>
                 </nav>
                 <div class="header-actions">
-                    <!-- Favoritos -->
                     <button class="header-icon-btn" onclick="openFavoritesModal()" aria-label="Mis favoritos" title="Mis favoritos">
                         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
                         </svg>
                         <span class="fav-count" id="favCount" style="display:none">0</span>
                     </button>
-                    <!-- Historial de pedidos -->
                     <button class="header-icon-btn" onclick="openOrdersModal()" aria-label="Mis pedidos" title="Mis pedidos">
                         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"></path>
@@ -46,7 +51,6 @@
                             <line x1="9" y1="16" x2="13" y2="16"></line>
                         </svg>
                     </button>
-                    <!-- Carrito -->
                     <a href="cart.html" class="cart-icon">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <circle cx="9" cy="21" r="1"></circle>
@@ -65,7 +69,6 @@
                 </div>
             </div>
         </div>
-        <!-- Mobile Menu -->
         <div class="mobile-menu" id="mobileMenu">
             <nav>
                 <a href="index.html" class="mobile-nav-link">
@@ -84,7 +87,6 @@
         </div>
     </header>
 
-    <!-- Products Page -->
     <div class="products-page">
         <div class="container">
             <div class="section-header">
@@ -92,7 +94,6 @@
                 <p>Encuentra todo lo que necesita tu mascota</p>
             </div>
 
-            <!-- Barra de búsqueda grande (desktop) con autocomplete -->
             <div class="search-bar search-bar--autocomplete" id="searchBarTop">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <circle cx="11" cy="11" r="8"></circle>
@@ -111,7 +112,6 @@
                 </button>
             </div>
 
-            <!-- MOBILE: wrapper sticky -->
             <div class="mobile-sticky-wrapper" id="mobileStickyWrapper">
                 <div class="search-bar search-bar--autocomplete search-bar-mobile-sticky">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -183,7 +183,6 @@
                             <option value="">Todas</option>
                         </select>
                     </div>
-                    <!-- Precio mobile -->
                     <div class="filter-group">
                         <label>Precio</label>
                         <div class="price-range-wrapper">
@@ -216,7 +215,6 @@
             </div>
 
             <div class="products-layout">
-                <!-- Sidebar desktop -->
                 <aside class="filters-sidebar filters-sidebar-desktop" id="filtersSidebar">
                     <div class="search-bar search-bar--autocomplete search-bar-sidebar" id="searchBarSidebar">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -235,7 +233,6 @@
                             </svg>
                         </button>
                     </div>
-
                     <div class="filters-header">
                         <h3>Filtros</h3>
                         <button class="clear-filters-btn" id="clearFiltersBtn" onclick="clearFilters()">
@@ -246,7 +243,6 @@
                             <span>Limpiar</span>
                         </button>
                     </div>
-
                     <div class="filter-group">
                         <label>Categoría</label>
                         <select id="categoryFilter" onchange="applyFilters()">
@@ -259,7 +255,6 @@
                             <option value="otros">Otros</option>
                         </select>
                     </div>
-
                     <div class="filter-group">
                         <label>Tipo de Mascota</label>
                         <select id="petTypeFilter" onchange="applyFilters()">
@@ -270,15 +265,12 @@
                             <option value="roedor">Roedor</option>
                         </select>
                     </div>
-
                     <div class="filter-group">
                         <label>Marca</label>
                         <select id="brandFilter" onchange="applyFilters()">
                             <option value="">Todas</option>
                         </select>
                     </div>
-
-                    <!-- Precio desktop -->
                     <div class="filter-group">
                         <label>Precio</label>
                         <div class="price-range-wrapper">
@@ -297,7 +289,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="filter-group">
                         <label>Ordenar por</label>
                         <select id="sortFilter" onchange="applyFilters()">
@@ -310,74 +301,29 @@
                     </div>
                 </aside>
 
-                <!-- Grid de productos -->
                 <div class="products-main">
                     <div class="products-count" id="productsCount">Cargando...</div>
                     <div id="productsGrid" class="products-grid">
-                        <!-- Skeletons -->
-                        <div class="product-card-skeleton">
-                            <div class="skeleton-img"></div>
-                            <div class="skeleton-body">
-                                <div class="skeleton-line skeleton-line--title"></div>
-                                <div class="skeleton-line skeleton-line--subtitle"></div>
-                                <div class="skeleton-line skeleton-line--meta"></div>
-                                <div class="skeleton-line skeleton-line--price"></div>
-                                <div class="skeleton-line skeleton-line--btn"></div>
-                            </div>
-                        </div>
-                        <div class="product-card-skeleton">
-                            <div class="skeleton-img"></div>
-                            <div class="skeleton-body">
-                                <div class="skeleton-line skeleton-line--title"></div>
-                                <div class="skeleton-line skeleton-line--subtitle"></div>
-                                <div class="skeleton-line skeleton-line--meta"></div>
-                                <div class="skeleton-line skeleton-line--price"></div>
-                                <div class="skeleton-line skeleton-line--btn"></div>
-                            </div>
-                        </div>
-                        <div class="product-card-skeleton">
-                            <div class="skeleton-img"></div>
-                            <div class="skeleton-body">
-                                <div class="skeleton-line skeleton-line--title"></div>
-                                <div class="skeleton-line skeleton-line--subtitle"></div>
-                                <div class="skeleton-line skeleton-line--meta"></div>
-                                <div class="skeleton-line skeleton-line--price"></div>
-                                <div class="skeleton-line skeleton-line--btn"></div>
-                            </div>
-                        </div>
-                        <div class="product-card-skeleton">
-                            <div class="skeleton-img"></div>
-                            <div class="skeleton-body">
-                                <div class="skeleton-line skeleton-line--title"></div>
-                                <div class="skeleton-line skeleton-line--subtitle"></div>
-                                <div class="skeleton-line skeleton-line--meta"></div>
-                                <div class="skeleton-line skeleton-line--price"></div>
-                                <div class="skeleton-line skeleton-line--btn"></div>
-                            </div>
-                        </div>
+                        <div class="product-card-skeleton"><div class="skeleton-img"></div><div class="skeleton-body"><div class="skeleton-line skeleton-line--title"></div><div class="skeleton-line skeleton-line--subtitle"></div><div class="skeleton-line skeleton-line--meta"></div><div class="skeleton-line skeleton-line--price"></div><div class="skeleton-line skeleton-line--btn"></div></div></div>
+                        <div class="product-card-skeleton"><div class="skeleton-img"></div><div class="skeleton-body"><div class="skeleton-line skeleton-line--title"></div><div class="skeleton-line skeleton-line--subtitle"></div><div class="skeleton-line skeleton-line--meta"></div><div class="skeleton-line skeleton-line--price"></div><div class="skeleton-line skeleton-line--btn"></div></div></div>
+                        <div class="product-card-skeleton"><div class="skeleton-img"></div><div class="skeleton-body"><div class="skeleton-line skeleton-line--title"></div><div class="skeleton-line skeleton-line--subtitle"></div><div class="skeleton-line skeleton-line--meta"></div><div class="skeleton-line skeleton-line--price"></div><div class="skeleton-line skeleton-line--btn"></div></div></div>
+                        <div class="product-card-skeleton"><div class="skeleton-img"></div><div class="skeleton-body"><div class="skeleton-line skeleton-line--title"></div><div class="skeleton-line skeleton-line--subtitle"></div><div class="skeleton-line skeleton-line--meta"></div><div class="skeleton-line skeleton-line--price"></div><div class="skeleton-line skeleton-line--btn"></div></div></div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <p class="copyright">© 2026 Chiquitines. Todos los derechos reservados.</p>
         </div>
     </footer>
 
-    <!-- Botón flotante WhatsApp -->
-    <a href="https://wa.me/595976106726"
-       class="whatsapp-fab"
-       target="_blank"
-       rel="noopener noreferrer"
-       aria-label="Contactar por WhatsApp">
+    <a href="https://wa.me/595976106726" class="whatsapp-fab" target="_blank" rel="noopener noreferrer" aria-label="Contactar por WhatsApp">
         <img src="assets/whatsapp.png" alt="WhatsApp">
     </a>
 
-    <!-- Botón volver arriba (solo mobile) -->
     <button class="scroll-top-btn" id="scrollTopBtn" aria-label="Volver arriba" onclick="window.scrollTo({top:0,behavior:'smooth'})">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
             <polyline points="18 15 12 9 6 15"></polyline>
@@ -401,36 +347,20 @@
             setupAutocompleteClose();
         });
 
-        // AUTOCOMPLETE //
         function handleAutocomplete(inputEl, dropdownId) {
             applyFilters();
-
             const query = inputEl.value.trim().toLowerCase();
             const dropdown = document.getElementById(dropdownId);
-
-            const clearBtnId = inputEl.id === 'searchInput' ? 'searchClearTop'
-                             : inputEl.id === 'searchInputMobile' ? 'searchClearMobile'
-                             : 'searchClearSidebar';
+            const clearBtnId = inputEl.id === 'searchInput' ? 'searchClearTop' : inputEl.id === 'searchInputMobile' ? 'searchClearMobile' : 'searchClearSidebar';
             const clearBtn = document.getElementById(clearBtnId);
             if (clearBtn) clearBtn.style.display = inputEl.value ? 'flex' : 'none';
-
-            if (!query || query.length < 2) {
-                dropdown.innerHTML = '';
-                dropdown.classList.remove('autocomplete-dropdown--open');
-                return;
-            }
-
+            if (!query || query.length < 2) { dropdown.innerHTML = ''; dropdown.classList.remove('autocomplete-dropdown--open'); return; }
             clearTimeout(autocompleteDebounce);
-            autocompleteDebounce = setTimeout(() => {
-                const suggestions = buildSuggestions(query);
-                renderAutocomplete(dropdown, suggestions, inputEl);
-            }, 150);
+            autocompleteDebounce = setTimeout(() => { const suggestions = buildSuggestions(query); renderAutocomplete(dropdown, suggestions, inputEl); }, 150);
         }
 
         function buildSuggestions(query) {
-            const results = [];
-            const seen = new Set();
-
+            const results = [], seen = new Set();
             const brands = [...new Set(allProducts.map(p => p.brand).filter(Boolean))];
             brands.forEach(brand => {
                 if (brand.toLowerCase().includes(query) && !seen.has('brand:' + brand)) {
@@ -438,45 +368,19 @@
                     results.push({ type: 'brand', label: brand, icon: '🏷️' });
                 }
             });
-
             allProducts.forEach(p => {
                 if (results.filter(r => r.type === 'product').length >= 6) return;
-                if (
-                    (p.name?.toLowerCase().includes(query) ||
-                     p.brand?.toLowerCase().includes(query)) &&
-                    !seen.has('product:' + p.name)
-                ) {
+                if ((p.name?.toLowerCase().includes(query) || p.brand?.toLowerCase().includes(query)) && !seen.has('product:' + p.name)) {
                     seen.add('product:' + p.name);
-                    results.push({
-                        type: 'product',
-                        label: p.name,
-                        sub: p.brand,
-                        icon: '📦'
-                    });
+                    results.push({ type: 'product', label: p.name, sub: p.brand, icon: '📦' });
                 }
             });
-
             return results.slice(0, 8);
         }
 
         function renderAutocomplete(dropdown, suggestions, inputEl) {
-            if (!suggestions.length) {
-                dropdown.innerHTML = '<div class="autocomplete-empty">Sin resultados</div>';
-                dropdown.classList.add('autocomplete-dropdown--open');
-                return;
-            }
-
-            dropdown.innerHTML = suggestions.map((s, i) => `
-                <div class="autocomplete-item" data-index="${i}" onmousedown="selectSuggestion('${escapeHtml(s.label)}', '${inputEl.id}', event)">
-                    <span class="autocomplete-icon">${s.icon}</span>
-                    <div class="autocomplete-text">
-                        <span class="autocomplete-label">${highlightMatch(s.label, inputEl.value.trim())}</span>
-                        ${s.sub ? `<span class="autocomplete-sub">${s.sub}</span>` : ''}
-                    </div>
-                    ${s.type === 'brand' ? '<span class="autocomplete-tag">Marca</span>' : ''}
-                </div>
-            `).join('');
-
+            if (!suggestions.length) { dropdown.innerHTML = '<div class="autocomplete-empty">Sin resultados</div>'; dropdown.classList.add('autocomplete-dropdown--open'); return; }
+            dropdown.innerHTML = suggestions.map((s, i) => `<div class="autocomplete-item" data-index="${i}" onmousedown="selectSuggestion('${escapeHtml(s.label)}', '${inputEl.id}', event)"><span class="autocomplete-icon">${s.icon}</span><div class="autocomplete-text"><span class="autocomplete-label">${highlightMatch(s.label, inputEl.value.trim())}</span>${s.sub ? `<span class="autocomplete-sub">${s.sub}</span>` : ''}</div>${s.type === 'brand' ? '<span class="autocomplete-tag">Marca</span>' : ''}</div>`).join('');
             dropdown.classList.add('autocomplete-dropdown--open');
         }
 
@@ -491,84 +395,42 @@
             const input = document.getElementById(inputId);
             if (!input) return;
             input.value = label;
-
-            ['searchInput', 'searchInputSidebar', 'searchInputMobile'].forEach(id => {
-                const el = document.getElementById(id);
-                if (el) el.value = label;
-            });
-
+            ['searchInput', 'searchInputSidebar', 'searchInputMobile'].forEach(id => { const el = document.getElementById(id); if (el) el.value = label; });
             closeAllDropdowns();
-
-            ['searchClearTop', 'searchClearMobile', 'searchClearSidebar'].forEach(id => {
-                const el = document.getElementById(id);
-                if (el) el.style.display = 'flex';
-            });
-
+            ['searchClearTop', 'searchClearMobile', 'searchClearSidebar'].forEach(id => { const el = document.getElementById(id); if (el) el.style.display = 'flex'; });
             applyFilters();
         }
 
         function clearSearch(inputId, dropdownId) {
             const input = document.getElementById(inputId);
             if (input) input.value = '';
-            ['searchInput', 'searchInputSidebar', 'searchInputMobile'].forEach(id => {
-                const el = document.getElementById(id);
-                if (el) el.value = '';
-            });
-            ['searchClearTop', 'searchClearMobile', 'searchClearSidebar'].forEach(id => {
-                const el = document.getElementById(id);
-                if (el) el.style.display = 'none';
-            });
+            ['searchInput', 'searchInputSidebar', 'searchInputMobile'].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
+            ['searchClearTop', 'searchClearMobile', 'searchClearSidebar'].forEach(id => { const el = document.getElementById(id); if (el) el.style.display = 'none'; });
             closeAllDropdowns();
             applyFilters();
         }
 
         function closeAllDropdowns() {
-            document.querySelectorAll('.autocomplete-dropdown').forEach(d => {
-                d.innerHTML = '';
-                d.classList.remove('autocomplete-dropdown--open');
-            });
+            document.querySelectorAll('.autocomplete-dropdown').forEach(d => { d.innerHTML = ''; d.classList.remove('autocomplete-dropdown--open'); });
         }
 
         function setupAutocompleteClose() {
-            document.addEventListener('click', function(e) {
-                if (!e.target.closest('.search-bar--autocomplete')) {
-                    closeAllDropdowns();
-                }
-            });
+            document.addEventListener('click', function(e) { if (!e.target.closest('.search-bar--autocomplete')) closeAllDropdowns(); });
         }
 
-        function escapeHtml(str) {
-            return str.replace(/'/g, "\\'");
-        }
+        function escapeHtml(str) { return str.replace(/'/g, "\\'"); }
 
-        // ================================================================
-        // PRECIO RANGE
-        // ================================================================
         function syncPriceRange(suffix) {
             const minEl = document.getElementById('priceMin' + suffix);
             const maxEl = document.getElementById('priceMax' + suffix);
-            let minVal = parseInt(minEl.value);
-            let maxVal = parseInt(maxEl.value);
-
-            if (minVal > maxVal) {
-                if (document.activeElement === minEl) {
-                    minEl.value = maxVal;
-                    minVal = maxVal;
-                } else {
-                    maxEl.value = minVal;
-                    maxVal = minVal;
-                }
-            }
-
-            priceMin = minVal;
-            priceMax = maxVal;
-
+            let minVal = parseInt(minEl.value), maxVal = parseInt(maxEl.value);
+            if (minVal > maxVal) { if (document.activeElement === minEl) { minEl.value = maxVal; minVal = maxVal; } else { maxEl.value = minVal; maxVal = minVal; } }
+            priceMin = minVal; priceMax = maxVal;
             const otherSuffix = suffix === 'Desktop' ? 'Mobile' : 'Desktop';
             const otherMin = document.getElementById('priceMin' + otherSuffix);
             const otherMax = document.getElementById('priceMax' + otherSuffix);
             if (otherMin) otherMin.value = minVal;
             if (otherMax) otherMax.value = maxVal;
-
             ['Desktop', 'Mobile'].forEach(s => {
                 const minLabel = document.getElementById('priceMinLabel' + s);
                 const maxLabel = document.getElementById('priceMaxLabel' + s);
@@ -583,14 +445,10 @@
             const maxEl = document.getElementById('priceMax' + suffix);
             const fill  = document.getElementById('priceFill' + suffix);
             if (!minEl || !maxEl || !fill) return;
-
             const rangeTotal = globalPriceMax - globalPriceMin;
             if (rangeTotal === 0) return;
-
-            const leftPct  = ((parseInt(minEl.value) - globalPriceMin) / rangeTotal) * 100;
-            const rightPct = ((globalPriceMax - parseInt(maxEl.value)) / rangeTotal) * 100;
-            fill.style.left  = leftPct + '%';
-            fill.style.right = rightPct + '%';
+            fill.style.left  = ((parseInt(minEl.value) - globalPriceMin) / rangeTotal * 100) + '%';
+            fill.style.right = ((globalPriceMax - parseInt(maxEl.value)) / rangeTotal * 100) + '%';
         }
 
         function formatPriceShort(val) {
@@ -600,18 +458,13 @@
         }
 
         function initPriceRange(min, max) {
-            globalPriceMin = min;
-            globalPriceMax = max;
-            priceMin = min;
-            priceMax = max;
-
+            globalPriceMin = min; globalPriceMax = max; priceMin = min; priceMax = max;
             ['Desktop', 'Mobile'].forEach(s => {
                 const minEl = document.getElementById('priceMin' + s);
                 const maxEl = document.getElementById('priceMax' + s);
                 if (!minEl || !maxEl) return;
                 minEl.min = min; minEl.max = max; minEl.value = min; minEl.step = Math.max(1000, Math.floor((max - min) / 100));
                 maxEl.min = min; maxEl.max = max; maxEl.value = max; maxEl.step = Math.max(1000, Math.floor((max - min) / 100));
-
                 const minLabel = document.getElementById('priceMinLabel' + s);
                 const maxLabel = document.getElementById('priceMaxLabel' + s);
                 if (minLabel) minLabel.textContent = formatPriceShort(min);
@@ -620,9 +473,6 @@
             });
         }
 
-        // ================================================================
-        // SYNC SEARCH / FILTER
-        // ================================================================
         function syncSearch(source, targetId) {
             const target = document.getElementById(targetId);
             if (target) target.value = source.value;
@@ -634,7 +484,6 @@
                 const sidebarInput = document.getElementById('searchInputSidebar');
                 if (sidebarInput) sidebarInput.value = source.value;
             }
-
             ['searchInput','searchInputMobile','searchInputSidebar'].forEach((id, i) => {
                 const el = document.getElementById(id);
                 const btnIds = ['searchClearTop','searchClearMobile','searchClearSidebar'];
@@ -648,111 +497,48 @@
             if (desktop) desktop.value = mobileSelect.value;
         }
 
-        // ================================================================
-        // SCROLL BEHAVIOR
-        // ================================================================
         function setupScrollBehavior() {
-            const searchBarTop     = document.getElementById('searchBarTop');
+            const searchBarTop = document.getElementById('searchBarTop');
             const searchBarSidebar = document.getElementById('searchBarSidebar');
             if (!searchBarTop || !searchBarSidebar) return;
-            const observer = new IntersectionObserver(
-                ([entry]) => {
-                    searchBarSidebar.classList.toggle('search-bar-sidebar--visible', !entry.isIntersecting);
-                },
-                { threshold: 0, rootMargin: '-10px 0px 0px 0px' }
-            );
+            const observer = new IntersectionObserver(([entry]) => { searchBarSidebar.classList.toggle('search-bar-sidebar--visible', !entry.isIntersecting); }, { threshold: 0, rootMargin: '-10px 0px 0px 0px' });
             observer.observe(searchBarTop);
         }
 
-        // ================================================================
-        // LOAD PRODUCTS
-        // ================================================================
         async function loadProducts() {
             try {
                 const archivos = ['products1.json', 'products2.json'];
-                const resultados = await Promise.all(
-                    archivos.map(archivo => fetch(archivo).then(r => r.json()))
-                );
-
+                const resultados = await Promise.all(archivos.map(archivo => fetch(archivo).then(r => r.json())));
                 allProducts = resultados.flat();
-
-                // Guardar caché para que reOrderToCart pueda enriquecer pedidos viejos
                 try { localStorage.setItem('productsCache', JSON.stringify(allProducts)); } catch(e) {}
 
                 const prices = allProducts.map(p => p.price).filter(p => typeof p === 'number');
-                const minPrice = Math.floor(Math.min(...prices) / 1000) * 1000;
-                const maxPrice = Math.ceil(Math.max(...prices) / 1000) * 1000;
-                initPriceRange(minPrice, maxPrice);
+                initPriceRange(Math.floor(Math.min(...prices) / 1000) * 1000, Math.ceil(Math.max(...prices) / 1000) * 1000);
 
                 const brands = [...new Set(allProducts.map(p => p.brand).filter(Boolean))].sort();
                 ['brandFilter', 'brandFilterMobile'].forEach(id => {
                     const el = document.getElementById(id);
                     if (!el) return;
-                    brands.forEach(brand => {
-                        const option = document.createElement('option');
-                        option.value = brand;
-                        option.textContent = brand;
-                        el.appendChild(option);
-                    });
+                    brands.forEach(brand => { const option = document.createElement('option'); option.value = brand; option.textContent = brand; el.appendChild(option); });
                 });
 
-                const params   = new URLSearchParams(window.location.search);
-                const pet      = params.get('pet');
-                const category = params.get('category');
-                const brand    = params.get('brand');
-                const sort     = params.get('sort');
-                const search   = params.get('q');
-                const pmin     = params.get('pmin');
-                const pmax     = params.get('pmax');
+                const params = new URLSearchParams(window.location.search);
+                const pet = params.get('pet'), category = params.get('category'), brand = params.get('brand'), sort = params.get('sort'), search = params.get('q'), pmin = params.get('pmin'), pmax = params.get('pmax');
                 let urlFilterApplied = false;
 
-                if (pet) {
-                    ['petTypeFilter', 'petTypeFilterMobile'].forEach(id => {
-                        const el = document.getElementById(id);
-                        if (el) { el.value = pet; urlFilterApplied = true; }
-                    });
-                }
-                if (category) {
-                    ['categoryFilter', 'categoryFilterMobile'].forEach(id => {
-                        const el = document.getElementById(id);
-                        if (el) { el.value = category; urlFilterApplied = true; }
-                    });
-                }
-                if (brand) {
-                    ['brandFilter', 'brandFilterMobile'].forEach(id => {
-                        const el = document.getElementById(id);
-                        if (el) { el.value = brand; urlFilterApplied = true; }
-                    });
-                }
-                if (sort) {
-                    ['sortFilter', 'sortFilterMobile'].forEach(id => {
-                        const el = document.getElementById(id);
-                        if (el) el.value = sort;
-                    });
-                }
-                if (search) {
-                    ['searchInput', 'searchInputSidebar', 'searchInputMobile'].forEach(id => {
-                        const el = document.getElementById(id);
-                        if (el) el.value = search;
-                    });
-                    ['searchClearTop', 'searchClearMobile', 'searchClearSidebar'].forEach(id => {
-                        const el = document.getElementById(id);
-                        if (el) el.style.display = 'flex';
-                    });
+                if (pet)      { ['petTypeFilter','petTypeFilterMobile'].forEach(id => { const el = document.getElementById(id); if (el) { el.value = pet; urlFilterApplied = true; } }); }
+                if (category) { ['categoryFilter','categoryFilterMobile'].forEach(id => { const el = document.getElementById(id); if (el) { el.value = category; urlFilterApplied = true; } }); }
+                if (brand)    { ['brandFilter','brandFilterMobile'].forEach(id => { const el = document.getElementById(id); if (el) { el.value = brand; urlFilterApplied = true; } }); }
+                if (sort)     { ['sortFilter','sortFilterMobile'].forEach(id => { const el = document.getElementById(id); if (el) el.value = sort; }); }
+                if (search)   {
+                    ['searchInput','searchInputSidebar','searchInputMobile'].forEach(id => { const el = document.getElementById(id); if (el) el.value = search; });
+                    ['searchClearTop','searchClearMobile','searchClearSidebar'].forEach(id => { const el = document.getElementById(id); if (el) el.style.display = 'flex'; });
                 }
                 if (pmin || pmax) {
-                    const minVal = pmin ? parseInt(pmin) : globalPriceMin;
-                    const maxVal = pmax ? parseInt(pmax) : globalPriceMax;
-                    priceMin = minVal;
-                    priceMax = maxVal;
-                    ['Desktop', 'Mobile'].forEach(s => {
-                        const minEl = document.getElementById('priceMin' + s);
-                        const maxEl = document.getElementById('priceMax' + s);
-                        if (minEl) minEl.value = minVal;
-                        if (maxEl) maxEl.value = maxVal;
-                    });
-                    syncPriceRange('Desktop');
-                    urlFilterApplied = true;
+                    const minVal = pmin ? parseInt(pmin) : globalPriceMin, maxVal = pmax ? parseInt(pmax) : globalPriceMax;
+                    priceMin = minVal; priceMax = maxVal;
+                    ['Desktop','Mobile'].forEach(s => { const minEl = document.getElementById('priceMin'+s); const maxEl = document.getElementById('priceMax'+s); if (minEl) minEl.value = minVal; if (maxEl) maxEl.value = maxVal; });
+                    syncPriceRange('Desktop'); urlFilterApplied = true;
                 }
 
                 if (urlFilterApplied && window.innerWidth < 768) {
@@ -761,17 +547,12 @@
                 }
 
                 applyFilters();
-
             } catch (error) {
                 console.error('Error loading products:', error);
-                document.getElementById('productsGrid').innerHTML =
-                    '<div class="empty-state"><p>Error al cargar productos</p></div>';
+                document.getElementById('productsGrid').innerHTML = '<div class="empty-state"><p>Error al cargar productos</p></div>';
             }
         }
 
-        // ================================================================
-        // APPLY FILTERS
-        // ================================================================
         function applyFilters() {
             const searchTerm = document.getElementById('searchInput').value.toLowerCase();
             const category   = document.getElementById('categoryFilter').value;
@@ -780,30 +561,11 @@
             const sort       = document.getElementById('sortFilter').value;
 
             filteredProducts = [...allProducts];
-
-            if (searchTerm) {
-                filteredProducts = filteredProducts.filter(p =>
-                    p.name?.toLowerCase().includes(searchTerm) ||
-                    p.description?.toLowerCase().includes(searchTerm) ||
-                    p.brand?.toLowerCase().includes(searchTerm) ||
-                    p.category?.toLowerCase().includes(searchTerm)
-                );
-            }
-
+            if (searchTerm) filteredProducts = filteredProducts.filter(p => p.name?.toLowerCase().includes(searchTerm) || p.description?.toLowerCase().includes(searchTerm) || p.brand?.toLowerCase().includes(searchTerm) || p.category?.toLowerCase().includes(searchTerm));
             if (category) filteredProducts = filteredProducts.filter(p => p.category === category);
-
-            if (petType) {
-                filteredProducts = filteredProducts.filter(p =>
-                    Array.isArray(p.petType) ? p.petType.includes(petType) : p.petType === petType
-                );
-            }
-
-            if (brand) filteredProducts = filteredProducts.filter(p => p.brand === brand);
-
-            filteredProducts = filteredProducts.filter(p =>
-                p.price >= priceMin && p.price <= priceMax
-            );
-
+            if (petType)  filteredProducts = filteredProducts.filter(p => Array.isArray(p.petType) ? p.petType.includes(petType) : p.petType === petType);
+            if (brand)    filteredProducts = filteredProducts.filter(p => p.brand === brand);
+            filteredProducts = filteredProducts.filter(p => p.price >= priceMin && p.price <= priceMax);
             if (sort === 'price-asc')       filteredProducts.sort((a, b) => a.price - b.price);
             else if (sort === 'price-desc') filteredProducts.sort((a, b) => b.price - a.price);
             else if (sort === 'name-asc')   filteredProducts.sort((a, b) => a.name.localeCompare(b.name));
@@ -814,114 +576,73 @@
             syncURL(searchTerm, category, petType, brand, sort);
         }
 
-        // ── Sincronizar filtros activos en la URL ──────────────────────
         function syncURL(search, category, petType, brand, sort) {
             const params = new URLSearchParams();
-            if (search)   params.set('q',        search);
+            if (search)   params.set('q', search);
             if (category) params.set('category', category);
-            if (petType)  params.set('pet',      petType);
-            if (brand)    params.set('brand',    brand);
-            if (sort)     params.set('sort',     sort);
+            if (petType)  params.set('pet', petType);
+            if (brand)    params.set('brand', brand);
+            if (sort)     params.set('sort', sort);
             if (priceMin > globalPriceMin) params.set('pmin', priceMin);
             if (priceMax < globalPriceMax) params.set('pmax', priceMax);
-
-            const newUrl = params.toString()
-                ? `${location.pathname}?${params.toString()}`
-                : location.pathname;
-
-            history.replaceState(null, '', newUrl);
+            history.replaceState(null, '', params.toString() ? `${location.pathname}?${params.toString()}` : location.pathname);
         }
 
-        // ── Botón para copiar/compartir URL de filtros actuales ────────
         function shareFilteredURL() {
             const url = location.href;
-            if (navigator.share) {
-                navigator.share({ title: 'Petshop Chiquitines', url });
-            } else {
-                navigator.clipboard.writeText(url).then(() => showNotification('🔗 Link copiado'));
-            }
+            if (navigator.share) { navigator.share({ title: 'Petshop Chiquitines', url }); }
+            else { navigator.clipboard.writeText(url).then(() => showNotification('🔗 Link copiado')); }
         }
 
         function displayProducts() {
             const grid  = document.getElementById('productsGrid');
             const count = document.getElementById('productsCount');
             count.textContent = `${filteredProducts.length} producto${filteredProducts.length !== 1 ? 's' : ''} encontrado${filteredProducts.length !== 1 ? 's' : ''}`;
-
-            if (filteredProducts.length === 0) {
-                grid.innerHTML = `
-                    <div class="empty-state">
-                        <p>No se encontraron productos</p>
-                        <button onclick="clearFilters()">Limpiar filtros</button>
-                    </div>`;
-                return;
-            }
-
+            if (filteredProducts.length === 0) { grid.innerHTML = `<div class="empty-state"><p>No se encontraron productos</p><button onclick="clearFilters()">Limpiar filtros</button></div>`; return; }
             grid.innerHTML = filteredProducts.map(product => createProductCard(product)).join('');
+            requestAnimationFrame(() => fitProductNames());
         }
 
         function clearFilters() {
-            ['searchInput', 'searchInputSidebar', 'searchInputMobile'].forEach(id => {
-                const el = document.getElementById(id);
-                if (el) el.value = '';
-            });
-            ['searchClearTop', 'searchClearMobile', 'searchClearSidebar'].forEach(id => {
-                const el = document.getElementById(id);
-                if (el) el.style.display = 'none';
-            });
-            ['categoryFilter','categoryFilterMobile',
-             'petTypeFilter', 'petTypeFilterMobile',
-             'brandFilter',   'brandFilterMobile',
-             'sortFilter',    'sortFilterMobile'].forEach(id => {
-                const el = document.getElementById(id);
-                if (el) el.value = '';
-            });
-
+            ['searchInput','searchInputSidebar','searchInputMobile'].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
+            ['searchClearTop','searchClearMobile','searchClearSidebar'].forEach(id => { const el = document.getElementById(id); if (el) el.style.display = 'none'; });
+            ['categoryFilter','categoryFilterMobile','petTypeFilter','petTypeFilterMobile','brandFilter','brandFilterMobile','sortFilter','sortFilterMobile'].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
             initPriceRange(globalPriceMin, globalPriceMax);
-
             closeAllDropdowns();
             applyFilters();
         }
 
         function updateFilterCount() {
             const priceActive = priceMin > globalPriceMin || priceMax < globalPriceMax;
-            const activeFilters = [
-                document.getElementById('categoryFilter').value,
-                document.getElementById('petTypeFilter').value,
-                document.getElementById('brandFilter').value,
-                document.getElementById('sortFilter').value
-            ].filter(Boolean).length + (priceActive ? 1 : 0);
-
+            const activeFilters = ['categoryFilter','petTypeFilter','brandFilter','sortFilter'].map(id => document.getElementById(id).value).filter(Boolean).length + (priceActive ? 1 : 0);
             const filterCount = document.getElementById('filterCount');
-            if (activeFilters > 0) {
-                filterCount.textContent = activeFilters;
-                filterCount.style.display = 'inline-block';
-            } else {
-                filterCount.style.display = 'none';
-            }
+            if (activeFilters > 0) { filterCount.textContent = activeFilters; filterCount.style.display = 'inline-block'; }
+            else { filterCount.style.display = 'none'; }
         }
 
         function setupFilterToggle() {
             const toggleBtn = document.getElementById('filterToggleBtn');
             const sidebar   = document.getElementById('filtersSidebarMobile');
-            if (toggleBtn && sidebar) {
-                toggleBtn.addEventListener('click', function() {
-                    sidebar.classList.toggle('mobile-hidden');
-                });
-            }
+            if (toggleBtn && sidebar) toggleBtn.addEventListener('click', function() { sidebar.classList.toggle('mobile-hidden'); });
         }
 
-        // Botón volver arriba — solo mobile
         (function() {
             const btn = document.getElementById('scrollTopBtn');
             if (!btn) return;
             window.addEventListener('scroll', function() {
-                if (window.innerWidth < 768) {
-                    btn.classList.toggle('scroll-top-btn--visible', window.scrollY > 400);
-                } else {
-                    btn.classList.remove('scroll-top-btn--visible');
-                }
+                if (window.innerWidth < 768) { btn.classList.toggle('scroll-top-btn--visible', window.scrollY > 400); }
+                else { btn.classList.remove('scroll-top-btn--visible'); }
             }, { passive: true });
         })();
+    </script>
+    <!-- PWA Service Worker -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .catch(err => console.warn('[PWA] SW no registrado:', err));
+            });
+        }
     </script>
 </body>
 </html>
