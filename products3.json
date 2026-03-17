@@ -1556,7 +1556,7 @@
     "category": "alimentos",
     "imageUrl": "assets/img/img302.webp",
     "isOnSale": false,
-    "description": "Alimento balanceado para gatos",
+    "description": "Galleta para perros",
     "code": "00246"
   },
     {
@@ -1571,7 +1571,22 @@
     "category": "alimentos",
     "imageUrl": "assets/img/img303.webp",
     "isOnSale": false,
-    "description": "Alimento balanceado para gatos",
+    "description": "Galleta para perros",
     "code": "06798"
+  },
+    {
+    "id": "304",
+    "name": "Nutrique Adulto sobrepeso",
+    "brand": "Nutrique",
+    "price": 210000,
+    "originalPrice": 210000,
+    "stock": 1,
+    "weight": "3kg",
+    "petType": "perro",
+    "category": "alimentos",
+    "imageUrl": "assets/img/img304.webp",
+    "isOnSale": false,
+    "description": "Alimento balanceado para perros",
+    "code": "46947"
   }
 ]
