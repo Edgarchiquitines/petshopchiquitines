@@ -507,9 +507,12 @@
 
         async function loadProducts() {
             try {
-                const archivos = ['products1.json', 'products2.json'];
+                const archivos = ['products1.json', 'products2.json', 'products3.json'];
                 const resultados = await Promise.all(archivos.map(archivo => fetch(archivo).then(r => r.json())));
-                allProducts = resultados.flat();
+
+                // Filtrar objetos separador/comentario (los que no tienen id ni name)
+                allProducts = resultados.flat().filter(p => p.id !== undefined && p.name !== undefined);
+
                 try { localStorage.setItem('productsCache', JSON.stringify(allProducts)); } catch(e) {}
 
                 const prices = allProducts.map(p => p.price).filter(p => typeof p === 'number');
