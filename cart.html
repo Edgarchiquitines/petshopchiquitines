@@ -15,6 +15,106 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Chiquitines">
     <link rel="apple-touch-icon" href="assets/icons/icon-192.png">
+    <style>
+        /* ── Fixes específicos para el carrito en mobile ── */
+
+        /* Tarjeta: no se desborda, respeta el ancho del contenedor */
+        .cart-item {
+            box-sizing: border-box;
+            width: 100%;
+            max-width: 100%;
+            overflow: hidden;
+        }
+
+        .cart-item-content {
+            width: 100%;
+            max-width: 100%;
+            min-width: 0;
+        }
+
+        /* Imagen fija pequeña en mobile */
+        .cart-item-image {
+            width: 3.5rem;
+            height: 3.5rem;
+            flex-shrink: 0;
+        }
+
+        /* Detalles: flex con wrap, no se sale */
+        .cart-item-details {
+            flex: 1;
+            min-width: 0;
+            overflow: hidden;
+        }
+
+        /* Nombre: multilinea, máx 2 líneas con font adaptable */
+        .cart-item-name {
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            line-clamp: 2;
+            font-size: clamp(0.72rem, 2.8vw, 0.875rem);
+            line-height: 1.3;
+            margin-bottom: 0.2rem;
+            word-break: break-word;
+            white-space: normal;
+        }
+
+        /* Meta: también con clamp y sin desborde */
+        .cart-item-meta {
+            font-size: clamp(0.62rem, 2.2vw, 0.75rem);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* Acciones: wrap para que en pantallas muy angostas no se corten */
+        .cart-item-actions {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.35rem;
+            margin-top: 0.4rem;
+        }
+
+        /* Precio: no se corta */
+        .cart-item-price {
+            text-align: right;
+            flex-shrink: 0;
+        }
+
+        .cart-item-total {
+            font-size: clamp(0.8rem, 3vw, 1rem);
+            white-space: nowrap;
+        }
+
+        .cart-item-unit-price {
+            font-size: clamp(0.6rem, 2vw, 0.75rem);
+            white-space: nowrap;
+        }
+
+        /* Botón eliminar: siempre visible */
+        .remove-btn {
+            flex-shrink: 0;
+            padding: 0.2rem;
+        }
+
+        /* Desktop: restaurar estilos más holgados */
+        @media (min-width: 768px) {
+            .cart-item-image { width: 6rem; height: 6rem; }
+            .cart-item-name {
+                font-size: 1rem;
+                display: block;
+                -webkit-line-clamp: unset;
+                line-clamp: unset;
+                white-space: normal;
+            }
+            .cart-item-meta { font-size: 0.75rem; white-space: normal; }
+            .cart-item-total { font-size: 1rem; }
+            .cart-item-unit-price { font-size: 0.75rem; }
+        }
+    </style>
 </head>
 <body>
     <header class="header">
@@ -141,12 +241,16 @@
                         <img src="${item.imageUrl || 'assets/placeholder.png'}" alt="${item.name}" class="cart-item-image" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1589924691995-400dc9ecc119?w=400'">
                         <div class="cart-item-details">
                             <h3 class="cart-item-name">${item.name}</h3>
-                            <p class="cart-item-meta">${item.brand || ''}${item.weight ? ' - ' + item.weight : ''}</p>
+                            <p class="cart-item-meta">${item.brand || ''}${item.weight ? ' · ' + item.weight : ''}${item.code ? ' · Cód: ' + item.code : ''}</p>
                             <div class="cart-item-actions">
                                 <div class="quantity-controls">
-                                    <button class="quantity-btn" onclick="changeQuantity('${item.id}', -1)" aria-label="Disminuir cantidad"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line></svg></button>
+                                    <button class="quantity-btn" onclick="changeQuantity('${item.id}', -1)" aria-label="Disminuir cantidad">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                                    </button>
                                     <span class="quantity-value">${item.quantity}</span>
-                                    <button class="quantity-btn" onclick="changeQuantity('${item.id}', 1)" aria-label="Aumentar cantidad"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></button>
+                                    <button class="quantity-btn" onclick="changeQuantity('${item.id}', 1)" aria-label="Aumentar cantidad">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                                    </button>
                                 </div>
                                 <div class="cart-item-price">
                                     <p class="cart-item-total">${formatPrice(item.price * item.quantity)}</p>
@@ -154,7 +258,9 @@
                                 </div>
                             </div>
                         </div>
-                        <button class="remove-btn" onclick="removeItemWithAnimation('${item.id}')" aria-label="Eliminar producto"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></button>
+                        <button class="remove-btn" onclick="removeItemWithAnimation('${item.id}')" aria-label="Eliminar producto">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                        </button>
                     </div>
                 </div>`).join('');
         }
@@ -243,7 +349,9 @@
             if (totalEl) totalEl.textContent = formatPrice(total);
         }
 
-        function calculateTotal() { return getCart().reduce((sum, item) => sum + (item.price * item.quantity), 0); }
+        function calculateTotal() {
+            return getCart().reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        }
 
         function toggleInvoiceFields() {
             const needsInvoice = document.getElementById('needsInvoice').checked;
@@ -256,11 +364,15 @@
             document.querySelectorAll('.error-message').forEach(el => el.textContent = '');
             document.querySelectorAll('input, textarea').forEach(el => el.classList.remove('input-error'));
             const customerName = document.getElementById('customerName');
-            if (!customerName.value.trim()) { showFieldError('nameError', 'Por favor ingresa tu nombre'); customerName.classList.add('input-error'); isValid = false; }
+            if (!customerName.value.trim()) {
+                showFieldError('nameError', 'Por favor ingresa tu nombre');
+                customerName.classList.add('input-error');
+                isValid = false;
+            }
             if (document.getElementById('needsInvoice').checked) {
-                const invoiceRuc = document.getElementById('invoiceRuc');
+                const invoiceRuc  = document.getElementById('invoiceRuc');
                 const invoiceName = document.getElementById('invoiceName');
-                if (!invoiceRuc.value.trim()) { showFieldError('rucError', 'Por favor ingresa el RUC'); invoiceRuc.classList.add('input-error'); isValid = false; }
+                if (!invoiceRuc.value.trim())  { showFieldError('rucError', 'Por favor ingresa el RUC'); invoiceRuc.classList.add('input-error'); isValid = false; }
                 if (!invoiceName.value.trim()) { showFieldError('invoiceNameError', 'Por favor ingresa el nombre o razón social'); invoiceName.classList.add('input-error'); isValid = false; }
             }
             return isValid;
@@ -268,48 +380,107 @@
 
         function showFieldError(elementId, message) {
             const errorEl = document.getElementById(elementId);
-            if (errorEl) { errorEl.textContent = message; errorEl.style.color = '#ef4444'; errorEl.style.fontSize = '0.875rem'; errorEl.style.marginTop = '0.25rem'; errorEl.style.display = 'block'; }
+            if (errorEl) {
+                errorEl.textContent = message;
+                errorEl.style.color = '#ef4444';
+                errorEl.style.fontSize = '0.875rem';
+                errorEl.style.marginTop = '0.25rem';
+                errorEl.style.display = 'block';
+            }
         }
 
-        function clearError(elementId) { const errorEl = document.getElementById(elementId); if (errorEl) errorEl.textContent = ''; }
+        function clearError(elementId) {
+            const errorEl = document.getElementById(elementId);
+            if (errorEl) errorEl.textContent = '';
+        }
 
-        function sendToWhatsApp() {
-            if (!validateForm()) { const firstError = document.querySelector('.input-error'); if (firstError) { firstError.scrollIntoView({ behavior: 'smooth', block: 'center' }); firstError.focus(); } return; }
-            const submitBtn = document.getElementById('submitBtn');
+        async function sendToWhatsApp() {
+            if (!validateForm()) {
+                const firstError = document.querySelector('.input-error');
+                if (firstError) { firstError.scrollIntoView({ behavior: 'smooth', block: 'center' }); firstError.focus(); }
+                return;
+            }
+
+            const submitBtn    = document.getElementById('submitBtn');
             const originalText = submitBtn.innerHTML;
             submitBtn.disabled = true;
             submitBtn.innerHTML = '<span>Enviando...</span>';
+
+            // ── Cargar pool de productos para enriquecer items con "code" ──
+            // El code puede no estar en localStorage si el producto fue agregado
+            // desde favoritos, panel, o un carrito guardado previamente.
+            let productPool = null;
+            try {
+                const cached = localStorage.getItem('productsCache');
+                if (cached) productPool = JSON.parse(cached);
+            } catch(e) {}
+
+            if (!productPool) {
+                try {
+                    const results = await Promise.all([
+                        fetch('products1.json').then(r => r.json()),
+                        fetch('products2.json').then(r => r.json())
+                    ]);
+                    productPool = results.flat();
+                    try { localStorage.setItem('productsCache', JSON.stringify(productPool)); } catch(e) {}
+                } catch(e) { productPool = []; }
+            }
+
+            // Enriquecer cada item del carrito con los datos frescos del JSON
+            const rawCart = getCart();
+            const cart = rawCart.map(item => {
+                const fresh = productPool.find(p => String(p.id) === String(item.id));
+                return fresh ? { ...item, code: fresh.code || item.code || null } : item;
+            });
+
             const customerName   = document.getElementById('customerName').value.trim();
             const deliveryMethod = document.querySelector('input[name="delivery"]:checked').value;
             const paymentMethod  = document.querySelector('input[name="payment"]:checked').value;
             const needsInvoice   = document.getElementById('needsInvoice').checked;
             const invoiceRuc     = document.getElementById('invoiceRuc')?.value.trim();
             const invoiceName    = document.getElementById('invoiceName')?.value.trim();
-            const cart = getCart();
+
             let message = '*NUEVO PEDIDO - Petshop Chiquitines*\n\n';
             message += `👤 *Cliente:* ${customerName}\n\n`;
             message += '📦 *Productos:*\n';
+
             cart.forEach((item, index) => {
-                message += `${index + 1}. ${item.name}\n   Marca: ${item.brand}\n   Cantidad: ${item.quantity}\n   Precio unitario: ${formatPrice(item.price)}\n   Subtotal: ${formatPrice(item.price * item.quantity)}\n\n`;
+                message += `${index + 1}. ${item.name}\n`;
+                message += `   Marca: ${item.brand || '-'}\n`;
+                message += `   Cantidad: ${item.quantity}\n`;
+                message += `   Precio unitario: ${formatPrice(item.price)}\n`;
+                message += `   Subtotal: ${formatPrice(item.price * item.quantity)}\n`;
+                message += `   Código: ${item.code || '-'}\n`;
+                message += '\n';
             });
+
             message += `💰 *TOTAL: ${formatPrice(calculateTotal())}*\n\n`;
             message += `🚚 *Entrega:* ${deliveryMethod === 'delivery' ? 'Delivery' : 'Retiro en local/Pickup'}\n\n`;
             message += `💳 *Método de pago:* ${paymentMethod === 'efectivo' ? 'Efectivo' : 'Transferencia'}\n\n`;
-            message += needsInvoice ? `🧾 *Factura:*\n   RUC: ${invoiceRuc}\n   Nombre: ${invoiceName}\n` : '🧾 *Factura:* No requiere\n';
+            message += needsInvoice
+                ? `🧾 *Factura:*\n   RUC: ${invoiceRuc}\n   Nombre: ${invoiceName}\n`
+                : '🧾 *Factura:* No requiere\n';
+
             try {
                 window.open(`https://wa.me/595976106726?text=${encodeURIComponent(message)}`, '_blank');
+
                 const orderData = {
-                    date: new Date().toLocaleDateString('es-PY', { day:'2-digit', month:'2-digit', year:'numeric', hour:'2-digit', minute:'2-digit' }),
+                    date: new Date().toLocaleDateString('es-PY', {
+                        day: '2-digit', month: '2-digit', year: 'numeric',
+                        hour: '2-digit', minute: '2-digit'
+                    }),
                     customerName, deliveryMethod, paymentMethod,
                     total: calculateTotal(),
                     items: cart.map(it => ({ ...it }))
                 };
                 saveOrder(orderData);
+
                 setTimeout(() => {
                     localStorage.removeItem('cart');
                     showNotification('¡Pedido enviado con éxito!');
                     setTimeout(() => { window.location.href = 'index.html'; }, 1500);
                 }, 500);
+
             } catch (error) {
                 console.error('Error al enviar pedido:', error);
                 showNotification('Error al enviar el pedido. Intenta nuevamente.');
