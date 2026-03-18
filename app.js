@@ -1,10 +1,31 @@
-// Cart Management
+'use strict';
+
+// ── Cached Intl.NumberFormat instances (avoids re-creation on every call) ──
+const _fmtPYG = new Intl.NumberFormat('es-PY', {
+    style: 'currency',
+    currency: 'PYG',
+    minimumFractionDigits: 0,
+});
+
+// ── Safe localStorage helpers ────────────────────────────────────────────────
+function _lsGet(key, fallback) {
+    try { return JSON.parse(localStorage.getItem(key) || 'null') ?? fallback; }
+    catch (e) { return fallback; }
+}
+function _lsSet(key, value) {
+    try { localStorage.setItem(key, JSON.stringify(value)); return true; }
+    catch (e) { return false; }
+}
+
+// ================================================================
+// CART MANAGEMENT
+// ================================================================
 function getCart() {
-    return JSON.parse(localStorage.getItem('cart') || '[]');
+    return _lsGet('cart', []);
 }
 
 function saveCart(cart) {
-    localStorage.setItem('cart', JSON.stringify(cart));
+    _lsSet('cart', cart);
     updateCartCount();
 }
 
@@ -60,16 +81,12 @@ function updateQuantity(productId, change) {
     return false;
 }
 
-// Price Formatting
+// ── Price Formatting ─────────────────────────────────────────────
 function formatPrice(price) {
-    return new Intl.NumberFormat('es-PY', {
-        style: 'currency',
-        currency: 'PYG',
-        minimumFractionDigits: 0,
-    }).format(price);
+    return _fmtPYG.format(price);
 }
 
-// Product Card Creation
+// ── Product Card Creation ────────────────────────────────────────
 function createProductCard(product) {
     const hasDiscount = product.isOnSale && product.originalPrice;
     const discountPercent = hasDiscount
@@ -81,18 +98,19 @@ function createProductCard(product) {
     const favActive = isFavorite(product.id);
 
     return `
-        <div class="product-card">
+        <div class="product-card" role="article" aria-label="${product.name}">
             <div class="product-image" onclick="openImageZoom('${imgSrc.replace(/'/g, "\\'")}', '${product.name.replace(/'/g, "\\'")}')">
                 <button class="fav-btn${favActive ? ' fav-btn--active' : ''}" data-id="${product.id}"
                     aria-label="${favActive ? 'Quitar de favoritos' : 'Agregar a favoritos'}"
+                    aria-pressed="${favActive}"
                     onclick="event.stopPropagation(); toggleFavorite(${JSON.stringify(product).replace(/"/g,'&quot;')})">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="${favActive ? '#FF6B35' : 'none'}" stroke="${favActive ? '#FF6B35' : 'currentColor'}" stroke-width="2">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="${favActive ? '#FF6B35' : 'none'}" stroke="${favActive ? '#FF6B35' : 'currentColor'}" stroke-width="2" aria-hidden="true" focusable="false">
                         <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
                     </svg>
                 </button>
-                <img src="${imgSrc}" alt="${product.name}">
-                <div class="zoom-hint">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <img src="${imgSrc}" alt="${product.name}" width="400" height="300" loading="lazy" decoding="async">
+                <div class="zoom-hint" aria-hidden="true">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true" focusable="false">
                         <circle cx="11" cy="11" r="8"></circle>
                         <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                         <line x1="11" y1="8" x2="11" y2="14"></line>
@@ -100,8 +118,8 @@ function createProductCard(product) {
                     </svg>
                 </div>
                 ${hasDiscount ? `
-                    <div class="discount-badge">
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <div class="discount-badge" aria-label="Descuento ${discountPercent}%">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
                             <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
                             <line x1="7" y1="7" x2="7.01" y2="7"></line>
                         </svg>
@@ -109,7 +127,7 @@ function createProductCard(product) {
                     </div>
                 ` : ''}
                 ${product.stock === 0 ? `
-                    <div class="out-of-stock-overlay">SIN STOCK</div>
+                    <div class="out-of-stock-overlay" aria-label="Sin stock">SIN STOCK</div>
                 ` : ''}
             </div>
             <div class="product-content">
@@ -118,9 +136,9 @@ function createProductCard(product) {
                     <span class="product-weight">${product.weight}</span>
                     <span class="product-pet-type">${product.petType}</span>
                 </div>
-                <div class="product-price">
+                <div class="product-price" aria-label="Precio">
                     ${hasDiscount ? `
-                        <p class="original-price">${formatPrice(product.originalPrice)}</p>
+                        <p class="original-price"><s>${formatPrice(product.originalPrice)}</s></p>
                         <p class="current-price">${formatPrice(product.price)}</p>
                     ` : `
                         <p class="regular-price">${formatPrice(product.price)}</p>
@@ -130,16 +148,17 @@ function createProductCard(product) {
                     <button
                         class="add-to-cart-btn"
                         onclick="addToCart(${JSON.stringify(product).replace(/"/g, '&quot;')})"
-                        ${product.stock === 0 ? 'disabled' : ''}>
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        aria-label="${product.stock === 0 ? 'Sin stock' : 'Agregar ' + product.name + ' al carrito'}"
+                        ${product.stock === 0 ? 'disabled aria-disabled="true"' : ''}>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
                             <circle cx="9" cy="21" r="1"></circle>
                             <circle cx="20" cy="21" r="1"></circle>
                             <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
                         </svg>
                         <span>${product.stock === 0 ? 'Sin Stock' : 'Agregar'}</span>
                     </button>
-                    <button class="share-wa-btn" onclick="shareProductWA(${JSON.stringify(product).replace(/"/g, '&quot;')})" aria-label="Compartir" title="Compartir por WhatsApp">
-                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <button class="share-wa-btn" onclick="shareProductWA(${JSON.stringify(product).replace(/"/g, '&quot;')})" aria-label="Compartir ${product.name} por WhatsApp" title="Compartir por WhatsApp">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
                             <circle cx="18" cy="5" r="3"></circle>
                             <circle cx="6" cy="12" r="3"></circle>
                             <circle cx="18" cy="19" r="3"></circle>
@@ -155,11 +174,9 @@ function createProductCard(product) {
 
 // ── Compartir producto por WhatsApp ─────────────────────────────────────────
 function shareProductWA(product) {
-    const price = new Intl.NumberFormat('es-PY', { style: 'currency', currency: 'PYG', minimumFractionDigits: 0 }).format(product.price);
+    const price = _fmtPYG.format(product.price);
     const hasDiscount = product.isOnSale && product.originalPrice;
-    const originalPrice = hasDiscount
-        ? new Intl.NumberFormat('es-PY', { style: 'currency', currency: 'PYG', minimumFractionDigits: 0 }).format(product.originalPrice)
-        : null;
+    const originalPrice = hasDiscount ? _fmtPYG.format(product.originalPrice) : null;
 
     let msg = `🐾 *${product.name}*\n`;
     if (product.brand) msg += `Marca: ${product.brand}\n`;
@@ -181,17 +198,20 @@ function openImageZoom(src, alt) {
 
     const overlay = document.createElement('div');
     overlay.id = 'imgZoomOverlay';
+    overlay.setAttribute('role', 'dialog');
+    overlay.setAttribute('aria-modal', 'true');
+    overlay.setAttribute('aria-label', 'Zoom de imagen: ' + alt);
     overlay.innerHTML = `
         <div class="imgzoom-backdrop"></div>
         <div class="imgzoom-container">
-            <img class="imgzoom-img" src="${src}" alt="${alt}" draggable="false">
-            <button class="imgzoom-close" aria-label="Cerrar">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <img class="imgzoom-img" src="${src}" alt="${alt}" draggable="false" width="800" height="600">
+            <button class="imgzoom-close" aria-label="Cerrar zoom">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true" focusable="false">
                     <line x1="18" y1="6" x2="6" y2="18"></line>
                     <line x1="6" y1="6" x2="18" y2="18"></line>
                 </svg>
             </button>
-            <div class="imgzoom-hint">Pellizca para hacer zoom</div>
+            <div class="imgzoom-hint" aria-hidden="true">Pellizca para hacer zoom</div>
         </div>
     `;
     document.body.appendChild(overlay);
@@ -334,23 +354,25 @@ function observeProductGrid() {
 }
 
 // ================================================================
-// NOTIFICACIÓN SIMPLE AL AGREGAR AL CARRITO (reemplaza el modal)
+// NOTIFICACIÓN SIMPLE AL AGREGAR AL CARRITO
 // ================================================================
 function showAddedToCartNotification(product) {
-    // Eliminar notificación anterior si existe
     const existing = document.getElementById('atcNotif');
     if (existing) existing.remove();
 
     const notif = document.createElement('div');
     notif.id = 'atcNotif';
+    notif.setAttribute('role', 'status');
+    notif.setAttribute('aria-live', 'polite');
+    notif.setAttribute('aria-atomic', 'true');
     notif.innerHTML = `
         <div class="atcn-inner">
-            <div class="atcn-check">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <div class="atcn-check" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
                     <polyline points="20 6 9 17 4 12"></polyline>
                 </svg>
             </div>
-            <img src="${product.imageUrl || 'https://images.unsplash.com/photo-1589924691995-400dc9ecc119?w=400'}" alt="${product.name}" class="atcn-img" onerror="this.src='https://images.unsplash.com/photo-1589924691995-400dc9ecc119?w=400'">
+            <img src="${product.imageUrl || 'https://images.unsplash.com/photo-1589924691995-400dc9ecc119?w=400'}" alt="" class="atcn-img" width="36" height="36" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1589924691995-400dc9ecc119?w=400'" aria-hidden="true">
             <div class="atcn-text">
                 <span class="atcn-label">¡Agregado!</span>
                 <span class="atcn-name">${product.name}</span>
@@ -368,9 +390,11 @@ function showAddedToCartNotification(product) {
     }, 3000);
 }
 
-// Notification
+// ── Notification genérica ────────────────────────────────────────
 function showNotification(message) {
     const notification = document.createElement('div');
+    notification.setAttribute('role', 'status');
+    notification.setAttribute('aria-live', 'polite');
     notification.style.cssText = `
         position: fixed;
         top: 5rem;
@@ -399,10 +423,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (mobileMenuBtn && mobileMenu) {
         mobileMenuBtn.addEventListener('click', function() {
-            mobileMenu.classList.toggle('active');
+            const isOpen = mobileMenu.classList.toggle('active');
+            mobileMenuBtn.setAttribute('aria-expanded', isOpen);
         });
         mobileMenu.querySelectorAll('.mobile-nav-link').forEach(link => {
-            link.addEventListener('click', () => mobileMenu.classList.remove('active'));
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                mobileMenuBtn.setAttribute('aria-expanded', 'false');
+            });
         });
     }
 
@@ -414,7 +442,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     window.addEventListener('resize', () => {
         requestAnimationFrame(() => fitProductNames());
-    });
+    }, { passive: true });
 });
 
 // CSS animations + notificación carrito
@@ -530,11 +558,11 @@ document.head.appendChild(style);
 // FAVORITOS (WISHLIST)
 // ================================================================
 function getFavorites() {
-    return JSON.parse(localStorage.getItem('favorites') || '[]');
+    return _lsGet('favorites', []);
 }
 
 function saveFavorites(favs) {
-    localStorage.setItem('favorites', JSON.stringify(favs));
+    _lsSet('favorites', favs);
     updateFavCount();
 }
 
@@ -563,6 +591,7 @@ function refreshFavBtn(btn, productId) {
     const active = isFavorite(productId);
     btn.classList.toggle('fav-btn--active', active);
     btn.setAttribute('aria-label', active ? 'Quitar de favoritos' : 'Agregar a favoritos');
+    btn.setAttribute('aria-pressed', active);
     btn.querySelector('svg').setAttribute('fill', active ? '#FF6B35' : 'none');
 }
 
@@ -585,7 +614,7 @@ function openFavoritesModal() {
     if (!favs.length) {
         body.innerHTML = `
             <div class="panel-empty">
-                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#d1d5db" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#d1d5db" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
                 <p>No tenés productos guardados</p>
                 <a href="products.html">Ver productos</a>
             </div>`;
@@ -594,18 +623,18 @@ function openFavoritesModal() {
             const img = p.imageUrl || 'https://images.unsplash.com/photo-1589924691995-400dc9ecc119?w=400';
             return `
             <div class="panel-product-row" id="fav-row-${p.id}">
-                <img src="${img}" alt="${p.name}" class="panel-product-img">
+                <img src="${img}" alt="${p.name}" class="panel-product-img" width="56" height="56" loading="lazy">
                 <div class="panel-product-info">
                     <span class="panel-product-name">${p.name}</span>
                     <span class="panel-product-brand">${p.brand || ''}</span>
                     <span class="panel-product-price">${formatPrice(p.price)}</span>
                 </div>
                 <div class="panel-product-actions">
-                    <button class="panel-add-btn" onclick="addToCart(${JSON.stringify(p).replace(/"/g,'&quot;')})" title="Agregar al carrito">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                    <button class="panel-add-btn" onclick="addToCart(${JSON.stringify(p).replace(/"/g,'&quot;')})" aria-label="Agregar ${p.name} al carrito" title="Agregar al carrito">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
                     </button>
-                    <button class="panel-remove-btn" onclick="removeFavFromPanel(${p.id})" title="Eliminar">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    <button class="panel-remove-btn" onclick="removeFavFromPanel(${p.id})" aria-label="Eliminar ${p.name} de favoritos" title="Eliminar">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
                     </button>
                 </div>
             </div>`;
@@ -613,7 +642,10 @@ function openFavoritesModal() {
     }
 
     modal.classList.add('panel--open');
+    modal.setAttribute('aria-hidden', 'false');
     document.getElementById('panelBackdrop')?.classList.add('panel--open');
+    const fab = document.querySelector('.whatsapp-fab');
+    if (fab) fab.style.display = 'none';
 }
 
 function removeFavFromPanel(productId) {
@@ -629,7 +661,7 @@ function checkFavPanelEmpty() {
     if (body && !body.querySelector('.panel-product-row')) {
         body.innerHTML = `
             <div class="panel-empty">
-                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#d1d5db" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#d1d5db" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
                 <p>No tenés productos guardados</p>
                 <a href="products.html">Ver productos</a>
             </div>`;
@@ -640,19 +672,18 @@ function checkFavPanelEmpty() {
 // HISTORIAL DE PEDIDOS
 // ================================================================
 function saveOrder(orderData) {
-    const orders = JSON.parse(localStorage.getItem('orderHistory') || '[]');
+    const orders = _lsGet('orderHistory', []);
     orders.unshift(orderData);
     if (orders.length > 20) orders.splice(20);
-    localStorage.setItem('orderHistory', JSON.stringify(orders));
+    _lsSet('orderHistory', orders);
 
-    // Registrar actividad por cada producto del pedido
     if (orderData.items) {
         orderData.items.forEach(item => trackUserActivity('order', item));
     }
 }
 
 function getOrders() {
-    return JSON.parse(localStorage.getItem('orderHistory') || '[]');
+    return _lsGet('orderHistory', []);
 }
 
 function openOrdersModal() {
@@ -665,7 +696,7 @@ function openOrdersModal() {
     if (!orders.length) {
         body.innerHTML = `
             <div class="panel-empty">
-                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#d1d5db" stroke-width="1.5"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"></path><rect x="9" y="3" width="6" height="4" rx="1" ry="1"></rect></svg>
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#d1d5db" stroke-width="1.5" aria-hidden="true" focusable="false"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"></path><rect x="9" y="3" width="6" height="4" rx="1" ry="1"></rect></svg>
                 <p>Todavía no realizaste ningún pedido</p>
                 <a href="products.html">Ver productos</a>
             </div>`;
@@ -684,7 +715,7 @@ function openOrdersModal() {
                     <span>${o.deliveryMethod === 'delivery' ? '🚚 Delivery' : '🏠 Retiro'}</span>
                     <span>${o.paymentMethod === 'efectivo' ? '💵 Efectivo' : '💳 Transferencia'}</span>
                 </div>
-                <ul class="order-history-items">
+                <ul class="order-history-items" aria-label="Productos del pedido">
                     ${o.items.map(it => `
                         <li>
                             <span class="order-item-name">${it.name}</span>
@@ -693,8 +724,8 @@ function openOrdersModal() {
                         </li>`).join('')}
                 </ul>
                 <div class="order-history-footer">
-                    <button class="order-repeat-btn" onclick="reOrderToCart(${i})">
-                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <button class="order-repeat-btn" onclick="reOrderToCart(${i})" aria-label="Repetir pedido ${orders.length - i}">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
                             <polyline points="1 4 1 10 7 10"></polyline>
                             <path d="M3.51 15a9 9 0 1 0 .49-4.95"></path>
                         </svg>
@@ -705,7 +736,10 @@ function openOrdersModal() {
     }
 
     modal.classList.add('panel--open');
+    modal.setAttribute('aria-hidden', 'false');
     document.getElementById('panelBackdrop')?.classList.add('panel--open');
+    const fab = document.querySelector('.whatsapp-fab');
+    if (fab) fab.style.display = 'none';
 }
 
 async function reOrderToCart(orderIndex) {
@@ -719,10 +753,7 @@ async function reOrderToCart(orderIndex) {
     }
 
     if (!freshProducts) {
-        try {
-            const cached = localStorage.getItem('productsCache');
-            if (cached) freshProducts = JSON.parse(cached);
-        } catch(e) {}
+        freshProducts = _lsGet('productsCache', null);
     }
 
     if (!freshProducts) {
@@ -733,7 +764,7 @@ async function reOrderToCart(orderIndex) {
                 fetch('products3.json').then(r => r.json())
             ]);
             freshProducts = results.flat();
-            try { localStorage.setItem('productsCache', JSON.stringify(freshProducts)); } catch(e) {}
+            _lsSet('productsCache', freshProducts);
         } catch(e) {
             freshProducts = null;
         }
@@ -747,7 +778,7 @@ async function reOrderToCart(orderIndex) {
         return { ...it };
     });
 
-    localStorage.setItem('cart', JSON.stringify(newCart));
+    _lsSet('cart', newCart);
     updateCartCount();
 
     closePanels();
@@ -757,8 +788,13 @@ async function reOrderToCart(orderIndex) {
 
 // ── Cerrar todos los paneles ──────────────────────────────────────
 function closePanels() {
-    document.querySelectorAll('.side-panel').forEach(p => p.classList.remove('panel--open'));
+    document.querySelectorAll('.side-panel').forEach(p => {
+        p.classList.remove('panel--open');
+        p.setAttribute('aria-hidden', 'true');
+    });
     document.getElementById('panelBackdrop')?.classList.remove('panel--open');
+    const fab = document.querySelector('.whatsapp-fab');
+    if (fab) fab.style.display = '';
 }
 
 // ── Inyectar paneles + backdrop en el DOM una sola vez ───────────
@@ -768,17 +804,22 @@ function injectPanels() {
     const backdrop = document.createElement('div');
     backdrop.id = 'panelBackdrop';
     backdrop.className = 'panel-backdrop';
+    backdrop.setAttribute('aria-hidden', 'true');
     backdrop.onclick = closePanels;
     document.body.appendChild(backdrop);
 
     const favPanel = document.createElement('div');
     favPanel.id = 'favoritesModal';
     favPanel.className = 'side-panel';
+    favPanel.setAttribute('role', 'dialog');
+    favPanel.setAttribute('aria-modal', 'true');
+    favPanel.setAttribute('aria-label', 'Mis Favoritos');
+    favPanel.setAttribute('aria-hidden', 'true');
     favPanel.innerHTML = `
         <div class="panel-header">
             <h2>❤️ Mis Favoritos</h2>
-            <button class="panel-close-btn" onclick="closePanels()" aria-label="Cerrar">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            <button class="panel-close-btn" onclick="closePanels()" aria-label="Cerrar panel de favoritos">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
             </button>
         </div>
         <div class="panel-body"></div>`;
@@ -787,11 +828,15 @@ function injectPanels() {
     const ordPanel = document.createElement('div');
     ordPanel.id = 'ordersModal';
     ordPanel.className = 'side-panel';
+    ordPanel.setAttribute('role', 'dialog');
+    ordPanel.setAttribute('aria-modal', 'true');
+    ordPanel.setAttribute('aria-label', 'Mis Pedidos');
+    ordPanel.setAttribute('aria-hidden', 'true');
     ordPanel.innerHTML = `
         <div class="panel-header">
             <h2>📋 Mis Pedidos</h2>
-            <button class="panel-close-btn" onclick="closePanels()" aria-label="Cerrar">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            <button class="panel-close-btn" onclick="closePanels()" aria-label="Cerrar panel de pedidos">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
             </button>
         </div>
         <div class="panel-body"></div>`;
@@ -802,12 +847,10 @@ function injectPanels() {
 
 // ================================================================
 // SEGUIMIENTO DE ACTIVIDAD DEL USUARIO
-// Registra interacciones para personalizar recomendaciones
 // ================================================================
 function trackUserActivity(type, product) {
     const activity = getUserActivity();
 
-    // Guardar categorías, marcas y tipo de mascota interactuados
     if (product.category) {
         activity.categories[product.category] = (activity.categories[product.category] || 0) + 1;
     }
@@ -819,7 +862,6 @@ function trackUserActivity(type, product) {
         if (pet) activity.pets[pet] = (activity.pets[pet] || 0) + 1;
     });
 
-    // IDs vistos recientemente (máx 30)
     if (!activity.seenIds.includes(String(product.id))) {
         activity.seenIds.unshift(String(product.id));
         if (activity.seenIds.length > 30) activity.seenIds.pop();
@@ -829,45 +871,33 @@ function trackUserActivity(type, product) {
     activity.lastUpdated = Date.now();
 
     saveUserActivity(activity);
-
-    // Refrescar la sección de recomendaciones en tiempo real si estamos en index
     refreshRecommendedIfVisible();
 }
 
 function getUserActivity() {
-    try {
-        return JSON.parse(localStorage.getItem('userActivity') || 'null') || {
-            hasActivity: false,
-            categories: {},
-            brands: {},
-            pets: {},
-            seenIds: [],
-            lastUpdated: null
-        };
-    } catch(e) {
-        return { hasActivity: false, categories: {}, brands: {}, pets: {}, seenIds: [], lastUpdated: null };
-    }
+    return _lsGet('userActivity', null) || {
+        hasActivity: false,
+        categories: {},
+        brands: {},
+        pets: {},
+        seenIds: [],
+        lastUpdated: null
+    };
 }
 
 function saveUserActivity(activity) {
-    try {
-        localStorage.setItem('userActivity', JSON.stringify(activity));
-    } catch(e) {}
+    _lsSet('userActivity', activity);
 }
 
 function hasUserActivity() {
-    const activity = getUserActivity();
-    return activity.hasActivity === true;
+    return getUserActivity().hasActivity === true;
 }
 
 // ================================================================
 // RECOMENDACIONES PERSONALIZADAS PARA INDEX.HTML
 // ================================================================
-
-// Caché del pool de productos para refrescos en tiempo real
 let _recommendedPool = null;
 
-// Filtra objetos separador/comentario del JSON (los que no tienen "id" ni "name")
 function filterRealProducts(arr) {
     return arr.filter(p => p.id !== undefined && p.name !== undefined);
 }
@@ -876,14 +906,12 @@ function getRecommendedProducts(allProds, max = 10) {
     const activity  = getUserActivity();
     const available = allProds.filter(p => p.stock > 0);
 
-    // ── Sin actividad: random con mix de ofertas y productos normales ──
     if (!activity.hasActivity) {
         const onSale = available.filter(p => p.isOnSale).sort(() => Math.random() - 0.5);
         const noSale = available.filter(p => !p.isOnSale).sort(() => Math.random() - 0.5);
         return [...onSale.slice(0, 6), ...noSale.slice(0, 4)].slice(0, max);
     }
 
-    // ── Con actividad: scoring por afinidad ───────────────────────────
     const topCats   = Object.entries(activity.categories).sort((a,b) => b[1]-a[1]).map(e => e[0]);
     const topBrands = Object.entries(activity.brands).sort((a,b) => b[1]-a[1]).map(e => e[0]);
     const topPets   = Object.entries(activity.pets).sort((a,b) => b[1]-a[1]).map(e => e[0]);
@@ -898,32 +926,22 @@ function getRecommendedProducts(allProds, max = 10) {
             const petList  = Array.isArray(p.petType) ? p.petType : [p.petType];
             const petMatch = petList.some(pt => topPets.includes(pt));
 
-            // Categoría: más peso que marca para favorecer variedad
             if (catIdx === 0)        score += 5;
             else if (catIdx > 0)     score += 2.5;
-
-            // Marca: pesa menos que categoría a propósito
             if (brandIdx === 0)      score += 2;
             else if (brandIdx > 0)   score += 1;
-
-            // Tipo de mascota
             if (petMatch)            score += 3;
-
-            // Bonus por oferta
             if (p.isOnSale)          score += 0.5;
-
-            // Pequeño ruido aleatorio para que no sea siempre idéntico
             score += Math.random() * 0.4;
 
             return { p, score };
         })
         .sort((a, b) => b.score - a.score);
 
-    // ── Límite de diversidad: máx 2 productos por marca ───────────────
     const MAX_PER_BRAND = 2;
     const brandCount    = {};
     const result        = [];
-    const leftover      = []; // los que quedaron afuera por límite de marca
+    const leftover      = [];
 
     for (const { p, score } of scored) {
         const brand = p.brand || '__sin_marca__';
@@ -936,13 +954,10 @@ function getRecommendedProducts(allProds, max = 10) {
         if (result.length >= max) break;
     }
 
-    // Si aún faltan productos para llegar a `max`, rellenar con el leftover
     if (result.length < max) {
-        const fill = leftover.slice(0, max - result.length);
-        result.push(...fill);
+        result.push(...leftover.slice(0, max - result.length));
     }
 
-    // Si sigue faltando (pocos productos en stock), agregar random del pool general
     if (result.length < max) {
         const resultIds = new Set(result.map(p => String(p.id)));
         const extra = available
@@ -955,20 +970,13 @@ function getRecommendedProducts(allProds, max = 10) {
     return result.slice(0, max);
 }
 
-// Refresca la sección en tiempo real si el grid existe en el DOM
 function refreshRecommendedIfVisible() {
     const grid = document.getElementById('recommendedGrid');
     if (!grid || !_recommendedPool) return;
-
-    // Pequeño delay para que la actividad ya esté guardada en localStorage
-    setTimeout(() => {
-        loadRecommendedSection(_recommendedPool);
-    }, 80);
+    setTimeout(() => { loadRecommendedSection(_recommendedPool); }, 80);
 }
 
-// Función pública para que index.html la llame (primera carga)
 function loadRecommendedSection(allProds) {
-    // Guardar el pool para refrescos posteriores (sin separadores de comentario)
     if (allProds && allProds.length) _recommendedPool = filterRealProducts(allProds);
 
     const section  = document.getElementById('recommendedSection');
@@ -977,16 +985,15 @@ function loadRecommendedSection(allProds) {
     const subtitle = document.getElementById('recommendedSubtitle');
     if (!section || !grid || !_recommendedPool) return;
 
-    const hasActivity = hasUserActivity();
-    const products    = getRecommendedProducts(_recommendedPool, 10);
+    const hasAct  = hasUserActivity();
+    const products = getRecommendedProducts(_recommendedPool, 10);
 
     if (!products.length) {
         section.style.display = 'none';
         return;
     }
 
-    // ── Título dinámico ───────────────────────────────────────────────
-    if (hasActivity) {
+    if (hasAct) {
         title.textContent    = '✨ Basado en tu actividad reciente';
         subtitle.textContent = 'Productos seleccionados según tus gustos y búsquedas';
     } else {
@@ -994,7 +1001,6 @@ function loadRecommendedSection(allProds) {
         subtitle.textContent = 'Una selección especial para vos y tu mascota';
     }
 
-    // ── Render con animación suave al actualizar ──────────────────────
     const wasVisible = section.style.display !== 'none';
     if (wasVisible) {
         grid.style.opacity = '0';

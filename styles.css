@@ -19,6 +19,22 @@ body {
     padding: 0 1rem;
 }
 
+/* ── Reduced motion ─────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* ── Focus visible (keyboard nav) ────────────────────────────────── */
+:focus-visible {
+    outline: 2px solid #FF6B35;
+    outline-offset: 2px;
+}
+
 /* ================================================================
    HEADER
    ================================================================ */
@@ -29,6 +45,7 @@ body {
     background-color: #000000;
     color: #ffffff;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    contain: layout style;
 }
 
 .header-content {
@@ -225,17 +242,16 @@ body {
 }
 
 /* ================================================================
-   PRODUCTS GRID — mobile base: 3 columnas simétricas fijas
+   PRODUCTS GRID
    ================================================================ */
 .products-grid {
     display: grid;
-    /* Mobile: 3 columnas iguales — igual que la web en móvil */
     grid-template-columns: repeat(3, 1fr);
     gap: 0.4rem;
 }
 
 /* ================================================================
-   PRODUCT CARD — dimensiones y comportamiento fijos en mobile
+   PRODUCT CARD
    ================================================================ */
 .product-card {
     background-color: #ffffff;
@@ -245,9 +261,9 @@ body {
     transition: box-shadow 0.3s;
     display: flex;
     flex-direction: column;
-    /* Evita que la tarjeta se encoja o se corte en ningún viewport */
     min-width: 0;
     width: 100%;
+    contain: layout style;
 }
 
 .product-card:hover {
@@ -256,11 +272,11 @@ body {
 
 .product-image {
     position: relative;
-    /* Ratio fijo 4:3 garantiza altura consistente en todos los dispositivos */
     aspect-ratio: 4 / 3;
     overflow: hidden;
     background-color: #f3f4f6;
     width: 100%;
+    cursor: pointer;
 }
 
 .product-image img {
@@ -302,9 +318,8 @@ body {
     font-size: 1.125rem;
 }
 
-/* ── Contenido de la tarjeta: padding y altura controlados ── */
 .product-content {
-    padding: 0.35rem;         /* mobile 3 cols: padding ajustado */
+    padding: 0.35rem;
     display: flex;
     flex-direction: column;
     flex: 1;
@@ -317,7 +332,7 @@ body {
     font-weight: 600;
     font-size: 11px;
     line-height: 1.35;
-    height: calc(11px * 1.35 * 2);  /* exactamente 2 líneas */
+    height: calc(11px * 1.35 * 2);
     overflow: hidden;
     display: block;
     white-space: normal;
@@ -336,7 +351,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    font-size: 0.58rem;      /* 3 cols mobile: muy compacto */
+    font-size: 0.58rem;
     color: #6b7280;
     margin-bottom: 0.35rem;
     gap: 0.25rem;
@@ -382,12 +397,10 @@ body {
     color: #1a1a1a;
 }
 
-/* ── Botones de acción: altura y tamaño fijos ── */
 .product-card-actions {
     display: flex;
     gap: 0.25rem;
     align-items: stretch;
-    /* Altura fija garantiza que los botones nunca se corten */
     height: 1.75rem;
     flex-shrink: 0;
 }
@@ -435,10 +448,9 @@ body {
     cursor: not-allowed;
 }
 
-/* ── Botón compartir: tamaño fijo, nunca se corta ── */
 .share-wa-btn {
     flex-shrink: 0;
-    width: 1.6rem;            /* ancho fijo en mobile 3 cols */
+    width: 1.6rem;
     height: 100%;
     background-color: #e5e7eb;
     border: none;
@@ -619,6 +631,13 @@ body {
     border-radius: 0.5rem;
 }
 
+/* Ocultar la X nativa del browser en input[type=search] para evitar duplicado con el botón personalizado */
+.search-bar input[type="search"]::-webkit-search-cancel-button,
+.search-bar input[type="search"]::-webkit-search-decoration {
+    -webkit-appearance: none;
+    appearance: none;
+}
+
 .search-bar input:focus {
     outline: none;
     border-color: #FF6B35;
@@ -757,6 +776,7 @@ body {
     background-color: #f9fafb;
     padding: 0.5rem 0;
     margin-bottom: 0.5rem;
+    contain: layout style;
 }
 
 .search-bar-mobile-sticky {
@@ -772,6 +792,7 @@ body {
     border-radius: 0.5rem;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     padding: 1rem;
+    contain: layout style;
 }
 
 .filters-sidebar-desktop {
@@ -961,6 +982,7 @@ body {
     min-width: 0;
     overflow: hidden;
     width: 100%;
+    contain: layout style;
 }
 
 .cart-item-content {
@@ -1304,7 +1326,6 @@ body {
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    /* Padding lateral para que las pills no toquen el borde en ningún mobile */
     padding: 0 0.5rem;
 }
 
@@ -1376,12 +1397,10 @@ body {
     border-bottom: 1px solid #e5e7eb;
 }
 
-/* ── Mobile: 2 columnas con padding lateral garantizado ── */
 .why-us-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 0.75rem;
-    /* Margen lateral explícito para que las tarjetas no toquen el borde */
     padding: 0 0.25rem;
 }
 
@@ -1392,12 +1411,11 @@ body {
     background-color: #ffffff;
     border: 1px solid #e5e7eb;
     border-radius: 0.75rem;
-    /* Padding interior fijo para todos los tamaños de mobile */
     padding: 0.75rem;
     transition: box-shadow 0.2s, transform 0.2s;
-    /* Evita que el contenido se desborde */
     min-width: 0;
     overflow: hidden;
+    contain: layout style;
 }
 
 .why-us-item:hover {
@@ -1413,7 +1431,7 @@ body {
 }
 
 .why-us-item h3 {
-    font-size: 0.78rem;  /* reducido en mobile para que no se corte */
+    font-size: 0.78rem;
     font-weight: 700;
     color: #111;
     margin-bottom: 0.15rem;
@@ -1421,7 +1439,7 @@ body {
 }
 
 .why-us-item p {
-    font-size: 0.68rem;  /* reducido en mobile */
+    font-size: 0.68rem;
     color: #6b7280;
     line-height: 1.4;
 }
@@ -1474,9 +1492,9 @@ body {
     align-items: center;
     justify-content: center;
     text-decoration: none;
-    /* Transición base para la animación de ocultar/mostrar */
     transition: transform 0.2s ease, opacity 0.2s ease, box-shadow 0.2s;
     animation: fab-pop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+    will-change: transform;
 }
 
 .whatsapp-fab:hover {
@@ -1532,7 +1550,6 @@ body {
     .hero-logo { max-width: 350px; }
     .hero p { font-size: 1rem; }
 
-    /* Desktop: 3 columnas base, aumenta con breakpoints mayores */
     .products-grid { grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
 
     .product-content { padding: 1rem; gap: 0; }
@@ -1543,7 +1560,6 @@ body {
     .original-price { font-size: 0.75rem; }
     .product-price { margin-bottom: 0.75rem; }
 
-    /* Botones desktop */
     .product-card-actions { height: 2.25rem; gap: 0.35rem; }
     .add-to-cart-btn { font-size: 0.875rem; padding: 0.5rem; gap: 0.5rem; }
     .add-to-cart-btn svg { width: 16px; height: 16px; }
@@ -1576,7 +1592,6 @@ body {
     .cat-row-label { font-size: 0.65rem; }
     .cat-pills { padding: 0; }
 
-    /* Desktop: 4 columnas para why-us */
     .why-us-grid { grid-template-columns: repeat(4, 1fr); gap: 1.25rem; padding: 0; }
     .why-us-item { padding: 1rem; gap: 0.75rem; }
     .why-us-icon { font-size: 1.75rem; }
@@ -1601,13 +1616,11 @@ body {
    MOBILE — ajustes específicos (≤767px)
    ================================================================ */
 @media (max-width: 767px) {
-    /* Contenedor con padding lateral uniforme y mínimo garantizado */
     .container {
         padding-left: 0.75rem;
         padding-right: 0.75rem;
     }
 
-    /* FAB más pequeño y separado del borde derecho */
     .whatsapp-fab {
         bottom: 1rem;
         right: 0.875rem;
@@ -1617,14 +1630,12 @@ body {
     .whatsapp-fab img { width: 1.65rem; height: 1.65rem; }
     .whatsapp-fab::before { display: none; }
 
-    /* Carrito */
     .cart-page .container { padding-left: 0.75rem; padding-right: 0.75rem; }
     .order-form { padding: 1rem; }
     .cart-item-actions { gap: 0.35rem; }
     .quantity-controls { gap: 0.25rem; }
     .quantity-value { width: 1.5rem; }
 
-    /* Skeleton body mismo padding que product-content en mobile */
     .skeleton-body { padding: 0.35rem; }
 }
 
@@ -1723,6 +1734,7 @@ body {
     box-shadow: -4px 0 24px rgba(0,0,0,0.18);
     transform: translateX(100%);
     transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
+    will-change: transform;
 }
 
 .side-panel.panel--open { transform: translateX(0); }
@@ -1967,3 +1979,14 @@ body {
 }
 
 .summary-total-row strong { color: #FF6B35; font-size: 1rem; }
+
+/* ================================================================
+   PRINT STYLES
+   ================================================================ */
+@media print {
+    .header, .whatsapp-fab, .scroll-top-btn, .mobile-menu-btn,
+    .mobile-sticky-wrapper, .filters-sidebar, .product-card-actions,
+    .cart-item-actions, .submit-btn, .back-btn { display: none !important; }
+    body { background: #fff; color: #000; }
+    .cart-item, .order-form { box-shadow: none; border: 1px solid #ccc; }
+}

@@ -4,49 +4,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carrito - Petshop Chiquitines</title>
+    <meta name="description" content="Revisá y completá tu pedido en Petshop Chiquitines.">
+    <meta name="robots" content="noindex, follow">
+    <meta name="theme-color" content="#000000">
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
-    <link rel="stylesheet" href="styles.css">
-    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Petshop Chiquitines">
+    <meta property="og:title" content="Carrito - Petshop Chiquitines">
+    <meta property="og:description" content="Revisá y completá tu pedido en Petshop Chiquitines.">
+    <meta property="og:url" content="https://edgarchiquitines.github.io/petshopchiquitines/cart.html">
+    <meta property="og:image" content="https://edgarchiquitines.github.io/petshopchiquitines/assets/logo.webp">
+
     <!-- PWA -->
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#000000">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Chiquitines">
     <link rel="apple-touch-icon" href="assets/icons/icon-192.png">
+
+    <!-- Preconnect -->
+    <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
+    <link rel="dns-prefetch" href="https://images.unsplash.com">
+
+    <!-- Preload -->
+    <link rel="preload" href="styles.css" as="style">
+
+    <link rel="stylesheet" href="styles.css">
+
     <style>
         /* ── Fixes específicos para el carrito en mobile ── */
-
-        /* Tarjeta: no se desborda, respeta el ancho del contenedor */
         .cart-item {
             box-sizing: border-box;
             width: 100%;
             max-width: 100%;
             overflow: hidden;
         }
-
         .cart-item-content {
             width: 100%;
             max-width: 100%;
             min-width: 0;
         }
-
-        /* Imagen fija pequeña en mobile */
         .cart-item-image {
             width: 3.5rem;
             height: 3.5rem;
             flex-shrink: 0;
         }
-
-        /* Detalles: flex con wrap, no se sale */
         .cart-item-details {
             flex: 1;
             min-width: 0;
             overflow: hidden;
         }
-
-        /* Nombre: multilinea, máx 2 líneas con font adaptable */
         .cart-item-name {
             overflow: hidden;
             display: -webkit-box;
@@ -59,16 +69,12 @@
             word-break: break-word;
             white-space: normal;
         }
-
-        /* Meta: también con clamp y sin desborde */
         .cart-item-meta {
             font-size: clamp(0.62rem, 2.2vw, 0.75rem);
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
-
-        /* Acciones: wrap para que en pantallas muy angostas no se corten */
         .cart-item-actions {
             display: flex;
             align-items: center;
@@ -77,30 +83,22 @@
             gap: 0.35rem;
             margin-top: 0.4rem;
         }
-
-        /* Precio: no se corta */
         .cart-item-price {
             text-align: right;
             flex-shrink: 0;
         }
-
         .cart-item-total {
             font-size: clamp(0.8rem, 3vw, 1rem);
             white-space: nowrap;
         }
-
         .cart-item-unit-price {
             font-size: clamp(0.6rem, 2vw, 0.75rem);
             white-space: nowrap;
         }
-
-        /* Botón eliminar: siempre visible */
         .remove-btn {
             flex-shrink: 0;
             padding: 0.2rem;
         }
-
-        /* Desktop: restaurar estilos más holgados */
         @media (min-width: 768px) {
             .cart-item-image { width: 6rem; height: 6rem; }
             .cart-item-name {
@@ -117,18 +115,18 @@
     </style>
 </head>
 <body>
-    <header class="header">
+    <header class="header" role="banner">
         <div class="container">
             <div class="header-content">
-                <nav class="nav-desktop">
+                <nav class="nav-desktop" role="navigation" aria-label="Navegación principal">
                     <a href="index.html" class="nav-link">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
                             <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
                         </svg>
                         <span>Inicio</span>
                     </a>
                     <a href="products.html" class="nav-link">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
                             <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
                         </svg>
                         <span>Productos</span>
@@ -136,29 +134,29 @@
                 </nav>
                 <div class="header-actions">
                     <button class="header-icon-btn" onclick="openFavoritesModal()" aria-label="Mis favoritos" title="Mis favoritos">
-                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
                             <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
                         </svg>
-                        <span class="fav-count" id="favCount" style="display:none">0</span>
+                        <span class="fav-count" id="favCount" style="display:none" aria-label="favoritos guardados">0</span>
                     </button>
                     <button class="header-icon-btn" onclick="openOrdersModal()" aria-label="Mis pedidos" title="Mis pedidos">
-                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
                             <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"></path>
                             <rect x="9" y="3" width="6" height="4" rx="1" ry="1"></rect>
                             <line x1="9" y1="12" x2="15" y2="12"></line>
                             <line x1="9" y1="16" x2="13" y2="16"></line>
                         </svg>
                     </button>
-                    <a href="cart.html" class="cart-icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <a href="cart.html" class="cart-icon" aria-label="Carrito de compras" aria-current="page">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
                             <circle cx="9" cy="21" r="1"></circle>
                             <circle cx="20" cy="21" r="1"></circle>
                             <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
                         </svg>
-                        <span class="cart-count" id="cartCount">0</span>
+                        <span class="cart-count" id="cartCount" aria-label="productos en el carrito">0</span>
                     </a>
-                    <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Abrir menú">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileMenu">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
                             <line x1="3" y1="12" x2="21" y2="12"></line>
                             <line x1="3" y1="6" x2="21" y2="6"></line>
                             <line x1="3" y1="18" x2="21" y2="18"></line>
@@ -167,16 +165,16 @@
                 </div>
             </div>
         </div>
-        <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu" id="mobileMenu" role="navigation" aria-label="Menú móvil">
             <nav>
                 <a href="index.html" class="mobile-nav-link">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
                         <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
                     </svg>
                     <span>Inicio</span>
                 </a>
                 <a href="products.html" class="mobile-nav-link">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
                         <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
                     </svg>
                     <span>Productos</span>
@@ -185,35 +183,40 @@
         </div>
     </header>
 
-    <div class="cart-page">
+    <main class="cart-page">
         <div class="container">
-            <a href="products.html" class="back-btn">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <a href="products.html" class="back-btn" aria-label="Volver a seguir comprando">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
                     <line x1="19" y1="12" x2="5" y2="12"></line>
                     <polyline points="12 19 5 12 12 5"></polyline>
                 </svg>
                 <span>Seguir comprando</span>
             </a>
             <h1 style="font-size: 1.875rem; font-weight: bold; margin-bottom: 1.5rem;">Carrito de Compras</h1>
-            <div id="cartContent"></div>
+            <div id="cartContent" aria-live="polite"></div>
         </div>
-    </div>
+    </main>
 
-    <footer class="footer">
+    <footer class="footer" role="contentinfo">
         <div class="container">
             <p class="copyright">© 2026 Chiquitines. Todos los derechos reservados.</p>
         </div>
     </footer>
 
-    <a href="https://wa.me/595976106726" class="whatsapp-fab" target="_blank" rel="noopener noreferrer" aria-label="Contactar por WhatsApp">
-        <img src="assets/whatsapp.png" alt="WhatsApp">
+    <a href="https://wa.me/595976106726" class="whatsapp-fab" target="_blank" rel="noopener noreferrer" aria-label="Contactar por WhatsApp al número 0976106726">
+        <img src="assets/whatsapp.png" alt="" width="30" height="30" loading="lazy" aria-hidden="true">
     </a>
 
-    <script src="app.js"></script>
-    <script>
-        if (typeof getCart !== 'function') {
-            console.error('app.js no cargado correctamente');
-            document.getElementById('cartContent').innerHTML = `<div style="min-height:50vh;display:flex;align-items:center;justify-content:center;"><div style="text-align:center;color:#ef4444;"><h2>Error al cargar recursos</h2><p>Por favor recarga la página</p><button onclick="location.reload()" style="margin-top:1rem;padding:.5rem 1rem;background:#ef4444;color:white;border:none;border-radius:.375rem;cursor:pointer;">Recargar Página</button></div></div>`;
+    <script src="app.js" defer></script>
+    <script defer>
+        'use strict';
+
+        if (typeof getCart !== 'function' && document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', function checkApp() {
+                if (typeof getCart !== 'function') {
+                    document.getElementById('cartContent').innerHTML = `<div style="min-height:50vh;display:flex;align-items:center;justify-content:center;"><div style="text-align:center;color:#ef4444;"><h2>Error al cargar recursos</h2><p>Por favor recarga la página</p><button onclick="location.reload()" style="margin-top:1rem;padding:.5rem 1rem;background:#ef4444;color:white;border:none;border-radius:.375rem;cursor:pointer;">Recargar Página</button></div></div>`;
+                }
+            });
         }
 
         document.addEventListener('DOMContentLoaded', function() {
@@ -224,10 +227,10 @@
             const cart = getCart();
             const cartContent = document.getElementById('cartContent');
             if (cart.length === 0) {
-                cartContent.innerHTML = `<div style="min-height:50vh;display:flex;align-items:center;justify-content:center;"><div style="text-align:center;"><svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="2" style="margin:0 auto 1rem;"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg><h2 style="font-size:1.5rem;font-weight:bold;margin-bottom:.5rem;">Tu carrito está vacío</h2><p style="color:#6b7280;margin-bottom:1.5rem;">Agrega productos para comenzar tu pedido</p><a href="products.html" class="btn-primary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg><span>Ver Productos</span></a></div></div>`;
+                cartContent.innerHTML = `<div style="min-height:50vh;display:flex;align-items:center;justify-content:center;"><div style="text-align:center;"><svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="2" style="margin:0 auto 1rem;" aria-hidden="true"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg><h2 style="font-size:1.5rem;font-weight:bold;margin-bottom:.5rem;">Tu carrito está vacío</h2><p style="color:#6b7280;margin-bottom:1.5rem;">Agrega productos para comenzar tu pedido</p><a href="products.html" class="btn-primary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg><span>Ver Productos</span></a></div></div>`;
                 return;
             }
-            cartContent.innerHTML = `<div class="cart-layout"><div class="cart-items" id="cartItems"></div><div class="order-form" id="orderForm"></div></div>`;
+            cartContent.innerHTML = `<div class="cart-layout"><div class="cart-items" id="cartItems" aria-label="Productos en el carrito"></div><div class="order-form" id="orderForm" aria-label="Formulario de pedido"></div></div>`;
             renderCartItems();
             renderOrderForm();
         }
@@ -236,30 +239,30 @@
             const cart = getCart();
             const cartItems = document.getElementById('cartItems');
             cartItems.innerHTML = cart.map(item => `
-                <div class="cart-item" data-product-id="${item.id}">
+                <div class="cart-item" data-product-id="${item.id}" role="article" aria-label="${item.name}">
                     <div class="cart-item-content">
-                        <img src="${item.imageUrl || 'assets/placeholder.png'}" alt="${item.name}" class="cart-item-image" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1589924691995-400dc9ecc119?w=400'">
+                        <img src="${item.imageUrl || 'assets/placeholder.png'}" alt="${item.name}" class="cart-item-image" loading="lazy" width="56" height="56" onerror="this.src='https://images.unsplash.com/photo-1589924691995-400dc9ecc119?w=400'">
                         <div class="cart-item-details">
                             <h3 class="cart-item-name">${item.name}</h3>
                             <p class="cart-item-meta">${item.brand || ''}${item.weight ? ' · ' + item.weight : ''}${item.code ? ' · Cód: ' + item.code : ''}</p>
                             <div class="cart-item-actions">
-                                <div class="quantity-controls">
-                                    <button class="quantity-btn" onclick="changeQuantity('${item.id}', -1)" aria-label="Disminuir cantidad">
-                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                                <div class="quantity-controls" role="group" aria-label="Cantidad de ${item.name}">
+                                    <button class="quantity-btn" onclick="changeQuantity('${item.id}', -1)" aria-label="Disminuir cantidad de ${item.name}">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
                                     </button>
-                                    <span class="quantity-value">${item.quantity}</span>
-                                    <button class="quantity-btn" onclick="changeQuantity('${item.id}', 1)" aria-label="Aumentar cantidad">
-                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                                    <span class="quantity-value" aria-label="Cantidad: ${item.quantity}">${item.quantity}</span>
+                                    <button class="quantity-btn" onclick="changeQuantity('${item.id}', 1)" aria-label="Aumentar cantidad de ${item.name}">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
                                     </button>
                                 </div>
-                                <div class="cart-item-price">
+                                <div class="cart-item-price" aria-label="Precio de ${item.name}">
                                     <p class="cart-item-total">${formatPrice(item.price * item.quantity)}</p>
                                     <p class="cart-item-unit-price">${formatPrice(item.price)} c/u</p>
                                 </div>
                             </div>
                         </div>
-                        <button class="remove-btn" onclick="removeItemWithAnimation('${item.id}')" aria-label="Eliminar producto">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                        <button class="remove-btn" onclick="removeItemWithAnimation('${item.id}')" aria-label="Eliminar ${item.name} del carrito">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
                         </button>
                     </div>
                 </div>`).join('');
@@ -272,37 +275,37 @@
                 <h2>Datos del Pedido</h2>
                 <div class="form-group">
                     <label for="customerName">Nombre *</label>
-                    <input type="text" id="customerName" placeholder="Tu nombre" required>
-                    <span class="error-message" id="nameError"></span>
+                    <input type="text" id="customerName" placeholder="Tu nombre" required autocomplete="given-name" aria-required="true">
+                    <span class="error-message" id="nameError" role="alert"></span>
                 </div>
-                <div class="form-group">
-                    <label>Método de Entrega *</label>
+                <div class="form-group" role="group" aria-labelledby="deliveryLabel">
+                    <label id="deliveryLabel">Método de Entrega *</label>
                     <div class="radio-group">
-                        <label class="radio-option"><input type="radio" name="delivery" value="delivery" checked><span>Delivery (te contactaremos para coordinar)</span></label>
+                        <label class="radio-option"><input type="radio" name="delivery" value="delivery" checked aria-required="true"><span>Delivery (te contactaremos para coordinar)</span></label>
                         <label class="radio-option"><input type="radio" name="delivery" value="pickup"><span>Retiro en local/Pickup</span></label>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label>Método de Pago *</label>
+                <div class="form-group" role="group" aria-labelledby="paymentLabel">
+                    <label id="paymentLabel">Método de Pago *</label>
                     <div class="radio-group">
-                        <label class="radio-option"><input type="radio" name="payment" value="efectivo" checked><span>Efectivo</span></label>
+                        <label class="radio-option"><input type="radio" name="payment" value="efectivo" checked aria-required="true"><span>Efectivo</span></label>
                         <label class="radio-option"><input type="radio" name="payment" value="transferencia"><span>Transferencia</span></label>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="checkbox-option"><input type="checkbox" id="needsInvoice" onchange="toggleInvoiceFields()"><span style="font-weight:600;">Necesito factura</span></label>
-                    <div id="invoiceFields" style="display:none;margin-top:.75rem;">
-                        <input type="text" id="invoiceRuc" placeholder="RUC" style="margin-bottom:.75rem;width:100%;border:1px solid #d1d5db;border-radius:.5rem;padding:.5rem .75rem;">
-                        <span class="error-message" id="rucError"></span>
-                        <input type="text" id="invoiceName" placeholder="Nombre o Razón Social" style="width:100%;border:1px solid #d1d5db;border-radius:.5rem;padding:.5rem .75rem;margin-top:.75rem;">
-                        <span class="error-message" id="invoiceNameError"></span>
+                    <div id="invoiceFields" style="display:none;margin-top:.75rem;" aria-hidden="true">
+                        <input type="text" id="invoiceRuc" placeholder="RUC" style="margin-bottom:.75rem;width:100%;border:1px solid #d1d5db;border-radius:.5rem;padding:.5rem .75rem;" aria-label="RUC para factura">
+                        <span class="error-message" id="rucError" role="alert"></span>
+                        <input type="text" id="invoiceName" placeholder="Nombre o Razón Social" style="width:100%;border:1px solid #d1d5db;border-radius:.5rem;padding:.5rem .75rem;margin-top:.75rem;" aria-label="Nombre o Razón Social para factura">
+                        <span class="error-message" id="invoiceNameError" role="alert"></span>
                     </div>
                 </div>
-                <div class="order-total">
+                <div class="order-total" aria-label="Resumen de costos">
                     <div class="total-row"><span style="color:#6b7280;">Subtotal</span><span style="font-weight:600;" id="subtotalAmount">${formatPrice(total)}</span></div>
                     <div class="total-row final"><span>Total</span><span class="total-amount" id="totalAmount">${formatPrice(total)}</span></div>
                 </div>
-                <button class="submit-btn" onclick="sendToWhatsApp()" id="submitBtn">Enviar Pedido por WhatsApp</button>`;
+                <button class="submit-btn" onclick="sendToWhatsApp()" id="submitBtn" aria-label="Enviar pedido por WhatsApp">Enviar Pedido por WhatsApp</button>`;
 
             const nameInput = document.getElementById('customerName');
             if (nameInput) {
@@ -323,7 +326,7 @@
             if (itemElement) {
                 const quantityEl = itemElement.querySelector('.quantity-value');
                 const priceEl = itemElement.querySelector('.cart-item-total');
-                if (quantityEl) quantityEl.textContent = item.quantity;
+                if (quantityEl) { quantityEl.textContent = item.quantity; quantityEl.setAttribute('aria-label', 'Cantidad: ' + item.quantity); }
                 if (priceEl) priceEl.textContent = formatPrice(item.price * item.quantity);
             }
             updateOrderTotal();
@@ -355,7 +358,9 @@
 
         function toggleInvoiceFields() {
             const needsInvoice = document.getElementById('needsInvoice').checked;
-            document.getElementById('invoiceFields').style.display = needsInvoice ? 'block' : 'none';
+            const invoiceFieldsEl = document.getElementById('invoiceFields');
+            invoiceFieldsEl.style.display = needsInvoice ? 'block' : 'none';
+            invoiceFieldsEl.setAttribute('aria-hidden', needsInvoice ? 'false' : 'true');
             if (!needsInvoice) { clearError('rucError'); clearError('invoiceNameError'); }
         }
 
@@ -367,13 +372,16 @@
             if (!customerName.value.trim()) {
                 showFieldError('nameError', 'Por favor ingresa tu nombre');
                 customerName.classList.add('input-error');
+                customerName.setAttribute('aria-invalid', 'true');
                 isValid = false;
+            } else {
+                customerName.setAttribute('aria-invalid', 'false');
             }
             if (document.getElementById('needsInvoice').checked) {
                 const invoiceRuc  = document.getElementById('invoiceRuc');
                 const invoiceName = document.getElementById('invoiceName');
-                if (!invoiceRuc.value.trim())  { showFieldError('rucError', 'Por favor ingresa el RUC'); invoiceRuc.classList.add('input-error'); isValid = false; }
-                if (!invoiceName.value.trim()) { showFieldError('invoiceNameError', 'Por favor ingresa el nombre o razón social'); invoiceName.classList.add('input-error'); isValid = false; }
+                if (!invoiceRuc.value.trim())  { showFieldError('rucError', 'Por favor ingresa el RUC'); invoiceRuc.classList.add('input-error'); invoiceRuc.setAttribute('aria-invalid','true'); isValid = false; }
+                if (!invoiceName.value.trim()) { showFieldError('invoiceNameError', 'Por favor ingresa el nombre o razón social'); invoiceName.classList.add('input-error'); invoiceName.setAttribute('aria-invalid','true'); isValid = false; }
             }
             return isValid;
         }
@@ -404,11 +412,9 @@
             const submitBtn    = document.getElementById('submitBtn');
             const originalText = submitBtn.innerHTML;
             submitBtn.disabled = true;
+            submitBtn.setAttribute('aria-busy', 'true');
             submitBtn.innerHTML = '<span>Enviando...</span>';
 
-            // ── Cargar pool de productos para enriquecer items con "code" ──
-            // El code puede no estar en localStorage si el producto fue agregado
-            // desde favoritos, panel, o un carrito guardado previamente.
             let productPool = null;
             try {
                 const cached = localStorage.getItem('productsCache');
@@ -427,7 +433,6 @@
                 } catch(e) { productPool = []; }
             }
 
-            // Enriquecer cada item del carrito con los datos frescos del JSON
             const rawCart = getCart();
             const cart = rawCart.map(item => {
                 const fresh = productPool.find(p => String(p.id) === String(item.id));
@@ -486,17 +491,18 @@
                 console.error('Error al enviar pedido:', error);
                 showNotification('Error al enviar el pedido. Intenta nuevamente.');
                 submitBtn.disabled = false;
+                submitBtn.setAttribute('aria-busy', 'false');
                 submitBtn.innerHTML = originalText;
             }
         }
     </script>
     <!-- PWA Service Worker -->
-    <script>
+    <script defer>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('sw.js')
                     .catch(err => console.warn('[PWA] SW no registrado:', err));
-            });
+            }, { passive: true });
         }
     </script>
 </body>

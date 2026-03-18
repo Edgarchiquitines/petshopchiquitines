@@ -6,31 +6,73 @@
     <title>Productos - Petshop Chiquitines</title>
     <meta name="description" content="Petshop Chiquitines - Explora nuestro catálogo de productos para mascotas: alimentos, accesorios, juguetes y más para perros, gatos y otras mascotas. Compra online de manera fácil y segura.">
     <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#000000">
     <link rel="canonical" href="https://edgarchiquitines.github.io/petshopchiquitines/products.html">
-    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
-    <link rel="stylesheet" href="styles.css">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Petshop Chiquitines">
+    <meta property="og:title" content="Productos - Petshop Chiquitines">
+    <meta property="og:description" content="Explora nuestro catálogo de productos para mascotas: alimentos, accesorios, juguetes y más para perros, gatos y otras mascotas.">
+    <meta property="og:url" content="https://edgarchiquitines.github.io/petshopchiquitines/products.html">
+    <meta property="og:image" content="https://edgarchiquitines.github.io/petshopchiquitines/assets/logo.webp">
+    <meta property="og:locale" content="es_PY">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Productos - Petshop Chiquitines">
+    <meta name="twitter:description" content="Explora nuestro catálogo de productos para mascotas.">
+    <meta name="twitter:image" content="https://edgarchiquitines.github.io/petshopchiquitines/assets/logo.webp">
+
     <!-- PWA -->
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#000000">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Chiquitines">
     <link rel="apple-touch-icon" href="assets/icons/icon-192.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+
+    <!-- Preconnect -->
+    <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
+    <link rel="dns-prefetch" href="https://images.unsplash.com">
+
+    <!-- Preload -->
+    <link rel="preload" href="styles.css" as="style">
+
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      "name": "Catálogo de Productos - Pet Shop Chiquitines",
+      "description": "Catálogo completo de productos para mascotas: alimentos, accesorios, juguetes, higiene y salud.",
+      "url": "https://edgarchiquitines.github.io/petshopchiquitines/products.html",
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Pet Shop Chiquitines",
+        "url": "https://edgarchiquitines.github.io/petshopchiquitines/"
+      }
+    }
+    </script>
 </head>
 <body>
-    <header class="header">
+    <header class="header" role="banner">
         <div class="container">
             <div class="header-content">
-                <nav class="nav-desktop">
+                <nav class="nav-desktop" role="navigation" aria-label="Navegación principal">
                     <a href="index.html" class="nav-link">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
                             <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
                         </svg>
                         <span>Inicio</span>
                     </a>
-                    <a href="products.html" class="nav-link active">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <a href="products.html" class="nav-link active" aria-current="page">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
                             <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
                         </svg>
                         <span>Productos</span>
@@ -38,29 +80,29 @@
                 </nav>
                 <div class="header-actions">
                     <button class="header-icon-btn" onclick="openFavoritesModal()" aria-label="Mis favoritos" title="Mis favoritos">
-                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
                             <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
                         </svg>
-                        <span class="fav-count" id="favCount" style="display:none">0</span>
+                        <span class="fav-count" id="favCount" style="display:none" aria-label="favoritos guardados">0</span>
                     </button>
                     <button class="header-icon-btn" onclick="openOrdersModal()" aria-label="Mis pedidos" title="Mis pedidos">
-                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
                             <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"></path>
                             <rect x="9" y="3" width="6" height="4" rx="1" ry="1"></rect>
                             <line x1="9" y1="12" x2="15" y2="12"></line>
                             <line x1="9" y1="16" x2="13" y2="16"></line>
                         </svg>
                     </button>
-                    <a href="cart.html" class="cart-icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <a href="cart.html" class="cart-icon" aria-label="Carrito de compras">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
                             <circle cx="9" cy="21" r="1"></circle>
                             <circle cx="20" cy="21" r="1"></circle>
                             <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
                         </svg>
-                        <span class="cart-count" id="cartCount">0</span>
+                        <span class="cart-count" id="cartCount" aria-label="productos en el carrito">0</span>
                     </a>
-                    <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Abrir menú">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileMenu">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
                             <line x1="3" y1="12" x2="21" y2="12"></line>
                             <line x1="3" y1="6" x2="21" y2="6"></line>
                             <line x1="3" y1="18" x2="21" y2="18"></line>
@@ -69,16 +111,16 @@
                 </div>
             </div>
         </div>
-        <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu" id="mobileMenu" role="navigation" aria-label="Menú móvil">
             <nav>
                 <a href="index.html" class="mobile-nav-link">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
                         <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
                     </svg>
                     <span>Inicio</span>
                 </a>
-                <a href="products.html" class="mobile-nav-link">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <a href="products.html" class="mobile-nav-link" aria-current="page">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
                         <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
                     </svg>
                     <span>Productos</span>
@@ -87,25 +129,28 @@
         </div>
     </header>
 
-    <div class="products-page">
+    <main class="products-page">
         <div class="container">
             <div class="section-header">
                 <h1>Todos los Productos</h1>
                 <p>Encuentra todo lo que necesita tu mascota</p>
             </div>
 
-            <div class="search-bar search-bar--autocomplete" id="searchBarTop">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <div class="search-bar search-bar--autocomplete" id="searchBarTop" role="search">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
                     <circle cx="11" cy="11" r="8"></circle>
                     <path d="m21 21-4.35-4.35"></path>
                 </svg>
-                <input type="text" id="searchInput"
+                <input type="search" id="searchInput"
                     placeholder="Buscar productos, marcas, categorías..."
                     oninput="syncSearch(this, 'searchInputSidebar'); handleAutocomplete(this, 'autocompleteTop')"
-                    autocomplete="off">
-                <div class="autocomplete-dropdown" id="autocompleteTop"></div>
-                <button class="search-clear-btn" id="searchClearTop" onclick="clearSearch('searchInput', 'autocompleteTop')" style="display:none">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    autocomplete="off"
+                    aria-label="Buscar productos"
+                    aria-autocomplete="list"
+                    aria-controls="autocompleteTop">
+                <div class="autocomplete-dropdown" id="autocompleteTop" role="listbox" aria-label="Sugerencias de búsqueda"></div>
+                <button class="search-clear-btn" id="searchClearTop" onclick="clearSearch('searchInput', 'autocompleteTop')" style="display:none" aria-label="Limpiar búsqueda">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
                         <line x1="18" y1="6" x2="6" y2="18"></line>
                         <line x1="6" y1="6" x2="18" y2="18"></line>
                     </svg>
@@ -113,42 +158,45 @@
             </div>
 
             <div class="mobile-sticky-wrapper" id="mobileStickyWrapper">
-                <div class="search-bar search-bar--autocomplete search-bar-mobile-sticky">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <div class="search-bar search-bar--autocomplete search-bar-mobile-sticky" role="search">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
                         <circle cx="11" cy="11" r="8"></circle>
                         <path d="m21 21-4.35-4.35"></path>
                     </svg>
-                    <input type="text" id="searchInputMobile"
+                    <input type="search" id="searchInputMobile"
                         placeholder="Buscar productos..."
                         oninput="syncSearch(this, 'searchInput'); handleAutocomplete(this, 'autocompleteMobile')"
-                        autocomplete="off">
-                    <div class="autocomplete-dropdown" id="autocompleteMobile"></div>
-                    <button class="search-clear-btn" id="searchClearMobile" onclick="clearSearch('searchInputMobile', 'autocompleteMobile')" style="display:none">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        autocomplete="off"
+                        aria-label="Buscar productos"
+                        aria-autocomplete="list"
+                        aria-controls="autocompleteMobile">
+                    <div class="autocomplete-dropdown" id="autocompleteMobile" role="listbox" aria-label="Sugerencias de búsqueda"></div>
+                    <button class="search-clear-btn" id="searchClearMobile" onclick="clearSearch('searchInputMobile', 'autocompleteMobile')" style="display:none" aria-label="Limpiar búsqueda">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
                             <line x1="18" y1="6" x2="6" y2="18"></line>
                             <line x1="6" y1="6" x2="18" y2="18"></line>
                         </svg>
                     </button>
                 </div>
 
-                <button class="filter-toggle-btn" id="filterToggleBtn">
+                <button class="filter-toggle-btn" id="filterToggleBtn" aria-expanded="false" aria-controls="filtersSidebarMobile">
                     <div class="filter-toggle-content">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
                             <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
                         </svg>
                         <span>Filtros</span>
-                        <span class="filter-count" id="filterCount" style="display: none;">0</span>
+                        <span class="filter-count" id="filterCount" style="display: none;" aria-label="filtros activos">0</span>
                     </div>
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
                         <polyline points="6 9 12 15 18 9"></polyline>
                     </svg>
                 </button>
 
-                <aside class="filters-sidebar mobile-hidden" id="filtersSidebarMobile">
+                <aside class="filters-sidebar mobile-hidden" id="filtersSidebarMobile" aria-label="Filtros de productos">
                     <div class="filters-header">
                         <h3>Filtros</h3>
-                        <button class="clear-filters-btn" onclick="clearFilters()">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <button class="clear-filters-btn" onclick="clearFilters()" aria-label="Limpiar todos los filtros">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
                                 <line x1="18" y1="6" x2="6" y2="18"></line>
                                 <line x1="6" y1="6" x2="18" y2="18"></line>
                             </svg>
@@ -156,7 +204,7 @@
                         </button>
                     </div>
                     <div class="filter-group">
-                        <label>Categoría</label>
+                        <label for="categoryFilterMobile">Categoría</label>
                         <select id="categoryFilterMobile" onchange="syncFilter('categoryFilter', this); applyFilters()">
                             <option value="">Todas</option>
                             <option value="alimentos">Alimentos</option>
@@ -168,7 +216,7 @@
                         </select>
                     </div>
                     <div class="filter-group">
-                        <label>Tipo de Mascota</label>
+                        <label for="petTypeFilterMobile">Tipo de Mascota</label>
                         <select id="petTypeFilterMobile" onchange="syncFilter('petTypeFilter', this); applyFilters()">
                             <option value="">Todas</option>
                             <option value="perro">Perro</option>
@@ -178,31 +226,33 @@
                         </select>
                     </div>
                     <div class="filter-group">
-                        <label>Marca</label>
+                        <label for="brandFilterMobile">Marca</label>
                         <select id="brandFilterMobile" onchange="syncFilter('brandFilter', this); applyFilters()">
                             <option value="">Todas</option>
                         </select>
                     </div>
                     <div class="filter-group">
                         <label>Precio</label>
-                        <div class="price-range-wrapper">
+                        <div class="price-range-wrapper" role="group" aria-label="Rango de precio">
                             <div class="price-range-track" id="priceTrackMobile">
                                 <div class="price-range-fill" id="priceFillMobile"></div>
                                 <input type="range" class="price-range-input price-range-min" id="priceMinMobile"
                                     min="0" max="1000000" step="1000" value="0"
+                                    aria-label="Precio mínimo"
                                     oninput="syncPriceRange('Mobile'); applyFilters()">
                                 <input type="range" class="price-range-input price-range-max" id="priceMaxMobile"
                                     min="0" max="1000000" step="1000" value="1000000"
+                                    aria-label="Precio máximo"
                                     oninput="syncPriceRange('Mobile'); applyFilters()">
                             </div>
-                            <div class="price-range-labels">
+                            <div class="price-range-labels" aria-live="polite">
                                 <span id="priceMinLabelMobile">Gs 0</span>
                                 <span id="priceMaxLabelMobile">Gs 1.000.000</span>
                             </div>
                         </div>
                     </div>
                     <div class="filter-group">
-                        <label>Ordenar por</label>
+                        <label for="sortFilterMobile">Ordenar por</label>
                         <select id="sortFilterMobile" onchange="syncFilter('sortFilter', this); applyFilters()">
                             <option value="">Más recientes</option>
                             <option value="price-asc">Precio: Menor a Mayor</option>
@@ -215,19 +265,22 @@
             </div>
 
             <div class="products-layout">
-                <aside class="filters-sidebar filters-sidebar-desktop" id="filtersSidebar">
-                    <div class="search-bar search-bar--autocomplete search-bar-sidebar" id="searchBarSidebar">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <aside class="filters-sidebar filters-sidebar-desktop" id="filtersSidebar" aria-label="Filtros de productos">
+                    <div class="search-bar search-bar--autocomplete search-bar-sidebar" id="searchBarSidebar" role="search">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
                             <circle cx="11" cy="11" r="8"></circle>
                             <path d="m21 21-4.35-4.35"></path>
                         </svg>
-                        <input type="text" id="searchInputSidebar"
+                        <input type="search" id="searchInputSidebar"
                             placeholder="Buscar..."
                             oninput="syncSearch(this, 'searchInput'); handleAutocomplete(this, 'autocompleteSidebar')"
-                            autocomplete="off">
-                        <div class="autocomplete-dropdown" id="autocompleteSidebar"></div>
-                        <button class="search-clear-btn" id="searchClearSidebar" onclick="clearSearch('searchInputSidebar', 'autocompleteSidebar')" style="display:none">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            autocomplete="off"
+                            aria-label="Buscar productos"
+                            aria-autocomplete="list"
+                            aria-controls="autocompleteSidebar">
+                        <div class="autocomplete-dropdown" id="autocompleteSidebar" role="listbox" aria-label="Sugerencias de búsqueda"></div>
+                        <button class="search-clear-btn" id="searchClearSidebar" onclick="clearSearch('searchInputSidebar', 'autocompleteSidebar')" style="display:none" aria-label="Limpiar búsqueda">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
                                 <line x1="18" y1="6" x2="6" y2="18"></line>
                                 <line x1="6" y1="6" x2="18" y2="18"></line>
                             </svg>
@@ -235,8 +288,8 @@
                     </div>
                     <div class="filters-header">
                         <h3>Filtros</h3>
-                        <button class="clear-filters-btn" id="clearFiltersBtn" onclick="clearFilters()">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <button class="clear-filters-btn" id="clearFiltersBtn" onclick="clearFilters()" aria-label="Limpiar todos los filtros">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
                                 <line x1="18" y1="6" x2="6" y2="18"></line>
                                 <line x1="6" y1="6" x2="18" y2="18"></line>
                             </svg>
@@ -244,7 +297,7 @@
                         </button>
                     </div>
                     <div class="filter-group">
-                        <label>Categoría</label>
+                        <label for="categoryFilter">Categoría</label>
                         <select id="categoryFilter" onchange="applyFilters()">
                             <option value="">Todas</option>
                             <option value="alimentos">Alimentos</option>
@@ -256,7 +309,7 @@
                         </select>
                     </div>
                     <div class="filter-group">
-                        <label>Tipo de Mascota</label>
+                        <label for="petTypeFilter">Tipo de Mascota</label>
                         <select id="petTypeFilter" onchange="applyFilters()">
                             <option value="">Todas</option>
                             <option value="perro">Perro</option>
@@ -266,31 +319,33 @@
                         </select>
                     </div>
                     <div class="filter-group">
-                        <label>Marca</label>
+                        <label for="brandFilter">Marca</label>
                         <select id="brandFilter" onchange="applyFilters()">
                             <option value="">Todas</option>
                         </select>
                     </div>
                     <div class="filter-group">
                         <label>Precio</label>
-                        <div class="price-range-wrapper">
+                        <div class="price-range-wrapper" role="group" aria-label="Rango de precio">
                             <div class="price-range-track" id="priceTrackDesktop">
                                 <div class="price-range-fill" id="priceFillDesktop"></div>
                                 <input type="range" class="price-range-input price-range-min" id="priceMinDesktop"
                                     min="0" max="1000000" step="1000" value="0"
+                                    aria-label="Precio mínimo"
                                     oninput="syncPriceRange('Desktop'); applyFilters()">
                                 <input type="range" class="price-range-input price-range-max" id="priceMaxDesktop"
                                     min="0" max="1000000" step="1000" value="1000000"
+                                    aria-label="Precio máximo"
                                     oninput="syncPriceRange('Desktop'); applyFilters()">
                             </div>
-                            <div class="price-range-labels">
+                            <div class="price-range-labels" aria-live="polite">
                                 <span id="priceMinLabelDesktop">Gs 0</span>
                                 <span id="priceMaxLabelDesktop">Gs 1.000.000</span>
                             </div>
                         </div>
                     </div>
                     <div class="filter-group">
-                        <label>Ordenar por</label>
+                        <label for="sortFilter">Ordenar por</label>
                         <select id="sortFilter" onchange="applyFilters()">
                             <option value="">Más recientes</option>
                             <option value="price-asc">Precio: Menor a Mayor</option>
@@ -302,36 +357,37 @@
                 </aside>
 
                 <div class="products-main">
-                    <div class="products-count" id="productsCount">Cargando...</div>
-                    <div id="productsGrid" class="products-grid">
-                        <div class="product-card-skeleton"><div class="skeleton-img"></div><div class="skeleton-body"><div class="skeleton-line skeleton-line--title"></div><div class="skeleton-line skeleton-line--subtitle"></div><div class="skeleton-line skeleton-line--meta"></div><div class="skeleton-line skeleton-line--price"></div><div class="skeleton-line skeleton-line--btn"></div></div></div>
-                        <div class="product-card-skeleton"><div class="skeleton-img"></div><div class="skeleton-body"><div class="skeleton-line skeleton-line--title"></div><div class="skeleton-line skeleton-line--subtitle"></div><div class="skeleton-line skeleton-line--meta"></div><div class="skeleton-line skeleton-line--price"></div><div class="skeleton-line skeleton-line--btn"></div></div></div>
-                        <div class="product-card-skeleton"><div class="skeleton-img"></div><div class="skeleton-body"><div class="skeleton-line skeleton-line--title"></div><div class="skeleton-line skeleton-line--subtitle"></div><div class="skeleton-line skeleton-line--meta"></div><div class="skeleton-line skeleton-line--price"></div><div class="skeleton-line skeleton-line--btn"></div></div></div>
-                        <div class="product-card-skeleton"><div class="skeleton-img"></div><div class="skeleton-body"><div class="skeleton-line skeleton-line--title"></div><div class="skeleton-line skeleton-line--subtitle"></div><div class="skeleton-line skeleton-line--meta"></div><div class="skeleton-line skeleton-line--price"></div><div class="skeleton-line skeleton-line--btn"></div></div></div>
+                    <div class="products-count" id="productsCount" aria-live="polite" aria-atomic="true">Cargando...</div>
+                    <div id="productsGrid" class="products-grid" aria-live="polite" aria-busy="true">
+                        <div class="product-card-skeleton" aria-hidden="true"><div class="skeleton-img"></div><div class="skeleton-body"><div class="skeleton-line skeleton-line--title"></div><div class="skeleton-line skeleton-line--subtitle"></div><div class="skeleton-line skeleton-line--meta"></div><div class="skeleton-line skeleton-line--price"></div><div class="skeleton-line skeleton-line--btn"></div></div></div>
+                        <div class="product-card-skeleton" aria-hidden="true"><div class="skeleton-img"></div><div class="skeleton-body"><div class="skeleton-line skeleton-line--title"></div><div class="skeleton-line skeleton-line--subtitle"></div><div class="skeleton-line skeleton-line--meta"></div><div class="skeleton-line skeleton-line--price"></div><div class="skeleton-line skeleton-line--btn"></div></div></div>
+                        <div class="product-card-skeleton" aria-hidden="true"><div class="skeleton-img"></div><div class="skeleton-body"><div class="skeleton-line skeleton-line--title"></div><div class="skeleton-line skeleton-line--subtitle"></div><div class="skeleton-line skeleton-line--meta"></div><div class="skeleton-line skeleton-line--price"></div><div class="skeleton-line skeleton-line--btn"></div></div></div>
+                        <div class="product-card-skeleton" aria-hidden="true"><div class="skeleton-img"></div><div class="skeleton-body"><div class="skeleton-line skeleton-line--title"></div><div class="skeleton-line skeleton-line--subtitle"></div><div class="skeleton-line skeleton-line--meta"></div><div class="skeleton-line skeleton-line--price"></div><div class="skeleton-line skeleton-line--btn"></div></div></div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </main>
 
-    <footer class="footer">
+    <footer class="footer" role="contentinfo">
         <div class="container">
             <p class="copyright">© 2026 Chiquitines. Todos los derechos reservados.</p>
         </div>
     </footer>
 
-    <a href="https://wa.me/595976106726" class="whatsapp-fab" target="_blank" rel="noopener noreferrer" aria-label="Contactar por WhatsApp">
-        <img src="assets/whatsapp.png" alt="WhatsApp">
+    <a href="https://wa.me/595976106726" class="whatsapp-fab" target="_blank" rel="noopener noreferrer" aria-label="Contactar por WhatsApp al número 0976106726">
+        <img src="assets/whatsapp.png" alt="" width="30" height="30" loading="lazy" aria-hidden="true">
     </a>
 
     <button class="scroll-top-btn" id="scrollTopBtn" aria-label="Volver arriba" onclick="window.scrollTo({top:0,behavior:'smooth'})">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
             <polyline points="18 15 12 9 6 15"></polyline>
         </svg>
     </button>
 
-    <script src="app.js"></script>
-    <script>
+    <script src="app.js" defer></script>
+    <script defer>
+        'use strict';
         let allProducts = [];
         let filteredProducts = [];
         let priceMin = 0;
@@ -379,8 +435,8 @@
         }
 
         function renderAutocomplete(dropdown, suggestions, inputEl) {
-            if (!suggestions.length) { dropdown.innerHTML = '<div class="autocomplete-empty">Sin resultados</div>'; dropdown.classList.add('autocomplete-dropdown--open'); return; }
-            dropdown.innerHTML = suggestions.map((s, i) => `<div class="autocomplete-item" data-index="${i}" onmousedown="selectSuggestion('${escapeHtml(s.label)}', '${inputEl.id}', event)"><span class="autocomplete-icon">${s.icon}</span><div class="autocomplete-text"><span class="autocomplete-label">${highlightMatch(s.label, inputEl.value.trim())}</span>${s.sub ? `<span class="autocomplete-sub">${s.sub}</span>` : ''}</div>${s.type === 'brand' ? '<span class="autocomplete-tag">Marca</span>' : ''}</div>`).join('');
+            if (!suggestions.length) { dropdown.innerHTML = '<div class="autocomplete-empty" role="option">Sin resultados</div>'; dropdown.classList.add('autocomplete-dropdown--open'); return; }
+            dropdown.innerHTML = suggestions.map((s, i) => `<div class="autocomplete-item" role="option" data-index="${i}" onmousedown="selectSuggestion('${escapeHtml(s.label)}', '${inputEl.id}', event)"><span class="autocomplete-icon" aria-hidden="true">${s.icon}</span><div class="autocomplete-text"><span class="autocomplete-label">${highlightMatch(s.label, inputEl.value.trim())}</span>${s.sub ? `<span class="autocomplete-sub">${s.sub}</span>` : ''}</div>${s.type === 'brand' ? '<span class="autocomplete-tag">Marca</span>' : ''}</div>`).join('');
             dropdown.classList.add('autocomplete-dropdown--open');
         }
 
@@ -415,7 +471,7 @@
         }
 
         function setupAutocompleteClose() {
-            document.addEventListener('click', function(e) { if (!e.target.closest('.search-bar--autocomplete')) closeAllDropdowns(); });
+            document.addEventListener('click', function(e) { if (!e.target.closest('.search-bar--autocomplete')) closeAllDropdowns(); }, { passive: true });
         }
 
         function escapeHtml(str) { return str.replace(/'/g, "\\'"); }
@@ -510,7 +566,6 @@
                 const archivos = ['products1.json', 'products2.json', 'products3.json'];
                 const resultados = await Promise.all(archivos.map(archivo => fetch(archivo).then(r => r.json())));
 
-                // Filtrar objetos separador/comentario (los que no tienen id ni name)
                 allProducts = resultados.flat().filter(p => p.id !== undefined && p.name !== undefined);
 
                 try { localStorage.setItem('productsCache', JSON.stringify(allProducts)); } catch(e) {}
@@ -552,7 +607,9 @@
                 applyFilters();
             } catch (error) {
                 console.error('Error loading products:', error);
-                document.getElementById('productsGrid').innerHTML = '<div class="empty-state"><p>Error al cargar productos</p></div>';
+                const grid = document.getElementById('productsGrid');
+                grid.setAttribute('aria-busy', 'false');
+                grid.innerHTML = '<div class="empty-state"><p>Error al cargar productos</p></div>';
             }
         }
 
@@ -591,15 +648,10 @@
             history.replaceState(null, '', params.toString() ? `${location.pathname}?${params.toString()}` : location.pathname);
         }
 
-        function shareFilteredURL() {
-            const url = location.href;
-            if (navigator.share) { navigator.share({ title: 'Petshop Chiquitines', url }); }
-            else { navigator.clipboard.writeText(url).then(() => showNotification('🔗 Link copiado')); }
-        }
-
         function displayProducts() {
             const grid  = document.getElementById('productsGrid');
             const count = document.getElementById('productsCount');
+            grid.setAttribute('aria-busy', 'false');
             count.textContent = `${filteredProducts.length} producto${filteredProducts.length !== 1 ? 's' : ''} encontrado${filteredProducts.length !== 1 ? 's' : ''}`;
             if (filteredProducts.length === 0) { grid.innerHTML = `<div class="empty-state"><p>No se encontraron productos</p><button onclick="clearFilters()">Limpiar filtros</button></div>`; return; }
             grid.innerHTML = filteredProducts.map(product => createProductCard(product)).join('');
@@ -626,7 +678,12 @@
         function setupFilterToggle() {
             const toggleBtn = document.getElementById('filterToggleBtn');
             const sidebar   = document.getElementById('filtersSidebarMobile');
-            if (toggleBtn && sidebar) toggleBtn.addEventListener('click', function() { sidebar.classList.toggle('mobile-hidden'); });
+            if (toggleBtn && sidebar) {
+                toggleBtn.addEventListener('click', function() {
+                    const isOpen = sidebar.classList.toggle('mobile-hidden') === false;
+                    toggleBtn.setAttribute('aria-expanded', isOpen);
+                });
+            }
         }
 
         (function() {
@@ -639,12 +696,12 @@
         })();
     </script>
     <!-- PWA Service Worker -->
-    <script>
+    <script defer>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('sw.js')
                     .catch(err => console.warn('[PWA] SW no registrado:', err));
-            });
+            }, { passive: true });
         }
     </script>
 </body>

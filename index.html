@@ -6,25 +6,87 @@
     <title>Pet shop Chiquitines | Alimentos, Juguetes y Accesorios para Mascotas</title>
     <meta name="description" content="Petshop Chiquitines - Tienda de mascotas con alimentos, accesorios y productos en oferta para perros y gatos. ¡Explora nuestro catálogo hoy!">
     <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#000000">
     <link rel="canonical" href="https://edgarchiquitines.github.io/petshopchiquitines/">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Petshop Chiquitines">
+    <meta property="og:title" content="Pet shop Chiquitines | Alimentos, Juguetes y Accesorios para Mascotas">
+    <meta property="og:description" content="Tienda de mascotas con alimentos, accesorios y productos en oferta para perros y gatos. ¡Explora nuestro catálogo hoy!">
+    <meta property="og:url" content="https://edgarchiquitines.github.io/petshopchiquitines/">
+    <meta property="og:image" content="https://edgarchiquitines.github.io/petshopchiquitines/assets/logo.webp">
+    <meta property="og:locale" content="es_PY">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Pet shop Chiquitines | Alimentos, Juguetes y Accesorios para Mascotas">
+    <meta name="twitter:description" content="Tienda de mascotas con alimentos, accesorios y productos en oferta para perros y gatos.">
+    <meta name="twitter:image" content="https://edgarchiquitines.github.io/petshopchiquitines/assets/logo.webp">
+
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Chiquitines">
+    <link rel="apple-touch-icon" href="assets/icons/icon-192.png">
+
+    <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
+    <link rel="dns-prefetch" href="https://images.unsplash.com">
+
+    <!-- Preload critical assets -->
+    <link rel="preload" href="styles.css" as="style">
+    <link rel="preload" href="assets/logo.webp" as="image" fetchpriority="high">
+
     <link rel="stylesheet" href="styles.css">
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "PetStore",
+      "name": "Pet Shop Chiquitines",
+      "description": "Tienda de mascotas con alimentos, accesorios y productos en oferta para perros y gatos.",
+      "url": "https://edgarchiquitines.github.io/petshopchiquitines/",
+      "logo": "https://edgarchiquitines.github.io/petshopchiquitines/assets/logo.webp",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Av. Peru y Gines",
+        "addressLocality": "Asunción",
+        "addressCountry": "PY"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+595976106726",
+        "contactType": "customer service",
+        "availableLanguage": "Spanish"
+      },
+      "sameAs": [
+        "https://wa.me/595976106726"
+      ]
+    }
+    </script>
 </head>
 <body>
     <!-- Header -->
-    <header class="header">
+    <header class="header" role="banner">
         <div class="container">
             <div class="header-content">
-                <nav class="nav-desktop">
-                    <a href="index.html" class="nav-link active">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <nav class="nav-desktop" role="navigation" aria-label="Navegación principal">
+                    <a href="index.html" class="nav-link active" aria-current="page">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
                             <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
                             <polyline points="9 22 9 12 15 12 15 22"></polyline>
                         </svg>
                         <span>Inicio</span>
                     </a>
                     <a href="products.html" class="nav-link">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
                             <line x1="16.5" y1="9.4" x2="7.5" y2="4.21"></line>
                             <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
                             <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
@@ -34,33 +96,30 @@
                     </a>
                 </nav>
                 <div class="header-actions">
-                    <!-- Favoritos -->
                     <button class="header-icon-btn" onclick="openFavoritesModal()" aria-label="Mis favoritos" title="Mis favoritos">
-                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
                             <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
                         </svg>
-                        <span class="fav-count" id="favCount" style="display:none">0</span>
+                        <span class="fav-count" id="favCount" style="display:none" aria-label="favoritos guardados">0</span>
                     </button>
-                    <!-- Historial de pedidos -->
                     <button class="header-icon-btn" onclick="openOrdersModal()" aria-label="Mis pedidos" title="Mis pedidos">
-                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
                             <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"></path>
                             <rect x="9" y="3" width="6" height="4" rx="1" ry="1"></rect>
                             <line x1="9" y1="12" x2="15" y2="12"></line>
                             <line x1="9" y1="16" x2="13" y2="16"></line>
                         </svg>
                     </button>
-                    <!-- Carrito -->
-                    <a href="cart.html" class="cart-icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <a href="cart.html" class="cart-icon" aria-label="Carrito de compras">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
                             <circle cx="9" cy="21" r="1"></circle>
                             <circle cx="20" cy="21" r="1"></circle>
                             <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
                         </svg>
-                        <span class="cart-count" id="cartCount">0</span>
+                        <span class="cart-count" id="cartCount" aria-label="productos en el carrito">0</span>
                     </a>
-                    <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Abrir menú">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileMenu">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
                             <line x1="3" y1="12" x2="21" y2="12"></line>
                             <line x1="3" y1="6" x2="21" y2="6"></line>
                             <line x1="3" y1="18" x2="21" y2="18"></line>
@@ -69,17 +128,16 @@
                 </div>
             </div>
         </div>
-        <!-- Mobile Menu -->
-        <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu" id="mobileMenu" role="navigation" aria-label="Menú móvil">
             <nav>
-                <a href="index.html" class="mobile-nav-link">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <a href="index.html" class="mobile-nav-link" aria-current="page">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
                         <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
                     </svg>
                     <span>Inicio</span>
                 </a>
                 <a href="products.html" class="mobile-nav-link">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
                         <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
                     </svg>
                     <span>Productos</span>
@@ -89,17 +147,17 @@
     </header>
 
     <!-- Hero Section -->
-    <section class="hero hero-gradient">
+    <section class="hero hero-gradient" aria-label="Bienvenida">
         <div class="container">
             <div class="hero-content">
                 <h1>
                     Bienvenido a<br>
-                    <img src="assets/logo.webp" alt="PetShop by Chiquitines" class="hero-logo">
+                    <img src="assets/logo.webp" alt="PetShop by Chiquitines" class="hero-logo" width="250" height="100" fetchpriority="high">
                 </h1>
                 <p>Los mejores productos para tu mascota con increíbles descuentos</p>
                 <a href="products.html" class="btn-primary">
                     <span>Ver Todos los Productos</span>
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
                         <line x1="5" y1="12" x2="19" y2="12"></line>
                         <polyline points="12 5 19 12 12 19"></polyline>
                     </svg>
@@ -109,55 +167,55 @@
     </section>
 
     <!-- Categorías -->
-    <section class="categories-section">
+    <section class="categories-section" aria-label="Categorías">
         <div class="container">
             <div class="cat-row">
-                <span class="cat-row-label">Mascotas</span>
-                <div class="cat-pills">
-                    <a href="products.html?pet=perro" class="cat-pill">
-                        <img src="assets/pills/perro.png" alt="Perro" class="cat-pill-img">
+                <span class="cat-row-label" id="label-mascotas">Mascotas</span>
+                <div class="cat-pills" role="list" aria-labelledby="label-mascotas">
+                    <a href="products.html?pet=perro" class="cat-pill" role="listitem">
+                        <img src="assets/pills/perro.png" alt="" class="cat-pill-img" width="17" height="17" loading="lazy" aria-hidden="true">
                         <span>Perro</span>
                     </a>
-                    <a href="products.html?pet=gato" class="cat-pill">
-                        <img src="assets/pills/gato.png" alt="Gato" class="cat-pill-img">
+                    <a href="products.html?pet=gato" class="cat-pill" role="listitem">
+                        <img src="assets/pills/gato.png" alt="" class="cat-pill-img" width="17" height="17" loading="lazy" aria-hidden="true">
                         <span>Gato</span>
                     </a>
-                    <a href="products.html?pet=ave" class="cat-pill">
-                        <img src="assets/pills/ave.png" alt="Ave" class="cat-pill-img">
+                    <a href="products.html?pet=ave" class="cat-pill" role="listitem">
+                        <img src="assets/pills/ave.png" alt="" class="cat-pill-img" width="17" height="17" loading="lazy" aria-hidden="true">
                         <span>Ave</span>
                     </a>
-                    <a href="products.html?pet=roedor" class="cat-pill">
-                        <img src="assets/pills/roedor.png" alt="Roedor" class="cat-pill-img">
+                    <a href="products.html?pet=roedor" class="cat-pill" role="listitem">
+                        <img src="assets/pills/roedor.png" alt="" class="cat-pill-img" width="17" height="17" loading="lazy" aria-hidden="true">
                         <span>Roedor</span>
                     </a>
-                    <a href="products.html" class="cat-pill">
-                        <img src="assets/pills/todos.png" alt="Todos" class="cat-pill-img">
+                    <a href="products.html" class="cat-pill" role="listitem">
+                        <img src="assets/pills/todos.png" alt="" class="cat-pill-img" width="17" height="17" loading="lazy" aria-hidden="true">
                         <span>Todos</span>
                     </a>
                 </div>
             </div>
-            <div class="cat-divider"></div>
+            <div class="cat-divider" role="separator"></div>
             <div class="cat-row">
-                <span class="cat-row-label">Productos</span>
-                <div class="cat-pills">
-                    <a href="products.html?category=alimentos" class="cat-pill">
-                        <img src="assets/pills/alimentos.png" alt="Alimentos" class="cat-pill-img">
+                <span class="cat-row-label" id="label-productos">Productos</span>
+                <div class="cat-pills" role="list" aria-labelledby="label-productos">
+                    <a href="products.html?category=alimentos" class="cat-pill" role="listitem">
+                        <img src="assets/pills/alimentos.png" alt="" class="cat-pill-img" width="17" height="17" loading="lazy" aria-hidden="true">
                         <span>Alimentos</span>
                     </a>
-                    <a href="products.html?category=juguetes" class="cat-pill">
-                        <img src="assets/pills/juguetes.png" alt="Juguetes" class="cat-pill-img">
+                    <a href="products.html?category=juguetes" class="cat-pill" role="listitem">
+                        <img src="assets/pills/juguetes.png" alt="" class="cat-pill-img" width="17" height="17" loading="lazy" aria-hidden="true">
                         <span>Juguetes</span>
                     </a>
-                    <a href="products.html?category=higiene" class="cat-pill">
-                        <img src="assets/pills/higiene.png" alt="Higiene" class="cat-pill-img">
+                    <a href="products.html?category=higiene" class="cat-pill" role="listitem">
+                        <img src="assets/pills/higiene.png" alt="" class="cat-pill-img" width="17" height="17" loading="lazy" aria-hidden="true">
                         <span>Higiene</span>
                     </a>
-                    <a href="products.html?category=salud" class="cat-pill">
-                        <img src="assets/pills/salud.png" alt="Salud" class="cat-pill-img">
+                    <a href="products.html?category=salud" class="cat-pill" role="listitem">
+                        <img src="assets/pills/salud.png" alt="" class="cat-pill-img" width="17" height="17" loading="lazy" aria-hidden="true">
                         <span>Salud</span>
                     </a>
-                    <a href="products.html?category=accesorios" class="cat-pill">
-                        <img src="assets/pills/accesorios.png" alt="Accesorios" class="cat-pill-img">
+                    <a href="products.html?category=accesorios" class="cat-pill" role="listitem">
+                        <img src="assets/pills/accesorios.png" alt="" class="cat-pill-img" width="17" height="17" loading="lazy" aria-hidden="true">
                         <span>Accesorios</span>
                     </a>
                 </div>
@@ -166,32 +224,32 @@
     </section>
 
     <!-- Por qué elegirnos -->
-    <section class="why-us-section">
+    <section class="why-us-section" aria-label="Por qué elegirnos">
         <div class="container">
             <div class="why-us-grid">
                 <div class="why-us-item">
-                    <span class="why-us-icon">🏆</span>
+                    <span class="why-us-icon" aria-hidden="true">🏆</span>
                     <div>
                         <h3>Calidad Premium</h3>
                         <p>Solo productos seleccionados para el bienestar de tu mascota</p>
                     </div>
                 </div>
                 <div class="why-us-item">
-                    <span class="why-us-icon">💬</span>
+                    <span class="why-us-icon" aria-hidden="true">💬</span>
                     <div>
                         <h3>Asesoramiento Gratis</h3>
                         <p>Te orientamos para elegir el mejor producto según tu mascota</p>
                     </div>
                 </div>
                 <div class="why-us-item">
-                    <span class="why-us-icon">⚡</span>
+                    <span class="why-us-icon" aria-hidden="true">⚡</span>
                     <div>
                         <h3>Atención Rápida</h3>
                         <p>Respondemos rápido por WhatsApp para que no esperes</p>
                     </div>
                 </div>
                 <div class="why-us-item">
-                    <span class="why-us-icon">🔒</span>
+                    <span class="why-us-icon" aria-hidden="true">🔒</span>
                     <div>
                         <h3>Compra Segura</h3>
                         <p>Pagá con confianza, tu pedido está garantizado</p>
@@ -202,35 +260,35 @@
     </section>
 
     <!-- Productos en Oferta -->
-    <section class="products-section">
+    <section class="products-section" aria-label="Productos en oferta">
         <div class="container">
             <div class="section-header">
                 <h2>🔥 Productos en Oferta</h2>
                 <p>Aprovecha nuestras mejores ofertas del momento</p>
             </div>
-            <div id="productsGrid" class="products-grid">
-                <div class="loading-skeleton"></div>
-                <div class="loading-skeleton"></div>
-                <div class="loading-skeleton"></div>
-                <div class="loading-skeleton"></div>
-                <div class="loading-skeleton"></div>
+            <div id="productsGrid" class="products-grid" aria-live="polite" aria-busy="true">
+                <div class="loading-skeleton" aria-hidden="true"></div>
+                <div class="loading-skeleton" aria-hidden="true"></div>
+                <div class="loading-skeleton" aria-hidden="true"></div>
+                <div class="loading-skeleton" aria-hidden="true"></div>
+                <div class="loading-skeleton" aria-hidden="true"></div>
             </div>
         </div>
     </section>
 
     <!-- Sección de Recomendaciones Personalizadas -->
-    <section class="products-section recommended-section" id="recommendedSection" style="display:none; background-color:#f9fafb; padding-top:0.5rem;">
+    <section class="products-section recommended-section" id="recommendedSection" style="display:none; background-color:#f9fafb; padding-top:0.5rem;" aria-label="Recomendaciones personalizadas">
         <div class="container">
             <div class="section-header">
                 <h2 id="recommendedTitle">💡 Productos que te podrían interesar</h2>
                 <p id="recommendedSubtitle">Una selección especial para vos y tu mascota</p>
             </div>
-            <div id="recommendedGrid" class="products-grid">
+            <div id="recommendedGrid" class="products-grid" aria-live="polite">
             </div>
             <div style="text-align:center; margin-top:1.5rem;">
                 <a href="products.html" class="btn-primary" style="background-color:#000; color:#fff; display:inline-flex;">
                     <span>Ver catálogo completo</span>
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
                         <line x1="5" y1="12" x2="19" y2="12"></line>
                         <polyline points="12 5 19 12 12 19"></polyline>
                     </svg>
@@ -240,13 +298,13 @@
     </section>
 
     <!-- CTA Section -->
-    <section class="cta-section">
+    <section class="cta-section" aria-label="Explorar catálogo">
         <div class="container">
             <h2>¿Buscas algo específico?</h2>
             <p>Explora nuestro catálogo completo con más de 1000 productos para todas las mascotas</p>
             <a href="products.html" class="btn-primary">
                 <span>Explorar Catálogo</span>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
                     <line x1="5" y1="12" x2="19" y2="12"></line>
                     <polyline points="12 5 19 12 12 19"></polyline>
                 </svg>
@@ -255,7 +313,7 @@
     </section>
 
     <!-- Nosotros / Contacto -->
-    <section class="about-contact-section">
+    <section class="about-contact-section" aria-label="Nosotros y contacto">
         <div class="container">
             <h2>Nosotros</h2>
             <p>
@@ -285,7 +343,7 @@
     </section>
 
     <!-- Footer -->
-    <footer class="footer">
+    <footer class="footer" role="contentinfo">
         <div class="container">
             <p class="copyright">© 2026 Chiquitines. Todos los derechos reservados.</p>
         </div>
@@ -296,13 +354,13 @@
        class="whatsapp-fab"
        target="_blank"
        rel="noopener noreferrer"
-       aria-label="Contactar por WhatsApp">
-        <img src="assets/whatsapp.png" alt="WhatsApp">
+       aria-label="Contactar por WhatsApp al número 0976106726">
+        <img src="assets/whatsapp.png" alt="" width="30" height="30" loading="lazy" aria-hidden="true">
     </a>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
-    <script src="app.js"></script>
-    <script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js" defer></script>
+    <script src="app.js" defer></script>
+    <script defer>
         document.addEventListener('DOMContentLoaded', function() {
             loadHomeProducts();
         });
@@ -313,15 +371,13 @@
                 const resultados = await Promise.all(
                     archivos.map(archivo => fetch(archivo).then(r => r.json()))
                 );
-                // Filtrar objetos separador/comentario (los que no tienen id ni name)
                 const products = resultados.flat().filter(p => p.id !== undefined && p.name !== undefined);
 
-                // Guardar en caché para uso de recomendaciones
                 try { localStorage.setItem('productsCache', JSON.stringify(products)); } catch(e) {}
 
-                // Sección de ofertas
                 const onSaleProducts = products.filter(p => p.isOnSale && p.stock > 0);
                 const grid = document.getElementById('productsGrid');
+                grid.setAttribute('aria-busy', 'false');
 
                 if (onSaleProducts.length === 0) {
                     grid.innerHTML = '<div class="empty-state"><p>No hay productos en oferta</p><a href="products.html">Ver todos los productos</a></div>';
@@ -330,12 +386,20 @@
                     requestAnimationFrame(() => fitProductNames());
                 }
 
-                // Sección de recomendaciones (siempre se carga, con o sin actividad)
                 loadRecommendedSection(products);
 
             } catch (error) {
                 // silenciar errores de red
             }
+        }
+    </script>
+    <!-- PWA Service Worker -->
+    <script defer>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .catch(err => console.warn('[PWA] SW no registrado:', err));
+            }, { passive: true });
         }
     </script>
 </body>
