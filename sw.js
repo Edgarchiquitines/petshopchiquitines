@@ -1,11 +1,14 @@
 // ================================================================
 // SERVICE WORKER — Pet Shop Chiquitines
-// v2: versioned cache, stale-while-revalidate for assets,
-//     network-first for JSON, offline fallback for HTML.
+// v3: un solo products.json, cache versionado, stale-while-revalidate
+//     para assets, network-first para JSON, offline fallback para HTML.
 // ================================================================
 'use strict';
 
-const CACHE_VERSION = 'chiquitines-v2';
+// ── IMPORTANTE: Incrementar CACHE_VERSION cada vez que subas cambios
+// al sitio (CSS, JS, HTML). Esto fuerza que todos los usuarios
+// reciban los archivos nuevos en su próxima visita.
+const CACHE_VERSION = 'chiquitines-v3';
 const OFFLINE_URL   = 'offline.html';
 
 const PRECACHE_URLS = [
@@ -21,6 +24,8 @@ const PRECACHE_URLS = [
     'assets/favicon.ico',
     'assets/icons/icon-192.png',
     'assets/icons/icon-512.png',
+    // Un solo JSON ahora — más fácil de mantener
+    'products.json',
 ];
 
 // ── Instalación ──────────────────────────────────────────────────
@@ -52,7 +57,7 @@ self.addEventListener('fetch', event => {
 
     const url = new URL(request.url);
 
-    // Ignorar scripts de terceros / CDN internos
+    // Ignorar scripts internos de CDN
     if (url.pathname.includes('/cdn-cgi/')) return;
 
     // URLs externas (Unsplash, wa.me, etc.) → solo red, sin caché
@@ -63,13 +68,15 @@ self.addEventListener('fetch', event => {
         return;
     }
 
-    // JSON de productos → network-first, cachear resultado
-    if (url.pathname.endsWith('.json')) {
+    // products.json → network-first con caché de respaldo
+    // Así el usuario siempre ve datos frescos cuando hay red,
+    // pero sigue funcionando offline con la última versión cacheada.
+    if (url.pathname.endsWith('products.json')) {
         event.respondWith(networkFirst(request, 'application/json', '[]'));
         return;
     }
 
-    // Assets estáticos → stale-while-revalidate
+    // Assets estáticos → stale-while-revalidate (instantáneo + actualización en background)
     if (/\.(css|js|webp|png|jpg|jpeg|gif|svg|ico|woff2?|ttf|eot)$/.test(url.pathname)) {
         event.respondWith(staleWhileRevalidate(request));
         return;
@@ -84,7 +91,7 @@ self.addEventListener('fetch', event => {
     event.respondWith(networkFirst(request, null, null));
 });
 
-// ── Estrategias ──────────────────────────────────────────────────
+// ── Estrategias de caché ─────────────────────────────────────────
 
 async function networkFirst(request, fallbackContentType, fallbackBody) {
     const cache = await caches.open(CACHE_VERSION);
@@ -121,10 +128,10 @@ async function networkFirstHtml(request) {
         if (response.ok) cache.put(request, response.clone());
         return response;
     } catch (_) {
-        const cached = await cache.match(request);
-        if (cached) return cached;
-        const index = await cache.match('index.html');
-        if (index)  return index;
+        const cached  = await cache.match(request);
+        if (cached)   return cached;
+        const index   = await cache.match('index.html');
+        if (index)    return index;
         const offline = await cache.match(OFFLINE_URL);
         return offline || new Response(
             '<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><title>Sin conexión</title></head><body style="font-family:sans-serif;text-align:center;padding:3rem;background:#000;color:#fff"><h1>Sin conexión</h1><p>Revisá tu conexión e intentá de nuevo.</p><button onclick="location.reload()" style="background:#FF6B35;color:#fff;border:none;padding:.75rem 1.5rem;border-radius:.5rem;font-size:1rem;cursor:pointer;margin-top:1rem">Reintentar</button></body></html>',
