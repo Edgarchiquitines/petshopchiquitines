@@ -211,10 +211,31 @@
     <script defer>
         'use strict';
 
+        // ── Mismas claves que index.html y products.html ─────────────────
+        const PRODUCTS_VERSION = 'v1';
+        const CACHE_KEY        = 'productsCache';
+        const CACHE_VER_KEY    = 'productsCacheVersion';
+
+        function _lsGet(key, fallback) {
+            try { return JSON.parse(localStorage.getItem(key) || 'null') ?? fallback; }
+            catch(e) { return fallback; }
+        }
+        function _lsSet(key, value) {
+            try { localStorage.setItem(key, JSON.stringify(value)); return true; }
+            catch(e) { return false; }
+        }
+
         if (typeof getCart !== 'function' && document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', function checkApp() {
+            document.addEventListener('DOMContentLoaded', function() {
                 if (typeof getCart !== 'function') {
-                    document.getElementById('cartContent').innerHTML = `<div style="min-height:50vh;display:flex;align-items:center;justify-content:center;"><div style="text-align:center;color:#ef4444;"><h2>Error al cargar recursos</h2><p>Por favor recarga la página</p><button onclick="location.reload()" style="margin-top:1rem;padding:.5rem 1rem;background:#ef4444;color:white;border:none;border-radius:.375rem;cursor:pointer;">Recargar Página</button></div></div>`;
+                    document.getElementById('cartContent').innerHTML = `
+                        <div style="min-height:50vh;display:flex;align-items:center;justify-content:center;">
+                            <div style="text-align:center;color:#ef4444;">
+                                <h2>Error al cargar recursos</h2>
+                                <p>Por favor recarga la página</p>
+                                <button onclick="location.reload()" style="margin-top:1rem;padding:.5rem 1rem;background:#ef4444;color:white;border:none;border-radius:.375rem;cursor:pointer;">Recargar Página</button>
+                            </div>
+                        </div>`;
                 }
             });
         }
@@ -227,10 +248,28 @@
             const cart = getCart();
             const cartContent = document.getElementById('cartContent');
             if (cart.length === 0) {
-                cartContent.innerHTML = `<div style="min-height:50vh;display:flex;align-items:center;justify-content:center;"><div style="text-align:center;"><svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="2" style="margin:0 auto 1rem;" aria-hidden="true"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg><h2 style="font-size:1.5rem;font-weight:bold;margin-bottom:.5rem;">Tu carrito está vacío</h2><p style="color:#6b7280;margin-bottom:1.5rem;">Agrega productos para comenzar tu pedido</p><a href="products.html" class="btn-primary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg><span>Ver Productos</span></a></div></div>`;
+                cartContent.innerHTML = `
+                    <div style="min-height:50vh;display:flex;align-items:center;justify-content:center;">
+                        <div style="text-align:center;">
+                            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="2" style="margin:0 auto 1rem;" aria-hidden="true">
+                                <circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle>
+                                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                            </svg>
+                            <h2 style="font-size:1.5rem;font-weight:bold;margin-bottom:.5rem;">Tu carrito está vacío</h2>
+                            <p style="color:#6b7280;margin-bottom:1.5rem;">Agrega productos para comenzar tu pedido</p>
+                            <a href="products.html" class="btn-primary">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                                <span>Ver Productos</span>
+                            </a>
+                        </div>
+                    </div>`;
                 return;
             }
-            cartContent.innerHTML = `<div class="cart-layout"><div class="cart-items" id="cartItems" aria-label="Productos en el carrito"></div><div class="order-form" id="orderForm" aria-label="Formulario de pedido"></div></div>`;
+            cartContent.innerHTML = `
+                <div class="cart-layout">
+                    <div class="cart-items" id="cartItems" aria-label="Productos en el carrito"></div>
+                    <div class="order-form" id="orderForm" aria-label="Formulario de pedido"></div>
+                </div>`;
             renderCartItems();
             renderOrderForm();
         }
@@ -262,7 +301,10 @@
                             </div>
                         </div>
                         <button class="remove-btn" onclick="removeItemWithAnimation('${item.id}')" aria-label="Eliminar ${item.name} del carrito">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
+                                <polyline points="3 6 5 6 21 6"></polyline>
+                                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                            </svg>
                         </button>
                     </div>
                 </div>`).join('');
@@ -293,7 +335,10 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="checkbox-option"><input type="checkbox" id="needsInvoice" onchange="toggleInvoiceFields()"><span style="font-weight:600;">Necesito factura</span></label>
+                    <label class="checkbox-option">
+                        <input type="checkbox" id="needsInvoice" onchange="toggleInvoiceFields()">
+                        <span style="font-weight:600;">Necesito factura</span>
+                    </label>
                     <div id="invoiceFields" style="display:none;margin-top:.75rem;" aria-hidden="true">
                         <input type="text" id="invoiceRuc" placeholder="RUC" style="margin-bottom:.75rem;width:100%;border:1px solid #d1d5db;border-radius:.5rem;padding:.5rem .75rem;" aria-label="RUC para factura">
                         <span class="error-message" id="rucError" role="alert"></span>
@@ -316,7 +361,7 @@
         }
 
         function changeQuantity(productId, change) {
-            const cart = getCart();
+            const cart   = getCart();
             const realId = cart.find(i => String(i.id) === String(productId))?.id ?? productId;
             if (!updateQuantity(realId, change)) return;
             const updatedCart = getCart();
@@ -325,31 +370,33 @@
             const itemElement = document.querySelector(`[data-product-id="${productId}"]`);
             if (itemElement) {
                 const quantityEl = itemElement.querySelector('.quantity-value');
-                const priceEl = itemElement.querySelector('.cart-item-total');
+                const priceEl    = itemElement.querySelector('.cart-item-total');
                 if (quantityEl) { quantityEl.textContent = item.quantity; quantityEl.setAttribute('aria-label', 'Cantidad: ' + item.quantity); }
-                if (priceEl) priceEl.textContent = formatPrice(item.price * item.quantity);
+                if (priceEl)    priceEl.textContent = formatPrice(item.price * item.quantity);
             }
             updateOrderTotal();
         }
 
         function removeItemWithAnimation(productId) {
             const itemEl = document.querySelector(`[data-product-id="${productId}"]`);
-            const cart = getCart();
+            const cart   = getCart();
             const realId = cart.find(i => String(i.id) === String(productId))?.id ?? productId;
             if (itemEl) {
                 itemEl.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-                itemEl.style.opacity = '0';
-                itemEl.style.transform = 'translateX(-20px)';
+                itemEl.style.opacity    = '0';
+                itemEl.style.transform  = 'translateX(-20px)';
                 setTimeout(() => { removeFromCart(realId); loadCart(); }, 300);
-            } else { removeFromCart(realId); loadCart(); }
+            } else {
+                removeFromCart(realId); loadCart();
+            }
         }
 
         function updateOrderTotal() {
-            const total = calculateTotal();
+            const total      = calculateTotal();
             const subtotalEl = document.getElementById('subtotalAmount');
-            const totalEl = document.getElementById('totalAmount');
+            const totalEl    = document.getElementById('totalAmount');
             if (subtotalEl) subtotalEl.textContent = formatPrice(total);
-            if (totalEl) totalEl.textContent = formatPrice(total);
+            if (totalEl)    totalEl.textContent    = formatPrice(total);
         }
 
         function calculateTotal() {
@@ -357,7 +404,7 @@
         }
 
         function toggleInvoiceFields() {
-            const needsInvoice = document.getElementById('needsInvoice').checked;
+            const needsInvoice    = document.getElementById('needsInvoice').checked;
             const invoiceFieldsEl = document.getElementById('invoiceFields');
             invoiceFieldsEl.style.display = needsInvoice ? 'block' : 'none';
             invoiceFieldsEl.setAttribute('aria-hidden', needsInvoice ? 'false' : 'true');
@@ -389,8 +436,8 @@
         function showFieldError(elementId, message) {
             const errorEl = document.getElementById(elementId);
             if (errorEl) {
-                errorEl.textContent = message;
-                errorEl.style.color = '#ef4444';
+                errorEl.textContent  = message;
+                errorEl.style.color  = '#ef4444';
                 errorEl.style.fontSize = '0.875rem';
                 errorEl.style.marginTop = '0.25rem';
                 errorEl.style.display = 'block';
@@ -415,24 +462,27 @@
             submitBtn.setAttribute('aria-busy', 'true');
             submitBtn.innerHTML = '<span>Enviando...</span>';
 
+            // ── Obtener pool de productos para enriquecer códigos ────────
+            // 1) Preferir caché (ya lo tienen si visitaron index o products)
+            // 2) Solo si no hay caché, hacer fetch del JSON unificado
             let productPool = null;
-            try {
-                const cached = localStorage.getItem('productsCache');
-                if (cached) productPool = JSON.parse(cached);
-            } catch(e) {}
+            const cachedVersion = _lsGet(CACHE_VER_KEY, null);
+            const cachedData    = _lsGet(CACHE_KEY, null);
 
-            if (!productPool) {
+            if (cachedData && cachedData.length && cachedVersion === PRODUCTS_VERSION) {
+                productPool = cachedData;
+            } else {
                 try {
-                    const results = await Promise.all([
-                        fetch('products1.json').then(r => r.json()),
-                        fetch('products2.json').then(r => r.json()),
-                        fetch('products3.json').then(r => r.json())
-                    ]);
-                    productPool = results.flat();
-                    try { localStorage.setItem('productsCache', JSON.stringify(productPool)); } catch(e) {}
-                } catch(e) { productPool = []; }
+                    const fresh = await fetch('products.json').then(r => r.json());
+                    productPool = fresh;
+                    _lsSet(CACHE_KEY, fresh);
+                    _lsSet(CACHE_VER_KEY, PRODUCTS_VERSION);
+                } catch(e) {
+                    productPool = [];
+                }
             }
 
+            // Enriquecer ítems del carrito con el código del JSON fresco
             const rawCart = getCart();
             const cart = rawCart.map(item => {
                 const fresh = productPool.find(p => String(p.id) === String(item.id));
@@ -496,6 +546,7 @@
             }
         }
     </script>
+
     <!-- PWA Service Worker -->
     <script defer>
         if ('serviceWorker' in navigator) {
