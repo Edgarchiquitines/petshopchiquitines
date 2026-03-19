@@ -312,9 +312,13 @@ body {
     font-weight: 600;
     font-size: 11px;
     line-height: 1.35;
-    height: calc(11px * 1.35 * 2);
+    /* max-height en em: siempre exactamente 2 lineas sin importar el font-size actual */
+    max-height: calc(1.35em * 2);
     overflow: hidden;
-    display: block;
+    /* line-clamp para corte limpio con puntos suspensivos en lugar de corte a mitad */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
     white-space: normal;
     word-break: break-word;
     overflow-wrap: break-word;
@@ -1484,7 +1488,7 @@ body {
     .products-grid { grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
 
     .product-content { padding: 1rem; gap: 0; }
-    .product-name { font-size: 17px; height: calc(17px * 1.35 * 2); margin-bottom: 0.35rem; }
+    .product-name { font-size: 17px; max-height: calc(1.35em * 2); margin-bottom: 0.35rem; }
     .product-meta { font-size: 0.75rem; margin-bottom: 0.5rem; }
     .product-weight { max-width: none; }
     .current-price, .regular-price { font-size: 1.25rem; }

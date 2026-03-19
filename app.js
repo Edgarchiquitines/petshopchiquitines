@@ -302,17 +302,31 @@ function fitProductNames() {
     const isDesktop = window.innerWidth >= 768;
     const MAX_FONT  = isDesktop ? 17 : 15;
     const MIN_FONT  = 10;
-    const MAX_LINES = 2;
 
     document.querySelectorAll('.product-name').forEach(el => {
+        // Resetear al tamaño máximo para medir desde arriba
         el.style.fontSize = MAX_FONT + 'px';
+
+        // Con -webkit-line-clamp activo, scrollHeight no es confiable.
+        // Medimos comparando clientHeight vs scrollHeight desactivando line-clamp temporalmente.
+        el.style.webkitLineClamp = 'unset';
+        el.style.maxHeight = 'none';
+
         const lh        = parseFloat(getComputedStyle(el).lineHeight) || MAX_FONT * 1.35;
-        const maxHeight = lh * MAX_LINES;
-        let size        = MAX_FONT;
+        const maxHeight = lh * 2;   // exactamente 2 lineas
+
+        let size = MAX_FONT;
         while (el.scrollHeight > maxHeight + 1 && size > MIN_FONT) {
             size--;
             el.style.fontSize = size + 'px';
+            // Recalcular line-height al nuevo tamaño
+            const newLh = parseFloat(getComputedStyle(el).lineHeight) || size * 1.35;
+            if (el.scrollHeight <= newLh * 2 + 1) break;
         }
+
+        // Restaurar line-clamp y max-height para el recorte visual
+        el.style.webkitLineClamp = '2';
+        el.style.maxHeight = '';   // deja que el CSS lo controle via calc(1.35em * 2)
     });
 }
 
