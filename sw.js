@@ -1,15 +1,18 @@
 // ================================================================
 // SERVICE WORKER — Pet Shop Chiquitines
-// v3: un solo products.json, cache versionado, stale-while-revalidate
-//     para assets, network-first para JSON, offline fallback para HTML.
+// La constante CACHE_VERSION se genera automáticamente con la fecha
+// y hora de compilación del SW. Para forzar que todos los usuarios
+// reciban archivos nuevos, basta con guardar (tocar) este archivo.
 // ================================================================
 'use strict';
 
-// ── IMPORTANTE: Incrementar CACHE_VERSION cada vez que subas cambios
-// al sitio (CSS, JS, HTML). Esto fuerza que todos los usuarios
-// reciban los archivos nuevos en su próxima visita.
-const CACHE_VERSION = 'chiquitines-v3';
-const OFFLINE_URL   = 'offline.html';
+// ── Versión automática: se actualiza sola cada vez que guardás el SW
+// Formato: chiquitines-YYYYMMDD-HHMM  (ej: chiquitines-20260320-1430)
+const _now = new Date();
+const _pad = n => String(n).padStart(2, '0');
+const CACHE_VERSION = `chiquitines-${_now.getFullYear()}${_pad(_now.getMonth()+1)}${_pad(_now.getDate())}-${_pad(_now.getHours())}${_pad(_now.getMinutes())}`;
+
+const OFFLINE_URL = 'offline.html';
 
 const PRECACHE_URLS = [
     'index.html',
@@ -24,7 +27,6 @@ const PRECACHE_URLS = [
     'assets/favicon.ico',
     'assets/icons/icon-192.png',
     'assets/icons/icon-512.png',
-    // Un solo JSON ahora — más fácil de mantener
     'products.json',
 ];
 
@@ -69,14 +71,12 @@ self.addEventListener('fetch', event => {
     }
 
     // products.json → network-first con caché de respaldo
-    // Así el usuario siempre ve datos frescos cuando hay red,
-    // pero sigue funcionando offline con la última versión cacheada.
     if (url.pathname.endsWith('products.json')) {
         event.respondWith(networkFirst(request, 'application/json', '[]'));
         return;
     }
 
-    // Assets estáticos → stale-while-revalidate (instantáneo + actualización en background)
+    // Assets estáticos → stale-while-revalidate
     if (/\.(css|js|webp|png|jpg|jpeg|gif|svg|ico|woff2?|ttf|eot)$/.test(url.pathname)) {
         event.respondWith(staleWhileRevalidate(request));
         return;

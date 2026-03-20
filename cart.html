@@ -212,18 +212,10 @@
         'use strict';
 
         // ── Mismas claves que index.html y products.html ─────────────────
+        // _lsGet y _lsSet viven en app.js — no se redefinen aquí.
         const PRODUCTS_VERSION = 'v1';
         const CACHE_KEY        = 'productsCache';
         const CACHE_VER_KEY    = 'productsCacheVersion';
-
-        function _lsGet(key, fallback) {
-            try { return JSON.parse(localStorage.getItem(key) || 'null') ?? fallback; }
-            catch(e) { return fallback; }
-        }
-        function _lsSet(key, value) {
-            try { localStorage.setItem(key, JSON.stringify(value)); return true; }
-            catch(e) { return false; }
-        }
 
         if (typeof getCart !== 'function' && document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', function() {
@@ -463,8 +455,7 @@
             submitBtn.innerHTML = '<span>Enviando...</span>';
 
             // ── Obtener pool de productos para enriquecer códigos ────────
-            // 1) Preferir caché (ya lo tienen si visitaron index o products)
-            // 2) Solo si no hay caché, hacer fetch del JSON unificado
+            // Usa _lsGet de app.js — no se redefine aquí.
             let productPool = null;
             const cachedVersion = _lsGet(CACHE_VER_KEY, null);
             const cachedData    = _lsGet(CACHE_KEY, null);

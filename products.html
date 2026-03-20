@@ -405,13 +405,12 @@
         let autocompleteDebounce = null;
 
         // ── Paginación ───────────────────────────────────────────────────
-        const PAGE_SIZE      = 30;   // Cuántos productos mostrar inicialmente y por cada carga
-        let   renderedCount  = 0;    // Cuántos ya están en el DOM
+        const PAGE_SIZE      = 30;
+        let   renderedCount  = 0;
         let   isLoadingMore  = false;
 
         // ── Caché de versión ─────────────────────────────────────────────
-        // Cambiar este valor cada vez que actualizás products.json
-        // para que el cache del browser se invalide automáticamente.
+        // _lsGet y _lsSet viven en app.js — no se redefinen aquí.
         const PRODUCTS_VERSION = 'v1';
         const CACHE_KEY        = 'productsCache';
         const CACHE_VER_KEY    = 'productsCacheVersion';
@@ -431,28 +430,24 @@
         // CARGA DE PRODUCTOS — cache-first + fetch en background
         // ════════════════════════════════════════════════════════════════
         async function loadProducts() {
-            // 1) Intentar mostrar el caché inmediatamente (render instantáneo)
             const cachedVersion = _lsGet(CACHE_VER_KEY, null);
             const cachedData    = _lsGet(CACHE_KEY, null);
 
             if (cachedData && cachedData.length && cachedVersion === PRODUCTS_VERSION) {
                 allProducts = cachedData;
                 _bootstrapFilters();
-                applyFilters();   // render inmediato desde caché ← sin esperar la red
+                applyFilters();
             }
 
-            // 2) Fetch del JSON fresco en paralelo (un solo archivo)
             try {
                 const response = await fetch('products.json');
                 if (!response.ok) throw new Error('HTTP ' + response.status);
                 const freshData = await response.json();
                 const fresh = freshData.filter(p => p.id !== undefined && p.name !== undefined);
 
-                // Guardar en caché para la próxima visita
                 _lsSet(CACHE_KEY, fresh);
                 _lsSet(CACHE_VER_KEY, PRODUCTS_VERSION);
 
-                // Si el caché ya pintó algo, solo actualizar si los datos cambiaron
                 const same = cachedData && JSON.stringify(fresh) === JSON.stringify(cachedData);
                 if (!same) {
                     allProducts = fresh;
@@ -461,7 +456,6 @@
                 }
             } catch (error) {
                 console.error('Error al cargar products.json:', error);
-                // Si había caché, el usuario ya ve los productos → no mostrar error
                 if (!allProducts.length) {
                     const grid = document.getElementById('productsGrid');
                     grid.setAttribute('aria-busy', 'false');
@@ -471,7 +465,6 @@
             }
         }
 
-        // Configura precios, marcas y parámetros de URL
         function _bootstrapFilters() {
             const prices = allProducts.map(p => p.price).filter(p => typeof p === 'number');
             if (prices.length) {
@@ -481,12 +474,10 @@
                 );
             }
 
-            // Poblar select de marcas
             const brands = [...new Set(allProducts.map(p => p.brand).filter(Boolean))].sort();
             ['brandFilter', 'brandFilterMobile'].forEach(id => {
                 const el = document.getElementById(id);
                 if (!el) return;
-                // Limpiar excepto "Todas"
                 while (el.options.length > 1) el.remove(1);
                 brands.forEach(brand => {
                     const option = document.createElement('option');
@@ -496,7 +487,6 @@
                 });
             });
 
-            // Leer parámetros de URL
             _applyURLParams();
         }
 
@@ -569,7 +559,7 @@
             else if (sort === 'name-asc')   filteredProducts.sort((a, b) => a.name.localeCompare(b.name));
             else if (sort === 'name-desc')  filteredProducts.sort((a, b) => b.name.localeCompare(a.name));
 
-            renderedCount = 0;   // Resetear paginación al cambiar filtros
+            renderedCount = 0;
             displayProducts();
             updateFilterCount();
             syncURL(searchTerm, category, petType, brand, sort);
@@ -587,16 +577,13 @@
                 return;
             }
 
-            // Renderizar solo el primer bloque (rápido)
             const firstBatch = filteredProducts.slice(0, PAGE_SIZE);
             grid.innerHTML   = firstBatch.map(product => createProductCard(product)).join('');
             renderedCount    = firstBatch.length;
 
-            // fitProductNames diferido — no bloquea el paint inicial
             _scheduleFitNames();
         }
 
-        // Agrega el siguiente bloque de productos al DOM (infinite scroll)
         function _renderNextBatch() {
             if (isLoadingMore) return;
             if (renderedCount >= filteredProducts.length) return;
@@ -605,7 +592,6 @@
             const indicator = document.getElementById('loadMoreIndicator');
             if (indicator) indicator.style.display = 'block';
 
-            // Pequeño timeout para que el spinner sea visible y no bloquee el hilo
             setTimeout(() => {
                 const grid      = document.getElementById('productsGrid');
                 const nextBatch = filteredProducts.slice(renderedCount, renderedCount + PAGE_SIZE);
@@ -623,7 +609,6 @@
             }, 50);
         }
 
-        // ── Infinite scroll con IntersectionObserver ─────────────────────
         function setupInfiniteScroll() {
             const sentinel = document.getElementById('loadMoreSentinel');
             if (!sentinel || !('IntersectionObserver' in window)) return;
@@ -632,12 +617,11 @@
                 if (entries[0].isIntersecting) {
                     _renderNextBatch();
                 }
-            }, { rootMargin: '200px' });   // Empieza a cargar 200px antes de llegar al final
+            }, { rootMargin: '200px' });
 
             observer.observe(sentinel);
         }
 
-        // ── fitProductNames diferido: no bloquea el paint ────────────────
         function _scheduleFitNames() {
             if (typeof requestIdleCallback === 'function') {
                 requestIdleCallback(fitProductNames, { timeout: 500 });
@@ -927,16 +911,6 @@
                 }
             }, { passive: true });
         })();
-
-        // ── helpers localStorage (ya existen en app.js, redefinir aquí para seguridad) ──
-        function _lsGet(key, fallback) {
-            try { return JSON.parse(localStorage.getItem(key) || 'null') ?? fallback; }
-            catch(e) { return fallback; }
-        }
-        function _lsSet(key, value) {
-            try { localStorage.setItem(key, JSON.stringify(value)); return true; }
-            catch(e) { return false; }
-        }
     </script>
 
     <!-- Spinner CSS para load-more -->

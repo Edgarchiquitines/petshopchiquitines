@@ -8,6 +8,7 @@ const _fmtPYG = new Intl.NumberFormat('es-PY', {
 });
 
 // ── Safe localStorage helpers ────────────────────────────────────────────────
+// Fuente única de verdad: definidas aquí y usadas desde todos los HTMLs.
 function _lsGet(key, fallback) {
     try { return JSON.parse(localStorage.getItem(key) || 'null') ?? fallback; }
     catch (e) { return fallback; }
@@ -304,29 +305,23 @@ function fitProductNames() {
     const MIN_FONT  = 10;
 
     document.querySelectorAll('.product-name').forEach(el => {
-        // Resetear al tamaño máximo para medir desde arriba
         el.style.fontSize = MAX_FONT + 'px';
-
-        // Con -webkit-line-clamp activo, scrollHeight no es confiable.
-        // Medimos comparando clientHeight vs scrollHeight desactivando line-clamp temporalmente.
         el.style.webkitLineClamp = 'unset';
         el.style.maxHeight = 'none';
 
         const lh        = parseFloat(getComputedStyle(el).lineHeight) || MAX_FONT * 1.35;
-        const maxHeight = lh * 2;   // exactamente 2 lineas
+        const maxHeight = lh * 2;
 
         let size = MAX_FONT;
         while (el.scrollHeight > maxHeight + 1 && size > MIN_FONT) {
             size--;
             el.style.fontSize = size + 'px';
-            // Recalcular line-height al nuevo tamaño
             const newLh = parseFloat(getComputedStyle(el).lineHeight) || size * 1.35;
             if (el.scrollHeight <= newLh * 2 + 1) break;
         }
 
-        // Restaurar line-clamp y max-height para el recorte visual
         el.style.webkitLineClamp = '2';
-        el.style.maxHeight = '';   // deja que el CSS lo controle via calc(1.35em * 2)
+        el.style.maxHeight = '';
     });
 }
 
@@ -335,7 +330,6 @@ function observeProductGrid() {
     if (!grids.length) return;
 
     const observer = new MutationObserver(() => {
-        // Diferir siempre para no bloquear el hilo principal
         if (typeof requestIdleCallback === 'function') {
             requestIdleCallback(fitProductNames, { timeout: 500 });
         } else {
@@ -437,11 +431,32 @@ document.addEventListener('DOMContentLoaded', function() {
     }, { passive: true });
 });
 
-// CSS animations
+// CSS animations + zoom-hint oculto en desktop
 const style = document.createElement('style');
 style.textContent = `
     @keyframes slideIn  { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0);    opacity: 1; } }
     @keyframes slideOut { from { transform: translateX(0);    opacity: 1; } to { transform: translateX(100%); opacity: 0; } }
+
+    /* ── zoom-hint: solo visible en dispositivos táctiles (mobile/tablet) ── */
+    .zoom-hint { display: none; }
+    @media (hover: none) and (pointer: coarse) {
+        .zoom-hint {
+            display: flex;
+            position: absolute;
+            bottom: 0.4rem;
+            right: 0.4rem;
+            background: rgba(0,0,0,0.55);
+            color: #fff;
+            font-size: 0.6rem;
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.3rem;
+            align-items: center;
+            gap: 0.25rem;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+    }
+    .imgzoom-hint--hidden { opacity: 0 !important; }
 
     /* ── Panel lateral: scroll correcto ── */
     .side-panel {
@@ -747,23 +762,20 @@ function openOrdersModal() {
     if (fab) fab.style.display = 'none';
 }
 
-// ── reOrderToCart — ahora usa el único products.json ─────────────
+// ── reOrderToCart ─────────────────────────────────────────────────
 async function reOrderToCart(orderIndex) {
     const orders = getOrders();
     const order  = orders[orderIndex];
     if (!order) return;
 
-    // 1) Buscar en la variable global (products.html ya la tiene cargada)
     let freshProducts = (typeof allProducts !== 'undefined' && allProducts.length)
         ? allProducts
         : null;
 
-    // 2) Fallback: caché de localStorage
     if (!freshProducts) {
         freshProducts = _lsGet('productsCache', null);
     }
 
-    // 3) Último recurso: fetch del JSON unificado
     if (!freshProducts) {
         try {
             freshProducts = await fetch('products.json').then(r => r.json());
@@ -991,7 +1003,6 @@ function loadRecommendedSection(allProds) {
     section.style.display = 'block';
 
     requestAnimationFrame(() => {
-        // Diferir fitProductNames para no bloquear
         if (typeof requestIdleCallback === 'function') {
             requestIdleCallback(fitProductNames, { timeout: 400 });
         } else {

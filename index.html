@@ -360,19 +360,10 @@
         'use strict';
 
         // ── Misma clave y versión que products.html ──────────────────────
-        // Si cambiás el products.json, actualizá este valor también.
+        // _lsGet y _lsSet viven en app.js — no se redefinen aquí.
         const PRODUCTS_VERSION = 'v1';
         const CACHE_KEY        = 'productsCache';
         const CACHE_VER_KEY    = 'productsCacheVersion';
-
-        function _lsGet(key, fallback) {
-            try { return JSON.parse(localStorage.getItem(key) || 'null') ?? fallback; }
-            catch(e) { return fallback; }
-        }
-        function _lsSet(key, value) {
-            try { localStorage.setItem(key, JSON.stringify(value)); return true; }
-            catch(e) { return false; }
-        }
 
         document.addEventListener('DOMContentLoaded', function() {
             loadHomeProducts();
