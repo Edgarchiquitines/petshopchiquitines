@@ -4447,7 +4447,7 @@
     "petType": "perro",
     "category": "alimentos",
     "imageUrl": "assets/img/img297.webp",
-    "isOnSale": false,
+    "isOnSale": true,
     "description": "Alimento balanceado para perros",
     "code": "01992"
   },
