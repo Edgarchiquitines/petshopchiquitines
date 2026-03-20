@@ -11,7 +11,7 @@
     "category": "alimentos",
     "imageUrl": "assets/img/img1.webp",
     "isOnSale": false,
-    "description": "Alimento balanceado para perros adultos",
+    "description": "Alimento balanceado para perros",
     "code": "00990"
   },
   {
@@ -26,7 +26,7 @@
     "category": "alimentos",
     "imageUrl": "assets/img/img2.webp",
     "isOnSale": false,
-    "description": "Alimento balanceado para perros adultos",
+    "description": "Alimento balanceado para perros",
     "code": "01003"
   },
   {
@@ -40,7 +40,7 @@
     "category": "alimentos",
     "imageUrl": "assets/img/img3.webp",
     "isOnSale": false,
-    "description": "Alimento balanceado para perros adultos",
+    "description": "Alimento balanceado para perros",
     "code": "01546"
   },
   {
@@ -54,7 +54,7 @@
     "category": "alimentos",
     "imageUrl": "assets/img/img4.webp",
     "isOnSale": false,
-    "description": "Alimento balanceado para perros adultos",
+    "description": "Alimento balanceado para perros",
     "code": "01010"
   },
   {
@@ -68,7 +68,7 @@
     "category": "alimentos",
     "imageUrl": "assets/img/img5.webp",
     "isOnSale": false,
-    "description": "Alimento balanceado para perros adultos",
+    "description": "Alimento balanceado para perros",
     "code": "00570"
   },
   {
@@ -6221,5 +6221,50 @@
     "isOnSale": false,
     "description": "Pate enlatado para perros",
     "code": "49436"
+  },
+  {
+    "id": "416",
+    "name": "Cibau Adulto mini",
+    "brand": "Cibau",
+    "price": 60000,
+    "originalPrice": 60000,
+    "stock": 1,
+    "weight": "1kg",
+    "petType": "perro",
+    "category": "alimentos",
+    "imageUrl": "assets/img/img416.webp",
+    "isOnSale": false,
+    "description": "Alimento balanceado para perros",
+    "code": "47999"
+  },
+  {
+    "id": "417",
+    "name": "Cibau Adulto mini",
+    "brand": "Cibau",
+    "price": 185000,
+    "originalPrice": 185000,
+    "stock": 1,
+    "weight": "3kg",
+    "petType": "perro",
+    "category": "alimentos",
+    "imageUrl": "assets/img/img417.webp",
+    "isOnSale": false,
+    "description": "Alimento balanceado para perros",
+    "code": "47265"
+  },
+  {
+    "id": "418",
+    "name": "Cibau Cachorro mini",
+    "brand": "Cibau",
+    "price": 195000,
+    "originalPrice": 195000,
+    "stock": 1,
+    "weight": "3kg",
+    "petType": "perro",
+    "category": "alimentos",
+    "imageUrl": "assets/img/img418.webp",
+    "isOnSale": false,
+    "description": "Alimento balanceado para perros",
+    "code": "47357"
   }
 ]
