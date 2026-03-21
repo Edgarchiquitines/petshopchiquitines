@@ -6806,7 +6806,21 @@
     "description": "Mezcla de semillas premium para aves",
     "code": "77611"
   },
-
+  {
+    "id": "454",
+    "name": "Afoxocan Antiparasitario canino externo",
+    "brand": "Afoxocan",
+    "price": 8000,
+    "originalPrice": 10000,
+    "stock": 1,
+    "weight": "2-4 kg",
+    "petType": "perro",
+    "category": "salud",
+    "imageUrl": "assets/img/img454.webp",
+    "isOnSale": false,
+    "description": "Antiparasitario canino externo",
+    "code": "06660"
+  },
 
 
 
@@ -6888,21 +6902,6 @@
     "isOnSale": false,
     "description": "Correa tirador simple",
     "code": "15452"
-  },
-  {
-    "id": "",
-    "name": "Afoxocan Antiparasitario canino externo",
-    "brand": "Afoxocan",
-    "price": 8000,
-    "originalPrice": 10000,
-    "stock": 45,
-    "weight": "2-4 kg",
-    "petType": "perro",
-    "category": "salud",
-    "imageUrl": "assets/img/img.webp",
-    "isOnSale": false,
-    "description": "Antiparasitario canino externo",
-    "code": "06660"
   },
   {
     "id": "",
