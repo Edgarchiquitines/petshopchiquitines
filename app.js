@@ -298,30 +298,37 @@ function openImageZoom(src, alt) {
     }, { passive: false });
 }
 
-// ── Auto font-size para nombres largos ──────────────────────────────────────
+// Ajuste de tamaño de fuente para nombres de producto
+//   1. Empezar con la fuente máxima.
+//   2. Reducir de a 1px intentando que el nombre entre en 2 líneas.
+//   3. Parar al llegar a MIN_FONT aunque el texto todavía no entre en 2 líneas.
+//   4. NUNCA truncar con line-clamp: el texto fluye a una 3.ª línea si hace falta.
 function fitProductNames() {
     const isDesktop = window.innerWidth >= 768;
     const MAX_FONT  = isDesktop ? 17 : 15;
-    const MIN_FONT  = 10;
+    const MIN_FONT  = 12; // mínimo legible — debajo de esto no se achica más
 
     document.querySelectorAll('.product-name').forEach(el => {
-        el.style.fontSize = MAX_FONT + 'px';
+        // 1. Resetear para medir desde cero
+        el.style.fontSize        = MAX_FONT + 'px';
         el.style.webkitLineClamp = 'unset';
-        el.style.maxHeight = 'none';
+        el.style.overflow        = 'visible';
+        el.style.display         = 'block';
+        el.style.maxHeight       = 'none';
+        el.style.whiteSpace      = 'normal';
 
-        const lh        = parseFloat(getComputedStyle(el).lineHeight) || MAX_FONT * 1.35;
-        const maxHeight = lh * 2;
-
+        // 2. Intentar que entre en 2 líneas reduciendo fuente hasta MIN_FONT
         let size = MAX_FONT;
-        while (el.scrollHeight > maxHeight + 1 && size > MIN_FONT) {
-            size--;
+        while (size > MIN_FONT) {
             el.style.fontSize = size + 'px';
-            const newLh = parseFloat(getComputedStyle(el).lineHeight) || size * 1.35;
-            if (el.scrollHeight <= newLh * 2 + 1) break;
+            const lh       = parseFloat(getComputedStyle(el).lineHeight) || size * 1.4;
+            const twoLines = lh * 2 + 2; // +2px de tolerancia
+            if (el.scrollHeight <= twoLines) break; // cabe en 2 líneas ✓
+            size--;
         }
 
-        el.style.webkitLineClamp = '2';
-        el.style.maxHeight = '';
+        // 3. Si con MIN_FONT sigue sin entrar en 2 líneas → no pasa nada,
+        //    el bloque crece a 3 líneas naturalmente. Sin clamp. Sin "...".
     });
 }
 
@@ -582,6 +589,17 @@ style.textContent = `
     @media (max-width: 767px) {
         #atcNotif { top:auto; bottom:5rem; right:0.75rem; left:0.75rem; }
         .atcn-inner { max-width:100%; }
+    }
+
+    /* ── product-name: sin truncado, altura libre ── */
+    .product-name {
+        overflow: visible !important;
+        display: block !important;
+        -webkit-line-clamp: unset !important;
+        line-clamp: unset !important;
+        max-height: none !important;
+        white-space: normal !important;
+        word-break: break-word;
     }
 `;
 document.head.appendChild(style);
