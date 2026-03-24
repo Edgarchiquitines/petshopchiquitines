@@ -522,11 +522,6 @@
                 syncPriceRange('Desktop');
                 urlFilterApplied = true;
             }
-
-            if (urlFilterApplied && window.innerWidth < 768) {
-                const sidebar = document.getElementById('filtersSidebarMobile');
-                if (sidebar) sidebar.classList.remove('mobile-hidden');
-            }
         }
 
         // ════════════════════════════════════════════════════════════════
