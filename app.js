@@ -298,11 +298,14 @@ function openImageZoom(src, alt) {
     }, { passive: false });
 }
 
-// Ajuste de tamaño de fuente para nombres de producto
+// ── Ajuste de tamaño de fuente para nombres de producto ─────────────────────
+//
+// Estrategia:
 //   1. Empezar con la fuente máxima.
 //   2. Reducir de a 1px intentando que el nombre entre en 2 líneas.
 //   3. Parar al llegar a MIN_FONT aunque el texto todavía no entre en 2 líneas.
 //   4. NUNCA truncar con line-clamp: el texto fluye a una 3.ª línea si hace falta.
+//
 function fitProductNames() {
     const isDesktop = window.innerWidth >= 768;
     const MAX_FONT  = isDesktop ? 17 : 15;
