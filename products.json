@@ -1515,7 +1515,7 @@
     "id": "451",
     "name": "DentaStix Masticable raza grande",
     "brand": "Pedigree",
-    "price": 178500,
+    "price": 18500,
     "originalPrice": 18500,
     "stock": 1,
     "weight": "115.5g",
@@ -3166,7 +3166,7 @@
     "name": "Primogato Gatito",
     "brand": "Primogato",
     "price": 80000,
-    "originalPrice": 8000,
+    "originalPrice": 80000,
     "stock": 1,
     "weight": "3kg",
     "petType": "gato",
@@ -3841,7 +3841,7 @@
     "name": "Bio Fresh Gato castrado salmon",
     "brand": "Bio Fresh",
     "price": 115000,
-    "originalPrice": 1150000,
+    "originalPrice": 115000,
     "stock": 1,
     "weight": "1.5kg",
     "petType": "gato",
@@ -6210,7 +6210,7 @@
     "id": "411",
     "name": "Bio Kitty Arena sanitaria neutro",
     "brand": "Bio Kitty",
-    "price": 7000,
+    "price": 70000,
     "originalPrice": 70000,
     "stock": 1,
     "weight": "10L",
@@ -6415,21 +6415,6 @@
     "isOnSale": false,
     "description": "Arena para gatos",
     "code": "00033"
-  },
-  {
-    "id": "424",
-    "name": "PipiCat Arena Sanitaria",
-    "brand": "PipiCat",
-    "price": 65000,
-    "originalPrice": 65000,
-    "stock": 1,
-    "weight": "12kg",
-    "petType": "gato",
-    "category": "higiene",
-    "imageUrl": "assets/img/img424.webp",
-    "isOnSale": false,
-    "description": "Arena para gatos",
-    "code": "05878"
   },
   {
     "id": "425",
@@ -7600,5 +7585,20 @@
     "isOnSale": false,
     "description": "Antiparasitario canino",
     "code": "72038"
-  }
+  },
+{
+  "id": "507",
+  "name": "PipiCat Arena Sanitaria",
+  "brand": "PipiCat",
+  "price": 65000,
+  "originalPrice": 65000,
+  "stock": 1,
+  "weight": "12kg",
+  "petType": "gato",
+  "category": "higiene",
+  "imageUrl": "assets/img/img507.webp",
+  "isOnSale": false,
+  "description": "Arena para gatos",
+  "code": "05878"
+}
 ]
