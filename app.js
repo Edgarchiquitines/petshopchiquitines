@@ -17,9 +17,7 @@ function _lsSet(key, value) {
     catch (e) { return false; }
 }
 
-// ================================================================
 // CART MANAGEMENT
-// ================================================================
 function getCart() {
     return _lsGet('cart', []);
 }
@@ -208,9 +206,7 @@ function shareProductWA(product) {
     window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
 }
 
-// ================================================================
 // IMAGE ZOOM LIGHTBOX
-// ================================================================
 function openImageZoom(src, alt) {
     if (document.getElementById('imgZoomOverlay')) return;
 
@@ -323,21 +319,17 @@ function openImageZoom(src, alt) {
     }, { passive: false });
 }
 
-// ================================================================
 // fitProductNames — optimizado con ResizeObserver
-// ================================================================
-//
 // Estrategia:
 //   1. Empezar con la fuente máxima.
 //   2. Reducir de a 1px intentando que el nombre entre en 2 líneas.
 //   3. Parar al llegar a MIN_FONT aunque el texto todavía no entre.
 //   4. NUNCA truncar con line-clamp: el texto fluye a 3.ª línea si hace falta.
 //
-// Optimización (punto 7 de la lista):
-//   • En lugar de re-iterar TODO el grid en cada resize, usamos un
-//     ResizeObserver por tarjeta: solo se recalcula la tarjeta cuyo
+// Optimización:
+//   • Usamos un ResizeObserver por tarjeta: solo se recalcula la tarjeta cuyo
 //     ancho cambió. Esto elimina el thrashing de layout masivo.
-//
+
 const _nameObservers = new WeakMap(); // card → ResizeObserver
 
 function _fitOneName(el) {
@@ -408,9 +400,7 @@ function observeProductGrid() {
     grids.forEach(grid => observer.observe(grid, { childList: true, subtree: false }));
 }
 
-// ================================================================
 // NOTIFICACIONES
-// ================================================================
 function showAddedToCartNotification(product) {
     const existing = document.getElementById('atcNotif');
     if (existing) existing.remove();
@@ -722,9 +712,7 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-// ================================================================
 // FAVORITOS (WISHLIST)
-// ================================================================
 function getFavorites() { return _lsGet('favorites', []); }
 
 function saveFavorites(favs) { _lsSet('favorites', favs); updateFavCount(); }
@@ -829,9 +817,7 @@ function checkFavPanelEmpty() {
     }
 }
 
-// ================================================================
 // HISTORIAL DE PEDIDOS
-// ================================================================
 function saveOrder(orderData) {
     const orders = _lsGet('orderHistory', []);
     orders.unshift(orderData);
@@ -1007,9 +993,7 @@ function injectPanels() {
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closePanels(); });
 }
 
-// ================================================================
 // SEGUIMIENTO DE ACTIVIDAD DEL USUARIO
-// ================================================================
 function trackUserActivity(type, product) {
     const activity = getUserActivity();
 
@@ -1039,16 +1023,13 @@ function getUserActivity() {
 function saveUserActivity(activity) { _lsSet('userActivity', activity); }
 function hasUserActivity() { return getUserActivity().hasActivity === true; }
 
-// ================================================================
 // RECOMENDACIONES PERSONALIZADAS
-// ================================================================
 let _recommendedPool = null;
 
 function filterRealProducts(arr) {
     return arr.filter(p => p.id !== undefined && p.name !== undefined);
 }
 
-// ── Optimización punto 8: reemplazar JSON.stringify pesado ───────
 // Antes: JSON.stringify(fresh) === JSON.stringify(cachedData)
 // Ahora: comparación ligera por longitud + id+stock del primer/último elemento.
 // Esta función se llama desde index.html y products.html.

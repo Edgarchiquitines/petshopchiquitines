@@ -1,6 +1,6 @@
 # Permitir que todos los motores de búsqueda rastreen todo
 User-agent: *
-Disallow: /products
+allow: /products
 Disallow: /cart
 
 # Sitemap principal

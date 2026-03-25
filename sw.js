@@ -1,9 +1,7 @@
-// ================================================================
 // SERVICE WORKER — Pet Shop Chiquitines
 // La constante CACHE_VERSION se genera automáticamente con la fecha
 // y hora de compilación del SW. Para forzar que todos los usuarios
 // reciban archivos nuevos, basta con guardar (tocar) este archivo.
-// ================================================================
 'use strict';
 
 // ── Versión automática: se actualiza sola cada vez que guardás el SW

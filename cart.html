@@ -211,8 +211,6 @@
     <script defer>
         'use strict';
 
-        // ── Mismas claves que index.html y products.html ─────────────────
-        // _lsGet y _lsSet viven en app.js — no se redefinen aquí.
         const PRODUCTS_VERSION = 'v1';
         const CACHE_KEY        = 'productsCache';
         const CACHE_VER_KEY    = 'productsCacheVersion';
@@ -455,7 +453,6 @@
             submitBtn.innerHTML = '<span>Enviando...</span>';
 
             // ── Obtener pool de productos para enriquecer códigos ────────
-            // Usa _lsGet de app.js — no se redefine aquí.
             let productPool = null;
             const cachedVersion = _lsGet(CACHE_VER_KEY, null);
             const cachedData    = _lsGet(CACHE_KEY, null);

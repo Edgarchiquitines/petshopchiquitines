@@ -1,10 +1,8 @@
 'use strict';
 
-// ================================================================
 // products-page.js
 // Lógica exclusiva de products.html, extraída del script inline.
 // Depende de app.js (debe cargarse antes).
-// ================================================================
 
 // ── Estado global ────────────────────────────────────────────────
 let allProducts      = [];
@@ -26,9 +24,8 @@ const PRODUCTS_VERSION = 'v1';
 const CACHE_KEY        = 'productsCache';
 const CACHE_VER_KEY    = 'productsCacheVersion';
 
-// ════════════════════════════════════════════════════════════════
 // INIT
-// ════════════════════════════════════════════════════════════════
+
 document.addEventListener('DOMContentLoaded', function() {
     loadProducts();
     setupFilterToggle();
@@ -37,9 +34,8 @@ document.addEventListener('DOMContentLoaded', function() {
     setupInfiniteScroll();
 });
 
-// ════════════════════════════════════════════════════════════════
 // CARGA DE PRODUCTOS — cache-first + fetch en background
-// ════════════════════════════════════════════════════════════════
+
 async function loadProducts() {
     const cachedVersion = _lsGet(CACHE_VER_KEY, null);
     const cachedData    = _lsGet(CACHE_KEY, null);
@@ -59,7 +55,7 @@ async function loadProducts() {
         _lsSet(CACHE_KEY, fresh);
         _lsSet(CACHE_VER_KEY, PRODUCTS_VERSION);
 
-        // ── Optimización punto 8: comparación ligera en lugar de JSON.stringify ──
+        // ── Optimización: comparación ligera en lugar de JSON.stringify ──
         const changed = _productsChanged(fresh, cachedData);
         if (changed) {
             allProducts = fresh;
@@ -134,9 +130,7 @@ function _applyURLParams() {
     }
 }
 
-// ════════════════════════════════════════════════════════════════
 // FILTROS Y DISPLAY
-// ════════════════════════════════════════════════════════════════
 function applyFilters() {
     const searchTerm = document.getElementById('searchInput').value.toLowerCase();
     const category   = document.getElementById('categoryFilter').value;
@@ -233,9 +227,7 @@ function _scheduleFitNames() {
     }
 }
 
-// ════════════════════════════════════════════════════════════════
 // AUTOCOMPLETE
-// ════════════════════════════════════════════════════════════════
 function handleAutocomplete(inputEl, dropdownId) {
     applyFilters();
     const query    = inputEl.value.trim().toLowerCase();
@@ -356,9 +348,7 @@ function escapeHtml(str) {
         .replace(/'/g, '&#39;');
 }
 
-// ════════════════════════════════════════════════════════════════
 // PRICE RANGE
-// ════════════════════════════════════════════════════════════════
 function syncPriceRange(suffix) {
     const minEl  = document.getElementById('priceMin' + suffix);
     const maxEl  = document.getElementById('priceMax' + suffix);
@@ -418,9 +408,7 @@ function initPriceRange(min, max) {
     });
 }
 
-// ════════════════════════════════════════════════════════════════
 // SYNC SEARCH & FILTERS
-// ════════════════════════════════════════════════════════════════
 function syncSearch(source, targetId) {
     const target = document.getElementById(targetId);
     if (target) target.value = source.value;
@@ -484,9 +472,7 @@ function syncURL(search, category, petType, brand, sort) {
         : location.pathname);
 }
 
-// ════════════════════════════════════════════════════════════════
 // UI MISC
-// ════════════════════════════════════════════════════════════════
 function setupFilterToggle() {
     const toggleBtn = document.getElementById('filterToggleBtn');
     const sidebar   = document.getElementById('filtersSidebarMobile');

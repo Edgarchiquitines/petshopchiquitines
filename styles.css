@@ -1635,9 +1635,7 @@ body {
 .fav-btn--active { color: #FF6B35; }
 .fav-btn--active svg { fill: #FF6B35; stroke: #FF6B35; }
 
-/* ================================================================
-   SIDE PANEL (drawer)
-   ================================================================ */
+/* SIDE PANEL (drawer)*/
 .panel-backdrop {
     display: none;
     position: fixed;
