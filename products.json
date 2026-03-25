@@ -3321,7 +3321,7 @@
     "weight": "1kg",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img217.webp",
+    "imageUrl": "assets/img/img217.jpg",
     "isOnSale": false,
     "description": "Alimento balanceado para gatos",
     "code": "72851"
@@ -3336,7 +3336,7 @@
     "weight": "3kg",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img218.webp",
+    "imageUrl": "assets/img/img218.jpg",
     "isOnSale": false,
     "description": "Alimento balanceado para gatos",
     "code": "73629"
@@ -3366,7 +3366,7 @@
     "weight": "85g",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img220.webp",
+    "imageUrl": "assets/img/img220.avif",
     "isOnSale": false,
     "description": "Pate para gatos",
     "code": "20774"
@@ -3396,7 +3396,7 @@
     "weight": "85g",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img222.webp",
+    "imageUrl": "assets/img/img222.jpeg",
     "isOnSale": false,
     "description": "Pate para gatos",
     "code": "40588"
@@ -3426,7 +3426,7 @@
     "weight": "85g",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img224.webp",
+    "imageUrl": "assets/img/img224.avif",
     "isOnSale": false,
     "description": "Pate para gatos",
     "code": "41066"
@@ -3456,7 +3456,7 @@
     "weight": "85g",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img226.webp",
+    "imageUrl": "assets/img/img226.avif",
     "isOnSale": false,
     "description": "Pate para gatos",
     "code": "41080"
@@ -3501,7 +3501,7 @@
     "weight": "11kg",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img229.webp",
+    "imageUrl": "assets/img/img229.png",
     "isOnSale": false,
     "description": "Alimento balanceado para gatos",
     "code": "01950"
@@ -3516,7 +3516,7 @@
     "weight": "10kg",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img230.webp",
+    "imageUrl": "assets/img/img230.png",
     "isOnSale": true,
     "description": "Alimento balanceado para gatos",
     "code": "60783"
@@ -3546,7 +3546,7 @@
     "weight": "1kg",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img232.webp",
+    "imageUrl": "assets/img/img232.png",
     "isOnSale": false,
     "description": "Alimento balanceado para perros",
     "code": "57598"
@@ -3568,18 +3568,18 @@
   },
   {
     "id": "234",
-    "name": "Three Dogs Cachorro med y grande",
-    "brand": "Three Dogs",
-    "price": 80000,
-    "originalPrice": 80000,
+    "name": "PipiCat Arena Sanitaria",
+    "brand": "PipiCat",
+    "price": 65000,
+    "originalPrice": 65000,
     "stock": 10,
-    "weight": "3kg",
-    "petType": "perro",
-    "category": "alimentos",
-    "imageUrl": "assets/img/img234.webp",
+    "weight": "12kg",
+    "petType": "gato",
+    "category": "higiene",
+    "imageUrl": "assets/img/img234.jpeg",
     "isOnSale": false,
-    "description": "Alimento balanceado para perros",
-    "code": "57635"
+    "description": "Arena para gatos",
+    "code": "05878"
   },
   {
     "id": "235",
@@ -3636,7 +3636,7 @@
     "weight": "15kg",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img238.webp",
+    "imageUrl": "assets/img/img238.png",
     "isOnSale": false,
     "description": "Alimento balanceado para perros",
     "code": "57628"
@@ -3666,7 +3666,7 @@
     "weight": "1kg",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img240.webp",
+    "imageUrl": "assets/img/img240.png",
     "isOnSale": false,
     "description": "Alimento balanceado para gatos",
     "code": "57703"
@@ -3681,7 +3681,7 @@
     "weight": "1kg",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img241.webp",
+    "imageUrl": "assets/img/img241.png",
     "isOnSale": false,
     "description": "Alimento balanceado para gatos",
     "code": "57765"
@@ -3696,7 +3696,7 @@
     "weight": "1kg",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img242.webp",
+    "imageUrl": "assets/img/img242.png",
     "isOnSale": false,
     "description": "Alimento balanceado para gatos",
     "code": "57734"
@@ -3711,7 +3711,7 @@
     "weight": "15kg",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img243.webp",
+    "imageUrl": "assets/img/img243.png",
     "isOnSale": false,
     "description": "Alimento balanceado para gatos",
     "code": "57758"
@@ -3726,7 +3726,7 @@
     "weight": "15kg",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img244.webp",
+    "imageUrl": "assets/img/img244.png",
     "isOnSale": false,
     "description": "Alimento balanceado para gatos",
     "code": "57796"
@@ -3741,7 +3741,7 @@
     "weight": "15kg",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img245.webp",
+    "imageUrl": "assets/img/img245.png",
     "isOnSale": false,
     "description": "Alimento balanceado para gatos",
     "code": "57727"
@@ -3756,7 +3756,7 @@
     "weight": "15kg",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img246.webp",
+    "imageUrl": "assets/img/img246.png",
     "isOnSale": false,
     "description": "Alimento balanceado para perros",
     "code": "50089"
@@ -7600,20 +7600,5 @@
     "isOnSale": false,
     "description": "Antiparasitario canino",
     "code": "72038"
-  },
-  {
-    "id": "507",
-    "name": "PipiCat Arena Sanitaria",
-    "brand": "PipiCat",
-    "price": 65000,
-    "originalPrice": 65000,
-    "stock": 10,
-    "weight": "12kg",
-    "petType": "gato",
-    "category": "higiene",
-    "imageUrl": "assets/img/img507.webp",
-    "isOnSale": false,
-    "description": "Arena para gatos",
-    "code": "05878"
   }
 ]
