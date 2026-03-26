@@ -3051,7 +3051,7 @@
     "weight": "8kg",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img200.webp",
+    "imageUrl": "assets/img/img200.png",
     "isOnSale": false,
     "description": "Alimento balanceado para perros",
     "code": "13264"
@@ -3066,7 +3066,7 @@
     "weight": "8kg",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img201.webp",
+    "imageUrl": "assets/img/img201.png",
     "isOnSale": false,
     "description": "Alimento balanceado para perros",
     "code": "13455"
