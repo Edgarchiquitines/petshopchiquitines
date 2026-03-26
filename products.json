@@ -5166,7 +5166,7 @@
     "weight": "3kg",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img340.webp",
+    "imageUrl": "assets/img/img340.png",
     "isOnSale": false,
     "description": "Alimento balanceado para perros",
     "code": "32942"
@@ -5181,7 +5181,7 @@
     "weight": "1kg",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img341.webp",
+    "imageUrl": "assets/img/img341.png",
     "isOnSale": false,
     "description": "Alimento balanceado para perros",
     "code": "28150"
@@ -5196,7 +5196,7 @@
     "weight": "3kg",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img342.webp",
+    "imageUrl": "assets/img/img342.png",
     "isOnSale": false,
     "description": "Alimento balanceado para perros",
     "code": "28204"
@@ -5211,7 +5211,7 @@
     "weight": "3kg",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img343.webp",
+    "imageUrl": "assets/img/img343.png",
     "isOnSale": false,
     "description": "Alimento balanceado para perros",
     "code": "31051"
@@ -5226,7 +5226,7 @@
     "weight": "15+3kg",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img344.webp",
+    "imageUrl": "assets/img/img344.png",
     "isOnSale": false,
     "description": "Alimento balanceado para perros",
     "code": "19555"
@@ -5241,7 +5241,7 @@
     "weight": "12kg",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img345.webp",
+    "imageUrl": "assets/img/img345.png",
     "isOnSale": false,
     "description": "Alimento balanceado para perros",
     "code": "68570"
@@ -5256,7 +5256,7 @@
     "weight": "85g",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img346.webp",
+    "imageUrl": "assets/img/img346.png",
     "isOnSale": false,
     "description": "Pate para gatos",
     "code": "46429"
@@ -5271,7 +5271,7 @@
     "weight": "85g",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img347.webp",
+    "imageUrl": "assets/img/img347.png",
     "isOnSale": false,
     "description": "Pate para gatos",
     "code": "46344"
