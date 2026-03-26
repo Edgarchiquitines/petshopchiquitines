@@ -3396,7 +3396,7 @@
     "weight": "85g",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img222.jpeg",
+    "imageUrl": "assets/img/img222.jpg",
     "isOnSale": false,
     "description": "Pate para gatos",
     "code": "40588"
@@ -3576,7 +3576,7 @@
     "weight": "12kg",
     "petType": "gato",
     "category": "higiene",
-    "imageUrl": "assets/img/img234.jpeg",
+    "imageUrl": "assets/img/img234.jpg",
     "isOnSale": false,
     "description": "Arena para gatos",
     "code": "05878"
