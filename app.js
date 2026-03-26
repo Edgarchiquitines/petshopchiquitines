@@ -320,17 +320,7 @@ function openImageZoom(src, alt) {
 }
 
 // fitProductNames — optimizado con ResizeObserver
-// Estrategia:
-//   1. Empezar con la fuente máxima.
-//   2. Reducir de a 1px intentando que el nombre entre en 2 líneas.
-//   3. Parar al llegar a MIN_FONT aunque el texto todavía no entre.
-//   4. NUNCA truncar con line-clamp: el texto fluye a 3.ª línea si hace falta.
-//
-// Optimización:
-//   • Usamos un ResizeObserver por tarjeta: solo se recalcula la tarjeta cuyo
-//     ancho cambió. Esto elimina el thrashing de layout masivo.
-
-const _nameObservers = new WeakMap(); // card → ResizeObserver
+const _nameObservers = new WeakMap();
 
 function _fitOneName(el) {
     const isDesktop = window.innerWidth >= 768;
@@ -354,14 +344,10 @@ function _fitOneName(el) {
     }
 }
 
-// Llama a _fitOneName para todos los .product-name visibles.
-// Se usa solo en el primer render o cuando se necesita un recalculo global.
 function fitProductNames() {
     document.querySelectorAll('.product-name').forEach(_fitOneName);
 }
 
-// Registra un ResizeObserver en la tarjeta padre para re-ajustar
-// solo ESA tarjeta cuando cambia su ancho (p.ej. resize del grid).
 function _observeCardResize(nameEl) {
     const card = nameEl.closest('.product-card');
     if (!card || _nameObservers.has(card)) return;
@@ -377,7 +363,6 @@ function _observeCardResize(nameEl) {
     _nameObservers.set(card, ro);
 }
 
-// Ajusta todos los nombres del grid Y registra observers individuales.
 function fitAndObserveProductNames() {
     document.querySelectorAll('.product-name').forEach(el => {
         _fitOneName(el);
@@ -515,8 +500,6 @@ document.addEventListener('DOMContentLoaded', function() {
     updateFavCount();
     observeProductGrid();
 
-    // Resize global: solo se usa si ResizeObserver NO está disponible
-    // (fallback para browsers muy antiguos).
     if (!('ResizeObserver' in window)) {
         window.addEventListener('resize', () => {
             if (typeof requestIdleCallback === 'function') {
@@ -534,7 +517,6 @@ style.textContent = `
     @keyframes slideIn  { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0);    opacity: 1; } }
     @keyframes slideOut { from { transform: translateX(0);    opacity: 1; } to { transform: translateX(100%); opacity: 0; } }
 
-    /* ── zoom-hint: solo visible en dispositivos táctiles ── */
     .zoom-hint { display: none; }
     @media (hover: none) and (pointer: coarse) {
         .zoom-hint {
@@ -555,7 +537,6 @@ style.textContent = `
     }
     .imgzoom-hint--hidden { opacity: 0 !important; }
 
-    /* ── Badge "Últimas unidades" ── */
     .low-stock-badge {
         position: absolute;
         bottom: 0.4rem;
@@ -575,12 +556,10 @@ style.textContent = `
     }
     .low-stock-badge svg { flex-shrink: 0; }
 
-    /* ── Notificación de stock agotado ── */
     .atcn-inner--warn { background: #1c1c1c; }
     .atcn-check--warn { background: #f59e0b; }
     .atcn-label--warn { color: #fbbf24; }
 
-    /* ── Panel lateral ── */
     .side-panel {
         display: flex;
         flex-direction: column;
@@ -599,7 +578,6 @@ style.textContent = `
         gap: 0.75rem;
     }
 
-    /* ── Tarjetas de pedido ── */
     .order-history-card {
         position: static !important;
         flex-shrink: 0;
@@ -663,7 +641,6 @@ style.textContent = `
     .order-repeat-btn:hover  { background-color: #E55A2B; }
     .order-repeat-btn:active { transform: scale(0.97); }
 
-    /* ── Favoritos ── */
     .panel-product-row {
         position: static !important;
         flex-shrink: 0;
@@ -671,7 +648,6 @@ style.textContent = `
         box-sizing: border-box;
     }
 
-    /* ── Toast carrito ── */
     #atcNotif {
         position: fixed; top: 5rem; right: 1rem;
         z-index: 9999; opacity: 0;
@@ -699,7 +675,6 @@ style.textContent = `
         .atcn-inner { max-width:100%; }
     }
 
-    /* ── product-name: sin truncado forzado ── */
     .product-name {
         overflow: visible !important;
         display: block !important;
@@ -712,14 +687,20 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
+// ════════════════════════════════════════════════════════════════
 // FAVORITOS (WISHLIST)
+// FIX: todas las comparaciones de ID usan String() para evitar
+//      discrepancias entre número y string que rompían el toggle/remove.
+// ════════════════════════════════════════════════════════════════
+
 function getFavorites() { return _lsGet('favorites', []); }
 
 function saveFavorites(favs) { _lsSet('favorites', favs); updateFavCount(); }
 
 function toggleFavorite(product) {
     const favs = getFavorites();
-    const idx  = favs.findIndex(f => f.id === product.id);
+    // FIX: comparar como strings para evitar 123 !== "123"
+    const idx  = favs.findIndex(f => String(f.id) === String(product.id));
     if (idx >= 0) {
         favs.splice(idx, 1);
         showNotification('Eliminado de favoritos');
@@ -729,12 +710,16 @@ function toggleFavorite(product) {
         trackUserActivity('favorite', product);
     }
     saveFavorites(favs);
+    // FIX: actualizar todos los botones con este id
     document.querySelectorAll(`.fav-btn[data-id="${product.id}"]`).forEach(btn => {
         refreshFavBtn(btn, product.id);
     });
 }
 
-function isFavorite(productId) { return getFavorites().some(f => f.id === productId); }
+function isFavorite(productId) {
+    // FIX: comparar como strings
+    return getFavorites().some(f => String(f.id) === String(productId));
+}
 
 function refreshFavBtn(btn, productId) {
     const active = isFavorite(productId);
@@ -742,6 +727,7 @@ function refreshFavBtn(btn, productId) {
     btn.setAttribute('aria-label', active ? 'Quitar de favoritos' : 'Agregar a favoritos');
     btn.setAttribute('aria-pressed', active);
     btn.querySelector('svg').setAttribute('fill', active ? '#FF6B35' : 'none');
+    btn.querySelector('svg').setAttribute('stroke', active ? '#FF6B35' : 'currentColor');
 }
 
 function updateFavCount() {
@@ -770,8 +756,9 @@ function openFavoritesModal() {
     } else {
         body.innerHTML = favs.map(p => {
             const img = p.imageUrl || 'https://images.unsplash.com/photo-1589924691995-400dc9ecc119?w=400';
+            // FIX: usar data-fav-id como atributo para evitar problemas de tipos en onclick
             return `
-            <div class="panel-product-row" id="fav-row-${p.id}">
+            <div class="panel-product-row" id="fav-row-${p.id}" data-fav-id="${p.id}">
                 <img src="${img}" alt="${p.name}" class="panel-product-img" width="56" height="56" loading="lazy">
                 <div class="panel-product-info">
                     <span class="panel-product-name">${p.name}</span>
@@ -782,7 +769,7 @@ function openFavoritesModal() {
                     <button class="panel-add-btn" onclick="addToCart(${JSON.stringify(p).replace(/"/g,'&quot;')})" aria-label="Agregar ${p.name} al carrito" title="Agregar al carrito">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
                     </button>
-                    <button class="panel-remove-btn" onclick="removeFavFromPanel(${p.id})" aria-label="Eliminar ${p.name} de favoritos" title="Eliminar">
+                    <button class="panel-remove-btn" onclick="removeFavFromPanel(this)" data-fav-id="${p.id}" aria-label="Eliminar ${p.name} de favoritos" title="Eliminar">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
                     </button>
                 </div>
@@ -797,12 +784,29 @@ function openFavoritesModal() {
     if (fab) fab.style.display = 'none';
 }
 
-function removeFavFromPanel(productId) {
-    const favs = getFavorites().filter(f => f.id !== productId);
+// FIX PRINCIPAL: ahora recibe el botón (this) y lee el id desde el atributo data-fav-id,
+// lo que garantiza que siempre tenemos el valor correcto sin importar el tipo.
+function removeFavFromPanel(btn) {
+    const productId = btn.dataset.favId;
+    if (!productId) return;
+
+    // FIX: comparar como strings
+    const favs = getFavorites().filter(f => String(f.id) !== String(productId));
     saveFavorites(favs);
+
+    // Animar y remover la fila
     const row = document.getElementById('fav-row-' + productId);
-    if (row) { row.style.opacity = '0'; setTimeout(() => { row.remove(); checkFavPanelEmpty(); }, 200); }
-    document.querySelectorAll(`.fav-btn[data-id="${productId}"]`).forEach(btn => refreshFavBtn(btn, productId));
+    if (row) {
+        row.style.transition = 'opacity 0.2s ease, transform 0.2s ease';
+        row.style.opacity = '0';
+        row.style.transform = 'translateX(20px)';
+        setTimeout(() => { row.remove(); checkFavPanelEmpty(); }, 200);
+    } else {
+        checkFavPanelEmpty();
+    }
+
+    // Actualizar botones de corazón en las tarjetas de producto
+    document.querySelectorAll(`.fav-btn[data-id="${productId}"]`).forEach(b => refreshFavBtn(b, productId));
 }
 
 function checkFavPanelEmpty() {
@@ -911,16 +915,15 @@ async function reOrderToCart(orderIndex) {
         if (freshProducts) {
             const fresh = freshProducts.find(p => String(p.id) === String(it.id));
             if (fresh) {
-                // ── Validar stock al repetir pedido ──────────────────────
                 const qty = fresh.stock > 0
                     ? Math.min(it.quantity, fresh.stock)
                     : 0;
-                if (qty <= 0) return null; // sin stock, no incluir
+                if (qty <= 0) return null;
                 return { ...fresh, quantity: qty };
             }
         }
         return { ...it };
-    }).filter(Boolean); // eliminar los que son null (sin stock)
+    }).filter(Boolean);
 
     if (!newCart.length) {
         showNotification('⚠️ Ningún producto del pedido tiene stock disponible');
@@ -1030,12 +1033,8 @@ function filterRealProducts(arr) {
     return arr.filter(p => p.id !== undefined && p.name !== undefined);
 }
 
-// Antes: JSON.stringify(fresh) === JSON.stringify(cachedData)
-// Ahora: comparación ligera por longitud + id+stock del primer/último elemento.
-// Esta función se llama desde index.html y products.html.
 function _productsChanged(fresh, cached) {
     if (!cached || fresh.length !== cached.length) return true;
-    // Comparar id y stock del primero y del último como proxy rápido
     const check = (a, b) => a.id !== b.id || a.stock !== b.stock || a.price !== b.price;
     return check(fresh[0], cached[0]) || check(fresh[fresh.length - 1], cached[cached.length - 1]);
 }
