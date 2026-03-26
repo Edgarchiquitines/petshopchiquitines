@@ -312,10 +312,8 @@ body {
     font-weight: 600;
     font-size: 11px;
     line-height: 1.35;
-    /* max-height en em: siempre exactamente 2 lineas sin importar el font-size actual */
     max-height: calc(1.35em * 2);
     overflow: hidden;
-    /* line-clamp para corte limpio con puntos suspensivos en lugar de corte a mitad */
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
@@ -1473,6 +1471,70 @@ body {
     to   { transform: scale(1); opacity: 1; }
 }
 
+/* ── Scroll-to-top button ──────────────────────────────────────────
+   Visible en TODOS los tamaños. En mobile se centra (igual que antes),
+   en desktop se posiciona a la izquierda del FAB de WhatsApp.
+   ─────────────────────────────────────────────────────────────── */
+.scroll-top-btn {
+    position: fixed;
+    z-index: 900;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 9999px;
+    background: rgba(0, 0, 0, 0.55);
+    border: 2px solid #ffffff;
+    color: #ffffff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s ease, background 0.2s;
+
+    /* Mobile: centrado en la parte inferior */
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%) scale(0.8);
+}
+
+.scroll-top-btn--visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Mobile: escala desde el centro */
+@media (max-width: 767px) {
+    .scroll-top-btn--visible {
+        transform: translateX(-50%) scale(1);
+    }
+    .scroll-top-btn:active {
+        transform: translateX(-50%) scale(0.92);
+    }
+}
+
+/* Desktop: se reposiciona a la izquierda del FAB de WhatsApp */
+@media (min-width: 768px) {
+    .scroll-top-btn {
+        bottom: 1.5rem;
+        /* FAB está en right:1.5rem con ancho 3.25rem → desplazamos lo suficiente */
+        right: calc(1.5rem + 3.25rem + 0.75rem);
+        left: auto;
+        transform: scale(0.8);
+    }
+    .scroll-top-btn--visible {
+        transform: scale(1);
+    }
+    .scroll-top-btn:hover {
+        background: rgba(0, 0, 0, 0.75);
+        transform: scale(1.08);
+    }
+    .scroll-top-btn:active {
+        transform: scale(0.95);
+    }
+}
+
 @media (min-width: 768px) {
     .nav-desktop { display: flex; gap: 2rem; }
     .nav-link { font-size: 1rem; }
@@ -1653,7 +1715,6 @@ body {
     width: min(400px, 100vw);
     background: #ffffff;
     z-index: 1200;
-    /* FIX: display flex con overflow hidden para que el scroll funcione */
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -1673,7 +1734,6 @@ body {
     border-bottom: 1px solid #e5e7eb;
     background: #000000;
     color: #ffffff;
-    /* FIX: nunca se encoge, siempre visible arriba */
     flex-shrink: 0;
 }
 
@@ -1693,7 +1753,6 @@ body {
 .panel-close-btn:hover { color: #FF6B35; }
 
 .panel-body {
-    /* FIX PRINCIPAL: flex:1 + min-height:0 activa el scroll */
     flex: 1 1 0;
     min-height: 0;
     overflow-y: auto;
@@ -1729,7 +1788,6 @@ body {
     border-radius: 0.5rem;
     border: 1px solid #e5e7eb;
     transition: opacity 0.2s;
-    /* FIX: no se encoge, ocupa su espacio completo */
     flex-shrink: 0;
     width: 100%;
     box-sizing: border-box;
@@ -1773,7 +1831,6 @@ body {
 
 /* ── Tarjetas de pedido ── */
 .order-history-card {
-    /* FIX: static + flex-shrink:0 evita superposición */
     position: static;
     flex-shrink: 0;
     width: 100%;
@@ -1825,34 +1882,6 @@ body {
 .order-item-name  { flex: 1; color: #374151; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .order-item-qty   { color: #9ca3af; flex-shrink: 0; }
 .order-item-price { font-weight: 600; color: #111; flex-shrink: 0; }
-
-.scroll-top-btn {
-    display: none;
-    position: fixed;
-    bottom: 1.5rem;
-    left: 50%;
-    transform: translateX(-50%) scale(0.8);
-    z-index: 900;
-    width: 3rem;
-    height: 3rem;
-    border-radius: 9999px;
-    background: rgba(0, 0, 0, 0.55);
-    border: 2px solid #ffffff;
-    color: #ffffff;
-    cursor: pointer;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.25);
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.25s ease, transform 0.25s ease;
-}
-
-@media (max-width: 767px) {
-    .scroll-top-btn { display: flex; }
-    .scroll-top-btn--visible { opacity: 1; pointer-events: auto; transform: translateX(-50%) scale(1); }
-    .scroll-top-btn:active { transform: translateX(-50%) scale(0.92); }
-}
 
 /* ── Repetir pedido ── */
 .order-history-footer {

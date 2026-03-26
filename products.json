@@ -9,7 +9,7 @@
     "weight": "2.7kg",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img1.webp",
+    "imageUrl": "assets/img/img1.png",
     "isOnSale": false,
     "description": "Alimento balanceado para perros",
     "code": "00990"
@@ -24,7 +24,7 @@
     "weight": "7kg",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img2.webp",
+    "imageUrl": "assets/img/img2.png",
     "isOnSale": false,
     "description": "Alimento balanceado para perros",
     "code": "01003"
@@ -38,7 +38,7 @@
     "weight": "15kg",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img3.webp",
+    "imageUrl": "assets/img/img3.png",
     "isOnSale": false,
     "description": "Alimento balanceado para perros",
     "code": "01546"
@@ -52,7 +52,7 @@
     "weight": "25kg",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img4.webp",
+    "imageUrl": "assets/img/img4.png",
     "isOnSale": false,
     "description": "Alimento balanceado para perros",
     "code": "01010"
@@ -81,7 +81,7 @@
     "weight": "7kg",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img6.webp",
+    "imageUrl": "assets/img/img6.png",
     "isOnSale": false,
     "description": "Alimento balanceado para gatos",
     "code": "01034"
@@ -96,7 +96,7 @@
     "weight": "15kg",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img7.webp",
+    "imageUrl": "assets/img/img7.png",
     "isOnSale": false,
     "description": "Alimento balanceado para gatos",
     "code": "01539"
@@ -111,7 +111,7 @@
     "weight": "25kg",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img8.webp",
+    "imageUrl": "assets/img/img8.png",
     "isOnSale": false,
     "description": "Alimento balanceado para gatos",
     "code": "01041"
@@ -3576,7 +3576,7 @@
     "weight": "12kg",
     "petType": "gato",
     "category": "higiene",
-    "imageUrl": "assets/img/img234.jpg",
+    "imageUrl": "assets/img/img234.png",
     "isOnSale": false,
     "description": "Arena para gatos",
     "code": "05878"
@@ -3771,7 +3771,7 @@
     "weight": "1kg",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img247.webp",
+    "imageUrl": "assets/img/img247.png",
     "isOnSale": false,
     "description": "Alimento balanceado para gatos",
     "code": "15052"
@@ -3786,7 +3786,7 @@
     "weight": "7kg",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img248.webp",
+    "imageUrl": "assets/img/img248.png",
     "isOnSale": false,
     "description": "Alimento balanceado para gatos",
     "code": "15069"
@@ -3801,7 +3801,7 @@
     "weight": "7kg",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img249.webp",
+    "imageUrl": "assets/img/img249.png",
     "isOnSale": false,
     "description": "Alimento balanceado para perros",
     "code": "14604"
@@ -3816,7 +3816,7 @@
     "weight": "7kg",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img250.webp",
+    "imageUrl": "assets/img/img250.png",
     "isOnSale": false,
     "description": "Alimento balanceado para perros",
     "code": "14680"
@@ -3831,7 +3831,7 @@
     "weight": "12kg",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img251.webp",
+    "imageUrl": "assets/img/img251.png",
     "isOnSale": false,
     "description": "Alimento balanceado para perros",
     "code": "14833"
@@ -3846,7 +3846,7 @@
     "weight": "3kg",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img252.webp",
+    "imageUrl": "assets/img/img252.png",
     "isOnSale": false,
     "description": "Alimento balanceado para perros",
     "code": "00223"
@@ -3861,7 +3861,7 @@
     "weight": "1.5kg",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img253.webp",
+    "imageUrl": "assets/img/img253.png",
     "isOnSale": false,
     "description": "Alimento balanceado para gatos",
     "code": "003187"
@@ -3876,7 +3876,7 @@
     "weight": "3kg",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img254.webp",
+    "imageUrl": "assets/img/img254.png",
     "isOnSale": false,
     "description": "Alimento balanceado para perros",
     "code": "58382"
@@ -3891,7 +3891,7 @@
     "weight": "3kg",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img255.webp",
+    "imageUrl": "assets/img/img255.png",
     "isOnSale": false,
     "description": "Alimento balanceado para perros",
     "code": "58436"
@@ -3906,7 +3906,7 @@
     "weight": "3kg",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img256.webp",
+    "imageUrl": "assets/img/img256.png",
     "isOnSale": false,
     "description": "Alimento balanceado para gatos",
     "code": "59488"
@@ -3921,7 +3921,7 @@
     "weight": "3kg",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img257.webp",
+    "imageUrl": "assets/img/img257.png",
     "isOnSale": false,
     "description": "Alimento balanceado para gatos",
     "code": "58627"
@@ -3936,7 +3936,7 @@
     "weight": "1.5kg",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img258.webp",
+    "imageUrl": "assets/img/img258.png",
     "isOnSale": false,
     "description": "Alimento balanceado para gatos",
     "code": "68442"
@@ -3951,7 +3951,7 @@
     "weight": "7.5kg",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img259.webp",
+    "imageUrl": "assets/img/img259.png",
     "isOnSale": false,
     "description": "Alimento balanceado para gatos",
     "code": "68633"
@@ -3966,7 +3966,7 @@
     "weight": "2kg",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img260.webp",
+    "imageUrl": "assets/img/img260.png",
     "isOnSale": false,
     "description": "Alimento balanceado para perros",
     "code": "53592"
@@ -3981,7 +3981,7 @@
     "weight": "7.5kg",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img261.webp",
+    "imageUrl": "assets/img/img261.png",
     "isOnSale": false,
     "description": "Alimento balanceado para perros",
     "code": "53585"
@@ -3996,7 +3996,7 @@
     "weight": "2kg",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img262.webp",
+    "imageUrl": "assets/img/img262.png",
     "isOnSale": false,
     "description": "Alimento balanceado para perros",
     "code": "53561"
@@ -4011,7 +4011,7 @@
     "weight": "7.5kg",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img263.webp",
+    "imageUrl": "assets/img/img263.png",
     "isOnSale": false,
     "description": "Alimento balanceado para perros",
     "code": "53578"
@@ -4026,7 +4026,7 @@
     "weight": "2kg",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img264.webp",
+    "imageUrl": "assets/img/img264.png",
     "isOnSale": false,
     "description": "Alimento balanceado para perros",
     "code": "53622"
@@ -4041,7 +4041,7 @@
     "weight": "7.5kg",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img265.webp",
+    "imageUrl": "assets/img/img265.png",
     "isOnSale": false,
     "description": "Alimento balanceado para perros",
     "code": "53639"
@@ -4056,7 +4056,7 @@
     "weight": "2kg",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img266.webp",
+    "imageUrl": "assets/img/img266.png",
     "isOnSale": false,
     "description": "Alimento balanceado para perros",
     "code": "553547"
@@ -4071,7 +4071,7 @@
     "weight": "7.5kg",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img267.webp",
+    "imageUrl": "assets/img/img267.png",
     "isOnSale": false,
     "description": "Alimento balanceado para perros",
     "code": "53554"
@@ -4086,7 +4086,7 @@
     "weight": "2kg",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img268.webp",
+    "imageUrl": "assets/img/img268.png",
     "isOnSale": false,
     "description": "Alimento balanceado para gatos",
     "code": "53660"
@@ -4101,7 +4101,7 @@
     "weight": "500g",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img269.webp",
+    "imageUrl": "assets/img/img269.png",
     "isOnSale": false,
     "description": "Alimento balanceado para gatos",
     "code": "53714"
@@ -4116,7 +4116,7 @@
     "weight": "2kg",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img270.webp",
+    "imageUrl": "assets/img/img270.png",
     "isOnSale": false,
     "description": "Alimento balanceado para gatos",
     "code": "53707"
@@ -4146,7 +4146,7 @@
     "weight": "3kg",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img272.webp",
+    "imageUrl": "assets/img/img272.png",
     "isOnSale": false,
     "description": "Alimento balanceado para perros",
     "code": "07078"
@@ -4161,7 +4161,7 @@
     "weight": "3kg",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img273.webp",
+    "imageUrl": "assets/img/img273.png",
     "isOnSale": false,
     "description": "Alimento balanceado para gatos",
     "code": "07108"
@@ -4176,7 +4176,7 @@
     "weight": "10.1kg",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img274.webp",
+    "imageUrl": "assets/img/img274.png",
     "isOnSale": false,
     "description": "Alimento balanceado para gatos",
     "code": "07115"
@@ -4191,7 +4191,7 @@
     "weight": "10.1kg",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img275.webp",
+    "imageUrl": "assets/img/img275.png",
     "isOnSale": false,
     "description": "Alimento balanceado para gatos",
     "code": "03537"
@@ -4206,7 +4206,7 @@
     "weight": "15kg",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img276.webp",
+    "imageUrl": "assets/img/img276.png",
     "isOnSale": false,
     "description": "Alimento balanceado para perros",
     "code": "02431"
@@ -4221,7 +4221,7 @@
     "weight": "20kg",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img277.webp",
+    "imageUrl": "assets/img/img277.png",
     "isOnSale": false,
     "description": "Alimento balanceado para perros",
     "code": "03155"
@@ -4236,7 +4236,7 @@
     "weight": "1.5kg",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img278.webp",
+    "imageUrl": "assets/img/img278.png",
     "isOnSale": false,
     "description": "Alimento balanceado para gatos",
     "code": "07658"
@@ -4251,7 +4251,7 @@
     "weight": "1.5kg",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img279.webp",
+    "imageUrl": "assets/img/img279.png",
     "isOnSale": false,
     "description": "Alimento balanceado para gatos",
     "code": "04442"
@@ -4266,7 +4266,7 @@
     "weight": "1.5kg",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img280.webp",
+    "imageUrl": "assets/img/img280.png",
     "isOnSale": false,
     "description": "Alimento balanceado para gatos",
     "code": "04459"
@@ -4281,7 +4281,7 @@
     "weight": "2.5kg",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img281.webp",
+    "imageUrl": "assets/img/img281.png",
     "isOnSale": false,
     "description": "Alimento balanceado para perros",
     "code": "041021"
@@ -4296,7 +4296,7 @@
     "weight": "2.5kg",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img282.webp",
+    "imageUrl": "assets/img/img282.png",
     "isOnSale": false,
     "description": "Alimento balanceado para perros",
     "code": "01274"
@@ -4311,7 +4311,7 @@
     "weight": "2kg",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img283.webp",
+    "imageUrl": "assets/img/img283.png",
     "isOnSale": false,
     "description": "Alimento balanceado para perros",
     "code": "07306"
@@ -4326,7 +4326,7 @@
     "weight": "2kg",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img284.webp",
+    "imageUrl": "assets/img/img284.png",
     "isOnSale": false,
     "description": "Alimento balanceado para perros",
     "code": "06033"
@@ -4341,7 +4341,7 @@
     "weight": "2kg",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img285.webp",
+    "imageUrl": "assets/img/img285.png",
     "isOnSale": false,
     "description": "Alimento balanceado para perros",
     "code": "08181"
@@ -4386,7 +4386,7 @@
     "weight": "3kg",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img288.webp",
+    "imageUrl": "assets/img/img288.png",
     "isOnSale": false,
     "description": "Alimento balanceado para perros",
     "code": "46947"
@@ -4401,7 +4401,7 @@
     "weight": "3kg",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img289.webp",
+    "imageUrl": "assets/img/img289.png",
     "isOnSale": false,
     "description": "Alimento balanceado para perros",
     "code": "46985"
@@ -4416,14 +4416,14 @@
     "weight": "2kg",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img290.webp",
+    "imageUrl": "assets/img/img290.png",
     "isOnSale": false,
     "description": "Alimento balanceado para gatos",
     "code": "47098"
   },
   {
     "id": "291",
-    "name": "Nutrique Perro Senior Raza med y grande",
+    "name": "Nutrique Perro Senior Raza med",
     "brand": "Nutrique",
     "price": 185000,
     "originalPrice": 185000,
@@ -4431,7 +4431,7 @@
     "weight": "3kg",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img291.webp",
+    "imageUrl": "assets/img/img291.png",
     "isOnSale": false,
     "description": "Alimento balanceado para perros",
     "code": "46893"
@@ -4446,7 +4446,7 @@
     "weight": "2kg",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img292.webp",
+    "imageUrl": "assets/img/img292.png",
     "isOnSale": false,
     "description": "Alimento balanceado para gatos",
     "code": "47036"
@@ -4461,7 +4461,7 @@
     "weight": "2kg",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img293.webp",
+    "imageUrl": "assets/img/img293.png",
     "isOnSale": false,
     "description": "Alimento balanceado para gatos",
     "code": "52704"
@@ -4476,7 +4476,7 @@
     "weight": "7.5kg",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img294.webp",
+    "imageUrl": "assets/img/img294.png",
     "isOnSale": false,
     "description": "Alimento balanceado para gatos",
     "code": "52711"
@@ -4491,7 +4491,7 @@
     "weight": "25kg",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img295.webp",
+    "imageUrl": "assets/img/img295.png",
     "isOnSale": false,
     "description": "Alimento balanceado para perros",
     "code": "01584"
@@ -4506,7 +4506,7 @@
     "weight": "25kg",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img296.webp",
+    "imageUrl": "assets/img/img296.png",
     "isOnSale": false,
     "description": "Alimento balanceado para perros",
     "code": "00079"
@@ -4536,7 +4536,7 @@
     "weight": "2kg",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img298.webp",
+    "imageUrl": "assets/img/img298.png",
     "isOnSale": false,
     "description": "Alimento balanceado para perros",
     "code": "31251"
@@ -4551,7 +4551,7 @@
     "weight": "2kg",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img299.webp",
+    "imageUrl": "assets/img/img299.png",
     "isOnSale": false,
     "description": "Alimento balanceado para perros",
     "code": "31053"
@@ -4566,7 +4566,7 @@
     "weight": "2kg",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img300.webp",
+    "imageUrl": "assets/img/img300.png",
     "isOnSale": false,
     "description": "Alimento balanceado para perros",
     "code": "30971"
@@ -4581,7 +4581,7 @@
     "weight": "2kg",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img301.webp",
+    "imageUrl": "assets/img/img301.png",
     "isOnSale": false,
     "description": "Alimento balanceado para perros",
     "code": "31114"
@@ -4596,7 +4596,7 @@
     "weight": "2kg",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img302.webp",
+    "imageUrl": "assets/img/img302.png",
     "isOnSale": false,
     "description": "Alimento balanceado para gatos",
     "code": "31220"
@@ -4611,7 +4611,7 @@
     "weight": "2kg",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img303.webp",
+    "imageUrl": "assets/img/img303.png",
     "isOnSale": false,
     "description": "Alimento balanceado para gatos",
     "code": "31138"
@@ -4626,7 +4626,7 @@
     "weight": "2.5kg",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img304.webp",
+    "imageUrl": "assets/img/img304.png",
     "isOnSale": false,
     "description": "Alimento balanceado para perros",
     "code": "32791"
@@ -4641,7 +4641,7 @@
     "weight": "2.5kg",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img305.webp",
+    "imageUrl": "assets/img/img305.png",
     "isOnSale": false,
     "description": "Alimento balanceado para perros",
     "code": "32678"
@@ -4656,7 +4656,7 @@
     "weight": "2.5kg",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img306.webp",
+    "imageUrl": "assets/img/img306.png",
     "isOnSale": false,
     "description": "Alimento balanceado para perros",
     "code": "32647"
@@ -4671,7 +4671,7 @@
     "weight": "2.5kg",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img307.webp",
+    "imageUrl": "assets/img/img307.png",
     "isOnSale": false,
     "description": "Alimento balanceado para perros",
     "code": "33019"
@@ -4686,7 +4686,7 @@
     "weight": "2.5kg",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img308.webp",
+    "imageUrl": "assets/img/img308.png",
     "isOnSale": false,
     "description": "Alimento balanceado para perros",
     "code": "32982"
@@ -4701,7 +4701,7 @@
     "weight": "1.5kg",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img309.webp",
+    "imageUrl": "assets/img/img309.png",
     "isOnSale": false,
     "description": "Alimento balanceado para gatos",
     "code": "33293"
@@ -4716,7 +4716,7 @@
     "weight": "7.5kg",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img310.webp",
+    "imageUrl": "assets/img/img310.png",
     "isOnSale": false,
     "description": "Alimento balanceado para gatos",
     "code": "34511"
@@ -4731,7 +4731,7 @@
     "weight": "1.5kg",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img311.webp",
+    "imageUrl": "assets/img/img311.png",
     "isOnSale": false,
     "description": "Alimento balanceado para gatos",
     "code": "33200"
@@ -4746,7 +4746,7 @@
     "weight": "1.5kg",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img312.webp",
+    "imageUrl": "assets/img/img312.png",
     "isOnSale": false,
     "description": "Alimento balanceado para gatos",
     "code": "33262"
@@ -4761,7 +4761,7 @@
     "weight": "7.5kg",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img313.webp",
+    "imageUrl": "assets/img/img313.png",
     "isOnSale": false,
     "description": "Alimento balanceado para gatos",
     "code": "33279"
@@ -4776,7 +4776,7 @@
     "weight": "1.5kg",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img314.webp",
+    "imageUrl": "assets/img/img314.png",
     "isOnSale": false,
     "description": "Alimento balanceado para gatos",
     "code": "35068"
@@ -4791,7 +4791,7 @@
     "weight": "7.5kg",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img315.webp",
+    "imageUrl": "assets/img/img315.png",
     "isOnSale": false,
     "description": "Alimento balanceado para gatos",
     "code": "35082"
@@ -4806,7 +4806,7 @@
     "weight": "1.5kg",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img316.webp",
+    "imageUrl": "assets/img/img316.png",
     "isOnSale": false,
     "description": "Alimento balanceado para gatos",
     "code": "36744"
@@ -4821,7 +4821,7 @@
     "weight": "7kg",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img317.webp",
+    "imageUrl": "assets/img/img317.png",
     "isOnSale": false,
     "description": "Alimento balanceado para gatos",
     "code": "36768"
@@ -4836,7 +4836,7 @@
     "weight": "1.5kg",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img318.webp",
+    "imageUrl": "assets/img/img318.png",
     "isOnSale": false,
     "description": "Alimento balanceado para gatos",
     "code": "36706"
@@ -4851,7 +4851,7 @@
     "weight": "1.5kg",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img319.webp",
+    "imageUrl": "assets/img/img319.png",
     "isOnSale": false,
     "description": "Alimento balanceado para gatos",
     "code": "36782"
@@ -4866,7 +4866,7 @@
     "weight": "7kg",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img320.webp",
+    "imageUrl": "assets/img/img320.png",
     "isOnSale": false,
     "description": "Alimento balanceado para gatos",
     "code": "36805"
@@ -4881,7 +4881,7 @@
     "weight": "1kg",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img321.webp",
+    "imageUrl": "assets/img/img321.png",
     "isOnSale": false,
     "description": "Alimento balanceado para gatos",
     "code": "69613"
@@ -5301,7 +5301,7 @@
     "weight": "85g",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img349.webp",
+    "imageUrl": "assets/img/img349.png",
     "isOnSale": false,
     "description": "Pate para gatos",
     "code": "33138"
@@ -5316,7 +5316,7 @@
     "weight": "85g",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img350.webp",
+    "imageUrl": "assets/img/img350.png",
     "isOnSale": false,
     "description": "Pate para gatos",
     "code": "33107"
@@ -5331,7 +5331,7 @@
     "weight": "85g",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img351.webp",
+    "imageUrl": "assets/img/img351.png",
     "isOnSale": false,
     "description": "Pate para gatos",
     "code": "33152"
@@ -5346,7 +5346,7 @@
     "weight": "100g",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img352.webp",
+    "imageUrl": "assets/img/img352.png",
     "isOnSale": false,
     "description": "Pate para perros",
     "code": "33060"
@@ -5361,7 +5361,7 @@
     "weight": "100g",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img353.webp",
+    "imageUrl": "assets/img/img353.png",
     "isOnSale": false,
     "description": "Pate para perros",
     "code": "33046"
@@ -5376,7 +5376,7 @@
     "weight": "100g",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img354.webp",
+    "imageUrl": "assets/img/img354.png",
     "isOnSale": false,
     "description": "Pate para perros",
     "code": "33053"
@@ -5391,7 +5391,7 @@
     "weight": "100g",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img355.webp",
+    "imageUrl": "assets/img/img355.png",
     "isOnSale": false,
     "description": "Pate para perros",
     "code": "33039"
@@ -5406,7 +5406,7 @@
     "weight": "280g",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img356.webp",
+    "imageUrl": "assets/img/img356.png",
     "isOnSale": false,
     "description": "Pate enlatado para gatos",
     "code": "08780"
@@ -5421,7 +5421,7 @@
     "weight": "280g",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img357.webp",
+    "imageUrl": "assets/img/img357.png",
     "isOnSale": false,
     "description": "Pate enlatado para perros",
     "code": "08735"
@@ -5436,7 +5436,7 @@
     "weight": "280g",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img358.webp",
+    "imageUrl": "assets/img/img358.png",
     "isOnSale": false,
     "description": "Pate enlatado para perros",
     "code": "08766"
@@ -6021,7 +6021,7 @@
     "weight": "2kg",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img397.webp",
+    "imageUrl": "assets/img/img397.png",
     "isOnSale": false,
     "description": "Alimento balanceado para gatos",
     "code": "31190"
@@ -6036,7 +6036,7 @@
     "weight": "2.5kg",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img398.webp",
+    "imageUrl": "assets/img/img398.png",
     "isOnSale": false,
     "description": "Alimento balanceado para perros",
     "code": "33040"
@@ -6426,7 +6426,7 @@
     "weight": "4kg",
     "petType": "gato",
     "category": "higiene",
-    "imageUrl": "assets/img/img424.webp",
+    "imageUrl": "assets/img/img424.png",
     "isOnSale": false,
     "description": "Arena para gatos",
     "code": "00033"

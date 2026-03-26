@@ -19,7 +19,6 @@ let   renderedCount = 0;
 let   isLoadingMore = false;
 
 // ── Caché de versión ─────────────────────────────────────────────
-// _lsGet y _lsSet viven en app.js
 const PRODUCTS_VERSION = 'v1';
 const CACHE_KEY        = 'productsCache';
 const CACHE_VER_KEY    = 'productsCacheVersion';
@@ -55,7 +54,6 @@ async function loadProducts() {
         _lsSet(CACHE_KEY, fresh);
         _lsSet(CACHE_VER_KEY, PRODUCTS_VERSION);
 
-        // ── Optimización: comparación ligera en lugar de JSON.stringify ──
         const changed = _productsChanged(fresh, cachedData);
         if (changed) {
             allProducts = fresh;
@@ -140,12 +138,16 @@ function applyFilters() {
 
     filteredProducts = [...allProducts];
 
-    if (searchTerm) filteredProducts = filteredProducts.filter(p =>
-        p.name?.toLowerCase().includes(searchTerm) ||
-        p.description?.toLowerCase().includes(searchTerm) ||
-        p.brand?.toLowerCase().includes(searchTerm) ||
-        p.category?.toLowerCase().includes(searchTerm)
+    if (searchTerm) {
+    const normalizeSearch = str => (str || '').toLowerCase().replace(/&/g, 'y');
+    const normalizedTerm = normalizeSearch(searchTerm);
+    filteredProducts = filteredProducts.filter(p =>
+        normalizeSearch(p.name).includes(normalizedTerm) ||
+        normalizeSearch(p.description).includes(normalizedTerm) ||
+        normalizeSearch(p.brand).includes(normalizedTerm) ||
+        normalizeSearch(p.category).includes(normalizedTerm)
     );
+}
     if (category) filteredProducts = filteredProducts.filter(p => p.category === category);
     if (petType)  filteredProducts = filteredProducts.filter(p =>
         Array.isArray(p.petType) ? p.petType.includes(petType) : p.petType === petType
@@ -253,15 +255,18 @@ function handleAutocomplete(inputEl, dropdownId) {
 function buildSuggestions(query) {
     const results = [], seen = new Set();
     const brands = [...new Set(allProducts.map(p => p.brand).filter(Boolean))];
-    brands.forEach(brand => {
-        if (brand.toLowerCase().includes(query) && !seen.has('brand:' + brand)) {
+    const normalizeSearch = str => (str || '').toLowerCase().replace(/&/g, 'y');
+const normalizedQuery = normalizeSearch(query);
+
+brands.forEach(brand => {
+    if (normalizeSearch(brand).includes(normalizedQuery) && !seen.has('brand:' + brand)) {
             seen.add('brand:' + brand);
             results.push({ type: 'brand', label: brand, icon: '🏷️' });
         }
     });
     allProducts.forEach(p => {
         if (results.filter(r => r.type === 'product').length >= 6) return;
-        if ((p.name?.toLowerCase().includes(query) || p.brand?.toLowerCase().includes(query)) && !seen.has('product:' + p.name)) {
+        if ((normalizeSearch(p.name).includes(normalizedQuery) || normalizeSearch(p.brand).includes(normalizedQuery)) && !seen.has('product:' + p.name)) {
             seen.add('product:' + p.name);
             results.push({ type: 'product', label: p.name, sub: p.brand, icon: '📦' });
         }
@@ -338,7 +343,6 @@ function setupAutocompleteClose() {
     }, { passive: true });
 }
 
-// ── escapeHtml corregido (punto 11): escapa &, <, > además de comillas ──
 function escapeHtml(str) {
     return str
         .replace(/&/g, '&amp;')
@@ -494,15 +498,13 @@ function setupScrollBehavior() {
     observer.observe(searchBarTop);
 }
 
-// Scroll-to-top button — solo mobile
+// ── Scroll-to-top button — ahora funciona en TODOS los tamaños ──
+// FIX: eliminada la condición if (window.innerWidth < 768) que
+//      ocultaba el botón en desktop.
 (function() {
     const btn = document.getElementById('scrollTopBtn');
     if (!btn) return;
     window.addEventListener('scroll', function() {
-        if (window.innerWidth < 768) {
-            btn.classList.toggle('scroll-top-btn--visible', window.scrollY > 400);
-        } else {
-            btn.classList.remove('scroll-top-btn--visible');
-        }
+        btn.classList.toggle('scroll-top-btn--visible', window.scrollY > 400);
     }, { passive: true });
 })();
