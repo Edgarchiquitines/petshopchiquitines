@@ -5046,7 +5046,7 @@
     "weight": "7.5kg",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img332.webp",
+    "imageUrl": "assets/img/img332.png",
     "isOnSale": false,
     "description": "Alimento balanceado para gatos",
     "code": "47739"
@@ -5076,7 +5076,7 @@
     "weight": "3kg",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img334.webp",
+    "imageUrl": "assets/img/img334.png",
     "isOnSale": false,
     "description": "Alimento balanceado para perros",
     "code": "28051"
