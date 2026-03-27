@@ -4187,7 +4187,7 @@
     "brand": "Golden",
     "price": 300000,
     "originalPrice": 300000,
-    "stock": 10,
+    "stock": 0,
     "weight": "10.1kg",
     "petType": "gato",
     "category": "alimentos",
