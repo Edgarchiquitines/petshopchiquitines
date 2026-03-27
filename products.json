@@ -3267,7 +3267,7 @@
     "code": "78598"
   },
   {
-    "id": "508",
+    "id": "507",
     "name": "Leroy Castrado Grille de carne",
     "brand": "Leroy",
     "price": 185000,
@@ -3276,7 +3276,7 @@
     "weight": "10.1kg",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img508.jpg",
+    "imageUrl": "assets/img/img507.jpg",
     "isOnSale": false,
     "description": "Alimento balanceado para gatos",
     "code": "78574"
@@ -3795,31 +3795,31 @@
     "id": "249",
     "name": "Formula Natural Perro Adulto raza pequeña",
     "brand": "Formula Natural",
-    "price": 300000,
-    "originalPrice": 300000,
+    "price": 415000,
+    "originalPrice": 415000,
     "stock": 10,
-    "weight": "7kg",
+    "weight": "10.1kg",
     "petType": "perro",
     "category": "alimentos",
     "imageUrl": "assets/img/img249.png",
     "isOnSale": false,
     "description": "Alimento balanceado para perros",
-    "code": "14604"
+    "code": "03704"
   },
   {
     "id": "250",
     "name": "Formula Natural Cachorro raza pequeña",
     "brand": "Formula Natural",
-    "price": 310000,
-    "originalPrice": 310000,
+    "price": 430000,
+    "originalPrice": 430000,
     "stock": 10,
-    "weight": "7kg",
+    "weight": "10.1kg",
     "petType": "perro",
     "category": "alimentos",
     "imageUrl": "assets/img/img250.png",
     "isOnSale": false,
     "description": "Alimento balanceado para perros",
-    "code": "14680"
+    "code": "03711"
   },
   {
     "id": "251",
@@ -5451,7 +5451,7 @@
     "weight": "2kg",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img359.webp",
+    "imageUrl": "assets/img/img359.png",
     "isOnSale": false,
     "description": "Alimento balanceado para perros",
     "code": "02170"
@@ -5466,7 +5466,7 @@
     "weight": "4kg",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img360.webp",
+    "imageUrl": "assets/img/img360.png",
     "isOnSale": false,
     "description": "Alimento balanceado para perros",
     "code": "27822"
@@ -5481,7 +5481,7 @@
     "weight": "8kg",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img361.webp",
+    "imageUrl": "assets/img/img361.png",
     "isOnSale": false,
     "description": "Alimento balanceado para perros",
     "code": "16888"
@@ -5496,7 +5496,7 @@
     "weight": "4kg",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img362.webp",
+    "imageUrl": "assets/img/img362.png",
     "isOnSale": false,
     "description": "Alimento balanceado para perros",
     "code": "02149"
@@ -5511,7 +5511,7 @@
     "weight": "15kg",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img363.webp",
+    "imageUrl": "assets/img/img363.png",
     "isOnSale": false,
     "description": "Alimento balanceado para perros",
     "code": "32154"
@@ -5526,7 +5526,7 @@
     "weight": "2kg",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img364.webp",
+    "imageUrl": "assets/img/img364.png",
     "isOnSale": false,
     "description": "Alimento balanceado para gatos",
     "code": "37593"
