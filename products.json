@@ -1026,7 +1026,7 @@
     "weight": "Caja x12",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img69.webp",
+    "imageUrl": "assets/img/img69.png",
     "isOnSale": false,
     "description": "Pate para gatos",
     "code": "00407"
@@ -1056,7 +1056,7 @@
     "weight": "Caja x12",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img71.webp",
+    "imageUrl": "assets/img/img71.png",
     "isOnSale": false,
     "description": "Pate para gatos",
     "code": "00421"
@@ -1086,7 +1086,7 @@
     "weight": "Caja x12",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img73.webp",
+    "imageUrl": "assets/img/img73.png",
     "isOnSale": false,
     "description": "Pate para gatos",
     "code": "00551"
@@ -1116,7 +1116,7 @@
     "weight": "Caja x12",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img75.webp",
+    "imageUrl": "assets/img/img75.jpeg",
     "isOnSale": false,
     "description": "Pate para gatos",
     "code": "00544"
@@ -1146,7 +1146,7 @@
     "weight": "Caja x12",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img77.webp",
+    "imageUrl": "assets/img/img77.jpeg",
     "isOnSale": false,
     "description": "Pate para gatos",
     "code": "00414"
@@ -1176,7 +1176,7 @@
     "weight": "Caja x12",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img79.webp",
+    "imageUrl": "assets/img/img79.jpeg",
     "isOnSale": false,
     "description": "Pate para gatos",
     "code": "00438"
@@ -6426,7 +6426,7 @@
     "weight": "12kg",
     "petType": "gato",
     "category": "higiene",
-    "imageUrl": "assets/img/img422.webp",
+    "imageUrl": "assets/img/img422.png",
     "isOnSale": false,
     "description": "Arena para gatos",
     "code": "06553"
@@ -6441,7 +6441,7 @@
     "weight": "4kg",
     "petType": "gato",
     "category": "higiene",
-    "imageUrl": "assets/img/img423.webp",
+    "imageUrl": "assets/img/img423.png",
     "isOnSale": false,
     "description": "Arena para gatos",
     "code": "06423"
@@ -6471,7 +6471,7 @@
     "weight": "10L",
     "petType": "gato",
     "category": "higiene",
-    "imageUrl": "assets/img/img425.webp",
+    "imageUrl": "assets/img/img425.png",
     "isOnSale": false,
     "description": "Arena para gatos",
     "code": "90136"
@@ -6486,7 +6486,7 @@
     "weight": "10L",
     "petType": "gato",
     "category": "higiene",
-    "imageUrl": "assets/img/img426.webp",
+    "imageUrl": "assets/img/img426.png",
     "isOnSale": false,
     "description": "Arena para gatos",
     "code": "00099"
@@ -6501,7 +6501,7 @@
     "weight": "10L",
     "petType": "gato",
     "category": "higiene",
-    "imageUrl": "assets/img/img427.webp",
+    "imageUrl": "assets/img/img427.png",
     "isOnSale": false,
     "description": "Arena para gatos",
     "code": "16989"
@@ -6516,7 +6516,7 @@
     "weight": "10L",
     "petType": "gato",
     "category": "higiene",
-    "imageUrl": "assets/img/img428.webp",
+    "imageUrl": "assets/img/img428.png",
     "isOnSale": false,
     "description": "Arena para gatos",
     "code": "90112"
@@ -6531,7 +6531,7 @@
     "weight": "10L",
     "petType": "gato",
     "category": "higiene",
-    "imageUrl": "assets/img/img429.webp",
+    "imageUrl": "assets/img/img429.png",
     "isOnSale": false,
     "description": "Arena para gatos",
     "code": "16996"
@@ -6546,7 +6546,7 @@
     "weight": "10L",
     "petType": "gato",
     "category": "higiene",
-    "imageUrl": "assets/img/img430.webp",
+    "imageUrl": "assets/img/img430.png",
     "isOnSale": false,
     "description": "Arena para gatos",
     "code": "12209"
@@ -6561,7 +6561,7 @@
     "weight": "10L",
     "petType": "gato",
     "category": "higiene",
-    "imageUrl": "assets/img/img431.webp",
+    "imageUrl": "assets/img/img431.png",
     "isOnSale": false,
     "description": "Arena para gatos",
     "code": "12001"
@@ -6576,7 +6576,7 @@
     "weight": "10L",
     "petType": "gato",
     "category": "higiene",
-    "imageUrl": "assets/img/img432.webp",
+    "imageUrl": "assets/img/img432.png",
     "isOnSale": false,
     "description": "Arena para gatos",
     "code": "12216"
@@ -6591,7 +6591,7 @@
     "weight": "10L",
     "petType": "gato",
     "category": "higiene",
-    "imageUrl": "assets/img/img433.webp",
+    "imageUrl": "assets/img/img433.png",
     "isOnSale": false,
     "description": "Arena para gatos",
     "code": "12025"
@@ -6606,7 +6606,7 @@
     "weight": "10L",
     "petType": "gato",
     "category": "higiene",
-    "imageUrl": "assets/img/img434.webp",
+    "imageUrl": "assets/img/img434.png",
     "isOnSale": false,
     "description": "Arena para gatos",
     "code": "12193"
@@ -6621,7 +6621,7 @@
     "weight": "10L",
     "petType": "gato",
     "category": "higiene",
-    "imageUrl": "assets/img/img435.webp",
+    "imageUrl": "assets/img/img435.png",
     "isOnSale": false,
     "description": "Arena para gatos",
     "code": "12186"
@@ -6636,7 +6636,7 @@
     "weight": "10L",
     "petType": "gato",
     "category": "higiene",
-    "imageUrl": "assets/img/img436.webp",
+    "imageUrl": "assets/img/img436.png",
     "isOnSale": false,
     "description": "Arena para gatos",
     "code": "12018"
@@ -6651,7 +6651,7 @@
     "weight": "10L",
     "petType": "gato",
     "category": "higiene",
-    "imageUrl": "assets/img/img437.webp",
+    "imageUrl": "assets/img/img437.png",
     "isOnSale": false,
     "description": "Arena para gatos",
     "code": "12032"
