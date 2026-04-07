@@ -6666,7 +6666,7 @@
     "weight": "4kg",
     "petType": "gato",
     "category": "higiene",
-    "imageUrl": "assets/img/img438.webp",
+    "imageUrl": "assets/img/img438.png",
     "isOnSale": false,
     "description": "Arena para gatos",
     "code": "50123"
@@ -6681,7 +6681,7 @@
     "weight": "4kg",
     "petType": "gato",
     "category": "higiene",
-    "imageUrl": "assets/img/img439.webp",
+    "imageUrl": "assets/img/img439.png",
     "isOnSale": false,
     "description": "Arena para gatos",
     "code": "10013"
@@ -6696,7 +6696,7 @@
     "weight": "4kg",
     "petType": "gato",
     "category": "higiene",
-    "imageUrl": "assets/img/img440.webp",
+    "imageUrl": "assets/img/img440.png",
     "isOnSale": false,
     "description": "Arena para gatos",
     "code": "10044"
@@ -6711,7 +6711,7 @@
     "weight": "4kg",
     "petType": "gato",
     "category": "higiene",
-    "imageUrl": "assets/img/img441.webp",
+    "imageUrl": "assets/img/img441.png",
     "isOnSale": false,
     "description": "Arena para gatos",
     "code": "10051"
@@ -6726,7 +6726,7 @@
     "weight": "8kg",
     "petType": "gato",
     "category": "higiene",
-    "imageUrl": "assets/img/img442.webp",
+    "imageUrl": "assets/img/img442.png",
     "isOnSale": false,
     "description": "Arena para gatos",
     "code": "10037"
@@ -6741,7 +6741,7 @@
     "weight": "4kg",
     "petType": "gato",
     "category": "higiene",
-    "imageUrl": "assets/img/img443.webp",
+    "imageUrl": "assets/img/img443.png",
     "isOnSale": false,
     "description": "Arena para gatos",
     "code": "60367"
@@ -6756,7 +6756,7 @@
     "weight": "4kg",
     "petType": "gato",
     "category": "higiene",
-    "imageUrl": "assets/img/img444.webp",
+    "imageUrl": "assets/img/img444.png",
     "isOnSale": false,
     "description": "Arena para gatos",
     "code": "62512"
@@ -6771,7 +6771,7 @@
     "weight": "4kg",
     "petType": "gato",
     "category": "higiene",
-    "imageUrl": "assets/img/img445.webp",
+    "imageUrl": "assets/img/img445.png",
     "isOnSale": false,
     "description": "Arena para gatos",
     "code": "62505"
@@ -6786,7 +6786,7 @@
     "weight": "20kg",
     "petType": "gato",
     "category": "higiene",
-    "imageUrl": "assets/img/img446.webp",
+    "imageUrl": "assets/img/img446.png",
     "isOnSale": false,
     "description": "Arena para gatos",
     "code": "62550"
@@ -6801,7 +6801,7 @@
     "weight": "2kg",
     "petType": "gato",
     "category": "higiene",
-    "imageUrl": "assets/img/img447.webp",
+    "imageUrl": "assets/img/img447.png",
     "isOnSale": false,
     "description": "Arena para gatos",
     "code": "30053"
@@ -6816,7 +6816,7 @@
     "weight": "2kg",
     "petType": "gato",
     "category": "higiene",
-    "imageUrl": "assets/img/img448.webp",
+    "imageUrl": "assets/img/img448.png",
     "isOnSale": false,
     "description": "Arena para gatos",
     "code": "30060"
@@ -6831,7 +6831,7 @@
     "weight": "350g",
     "petType": "ave",
     "category": "alimentos",
-    "imageUrl": "assets/img/img449.webp",
+    "imageUrl": "assets/img/img449.png",
     "isOnSale": false,
     "description": "Mezcla de semillas premium para aves",
     "code": "77611"
@@ -6846,7 +6846,7 @@
     "weight": "15kg",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img454.webp",
+    "imageUrl": "assets/img/img454.png",
     "isOnSale": false,
     "description": "Alimento balanceado para gatos",
     "code": "85066"
@@ -6861,7 +6861,7 @@
     "weight": "paqx8",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img455.webp",
+    "imageUrl": "assets/img/img455.png",
     "isOnSale": false,
     "description": "Snacks para perros",
     "code": "07433"
@@ -6876,7 +6876,7 @@
     "weight": "250g",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img456.webp",
+    "imageUrl": "assets/img/img456.png",
     "isOnSale": false,
     "description": "Snacks para perros",
     "code": "07518"
@@ -6891,7 +6891,7 @@
     "weight": "paqx4",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img457.webp",
+    "imageUrl": "assets/img/img457.png",
     "isOnSale": false,
     "description": "Snacks para perros",
     "code": "07389"
@@ -6906,7 +6906,7 @@
     "weight": "250g",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img458.webp",
+    "imageUrl": "assets/img/img458.png",
     "isOnSale": false,
     "description": "Snacks para perros",
     "code": "09857"
@@ -6921,7 +6921,7 @@
     "weight": "paqx4",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img459.webp",
+    "imageUrl": "assets/img/img459.png",
     "isOnSale": false,
     "description": "Snacks para perros",
     "code": "07402"
@@ -6936,7 +6936,7 @@
     "weight": "250g",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img460.webp",
+    "imageUrl": "assets/img/img460.png",
     "isOnSale": false,
     "description": "Snacks para perros",
     "code": "07495"
@@ -6951,7 +6951,7 @@
     "weight": "paqx2",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img461.webp",
+    "imageUrl": "assets/img/img461.png",
     "isOnSale": false,
     "description": "Snacks para perros",
     "code": "80217"
@@ -6966,7 +6966,7 @@
     "weight": "paqx2",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img462.webp",
+    "imageUrl": "assets/img/img462.png",
     "isOnSale": false,
     "description": "Snacks para perros",
     "code": "81016"
@@ -6981,7 +6981,7 @@
     "weight": "paqx3",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img463.webp",
+    "imageUrl": "assets/img/img463.png",
     "isOnSale": false,
     "description": "Snacks para perros",
     "code": "84079"
@@ -6996,7 +6996,7 @@
     "weight": "paqx6",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img464.webp",
+    "imageUrl": "assets/img/img464.png",
     "isOnSale": false,
     "description": "Snacks para perros",
     "code": "81009"
@@ -7011,7 +7011,7 @@
     "weight": "paqx1",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img465.webp",
+    "imageUrl": "assets/img/img465.png",
     "isOnSale": false,
     "description": "Snacks para perros",
     "code": "81108"
@@ -7026,7 +7026,7 @@
     "weight": "1kg",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img466.webp",
+    "imageUrl": "assets/img/img466.png",
     "isOnSale": false,
     "description": "Snacks para perros",
     "code": "80668"
@@ -7041,7 +7041,7 @@
     "weight": "1kg",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img467.webp",
+    "imageUrl": "assets/img/img467.png",
     "isOnSale": false,
     "description": "Snacks para perros",
     "code": "81504"
