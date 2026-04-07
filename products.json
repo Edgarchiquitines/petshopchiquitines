@@ -2121,7 +2121,7 @@
     "weight": "2kg",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img138.webp",
+    "imageUrl": "assets/img/img138.png",
     "isOnSale": false,
     "description": "Alimento balanceado para perros",
     "code": "03927"
@@ -2136,7 +2136,7 @@
     "weight": "2kg",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img139.webp",
+    "imageUrl": "assets/img/img139.png",
     "isOnSale": false,
     "description": "Alimento balanceado para perros",
     "code": "03965"
@@ -2151,14 +2151,14 @@
     "weight": "2kg",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img140.webp",
+    "imageUrl": "assets/img/img140.png",
     "isOnSale": false,
     "description": "Alimento balanceado para perros",
     "code": "04047"
   },
   {
     "id": "141",
-    "name": "Select Digestion equilibrada Ad mini",
+    "name": "Select Digestion equilibrada Ad raza peq",
     "brand": "Monello",
     "price": 80000,
     "originalPrice": 80000,
@@ -2166,14 +2166,14 @@
     "weight": "2kg",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img141.webp",
+    "imageUrl": "assets/img/img141.png",
     "isOnSale": false,
     "description": "Alimento balanceado para perros",
     "code": "04009"
   },
   {
     "id": "142",
-    "name": "Select Control de peso Ad med y grande",
+    "name": "Select Control de peso Ad raza peq",
     "brand": "Monello",
     "price": 80000,
     "originalPrice": 80000,
@@ -2181,7 +2181,7 @@
     "weight": "2kg",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img142.webp",
+    "imageUrl": "assets/img/img142.png",
     "isOnSale": false,
     "description": "Alimento balanceado para perros",
     "code": "04085"
@@ -2196,7 +2196,7 @@
     "weight": "2kg",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img143.webp",
+    "imageUrl": "assets/img/img143.png",
     "isOnSale": false,
     "description": "Alimento balanceado para perros",
     "code": "04160"
@@ -2211,7 +2211,7 @@
     "weight": "2kg",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img144.webp",
+    "imageUrl": "assets/img/img144.png",
     "isOnSale": false,
     "description": "Alimento balanceado para perros",
     "code": "04122"
@@ -2226,7 +2226,7 @@
     "weight": "245g",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img145.webp",
+    "imageUrl": "assets/img/img145.png",
     "isOnSale": false,
     "description": "Pate envasado para perros",
     "code": "90080"
@@ -2241,7 +2241,7 @@
     "weight": "245g",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img146.webp",
+    "imageUrl": "assets/img/img146.png",
     "isOnSale": false,
     "description": "Pate envasado para perros",
     "code": "90103"
@@ -2256,7 +2256,7 @@
     "weight": "245g",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img147.webp",
+    "imageUrl": "assets/img/img147.png",
     "isOnSale": false,
     "description": "Pate envasado para perros",
     "code": "90127"
@@ -2271,7 +2271,7 @@
     "weight": "100g",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img148.webp",
+    "imageUrl": "assets/img/img148.png",
     "isOnSale": false,
     "description": "Pate para perros",
     "code": "90073"
@@ -2286,7 +2286,7 @@
     "weight": "100g",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img149.webp",
+    "imageUrl": "assets/img/img149.png",
     "isOnSale": false,
     "description": "Pate para perros",
     "code": "90097"
@@ -2301,7 +2301,7 @@
     "weight": "100g",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img150.webp",
+    "imageUrl": "assets/img/img150.png",
     "isOnSale": false,
     "description": "Pate para perros",
     "code": "90110"
@@ -2316,7 +2316,7 @@
     "weight": "100g",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img151.webp",
+    "imageUrl": "assets/img/img151.png",
     "isOnSale": false,
     "description": "Pate para gatos",
     "code": "90158"
@@ -2331,7 +2331,7 @@
     "weight": "100g",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img152.webp",
+    "imageUrl": "assets/img/img152.png",
     "isOnSale": false,
     "description": "Pate para gatos",
     "code": "90172"
@@ -2346,7 +2346,7 @@
     "weight": "100g",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img153.webp",
+    "imageUrl": "assets/img/img153.png",
     "isOnSale": false,
     "description": "Pate para gatos",
     "code": "90165"
@@ -2361,7 +2361,7 @@
     "weight": "100g",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img154.webp",
+    "imageUrl": "assets/img/img154.png",
     "isOnSale": false,
     "description": "Pate para gatos",
     "code": "90882"
@@ -3246,7 +3246,7 @@
     "weight": "10.1kg",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img213.jpg",
+    "imageUrl": "assets/img/img213.png",
     "isOnSale": false,
     "description": "Alimento balanceado para gatos",
     "code": "79182"
@@ -7056,7 +7056,7 @@
     "weight": "65g",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img468.webp",
+    "imageUrl": "assets/img/img468.png",
     "isOnSale": false,
     "description": "Snacks para perros",
     "code": "90438"
@@ -7071,7 +7071,7 @@
     "weight": "100g",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img469.webp",
+    "imageUrl": "assets/img/img469.png",
     "isOnSale": false,
     "description": "Snacks para perros",
     "code": "90442"
@@ -7086,7 +7086,7 @@
     "weight": "120g",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img470.webp",
+    "imageUrl": "assets/img/img470.png",
     "isOnSale": false,
     "description": "Snacks para perros",
     "code": "90435"
@@ -7101,7 +7101,7 @@
     "weight": "250g",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img471.webp",
+    "imageUrl": "assets/img/img471.png",
     "isOnSale": false,
     "description": "Snacks para perros",
     "code": "73891"
@@ -7116,7 +7116,7 @@
     "weight": "15g",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img472.webp",
+    "imageUrl": "assets/img/img472.png",
     "isOnSale": false,
     "description": "Golosina para gato",
     "code": "80238"
@@ -7131,7 +7131,7 @@
     "weight": "paqx4",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img473.webp",
+    "imageUrl": "assets/img/img473.png",
     "isOnSale": false,
     "description": "Golosina para gato",
     "code": "280238"
