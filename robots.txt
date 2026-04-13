@@ -2,7 +2,7 @@
 User-agent: *
 allow: /products
 Disallow: /cart
-Sitemap: https://edgarchiquitines.github.io/petshopchiquitines/sitemap.xml
+Sitemap: https://petshopchiquitines.com/sitemap.xml
 
 User-agent: Googlebot
 User-agent: Googlebot-Image

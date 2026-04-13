@@ -201,7 +201,7 @@ function shareProductWA(product) {
     else                msg += `Precio: *${price}*\n`;
     msg += `\n¡Encontralo en Petshop Chiquitines! 🏪\n`;
     msg += `📍 Av. Peru y Gines, Asunción\n`;
-    msg += `👉 https://edgarchiquitines.github.io/petshopchiquitines/products.html`;
+    msg += `👉 https://petshopchiquitines.com/products.html`;
 
     window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
 }
