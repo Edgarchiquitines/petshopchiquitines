@@ -7506,7 +7506,7 @@
     "weight": "4kg",
     "petType": "gato",
     "category": "salud",
-    "imageUrl": "assets/img/img498.webp",
+    "imageUrl": "assets/img/img498.png",
     "isOnSale": false,
     "description": "Antiparasitario felino externo",
     "code": "75992"
@@ -7521,7 +7521,7 @@
     "weight": "+4kg",
     "petType": "gato",
     "category": "salud",
-    "imageUrl": "assets/img/img499.webp",
+    "imageUrl": "assets/img/img499.png",
     "isOnSale": false,
     "description": "Antiparasitario felino externo",
     "code": "76005"
@@ -7566,7 +7566,7 @@
     "weight": "1-4kg",
     "petType": "perro",
     "category": "salud",
-    "imageUrl": "assets/img/img502.webp",
+    "imageUrl": "assets/img/img502.png",
     "isOnSale": false,
     "description": "Antiparasitario canino",
     "code": "75947"
@@ -7581,7 +7581,7 @@
     "weight": "4-40kg",
     "petType": "perro",
     "category": "salud",
-    "imageUrl": "assets/img/img503.webp",
+    "imageUrl": "assets/img/img503.png",
     "isOnSale": false,
     "description": "Antiparasitario canino",
     "code": "75978"
@@ -7596,7 +7596,7 @@
     "weight": "1-4kg",
     "petType": "perro",
     "category": "salud",
-    "imageUrl": "assets/img/img504.webp",
+    "imageUrl": "assets/img/img504.png",
     "isOnSale": false,
     "description": "Antiparasitario canino",
     "code": "71994"
@@ -7611,7 +7611,7 @@
     "weight": "9-24kg",
     "petType": "perro",
     "category": "salud",
-    "imageUrl": "assets/img/img505.webp",
+    "imageUrl": "assets/img/img505.png",
     "isOnSale": false,
     "description": "Antiparasitario canino",
     "code": "72014"
@@ -7626,7 +7626,7 @@
     "weight": "40-60kg",
     "petType": "perro",
     "category": "salud",
-    "imageUrl": "assets/img/img506.webp",
+    "imageUrl": "assets/img/img506.png",
     "isOnSale": false,
     "description": "Antiparasitario canino",
     "code": "72038"
