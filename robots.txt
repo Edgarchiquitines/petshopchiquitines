@@ -2,6 +2,8 @@
 User-agent: *
 allow: /products
 Disallow: /cart
-
-# Sitemap principal
 Sitemap: https://edgarchiquitines.github.io/petshopchiquitines/sitemap.xml
+
+User-agent: Googlebot
+User-agent: Googlebot-Image
+allow: /assets/favicon-48x48.png

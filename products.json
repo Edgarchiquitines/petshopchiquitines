@@ -3381,7 +3381,7 @@
     "weight": "Caja x12",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img221.webp",
+    "imageUrl": "assets/img/img221.png",
     "isOnSale": false,
     "description": "Pate para gatos",
     "code": "20774"
@@ -3411,7 +3411,7 @@
     "weight": "Caja x12",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img223.webp",
+    "imageUrl": "assets/img/img223.png",
     "isOnSale": false,
     "description": "Pate para gatos",
     "code": "40588"
@@ -3441,7 +3441,7 @@
     "weight": "Caja x12",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img225.webp",
+    "imageUrl": "assets/img/img225.png",
     "isOnSale": false,
     "description": "Pate para gatos",
     "code": "41066"
@@ -3471,7 +3471,7 @@
     "weight": "Caja x12",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img227.webp",
+    "imageUrl": "assets/img/img227.png",
     "isOnSale": false,
     "description": "Pate para gatos",
     "code": "41080"
