@@ -1992,6 +1992,21 @@
     "code": "03507"
   },
   {
+    "id": "510",
+    "name": "Monello Senior",
+    "brand": "Monello",
+    "price": 285000,
+    "originalPrice": 285000,
+    "stock": 10,
+    "weight": "15kg",
+    "petType": "perro",
+    "category": "alimentos",
+    "imageUrl": "assets/img/img510.png",
+    "isOnSale": false,
+    "description": "Alimento balanceado para perros",
+    "code": "03514"
+  },
+  {
     "id": "130",
     "name": "Monello Diversion galleta perro",
     "brand": "Monello",
