@@ -1,9 +1,9 @@
-# Permitir que todos los motores de búsqueda rastreen todo
 User-agent: *
-allow: /products
+Allow: /
 Disallow: /cart
-Sitemap: https://petshopchiquitines.com/sitemap.xml
 
 User-agent: Googlebot
 User-agent: Googlebot-Image
-allow: /assets/favicon-48x48.png
+Allow: /assets/favicon-48x48.png
+
+Sitemap: https://petshopchiquitines.com/sitemap.xml
