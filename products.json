@@ -141,7 +141,7 @@
     "weight": "3kg",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img10.webp",
+    "imageUrl": "assets/img/img10.png",
     "isOnSale": true,
     "description": "Alimento balanceado para gatos",
     "code": "58021"

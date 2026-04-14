@@ -174,7 +174,19 @@ function displayProducts() {
     count.textContent = `${filteredProducts.length} producto${filteredProducts.length !== 1 ? 's' : ''} encontrado${filteredProducts.length !== 1 ? 's' : ''}`;
 
     if (filteredProducts.length === 0) {
-        grid.innerHTML = `<div class="empty-state"><p>No se encontraron productos</p><button onclick="clearFilters()">Limpiar filtros</button></div>`;
+        // Detectar si hay un filtro de categoría activo
+        const category = document.getElementById('categoryFilter').value;
+        const petType = document.getElementById('petTypeFilter').value;
+        const brand = document.getElementById('brandFilter').value;
+        const searchTerm = document.getElementById('searchInput').value;
+        
+        // Si hay algún filtro activo, mostrar "Próximamente"
+        if (category || petType || brand || searchTerm) {
+            grid.innerHTML = `<div class="empty-state"><p>🚀 Próximamente</p><p class="empty-state-subtitle">Estamos preparando productos para esta categoría</p><button onclick="clearFilters()" class="clear-btn">Limpiar filtros</button></div>`;
+        } else {
+            // Si no hay filtros, mostrar el mensaje original
+            grid.innerHTML = `<div class="empty-state"><p>No se encontraron productos</p><button onclick="clearFilters()" class="clear-btn">Limpiar filtros</button></div>`;
+        }
         return;
     }
 
