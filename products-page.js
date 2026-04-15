@@ -40,7 +40,7 @@ async function loadProducts() {
     const cachedData    = _lsGet(CACHE_KEY, null);
 
     if (cachedData && cachedData.length && cachedVersion === PRODUCTS_VERSION) {
-        allProducts = cachedData;
+        allProducts = cachedData.map(normalizeProduct);
         _bootstrapFilters();
         applyFilters();
     }
@@ -49,7 +49,7 @@ async function loadProducts() {
         const response = await fetch('products.json');
         if (!response.ok) throw new Error('HTTP ' + response.status);
         const freshData = await response.json();
-        const fresh = freshData.filter(p => p.id !== undefined && p.name !== undefined);
+        const fresh = freshData.filter(p => p.id !== undefined && p.name !== undefined).map(normalizeProduct);
 
         _lsSet(CACHE_KEY, fresh);
         _lsSet(CACHE_VER_KEY, PRODUCTS_VERSION);

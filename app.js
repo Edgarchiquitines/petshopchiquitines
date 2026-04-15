@@ -89,32 +89,58 @@ function formatPrice(price) {
     return _fmtPYG.format(price);
 }
 
+// ── Normalize product: handles both discount modes ───────────────
+// Mode 1: discountPercent set → auto-calculate price from originalPrice
+// Mode 2: price < originalPrice set manually → auto-enable isOnSale
+function normalizeProduct(p) {
+    const prod = { ...p };
+
+    // Mode 1: discountPercent provided → derive price from originalPrice
+    if (prod.discountPercent && prod.discountPercent > 0 && prod.originalPrice) {
+        prod.price = Math.round(prod.originalPrice * (1 - prod.discountPercent / 100));
+        prod.isOnSale = true;
+    }
+
+    // Mode 2: price < originalPrice but isOnSale not set → auto-enable
+    if (prod.originalPrice && prod.price < prod.originalPrice && !prod.isOnSale) {
+        prod.isOnSale = true;
+    }
+
+    // Safety: if isOnSale but no real discount, disable it
+    if (prod.isOnSale && (!prod.originalPrice || prod.price >= prod.originalPrice)) {
+        prod.isOnSale = false;
+    }
+
+    return prod;
+}
+
 // ── Product Card Creation ────────────────────────────────────────
 function createProductCard(product) {
-    const hasDiscount = product.isOnSale && product.originalPrice;
+    const p = normalizeProduct(product);
+    const hasDiscount = p.isOnSale && p.originalPrice && p.price < p.originalPrice;
     const discountPercent = hasDiscount
-        ? Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)
+        ? Math.round(((p.originalPrice - p.price) / p.originalPrice) * 100)
         : 0;
 
     // ── Badge "Últimas unidades" ─────────────────────────────────
     // Se muestra si stock > 0 y stock <= LOW_STOCK_THRESHOLD
-    const isLowStock = product.stock > 0 && product.stock <= LOW_STOCK_THRESHOLD;
+    const isLowStock = p.stock > 0 && p.stock <= LOW_STOCK_THRESHOLD;
 
-    const imgSrc = product.imageUrl || 'https://images.unsplash.com/photo-1589924691995-400dc9ecc119?w=400';
-    const favActive = isFavorite(product.id);
+    const imgSrc = p.imageUrl || 'https://images.unsplash.com/photo-1589924691995-400dc9ecc119?w=400';
+    const favActive = isFavorite(p.id);
 
     return `
-        <div class="product-card" role="article" aria-label="${product.name}">
-            <div class="product-image" onclick="openImageZoom('${imgSrc.replace(/'/g, "\\'")}', '${product.name.replace(/'/g, "\\'")}')">
-                <button class="fav-btn${favActive ? ' fav-btn--active' : ''}" data-id="${product.id}"
+        <div class="product-card" role="article" aria-label="${p.name}">
+            <div class="product-image" onclick="openImageZoom('${imgSrc.replace(/'/g, "\\'")}', '${p.name.replace(/'/g, "\\'")}')">
+                <button class="fav-btn${favActive ? ' fav-btn--active' : ''}" data-id="${p.id}"
                     aria-label="${favActive ? 'Quitar de favoritos' : 'Agregar a favoritos'}"
                     aria-pressed="${favActive}"
-                    onclick="event.stopPropagation(); toggleFavorite(${JSON.stringify(product).replace(/"/g,'&quot;')})">
+                    onclick="event.stopPropagation(); toggleFavorite(${JSON.stringify(p).replace(/"/g,'&quot;')})">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="${favActive ? '#FF6B35' : 'none'}" stroke="${favActive ? '#FF6B35' : 'currentColor'}" stroke-width="2" aria-hidden="true" focusable="false">
                         <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
                     </svg>
                 </button>
-                <img src="${imgSrc}" alt="${product.name}" width="400" height="300" loading="lazy" decoding="async">
+                <img src="${imgSrc}" alt="${p.name}" width="400" height="300" loading="lazy" decoding="async">
                 <div class="zoom-hint" aria-hidden="true">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true" focusable="false">
                         <circle cx="11" cy="11" r="8"></circle>
@@ -142,38 +168,38 @@ function createProductCard(product) {
                         <span>¡Últimas!</span>
                     </div>
                 ` : ''}
-                ${product.stock === 0 ? `
+                ${p.stock === 0 ? `
                     <div class="out-of-stock-overlay" aria-label="Sin stock">SIN STOCK</div>
                 ` : ''}
             </div>
             <div class="product-content">
-                <h3 class="product-name">${product.name}</h3>
+                <h3 class="product-name">${p.name}</h3>
                 <div class="product-meta">
-                    <span class="product-weight">${product.weight}</span>
-                    <span class="product-pet-type">${product.petType}</span>
+                    <span class="product-weight">${p.weight}</span>
+                    <span class="product-pet-type">${p.petType}</span>
                 </div>
                 <div class="product-price" aria-label="Precio">
                     ${hasDiscount ? `
-                        <p class="original-price"><s>${formatPrice(product.originalPrice)}</s></p>
-                        <p class="current-price">${formatPrice(product.price)}</p>
+                        <p class="original-price"><s>${formatPrice(p.originalPrice)}</s></p>
+                        <p class="current-price">${formatPrice(p.price)}</p>
                     ` : `
-                        <p class="regular-price">${formatPrice(product.price)}</p>
+                        <p class="regular-price">${formatPrice(p.price)}</p>
                     `}
                 </div>
                 <div class="product-card-actions">
                     <button
                         class="add-to-cart-btn"
-                        onclick="addToCart(${JSON.stringify(product).replace(/"/g, '&quot;')})"
-                        aria-label="${product.stock === 0 ? 'Sin stock' : 'Agregar ' + product.name + ' al carrito'}"
-                        ${product.stock === 0 ? 'disabled aria-disabled="true"' : ''}>
+                        onclick="addToCart(${JSON.stringify(p).replace(/"/g, '&quot;')})"
+                        aria-label="${p.stock === 0 ? 'Sin stock' : 'Agregar ' + p.name + ' al carrito'}"
+                        ${p.stock === 0 ? 'disabled aria-disabled="true"' : ''}>
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
                             <circle cx="9" cy="21" r="1"></circle>
                             <circle cx="20" cy="21" r="1"></circle>
                             <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
                         </svg>
-                        <span>${product.stock === 0 ? 'Sin Stock' : 'Agregar'}</span>
+                        <span>${p.stock === 0 ? 'Sin Stock' : 'Agregar'}</span>
                     </button>
-                    <button class="share-wa-btn" onclick="shareProductWA(${JSON.stringify(product).replace(/"/g, '&quot;')})" aria-label="Compartir ${product.name} por WhatsApp" title="Compartir por WhatsApp">
+                    <button class="share-wa-btn" onclick="shareProductWA(${JSON.stringify(p).replace(/"/g, '&quot;')})" aria-label="Compartir ${p.name} por WhatsApp" title="Compartir por WhatsApp">
                         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
                             <circle cx="18" cy="5" r="3"></circle>
                             <circle cx="6" cy="12" r="3"></circle>
