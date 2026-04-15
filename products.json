@@ -3628,6 +3628,21 @@
     "code": "57635"
   },
   {
+    "id": "424",
+    "name": "PipiCat Arena Sanitaria",
+    "brand": "PipiCat",
+    "price": 25000,
+    "originalPrice": 25000,
+    "stock": 10,
+    "weight": "4kg",
+    "petType": "gato",
+    "category": "higiene",
+    "imageUrl": "assets/img/img424.png",
+    "isOnSale": false,
+    "description": "Arena para gatos",
+    "code": "00033"
+  },
+  {
     "id": "234",
     "name": "PipiCat Arena Sanitaria",
     "brand": "PipiCat",
@@ -6515,21 +6530,6 @@
     "isOnSale": false,
     "description": "Arena para gatos",
     "code": "06423"
-  },
-  {
-    "id": "424",
-    "name": "PipiCat Arena Sanitaria",
-    "brand": "PipiCat",
-    "price": 25000,
-    "originalPrice": 25000,
-    "stock": 10,
-    "weight": "4kg",
-    "petType": "gato",
-    "category": "higiene",
-    "imageUrl": "assets/img/img424.png",
-    "isOnSale": false,
-    "description": "Arena para gatos",
-    "code": "00033"
   },
   {
     "id": "425",

@@ -1,0 +1,26 @@
+1. app-mode.js se carga con defer — se ejecuta después de que los scripts inline ya corrieron, pero AppMode.init() 
+al final del archivo no usa defer y puede ejecutarse antes de que el DOM esté listo.
+
+2. setupDOM() duplica el productsGrid — crea uno nuevo dentro de page-home, pero el HTML ya tiene uno. El loadHomeProducts() 
+del inline script busca #productsGrid que puede ser el original oculto.
+
+3. El hero original se oculta con style.display='none' pero se copia con outerHTML — si hay event listeners o IDs duplicados, rompe todo.
+
+4. app-mode.js no está en el sw.js precache — al instalar la PWA, el archivo no se precachea y no carga offline.
+
+5. app-styles.css tampoco está en el precache.
+
+La solución limpia: reescribir app-mode.js para que sea más robusto, sin duplicar DOM, 
+y actualizar sw.js.
+
+El enfoque correcto es no manipular el DOM existente. En lugar de mover/clonar elementos, el app-mode debe simplemente:
+
+1.Agregar clase app-mode al body
+2.CSS se encarga de ocultar/mostrar lo que corresponde
+3.El bottom nav se inyecta una vez
+4.La navegación en app mode usa iframes o redirecciona normalmente (las páginas products/cart ya existen)
+
+Reescribe app-mode.js con un enfoque mucho más simple y robusto, y actualiza el sw.js y el index.html.
+Reescribe app-styles.css con un enfoque limpio-sin asumir estructura DOM creada dinámicamente
+Actualiza index.html para agregar los dos archivos nuevos y asegurar que app-mode.js se cargue sin defer(o con defer pero después de app.js)
+Actualiza sw.js para incluir los archivos nuevos el precache

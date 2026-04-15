@@ -884,7 +884,7 @@ function openOrdersModal() {
                 </div>
                 <div class="order-history-meta">
                     <span>👤 ${o.customerName}</span>
-                    <span>${o.deliveryMethod === 'delivery' ? '🚚 Delivery' : '🏠 Retiro'}</span>
+                    <span>${o.deliveryMethod === 'Envio por Bolt' ? '🚚 Envio por Bolt' : '🏠 Retiro'}</span>
                     <span>${o.paymentMethod === 'efectivo' ? '💵 Efectivo' : '💳 Transferencia'}</span>
                 </div>
                 <ul class="order-history-items" aria-label="Productos del pedido">

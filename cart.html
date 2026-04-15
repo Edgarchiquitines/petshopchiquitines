@@ -322,8 +322,8 @@
                 <div class="form-group" role="group" aria-labelledby="deliveryLabel">
                     <label id="deliveryLabel">Método de Entrega *</label>
                     <div class="radio-group">
-                        <label class="radio-option"><input type="radio" name="delivery" value="delivery" checked aria-required="true"><span>Delivery (te contactaremos para coordinar)</span></label>
-                        <label class="radio-option"><input type="radio" name="delivery" value="pickup"><span>Retiro en local/Pickup</span></label>
+                        <label class="radio-option"><input type="radio" name="Envio por Bolt" value="Envio por Bolt" checked aria-required="true"><span>Envio por Bolt (te contactaremos para coordinar)</span></label>
+                        <label class="radio-option"><input type="radio" name="Envio por Bolt" value="pickup"><span>Retiro en local/Pickup</span></label>
                     </div>
                 </div>
                 <div class="form-group" role="group" aria-labelledby="paymentLabel">
@@ -487,7 +487,7 @@
             });
 
             const customerName   = document.getElementById('customerName').value.trim();
-            const deliveryMethod = document.querySelector('input[name="delivery"]:checked').value;
+            const deliveryMethod = document.querySelector('input[name="Envio por Bolt"]:checked').value;
             const paymentMethod  = document.querySelector('input[name="payment"]:checked').value;
             const needsInvoice   = document.getElementById('needsInvoice').checked;
             const invoiceRuc     = document.getElementById('invoiceRuc')?.value.trim();
@@ -509,7 +509,7 @@
             });
 
             message += `💰 *TOTAL: ${formatPrice(calculateTotal())}*\n\n`;
-            message += `🚚 *Entrega:* ${deliveryMethod === 'delivery' ? 'Delivery' : 'Retiro en local/Pickup'}\n\n`;
+            message += `🚚 *Entrega:* ${deliveryMethod === 'Envio por Bolt' ? 'Envio por Bolt' : 'Retiro en local/Pickup'}\n\n`;
             message += `💳 *Método de pago:* ${paymentMethod === 'efectivo' ? 'Efectivo' : 'Transferencia'}\n\n`;
             message += needsInvoice
                 ? `🧾 *Factura:*\n   RUC: ${invoiceRuc}\n   Nombre: ${invoiceName}\n`
