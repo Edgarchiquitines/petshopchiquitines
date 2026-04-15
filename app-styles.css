@@ -8,32 +8,24 @@
    RESET & BASE STYLES - App Mode
    ───────────────────────────────────────────────────────────────── */
 
-@supports (display: standalone) {
-    html {
-        --app-safe-area-top: max(1rem, env(safe-area-inset-top));
-        --app-safe-area-bottom: max(4.5rem, env(safe-area-inset-bottom));
-        --app-safe-area-left: env(safe-area-inset-left);
-        --app-safe-area-right: env(safe-area-inset-right);
-    }
+/* Variables de safe area — aplican siempre para que funcionen en standalone y en browser */
+html {
+    --app-safe-area-top: env(safe-area-inset-top, 0px);
+    --app-safe-area-bottom: env(safe-area-inset-bottom, 0px);
+    --app-safe-area-left: env(safe-area-inset-left, 0px);
+    --app-safe-area-right: env(safe-area-inset-right, 0px);
 }
 
 body.app-mode {
     /* Llenar todo el viewport */
-    min-height: 100vh;
-    min-height: 100dvh;
-    display: flex;
-    flex-direction: column;
-    overflow-x: hidden;
-    
-    /* Remover márgenes adicionales en navegadores móviles */
-    position: fixed;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    width: 100vw;
+    width: 100%;
     height: 100vh;
     height: 100dvh;
+    max-height: 100vh;
+    max-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* body NO scrollea — el scroll queda en .app-pages-wrapper */
     
     /* Tipografía optimizada */
     -webkit-font-smoothing: antialiased;
@@ -46,7 +38,7 @@ body.app-mode {
 
 body.app-mode .header {
     position: relative;
-    padding-top: var(--app-safe-area-top);
+    padding-top: max(0.5rem, var(--app-safe-area-top));
     padding-left: var(--app-safe-area-left);
     padding-right: var(--app-safe-area-right);
     z-index: 900;
@@ -206,13 +198,14 @@ body.app-mode .bottom-nav {
     left: 0;
     right: 0;
     width: 100%;
-    height: 4.5rem;
+    height: calc(4.5rem + var(--app-safe-area-bottom));
     padding-bottom: var(--app-safe-area-bottom);
     background: #000;
     border-top: 1px solid #222;
     display: flex;
     justify-content: space-around;
-    align-items: center;
+    align-items: flex-start;
+    padding-top: 0.25rem;
     z-index: 1000;
     box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.2);
 }
@@ -276,11 +269,13 @@ body.app-mode .bottom-nav-badge {
 
 body.app-mode .app-pages-wrapper {
     flex: 1;
-    min-height: 0;
+    min-height: 0; /* critical for flex children to scroll */
     overflow-y: auto;
     overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
     position: relative;
+    /* Leave space for bottom nav */
+    padding-bottom: calc(4.5rem + var(--app-safe-area-bottom));
 }
 
 body.app-mode .app-page {
@@ -329,7 +324,7 @@ body.app-mode .footer {
 
 body.app-mode .whatsapp-fab {
     position: fixed;
-    bottom: calc(4.5rem + var(--app-safe-area-bottom) + 1rem);
+    bottom: calc(4.5rem + var(--app-safe-area-bottom) + 0.75rem);
     right: 1rem;
     width: 3.5rem;
     height: 3.5rem;
@@ -472,27 +467,13 @@ body.app-mode select:focus {
    NOTCH & SAFE AREA SUPPORT
    ───────────────────────────────────────────────────────────────── */
 
-@supports (padding: max(0px)) {
-    body.app-mode {
-        padding-left: var(--app-safe-area-left);
-        padding-right: var(--app-safe-area-right);
-    }
-    
-    body.app-mode .header {
-        padding-left: var(--app-safe-area-left);
-        padding-right: var(--app-safe-area-right);
-    }
-}
+/* Safe area padding applied directly via --app-safe-area-* variables above */
 
 /* ─────────────────────────────────────────────────────────────────
    STATUS BAR STYLE (iOS)
    ───────────────────────────────────────────────────────────────── */
 
-@supports (padding: env(safe-area-inset-top)) {
-    body.app-mode {
-        background: #000 !important;
-    }
-}
+/* iOS status bar background handled by theme-color meta tag and body background */
 
 /* ─────────────────────────────────────────────────────────────────
    PRINT MEDIA

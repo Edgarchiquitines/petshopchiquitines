@@ -180,12 +180,12 @@ const AppMode = (() => {
             showPage('home');
         }
 
-        // Restaurar scroll position
-        setTimeout(() => {
+        // Restaurar scroll position después de que el DOM se actualice
+        requestAnimationFrame(() => {
             if (pagesWrapper) {
                 pagesWrapper.scrollTop = state.lastScrollPositions[pageId] || 0;
             }
-        }, 0);
+        });
     }
 
     /**
@@ -381,20 +381,26 @@ const AppMode = (() => {
      * Prevenir pull-to-refresh en Android
      */
     function preventPullToRefresh() {
-        let lastY = 0;
+        // Solo prevenir en el wrapper de páginas, no en todo el documento
+        // Esto evita congelar el scroll en toda la app
+        const getWrapper = () => document.querySelector('.app-pages-wrapper');
 
         document.addEventListener('touchstart', (e) => {
-            lastY = e.touches[0].clientY;
+            const wrapper = getWrapper();
+            if (wrapper) {
+                wrapper._ptrStartY = e.touches[0].clientY;
+            }
         }, { passive: true });
 
         document.addEventListener('touchmove', (e) => {
-            const wrapper = document.querySelector('.app-pages-wrapper');
+            const wrapper = getWrapper();
             if (!wrapper) return;
 
             const currentY = e.touches[0].clientY;
-            
-            // Si estamos al tope y trying to pull down, prevenir
-            if (wrapper.scrollTop === 0 && currentY > lastY) {
+            const startY  = wrapper._ptrStartY || currentY;
+
+            // Solo prevenir si estamos al tope Y jalando hacia abajo
+            if (wrapper.scrollTop <= 0 && currentY > startY) {
                 e.preventDefault();
             }
         }, { passive: false });
@@ -404,14 +410,11 @@ const AppMode = (() => {
      * Optimizar viewport
      */
     function optimizeViewport() {
-        // Forzar height=device-height para evitar bouncing
-        const viewport = document.querySelector('meta[name="viewport"]');
-        if (viewport) {
-            viewport.setAttribute(
-                'content',
-                'width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no'
-            );
-        }
+        // El viewport ya está configurado correctamente en el meta tag del HTML.
+        // No modificar en runtime — puede causar flickers en iOS.
+        // Forzar height correcto en html/body para que el flex layout funcione.
+        document.documentElement.style.height = '100%';
+        document.body.style.height = '100dvh';
     }
 
     /**
