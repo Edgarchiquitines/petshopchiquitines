@@ -1998,3 +1998,33 @@ body {
     body { background: #fff; color: #000; }
     .cart-item, .order-form { box-shadow: none; border: 1px solid #ccc; }
 }
+/* ── Mini mapa en sección Nosotros ───────────────────────────── */
+.mini-map-wrapper {
+    margin: 1.25rem auto 1.5rem;
+    max-width: 520px;
+    width: 100%;
+}
+
+.mini-map-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: 0.65rem;
+    padding: 0.5rem 1.1rem;
+    background: #FF6B35;
+    color: #fff !important;
+    border-radius: 0.5rem;
+    font-size: 0.88rem;
+    font-weight: 600;
+    text-decoration: none !important;
+    transition: background 0.2s, transform 0.15s;
+}
+
+.mini-map-cta:hover {
+    background: #E55A2B;
+    text-decoration: none !important;
+}
+
+.mini-map-cta:active {
+    transform: scale(0.97);
+}
