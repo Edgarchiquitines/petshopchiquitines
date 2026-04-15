@@ -7735,18 +7735,18 @@
   },
   {
     "id": "513",
-    "name": "Scalibor Collar Antiparasitario P-48cm",
-    "brand": "Scalibor",
-    "price": 118000,
-    "originalPrice": 118000,
+    "name": "Lysoform Pets",
+    "brand": "Lysoform",
+    "price": 25000,
+    "originalPrice": 25000,
     "discountPercent": 0,
     "stock": 10,
-    "weight": "paqx1",
-    "petType": "perro",
+    "weight": "360g",
+    "petType": ["perro","gato"],
     "category": "salud",
     "imageUrl": "assets/img/img513.png",
     "isOnSale": false,
-    "description": "Collar antiparasitario de larga duración",
-    "code": "82866"
+    "description": "Desinfectante para mascotas",
+    "code": "26996"
   }
 ]
