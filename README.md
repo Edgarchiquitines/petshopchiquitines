@@ -34,20 +34,6 @@ Here are some ideas to get you started:
   },
   {
     "id": "",
-    "name": "Scalibor Collar Antiparasitario P",
-    "brand": "Scalibor",
-    "price": 118000,
-    "stock": 40,
-    "weight": "1 unidad",
-    "petType": "perro",
-    "category": "salud",
-    "imageUrl": "assets/img/img.webp",
-    "isOnSale": false,
-    "description": "Collar antiparasitario de larga duración",
-    "code": "82866"
-  },
-  {
-    "id": "",
     "name": "Cuerda con pelota Lili M",
     "brand": "Lili Mascotas",
     "price": 12000,
