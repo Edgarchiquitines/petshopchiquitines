@@ -105,11 +105,17 @@ function _applyURLParams() {
     const search   = params.get('q');
     const pmin     = params.get('pmin');
     const pmax     = params.get('pmax');
+    const sale     = params.get('sale');
 
     if (pet)      { ['petTypeFilter','petTypeFilterMobile'].forEach(id => { const el = document.getElementById(id); if (el) el.value = pet; }); }
     if (category) { ['categoryFilter','categoryFilterMobile'].forEach(id => { const el = document.getElementById(id); if (el) el.value = category; }); }
     if (brand)    { ['brandFilter','brandFilterMobile'].forEach(id => { const el = document.getElementById(id); if (el) el.value = brand; }); }
     if (sort)     { ['sortFilter','sortFilterMobile'].forEach(id => { const el = document.getElementById(id); if (el) el.value = sort; }); }
+    if (sale === '1') {
+        ['saleFilter','saleFilterMobile'].forEach(id => { const el = document.getElementById(id); if (el) el.checked = true; });
+        // Guardar en variable global para que applyFilters lo use
+        window._filterSaleOnly = true;
+    }
     if (search)   {
         ['searchInput','searchInputSidebar','searchInputMobile'].forEach(id => { const el = document.getElementById(id); if (el) el.value = search; });
         ['searchClearTop','searchClearMobile','searchClearSidebar'].forEach(id => { const el = document.getElementById(id); if (el) el.style.display = 'flex'; });
@@ -154,6 +160,7 @@ function applyFilters() {
     );
     if (brand)    filteredProducts = filteredProducts.filter(p => p.brand === brand);
     filteredProducts = filteredProducts.filter(p => p.price >= priceMin && p.price <= priceMax);
+    if (window._filterSaleOnly) filteredProducts = filteredProducts.filter(p => p.isOnSale);
 
     if (sort === 'price-asc')       filteredProducts.sort((a, b) => a.price - b.price);
     else if (sort === 'price-desc') filteredProducts.sort((a, b) => b.price - a.price);
@@ -170,6 +177,10 @@ function displayProducts() {
     const grid  = document.getElementById('productsGrid');
     const count = document.getElementById('productsCount');
     grid.setAttribute('aria-busy', 'false');
+
+    // Mostrar/ocultar banner de filtro de ofertas
+    const banner = document.getElementById('saleBanner');
+    if (banner) banner.style.display = window._filterSaleOnly ? 'flex' : 'none';
 
     count.textContent = `${filteredProducts.length} producto${filteredProducts.length !== 1 ? 's' : ''} encontrado${filteredProducts.length !== 1 ? 's' : ''}`;
 
@@ -460,15 +471,27 @@ function clearFilters() {
      'brandFilter','brandFilterMobile','sortFilter','sortFilterMobile'].forEach(id => {
         const el = document.getElementById(id); if (el) el.value = '';
     });
+    window._filterSaleOnly = false;
+    const banner = document.getElementById('saleBanner');
+    if (banner) banner.style.display = 'none';
     initPriceRange(globalPriceMin, globalPriceMax);
     closeAllDropdowns();
     applyFilters();
 }
 
+function clearSaleFilter() {
+    window._filterSaleOnly = false;
+    const banner = document.getElementById('saleBanner');
+    if (banner) banner.style.display = 'none';
+    history.replaceState(null, '', location.pathname);
+    applyFilters();
+}
+
 function updateFilterCount() {
     const priceActive = priceMin > globalPriceMin || priceMax < globalPriceMax;
+    const saleActive  = window._filterSaleOnly ? 1 : 0;
     const activeFilters = ['categoryFilter','petTypeFilter','brandFilter','sortFilter']
-        .map(id => document.getElementById(id).value).filter(Boolean).length + (priceActive ? 1 : 0);
+        .map(id => document.getElementById(id).value).filter(Boolean).length + (priceActive ? 1 : 0) + saleActive;
     const filterCount = document.getElementById('filterCount');
     if (activeFilters > 0) { filterCount.textContent = activeFilters; filterCount.style.display = 'inline-block'; }
     else { filterCount.style.display = 'none'; }

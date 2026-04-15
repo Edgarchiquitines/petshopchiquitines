@@ -276,6 +276,15 @@
                 <div class="loading-skeleton" aria-hidden="true"></div>
                 <div class="loading-skeleton" aria-hidden="true"></div>
             </div>
+            <div style="text-align:center; margin-top:1.5rem;">
+                <a id="seeAllOffersBtn" href="products.html?sale=1" class="btn-primary" style="display:none; background-color:#FF6B35; color:#fff;">
+                    <span>Ver todas las ofertas</span>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </a>
+            </div>
         </div>
     </section>
 
@@ -397,6 +406,16 @@
             loadHomeProducts();
         });
 
+        // Re-renderizar ofertas si cambia el tamaño (cambia columnas)
+        let _resizeTimer;
+        window.addEventListener('resize', function() {
+            clearTimeout(_resizeTimer);
+            _resizeTimer = setTimeout(function() {
+                const grid = document.getElementById('productsGrid');
+                if (grid && window._lastProducts) _renderOffers(window._lastProducts, grid);
+            }, 250);
+        }, { passive: true });
+
         async function loadHomeProducts() {
             const grid = document.getElementById('productsGrid');
 
@@ -434,8 +453,17 @@
             }
         }
 
+        function _getGridCols() {
+            const w = window.innerWidth;
+            if (w >= 1280) return 5;
+            if (w >= 1024) return 4;
+            if (w >= 768)  return 3;
+            return 2;
+        }
+
         function _renderOffers(products, grid) {
             const onSale = products.filter(p => p.isOnSale && p.stock > 0);
+            window._lastProducts = products; // para resize
             grid.setAttribute('aria-busy', 'false');
 
             if (!onSale.length) {
@@ -443,7 +471,18 @@
                 return;
             }
 
-            grid.innerHTML = onSale.map(product => createProductCard(product)).join('');
+            // Limitar: 2 filas en desktop (≥768px), 3 filas en mobile
+            const cols     = _getGridCols();
+            const maxRows  = cols >= 3 ? 2 : 3;
+            const maxItems = cols * maxRows;
+            const visible  = onSale.slice(0, maxItems);
+            const hasMore  = onSale.length > maxItems;
+
+            grid.innerHTML = visible.map(product => createProductCard(product)).join('');
+
+            // Botón "Ver todas las ofertas" si hay más productos
+            const seeAllBtn = document.getElementById('seeAllOffersBtn');
+            if (seeAllBtn) seeAllBtn.style.display = hasMore ? 'flex' : 'none';
 
             // fitProductNames diferido — no bloquea el paint
             if (typeof requestIdleCallback === 'function') {

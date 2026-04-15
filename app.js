@@ -1145,7 +1145,11 @@ function loadRecommendedSection(allProds) {
     if (!section || !grid || !_recommendedPool) return;
 
     const hasAct  = hasUserActivity();
-    const products = getRecommendedProducts(_recommendedPool, 10);
+    // Limitar: 2 filas en desktop (≥768px), 3 filas en mobile
+    const _w = window.innerWidth;
+    const _cols = _w >= 1280 ? 5 : _w >= 1024 ? 4 : _w >= 768 ? 3 : 2;
+    const _maxRows = _cols >= 3 ? 2 : 3;
+    const products = getRecommendedProducts(_recommendedPool, _cols * _maxRows);
 
     if (!products.length) { section.style.display = 'none'; return; }
 

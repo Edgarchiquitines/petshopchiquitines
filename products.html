@@ -375,6 +375,10 @@
                 </aside>
 
                 <div class="products-main">
+                    <div id="saleBanner" style="display:none; align-items:center; justify-content:space-between; gap:0.75rem; background:#FF6B35; color:#fff; border-radius:0.5rem; padding:0.6rem 1rem; margin-bottom:0.75rem; font-size:0.9rem; font-weight:600;">
+                        <span>🔥 Mostrando solo productos en oferta</span>
+                        <button onclick="clearSaleFilter()" style="background:rgba(255,255,255,0.25); border:none; color:#fff; border-radius:0.35rem; padding:0.25rem 0.65rem; font-size:0.82rem; font-weight:700; cursor:pointer;">✕ Quitar filtro</button>
+                    </div>
                     <div class="products-count" id="productsCount" aria-live="polite" aria-atomic="true">Cargando...</div>
                     <div id="productsGrid" class="products-grid" aria-live="polite" aria-busy="true">
                         <div class="product-card-skeleton" aria-hidden="true"><div class="skeleton-img"></div><div class="skeleton-body"><div class="skeleton-line skeleton-line--title"></div><div class="skeleton-line skeleton-line--subtitle"></div><div class="skeleton-line skeleton-line--meta"></div><div class="skeleton-line skeleton-line--price"></div><div class="skeleton-line skeleton-line--btn"></div></div></div>
