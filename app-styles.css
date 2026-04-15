@@ -51,18 +51,6 @@ body.app-mode .header-content {
     min-height: 3rem;
 }
 
-/* Logo en el header: centrado absolutamente */
-body.app-mode .header-content::before {
-    content: '';
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100px;
-    height: 36px;
-    background: url('assets/logo.webp') center/contain no-repeat;
-    pointer-events: none;
-}
-
 /* Íconos del header */
 body.app-mode .header-actions {
     display: flex;
