@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+    <meta name="google-site-verification" content="mHAOH5rT9Sn9ZUePt_bTyPKL5J3eml9OBUwPnSJkfMg" />
+    <title>Pet shop Chiquitines | Alimentos, Juguetes y Accesorios para Mascotas</title>
+    <meta name="description" content="Petshop Chiquitines - Tienda de mascotas con alimentos, accesorios y productos para perros y gatos. ¡Explora nuestro catálogo hoy!">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#000000">
+    <link rel="canonical" href="https://petshopchiquitines.com/">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Petshop Chiquitines">
+    <meta property="og:title" content="Pet shop Chiquitines | Alimentos, Juguetes y Accesorios para Mascotas">
+    <meta property="og:description" content="Tienda de mascotas con alimentos, accesorios y productos para perros y gatos. ¡Explora nuestro catálogo hoy!">
+    <meta property="og:url" content="https://petshopchiquitines.com/">
+    <meta property="og:image" content="https://petshopchiquitines.com/assets/logo.webp">
+    <meta property="og:locale" content="es_PY">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Pet shop Chiquitines | Alimentos, Juguetes y Accesorios para Mascotas">
+    <meta name="twitter:description" content="Tienda de mascotas con alimentos, accesorios y productos para perros y gatos.">
+    <meta name="twitter:image" content="https://petshopchiquitines.com/assets/logo.webp">
+
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Chiquitines">
+    <link rel="apple-touch-icon" href="assets/icons/icon-192.png">
+
+    <!-- Favicon (múltiples formatos para máxima compatibilidad) -->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="assets/favicon-48x48.png">
+
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
+    <link rel="dns-prefetch" href="https://images.unsplash.com">
+
+    <!-- Preload critical assets -->
+    <link rel="preload" href="styles.css" as="style">
+    <link rel="preload" href="app-styles.css" as="style">
+    <link rel="preload" href="assets/logo.webp" as="image" fetchpriority="high">
+
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="app-styles.css">
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "PetStore",
+      "name": "Pet Shop Chiquitines",
+      "description": "Tienda de mascotas con alimentos, accesorios y productos para perros y gatos.",
+      "url": "https://petshopchiquitines.com/",
+      "logo": "https://petshopchiquitines.com/assets/logo.webp",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Av. Peru y esq. Gines",
+        "addressLocality": "Asunción",
+        "addressCountry": "PY"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+595976106726",
+        "contactType": "customer service",
+        "availableLanguage": "Spanish"
+      },
+      "sameAs": [
+        "https://wa.me/595976106726"
+      ]
+    }
+    </script>
+</head>
+<body>
+    <!-- Header - App Mode Compatible -->
+    <header class="header" role="banner">
+        <div class="container">
+            <div class="header-content">
+                <nav class="nav-desktop" role="navigation" aria-label="Navegación principal">
+                    <a href="index.html" class="nav-link active" aria-current="page">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                        </svg>
+                        <span>Inicio</span>
+                    </a>
+                    <a href="products.html" class="nav-link">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
+                            <line x1="16.5" y1="9.4" x2="7.5" y2="4.21"></line>
+                            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                            <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                            <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                        </svg>
+                        <span>Productos</span>
+                    </a>
+                </nav>
+                <div class="header-actions">
+                    <button class="header-icon-btn" onclick="openFavoritesModal()" aria-label="Mis favoritos" title="Mis favoritos">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                        </svg>
+                        <span class="fav-count" id="favCount" style="display:none" aria-label="favoritos guardados">0</span>
+                    </button>
+                    <button class="header-icon-btn" onclick="openOrdersModal()" aria-label="Mis pedidos" title="Mis pedidos">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
+                            <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"></path>
+                            <rect x="9" y="3" width="6" height="4" rx="1" ry="1"></rect>
+                            <line x1="9" y1="12" x2="15" y2="12"></line>
+                            <line x1="9" y1="16" x2="13" y2="16"></line>
+                        </svg>
+                    </button>
+                    <a href="cart.html" class="cart-icon" aria-label="Carrito de compras">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
+                            <circle cx="9" cy="21" r="1"></circle>
+                            <circle cx="20" cy="21" r="1"></circle>
+                            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                        </svg>
+                        <span class="cart-count" id="cartCount" aria-label="productos en el carrito">0</span>
+                    </a>
+                    <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileMenu">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
+                            <line x1="3" y1="12" x2="21" y2="12"></line>
+                            <line x1="3" y1="6" x2="21" y2="6"></line>
+                            <line x1="3" y1="18" x2="21" y2="18"></line>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="mobile-menu" id="mobileMenu" role="navigation" aria-label="Menú móvil">
+            <nav>
+                <a href="index.html" class="mobile-nav-link" aria-current="page">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                    </svg>
+                    <span>Inicio</span>
+                </a>
+                <a href="products.html" class="mobile-nav-link">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
+                        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                    </svg>
+                    <span>Productos</span>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero hero-gradient" aria-label="Bienvenida">
+        <div class="container">
+            <div class="hero-content">
+                <h1>
+                    Bienvenidos a<br>
+                    <img src="assets/logo.webp" alt="PetShop by Chiquitines" class="hero-logo" width="250" height="100" fetchpriority="high">
+                </h1>
+                <p>Los mejores productos para tus mascotas con increíbles precios</p>
+                <a href="products.html" class="btn-primary">
+                    <span>Ver Todos los Productos</span>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true" focusable="false">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Productos Destacados -->
+    <section id="offersSection" class="products-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Ofertas Especiales</h2>
+                <p>Productos con descuento disponibles ahora</p>
+            </div>
+            <div id="productsGrid" class="products-grid" aria-busy="true"></div>
+            <button id="seeAllOffersBtn" style="display:none;width:100%;margin-top:1rem;max-width:none" class="btn-primary" onclick="window.location.href='products.html'">
+                <span>Ver todas las ofertas</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+            </button>
+        </div>
+    </section>
+
+    <!-- Recommended Section -->
+    <section id="recommendedSection" class="products-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Recomendaciones</h2>
+                <p>Populares entre nuestros clientes</p>
+            </div>
+            <div id="recommendedGrid" class="products-grid" aria-busy="true"></div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section">
+        <div class="container">
+            <h2>Sobre Nosotros</h2>
+            <p>
+                <strong>Chiquitines Pet Shop</strong> es una tienda de mascotas que ofrece
+                productos de calidad para perros, gatos y otras mascotas.
+            </p>
+            <p>
+                Contamos con una amplia variedad de alimentos, accesorios, juguetes
+                y productos de higiene, siempre buscando lo mejor para tus compañeros peludos.
+            </p>
+            <p>
+                <strong>Ubicación:</strong> Av. Perú y esq. Gines, Asunción, Paraguay<br>
+                <strong>Horario:</strong> Lunes a viernes: 9:00 AM - 6:00 PM<br>
+                Sábado: 9:00 AM - 4:00 PM
+            </p>
+
+            <p>
+                <strong>Contacto:</strong>
+                <a href="https://wa.me/595976106726?text=Hola%20quiero%20consultar%20sobre%20sus%20productos"
+                   target="_blank"
+                   rel="noopener noreferrer">
+                   WhatsApp: 0976 106726
+                </a>
+                <br>
+                <a href="mailto:edgarchiquitinespet@gmail.com">
+                    edgarchiquitinespet@gmail.com
+                </a>
+            </p>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <p class="copyright">© 2026 Chiquitines Py - Asunción, Paraguay</p>
+            <p>Todos los derechos reservados</p>
+        </div>
+    </footer>
+
+    <!-- Botón flotante WhatsApp -->
+    <a href="https://wa.me/595976106726?text=Hola%20quiero%20información%20sobre%20sus%20productos"
+       class="whatsapp-fab"
+       target="_blank"
+       rel="noopener noreferrer"
+       aria-label="Contactar por WhatsApp">
+        <img src="assets/whatsapp.png" alt="WhatsApp" width="30" height="30" loading="lazy">
+    </a>
+
+    <!-- Datos estructurados SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "PetStore",
+      "name": "Pet Shop Chiquitines",
+      "image": "https://petshopchiquitines.com/assets/logo.png",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Av. Perú y esq. Gines",
+        "addressLocality": "Asunción",
+        "addressCountry": "PY"
+      },
+      "telephone": "+595976106726",
+      "url": "https://petshopchiquitines.com"
+    }
+    </script>
+
+    <!-- Scripts -->
+    <script src="app.js" defer></script>
+    <script src="app-mode.js" defer></script>
+    
+    <script defer>
+        'use strict';
+
+        const PRODUCTS_VERSION = 'v1';
+        const CACHE_KEY        = 'productsCache';
+        const CACHE_VER_KEY    = 'productsCacheVersion';
+
+        document.addEventListener('DOMContentLoaded', function() {
+            loadHomeProducts();
+        });
+
+        // Re-renderizar ofertas si cambia el tamaño
+        let _resizeTimer;
+        window.addEventListener('resize', function() {
+            clearTimeout(_resizeTimer);
+            _resizeTimer = setTimeout(function() {
+                const grid = document.getElementById('productsGrid');
+                if (grid && window._lastProducts) _renderOffers(window._lastProducts, grid);
+            }, 250);
+        }, { passive: true });
+
+        async function loadHomeProducts() {
+            const grid = document.getElementById('productsGrid');
+
+            // Render inmediato desde caché
+            const cachedVersion = _lsGet(CACHE_VER_KEY, null);
+            const cachedData    = _lsGet(CACHE_KEY, null);
+
+            if (cachedData && cachedData.length && cachedVersion === PRODUCTS_VERSION) {
+                _renderOffers(cachedData, grid);
+                loadRecommendedSection(cachedData);
+            }
+
+            // Fetch del JSON fresco en paralelo
+            try {
+                const response = await fetch('products.json');
+                if (!response.ok) throw new Error('HTTP ' + response.status);
+                const fresh = (await response.json()).filter(p => p.id !== undefined && p.name !== undefined);
+
+                _lsSet(CACHE_KEY, fresh);
+                _lsSet(CACHE_VER_KEY, PRODUCTS_VERSION);
+
+                const same = cachedData && JSON.stringify(fresh) === JSON.stringify(cachedData);
+                if (!same) {
+                    _renderOffers(fresh, grid);
+                    loadRecommendedSection(fresh);
+                }
+            } catch (error) {
+                if (!cachedData || !cachedData.length) {
+                    grid.setAttribute('aria-busy', 'false');
+                    grid.innerHTML = '<div class="empty-state"><p>No se pudieron cargar los productos.</p><a href="products.html">Ver catálogo</a></div>';
+                }
+            }
+        }
+
+        function _getGridCols() {
+            const w = window.innerWidth;
+            if (w >= 1280) return 5;
+            if (w >= 1024) return 4;
+            if (w >= 768)  return 3;
+            return 2;
+        }
+
+        function _renderOffers(products, grid) {
+            const onSale = products.filter(p => p.isOnSale && p.stock > 0);
+            window._lastProducts = products;
+            grid.setAttribute('aria-busy', 'false');
+
+            if (!onSale.length) {
+                grid.innerHTML = '<div class="empty-state"><p>No hay productos en oferta</p><a href="products.html">Ver todos los productos</a></div>';
+                return;
+            }
+
+            const cols     = _getGridCols();
+            const maxRows  = cols >= 3 ? 2 : 3;
+            const maxItems = cols * maxRows;
+            const visible  = onSale.slice(0, maxItems);
+            const hasMore  = onSale.length > maxItems;
+
+            grid.innerHTML = visible.map(product => createProductCard(product)).join('');
+
+            const seeAllBtn = document.getElementById('seeAllOffersBtn');
+            if (seeAllBtn) seeAllBtn.style.display = hasMore ? 'flex' : 'none';
+
+            if (typeof requestIdleCallback === 'function') {
+                requestIdleCallback(fitProductNames, { timeout: 500 });
+            } else {
+                setTimeout(fitProductNames, 100);
+            }
+        }
+    </script>
+
+    <!-- PWA Service Worker -->
+    <script defer>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .catch(err => console.warn('[PWA] SW no registrado:', err));
+            }, { passive: true });
+        }
+    </script>
+</body>
+</html>
