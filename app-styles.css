@@ -1,75 +1,124 @@
 /* ═══════════════════════════════════════════════════════════════
    APP MODE STYLES - Pet Shop Chiquitines
    Se activa solo cuando <body> tiene la clase .app-mode
-   (inyectada por app-mode.js cuando detecta display: standalone)
    ═══════════════════════════════════════════════════════════════ */
 
-/* ── Safe area variables (siempre disponibles) ─────────────────── */
+/* ── Safe area variables ────────────────────────────────────────── */
 html {
     --safe-top:    env(safe-area-inset-top, 0px);
     --safe-bottom: env(safe-area-inset-bottom, 0px);
     --safe-left:   env(safe-area-inset-left, 0px);
     --safe-right:  env(safe-area-inset-right, 0px);
-    --bn-height:   4rem; /* bottom nav height */
+    --bn-height:   4rem;
+    --app-orange:  #FF6B35;
+    --app-black:   #000;
+    --app-dark:    #111;
 }
 
 /* ── Body: flex column full screen ─────────────────────────────── */
 body.app-mode {
     display: flex;
     flex-direction: column;
-    height: 100dvh;       /* dynamic viewport height */
-    height: 100vh;        /* fallback */
-    overflow: hidden;     /* el scroll queda en #app-scroll-content */
+    height: 100dvh;
+    height: 100vh;
+    overflow: hidden;
     -webkit-font-smoothing: antialiased;
 }
 
-/* ── Header: compacto, sin logo, sin nav de escritorio ─────────── */
+/* ══════════════════════════════════════════════════════════════════
+   HEADER — estilo app nativa
+   Solo muestra: hamburguesa (oculta) + logo centrado + íconos de acción
+   ══════════════════════════════════════════════════════════════════ */
 body.app-mode .header {
     flex-shrink: 0;
-    position: relative;    /* quitar sticky/fixed si lo tenía */
+    position: relative;
     padding-top: var(--safe-top);
     z-index: 100;
+    background: #000;
 }
 
-/* Ocultar navegación de escritorio y botón hamburguesa */
+/* Ocultar navegación de escritorio, hamburguesa y menú móvil */
 body.app-mode .nav-desktop,
 body.app-mode .mobile-menu-btn,
 body.app-mode .mobile-menu {
     display: none !important;
 }
 
-/* Header-actions ocupa todo el ancho */
+/* Header-content: los íconos de acción a la derecha */
 body.app-mode .header-content {
     justify-content: flex-end;
+    padding: 0.5rem 0.75rem;
+    min-height: 3rem;
 }
 
-/* ── Scroll content: crece y scrollea ──────────────────────────── */
+/* Logo en el header: centrado absolutamente */
+body.app-mode .header-content::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 36px;
+    background: url('assets/logo.webp') center/contain no-repeat;
+    pointer-events: none;
+}
+
+/* Íconos del header */
+body.app-mode .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+body.app-mode .header-icon-btn,
+body.app-mode .cart-icon {
+    width: 2.25rem;
+    height: 2.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.5rem;
+    position: relative;
+    color: #fff;
+    transition: background 0.15s;
+}
+
+body.app-mode .header-icon-btn:active,
+body.app-mode .cart-icon:active {
+    background: rgba(255, 107, 53, 0.2);
+}
+
+/* Ocultar el ícono de carrito del header: ya está en el bottom nav */
+body.app-mode .cart-icon {
+    display: none !important;
+}
+
+/* ── Scroll content ─────────────────────────────────────────────── */
 #app-scroll-content {
     flex: 1;
     min-height: 0;
     overflow-y: auto;
     overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
-    /* Dejar espacio para el bottom nav fijo */
     padding-bottom: calc(var(--bn-height) + var(--safe-bottom) + 0.5rem);
 }
 
-/* ── Footer: oculto ─────────────────────────────────────────────── */
+/* ── Footer: oculto en app ──────────────────────────────────────── */
 body.app-mode .footer {
     display: none !important;
 }
 
-/* ── Secciones: menos padding en app ───────────────────────────── */
+/* ── Hero: más compacto ─────────────────────────────────────────── */
 body.app-mode .hero {
-    padding: 1.25rem 0;
+    padding: 1rem 0;
 }
 
 body.app-mode .hero h1 {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
 }
 
 body.app-mode .hero-logo {
-    max-width: 170px;
+    max-width: 160px;
 }
 
 body.app-mode .hero p {
@@ -81,23 +130,14 @@ body.app-mode .btn-primary {
     font-size: 0.88rem;
 }
 
-/* ── Grilla de productos: 2 columnas siempre en app ────────────── */
+/* ── Grilla de productos: 2 columnas en app ─────────────────────── */
 body.app-mode .products-grid {
     grid-template-columns: repeat(2, 1fr) !important;
     gap: 0.5rem;
     padding: 0.5rem;
 }
 
-/* ── Categorías: scroll horizontal sin desborde ────────────────── */
-body.app-mode .categories-section {
-    overflow-x: hidden;
-}
-
-body.app-mode .cat-pills {
-    -webkit-overflow-scrolling: touch;
-}
-
-/* ── Secciones secundarias: menos espacio ──────────────────────── */
+/* ── Secciones secundarias ──────────────────────────────────────── */
 body.app-mode .why-us-section,
 body.app-mode .about-contact-section,
 body.app-mode .cta-section {
@@ -124,7 +164,9 @@ body.app-mode .whatsapp-fab {
     z-index: 200;
 }
 
-/* ── Bottom Navigation Bar ──────────────────────────────────────── */
+/* ══════════════════════════════════════════════════════════════════
+   BOTTOM NAVIGATION BAR
+   ══════════════════════════════════════════════════════════════════ */
 body.app-mode .bottom-nav {
     position: fixed;
     bottom: 0;
@@ -132,14 +174,14 @@ body.app-mode .bottom-nav {
     right: 0;
     height: calc(var(--bn-height) + var(--safe-bottom));
     padding-bottom: var(--safe-bottom);
-    background: #000;
-    border-top: 1px solid #1a1a1a;
+    background: #fff;
+    border-top: 1px solid #e5e7eb;
     display: flex;
     justify-content: space-around;
     align-items: flex-start;
-    padding-top: 0.4rem;
+    padding-top: 0.5rem;
     z-index: 999;
-    box-shadow: 0 -2px 16px rgba(0, 0, 0, 0.35);
+    box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.08);
 }
 
 body.app-mode .bottom-nav-item {
@@ -148,57 +190,80 @@ body.app-mode .bottom-nav-item {
     align-items: center;
     justify-content: flex-start;
     gap: 0.2rem;
-    color: #666;
+    color: #9ca3af;
     text-decoration: none;
-    padding: 0.3rem 0.5rem;
+    padding: 0.25rem 0.5rem;
     flex: 1;
     position: relative;
     -webkit-touch-callout: none;
     user-select: none;
     -webkit-tap-highlight-color: transparent;
+    transition: color 0.15s;
 }
 
 body.app-mode .bottom-nav-item svg {
-    width: 22px;
-    height: 22px;
+    width: 24px;
+    height: 24px;
     flex-shrink: 0;
+    stroke-width: 1.75;
 }
 
 body.app-mode .bottom-nav-item > span:not(.bn-badge) {
     font-size: 0.6rem;
     font-weight: 600;
+    letter-spacing: 0.01em;
     white-space: nowrap;
 }
 
 body.app-mode .bottom-nav-item.active {
-    color: #FF6B35;
+    color: var(--app-orange);
+}
+
+body.app-mode .bottom-nav-item.active svg {
+    stroke: var(--app-orange);
 }
 
 body.app-mode .bottom-nav-item:active {
-    opacity: 0.7;
+    opacity: 0.6;
 }
 
-/* Badge sobre el ícono */
+/* Indicador activo: punto naranja debajo del ícono */
+body.app-mode .bottom-nav-item.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0.1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0.35rem;
+    height: 0.35rem;
+    background: var(--app-orange);
+    border-radius: 50%;
+}
+
+/* ── Badge ──────────────────────────────────────────────────────── */
 body.app-mode .bn-badge {
     position: absolute;
-    top: 0.1rem;
-    left: calc(50% + 4px);
-    background: #FF6B35;
+    top: 0;
+    left: calc(50% + 6px);
+    background: var(--app-orange);
     color: #fff;
-    font-size: 0.55rem;
+    font-size: 0.5rem;
     font-weight: 700;
     min-width: 1rem;
     height: 1rem;
     border-radius: 9999px;
-    display: none; /* JS lo muestra cuando count > 0 */
+    display: none;
     align-items: center;
     justify-content: center;
     padding: 0 0.2rem;
-    border: 1.5px solid #000;
+    border: 1.5px solid #fff;
     line-height: 1;
+    pointer-events: none;
 }
 
-/* ── Paneles laterales (favoritos/pedidos): slide desde abajo ──── */
+/* ══════════════════════════════════════════════════════════════════
+   PANELES LATERALES — slide desde abajo en app
+   ══════════════════════════════════════════════════════════════════ */
 body.app-mode .side-panel {
     border-radius: 1.25rem 1.25rem 0 0;
     bottom: 0 !important;
@@ -216,19 +281,55 @@ body.app-mode .panel-header::before {
     display: block;
     width: 2.5rem;
     height: 0.25rem;
-    background: #333;
+    background: #e5e7eb;
     border-radius: 0.25rem;
     margin: 0 auto 0.5rem;
 }
 
-/* ── Inputs: evitar zoom en iOS (mínimo 16px) ───────────────────── */
+/* ══════════════════════════════════════════════════════════════════
+   CARRITO — botón WhatsApp para finalizar pedido
+   ══════════════════════════════════════════════════════════════════ */
+
+/* Botón principal de WhatsApp en carrito */
+.checkout-wa-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    width: 100%;
+    padding: 0.9rem 1.5rem;
+    background: #25D366;
+    color: #fff;
+    border: none;
+    border-radius: 0.75rem;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+    margin-top: 0.75rem;
+    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+}
+
+.checkout-wa-btn:active {
+    background: #1ebe5d;
+    transform: scale(0.98);
+}
+
+.checkout-wa-btn svg {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+}
+
+/* ── Inputs: evitar zoom en iOS ─────────────────────────────────── */
 body.app-mode input,
 body.app-mode textarea,
 body.app-mode select {
     font-size: 16px !important;
 }
 
-/* ── Print: limpiar ─────────────────────────────────────────────── */
+/* ── Print ──────────────────────────────────────────────────────── */
 @media print {
     body.app-mode .bottom-nav,
     body.app-mode .whatsapp-fab {
