@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google-site-verification" content="mHAOH5rT9Sn9ZUePt_bTyPKL5J3eml9OBUwPnSJkfMg" />
     <title>Pet shop Chiquitines | Alimentos, Juguetes y Accesorios para Mascotas</title>
     <meta name="description" content="Petshop Chiquitines - Tienda de mascotas con alimentos, accesorios y productos para perros y gatos. ¡Explora nuestro catálogo hoy!">
@@ -44,11 +44,9 @@
 
     <!-- Preload critical assets -->
     <link rel="preload" href="styles.css" as="style">
-    <link rel="preload" href="app-styles.css" as="style">
     <link rel="preload" href="assets/logo.webp" as="image" fetchpriority="high">
 
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="app-styles.css">
 
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
@@ -78,7 +76,7 @@
     </script>
 </head>
 <body>
-    <!-- Header - App Mode Compatible -->
+    <!-- Header -->
     <header class="header" role="banner">
         <div class="container">
             <div class="header-content">
@@ -162,7 +160,7 @@
                 <p>Los mejores productos para tus mascotas con increíbles precios</p>
                 <a href="products.html" class="btn-primary">
                     <span>Ver Todos los Productos</span>
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true" focusable="false">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
                         <line x1="5" y1="12" x2="19" y2="12"></line>
                         <polyline points="12 5 19 12 12 19"></polyline>
                     </svg>
@@ -171,108 +169,268 @@
         </div>
     </section>
 
-    <!-- Productos Destacados -->
-    <section id="offersSection" class="products-section">
+    <!-- Categorías -->
+    <section class="categories-section" aria-label="Categorías">
+        <div class="container">
+            <div class="cat-row">
+                <span class="cat-row-label" id="label-mascotas">Mascotas</span>
+                <div class="cat-pills" role="list" aria-labelledby="label-mascotas">
+                    <a href="products.html?pet=perro" class="cat-pill" role="listitem">
+                        <img src="assets/pills/perro.png" alt="" class="cat-pill-img" width="17" height="17" loading="lazy" aria-hidden="true">
+                        <span>Perros</span>
+                    </a>
+                    <a href="products.html?pet=gato" class="cat-pill" role="listitem">
+                        <img src="assets/pills/gato.png" alt="" class="cat-pill-img" width="17" height="17" loading="lazy" aria-hidden="true">
+                        <span>Gatos</span>
+                    </a>
+                    <a href="products.html?pet=ave" class="cat-pill" role="listitem">
+                        <img src="assets/pills/ave.png" alt="" class="cat-pill-img" width="17" height="17" loading="lazy" aria-hidden="true">
+                        <span>Aves</span>
+                    </a>
+                    <a href="products.html?pet=roedor" class="cat-pill" role="listitem">
+                        <img src="assets/pills/roedor.png" alt="" class="cat-pill-img" width="17" height="17" loading="lazy" aria-hidden="true">
+                        <span>Roedores</span>
+                    </a>
+                    <a href="products.html" class="cat-pill" role="listitem">
+                        <img src="assets/pills/todos.png" alt="" class="cat-pill-img" width="17" height="17" loading="lazy" aria-hidden="true">
+                        <span>Todos</span>
+                    </a>
+                </div>
+            </div>
+            <div class="cat-divider" role="separator"></div>
+            <div class="cat-row">
+                <span class="cat-row-label" id="label-productos">Productos</span>
+                <div class="cat-pills" role="list" aria-labelledby="label-productos">
+                    <a href="products.html?category=alimentos" class="cat-pill" role="listitem">
+                        <img src="assets/pills/alimentos.png" alt="" class="cat-pill-img" width="17" height="17" loading="lazy" aria-hidden="true">
+                        <span>Alimentos</span>
+                    </a>
+                    <a href="products.html?category=juguetes" class="cat-pill" role="listitem">
+                        <img src="assets/pills/juguetes.png" alt="" class="cat-pill-img" width="17" height="17" loading="lazy" aria-hidden="true">
+                        <span>Juguetes</span>
+                    </a>
+                    <a href="products.html?category=higiene" class="cat-pill" role="listitem">
+                        <img src="assets/pills/higiene.png" alt="" class="cat-pill-img" width="17" height="17" loading="lazy" aria-hidden="true">
+                        <span>Higiene</span>
+                    </a>
+                    <a href="products.html?category=salud" class="cat-pill" role="listitem">
+                        <img src="assets/pills/salud.png" alt="" class="cat-pill-img" width="17" height="17" loading="lazy" aria-hidden="true">
+                        <span>Salud</span>
+                    </a>
+                    <a href="products.html?category=accesorios" class="cat-pill" role="listitem">
+                        <img src="assets/pills/accesorios.png" alt="" class="cat-pill-img" width="17" height="17" loading="lazy" aria-hidden="true">
+                        <span>Accesorios</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Por qué elegirnos -->
+    <section class="why-us-section" aria-label="Por qué elegirnos">
+        <div class="container">
+            <div class="why-us-grid">
+                <div class="why-us-item">
+                    <span class="why-us-icon" aria-hidden="true">🏆</span>
+                    <div>
+                        <h3>Calidad Premium</h3>
+                        <p>Productos seleccionados para el bienestar de tu mascota</p>
+                    </div>
+                </div>
+                <div class="why-us-item">
+                    <span class="why-us-icon" aria-hidden="true">💬</span>
+                    <div>
+                        <h3>Asesoramiento Gratis</h3>
+                        <p>Te orientamos para elegir el mejor producto según tu mascota</p>
+                    </div>
+                </div>
+                <div class="why-us-item">
+                    <span class="why-us-icon" aria-hidden="true">⚡</span>
+                    <div>
+                        <h3>Atención Rápida</h3>
+                        <p>Respondemos rápido por WhatsApp para que no esperes</p>
+                    </div>
+                </div>
+                <div class="why-us-item">
+                    <span class="why-us-icon" aria-hidden="true">🔒</span>
+                    <div>
+                        <h3>Compra Segura</h3>
+                        <p>Pagá con confianza, tu pedido está garantizado</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Productos en Oferta -->
+    <section class="products-section" aria-label="Productos en oferta">
         <div class="container">
             <div class="section-header">
-                <h2>Ofertas Especiales</h2>
-                <p>Productos con descuento disponibles ahora</p>
+                <h2>🔥 Productos en Oferta</h2>
+                <p>Aprovecha nuestras mejores ofertas del momento</p>
             </div>
-            <div id="productsGrid" class="products-grid" aria-busy="true"></div>
-            <button id="seeAllOffersBtn" style="display:none;width:100%;margin-top:1rem;max-width:none" class="btn-primary" onclick="window.location.href='products.html'">
-                <span>Ver todas las ofertas</span>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
-                    <line x1="5" y1="12" x2="19" y2="12"></line>
-                    <polyline points="12 5 19 12 12 19"></polyline>
+            <div id="productsGrid" class="products-grid" aria-live="polite" aria-busy="true">
+                <div class="loading-skeleton" aria-hidden="true"></div>
+                <div class="loading-skeleton" aria-hidden="true"></div>
+                <div class="loading-skeleton" aria-hidden="true"></div>
+                <div class="loading-skeleton" aria-hidden="true"></div>
+                <div class="loading-skeleton" aria-hidden="true"></div>
+            </div>
+            <div style="text-align:center; margin-top:1.5rem;">
+                <a id="seeAllOffersBtn" href="products.html?sale=1" class="btn-primary" style="display:none; background-color:#FF6B35; color:#fff;">
+                    <span>Ver todas las ofertas</span>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recomendaciones Personalizadas -->
+    <section class="products-section recommended-section" id="recommendedSection" style="display:none; background-color:#f9fafb; padding-top:0.5rem;" aria-label="Recomendaciones personalizadas">
+        <div class="container">
+            <div class="section-header">
+                <h2 id="recommendedTitle">💡 Productos que te podrían interesar</h2>
+                <p id="recommendedSubtitle">Una selección especial para vos y tu mascota</p>
+            </div>
+            <div id="recommendedGrid" class="products-grid" aria-live="polite"></div>
+            <div style="text-align:center; margin-top:1.5rem;">
+                <a href="products.html" class="btn-primary" style="background-color:#000; color:#fff; display:inline-flex;">
+                    <span>Ver catálogo completo</span>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+<section class="cta-section" aria-label="Explorar catálogo">
+    <div class="container">
+        <h2>¿Buscas algo específico?</h2>
+        <p>Explora nuestro catálogo completo con productos para todas las mascotas</p>
+        <a href="/products.html" class="btn-primary">
+            <span>Explorar Catálogo</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+        </a>
+    </div>
+</section>
+
+<!-- Nosotros / Contacto -->
+<section class="about-contact-section" aria-label="Nosotros y contacto">
+    <div class="container">
+
+        <h2>Pet Shop en Asunción</h2>
+
+        <p>
+            <strong>Ubicación:</strong>
+            <a href="https://www.google.com/maps/search/?api=1&query=Av.+Peru+y+Gines+Asuncion+Paraguay" target="_blank" rel="noopener noreferrer">
+                Av. Perú y esq. Gines, Asunción
+            </a>
+        </p>
+
+        <!-- Mini mapa -->
+        <div class="mini-map-wrapper">
+            <iframe
+                title="Ubicación de Pet Shop Chiquitines"
+                src="https://maps.google.com/maps?q=Av.+Peru+y+Gines,+Asuncion,+Paraguay&output=embed&hl=es&z=16"
+                width="100%"
+                height="220"
+                style="border:0; border-radius: 0.75rem; display:block;"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+
+            <a
+                href="https://www.google.com/maps/search/?api=1&query=Av.+Peru+y+Gines+Asuncion+Paraguay"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="mini-map-cta"
+                aria-label="Ver en Google Maps">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                    <circle cx="12" cy="10" r="3"></circle>
                 </svg>
-            </button>
+                Abrir en Google Maps
+            </a>
         </div>
-    </section>
 
-    <!-- Recommended Section -->
-    <section id="recommendedSection" class="products-section">
-        <div class="container">
-            <div class="section-header">
-                <h2>Recomendaciones</h2>
-                <p>Populares entre nuestros clientes</p>
-            </div>
-            <div id="recommendedGrid" class="products-grid" aria-busy="true"></div>
-        </div>
-    </section>
+        <h2>Nosotros</h2>
+        <p>
+            En Pet Shop Chiquitines vivimos por y para las mascotas. Somos más que una tienda:
+            somos un espacio donde el cuidado, la calidad y el amor por los animales se unen para ofrecer
+            lo mejor a cada compañero peludo.
+        </p>
 
-    <!-- About Section -->
-    <section class="about-section">
-        <div class="container">
-            <h2>Sobre Nosotros</h2>
-            <p>
-                <strong>Chiquitines Pet Shop</strong> es una tienda de mascotas que ofrece
-                productos de calidad para perros, gatos y otras mascotas.
-            </p>
-            <p>
-                Contamos con una amplia variedad de alimentos, accesorios, juguetes
-                y productos de higiene, siempre buscando lo mejor para tus compañeros peludos.
-            </p>
-            <p>
-                <strong>Ubicación:</strong> Av. Perú y esq. Gines, Asunción, Paraguay<br>
-                <strong>Horario:</strong> Lunes a viernes: 9:00 AM - 6:00 PM<br>
-                Sábado: 9:00 AM - 4:00 PM
-            </p>
+        <p>
+            Seleccionamos alimentos premium, juguetes, accesorios y productos esenciales pensados para su bienestar,
+            salud y felicidad en cada etapa de su vida.
+        </p>
 
-            <p>
-                <strong>Contacto:</strong>
-                <a href="https://wa.me/595976106726?text=Hola%20quiero%20consultar%20sobre%20sus%20productos"
-                   target="_blank"
-                   rel="noopener noreferrer">
-                   WhatsApp: 0976 106726
-                </a>
-                <br>
-                <a href="mailto:edgarchiquitinespet@gmail.com">
-                    edgarchiquitinespet@gmail.com
-                </a>
-            </p>
+        <p>
+            Brindamos atención personalizada, asesoramiento cercano y un catálogo completo para perros y gatos,
+            todo en un solo lugar.
+        </p>
 
-        </div>
-    </section>
+        <p>
+            <strong>Contacto:</strong>
+            <a href="https://wa.me/595976106726?text=Hola%20quiero%20consultar%20sobre%20sus%20productos"
+               target="_blank"
+               rel="noopener noreferrer">
+               WhatsApp: 0976 106726
+            </a>
+            <br>
+            <a href="mailto:edgarchiquitinespet@gmail.com">
+                edgarchiquitinespet@gmail.com
+            </a>
+        </p>
 
-    <!-- Footer -->
-    <footer class="footer" role="contentinfo">
-        <div class="container">
-            <p class="copyright">© 2026 Chiquitines Py - Asunción, Paraguay</p>
-            <p>Todos los derechos reservados</p>
-        </div>
-    </footer>
+    </div>
+</section>
 
-    <!-- Botón flotante WhatsApp -->
-    <a href="https://wa.me/595976106726?text=Hola%20quiero%20información%20sobre%20sus%20productos"
-       class="whatsapp-fab"
-       target="_blank"
-       rel="noopener noreferrer"
-       aria-label="Contactar por WhatsApp">
-        <img src="assets/whatsapp.png" alt="WhatsApp" width="30" height="30" loading="lazy">
-    </a>
+<!-- Footer -->
+<footer class="footer" role="contentinfo">
+    <div class="container">
+        <p class="copyright">© 2026 Chiquitines - Asunción, Paraguay</p>
+<p>Todos los derechos reservados</p>
+    </div>
+</footer>
 
-    <!-- Datos estructurados SEO -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "PetStore",
-      "name": "Pet Shop Chiquitines",
-      "image": "https://petshopchiquitines.com/assets/logo.png",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Av. Perú y esq. Gines",
-        "addressLocality": "Asunción",
-        "addressCountry": "PY"
-      },
-      "telephone": "+595976106726",
-      "url": "https://petshopchiquitines.com"
-    }
-    </script>
+<!-- Botón flotante WhatsApp -->
+<a href="https://wa.me/595976106726?text=Hola%20quiero%20información%20sobre%20sus%20productos"
+   class="whatsapp-fab"
+   target="_blank"
+   rel="noopener noreferrer"
+   aria-label="Contactar por WhatsApp">
+    <img src="assets/whatsapp.png" alt="WhatsApp" width="30" height="30" loading="lazy">
+</a>
 
-    <!-- Scripts -->
+<!-- Datos estructurados SEO (MUY IMPORTANTE) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "PetStore",
+  "name": "Pet Shop Chiquitines",
+  "image": "https://petshopchiquitines.com/assets/logo.png",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Av. Perú y esq. Gines",
+    "addressLocality": "Asunción",
+    "addressCountry": "PY"
+  },
+  "telephone": "+595976106726",
+  "url": "https://petshopchiquitines.com"
+}
+</script>
+
     <script src="app.js" defer></script>
-    <script src="app-mode.js" defer></script>
-    
     <script defer>
         'use strict';
 
@@ -284,7 +442,7 @@
             loadHomeProducts();
         });
 
-        // Re-renderizar ofertas si cambia el tamaño
+        // Re-renderizar ofertas si cambia el tamaño (cambia columnas)
         let _resizeTimer;
         window.addEventListener('resize', function() {
             clearTimeout(_resizeTimer);
@@ -297,7 +455,7 @@
         async function loadHomeProducts() {
             const grid = document.getElementById('productsGrid');
 
-            // Render inmediato desde caché
+            // ── 1) Render inmediato desde caché ─────────────────────────
             const cachedVersion = _lsGet(CACHE_VER_KEY, null);
             const cachedData    = _lsGet(CACHE_KEY, null);
 
@@ -306,21 +464,24 @@
                 loadRecommendedSection(cachedData);
             }
 
-            // Fetch del JSON fresco en paralelo
+            // ── 2) Fetch del JSON fresco en paralelo ─────────────────────
             try {
                 const response = await fetch('products.json');
                 if (!response.ok) throw new Error('HTTP ' + response.status);
                 const fresh = (await response.json()).filter(p => p.id !== undefined && p.name !== undefined);
 
+                // Guardar en caché compartida con products.html
                 _lsSet(CACHE_KEY, fresh);
                 _lsSet(CACHE_VER_KEY, PRODUCTS_VERSION);
 
+                // Solo re-renderizar si los datos cambiaron respecto al caché
                 const same = cachedData && JSON.stringify(fresh) === JSON.stringify(cachedData);
                 if (!same) {
                     _renderOffers(fresh, grid);
                     loadRecommendedSection(fresh);
                 }
             } catch (error) {
+                // Si ya había caché pintado, el usuario no nota nada
                 if (!cachedData || !cachedData.length) {
                     grid.setAttribute('aria-busy', 'false');
                     grid.innerHTML = '<div class="empty-state"><p>No se pudieron cargar los productos.</p><a href="products.html">Ver catálogo</a></div>';
@@ -338,7 +499,7 @@
 
         function _renderOffers(products, grid) {
             const onSale = products.filter(p => p.isOnSale && p.stock > 0);
-            window._lastProducts = products;
+            window._lastProducts = products; // para resize
             grid.setAttribute('aria-busy', 'false');
 
             if (!onSale.length) {
@@ -346,6 +507,7 @@
                 return;
             }
 
+            // Limitar: 2 filas en desktop (≥768px), 3 filas en mobile
             const cols     = _getGridCols();
             const maxRows  = cols >= 3 ? 2 : 3;
             const maxItems = cols * maxRows;
@@ -354,9 +516,11 @@
 
             grid.innerHTML = visible.map(product => createProductCard(product)).join('');
 
+            // Botón "Ver todas las ofertas" si hay más productos
             const seeAllBtn = document.getElementById('seeAllOffersBtn');
             if (seeAllBtn) seeAllBtn.style.display = hasMore ? 'flex' : 'none';
 
+            // fitProductNames diferido — no bloquea el paint
             if (typeof requestIdleCallback === 'function') {
                 requestIdleCallback(fitProductNames, { timeout: 500 });
             } else {
