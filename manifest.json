@@ -1,7 +1,7 @@
 {
   "name": "Pet Shop Chiquitines",
   "short_name": "Chiquitines",
-  "description": "Tienda de mascotas con alimentos, accesorios y productos en oferta para perros y gatos.",
+  "description": "Tienda de mascotas con alimentos, accesorios y productos para perros y gatos.",
   "start_url": "/index.html",
   "scope": "/",
   "display": "standalone",
