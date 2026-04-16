@@ -104,6 +104,15 @@
                 <span class="bn-badge" id="favBadge"></span>
                 <span>Favoritos</span>
             </a>
+            <a href="#" class="bottom-nav-item" id="bnOrdersBtn" aria-label="Mis Pedidos">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/>
+                    <rect x="9" y="3" width="6" height="4" rx="1" ry="1"/>
+                    <line x1="9" y1="12" x2="15" y2="12"/>
+                    <line x1="9" y1="16" x2="13" y2="16"/>
+                </svg>
+                <span>Pedidos</span>
+            </a>
             <a href="cart.html" class="bottom-nav-item ${cur === 'cart' ? 'active' : ''}" aria-label="Carrito">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <circle cx="9" cy="21" r="1"/>
@@ -124,6 +133,18 @@
                 e.preventDefault();
                 // Disparar evento personalizado que app.js escuchará
                 document.dispatchEvent(new CustomEvent('openFavoritesFromApp'));
+<<<<<<< HEAD
+            });
+        }
+
+        // Pedidos: abre el panel de historial de pedidos
+        const ordersBtn = nav.querySelector('#bnOrdersBtn');
+        if (ordersBtn) {
+            ordersBtn.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.dispatchEvent(new CustomEvent('openOrdersFromApp'));
+=======
+>>>>>>> e640a8ca1232675ee56013cd3154eb2e26e054ca
             });
         }
 
