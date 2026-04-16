@@ -133,7 +133,6 @@
                 e.preventDefault();
                 // Disparar evento personalizado que app.js escuchará
                 document.dispatchEvent(new CustomEvent('openFavoritesFromApp'));
-<<<<<<< HEAD
             });
         }
 
@@ -143,8 +142,6 @@
             ordersBtn.addEventListener('click', function (e) {
                 e.preventDefault();
                 document.dispatchEvent(new CustomEvent('openOrdersFromApp'));
-=======
->>>>>>> e640a8ca1232675ee56013cd3154eb2e26e054ca
             });
         }
 
