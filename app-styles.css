@@ -261,14 +261,30 @@ body.app-mode .side-panel {
     border-radius: 1.25rem 1.25rem 0 0;
     bottom: 0 !important;
     top: auto !important;
+    /* Altura explícita en app-mode para que el panel llene el espacio
+       sin depender de que el contenido lo estire */
     max-height: 85dvh;
     max-height: 85vh;
+}
+
+/* Cuando está abierto: fijar altura para que siempre se vea bien */
+body.app-mode .side-panel.panel--open {
+    height: 85dvh;
+    height: 85vh;
+}
+
+/* Si el contenido es poco (estado vacío), no forzar el alto completo */
+body.app-mode .side-panel.panel--open:has(.panel-empty) {
+    height: auto;
+    min-height: 45dvh;
+    min-height: 45vh;
 }
 
 body.app-mode .panel-header {
     border-radius: 1.25rem 1.25rem 0 0;
 }
 
+/* Indicador de arrastre ("pill") sobre el header */
 body.app-mode .panel-header::before {
     content: '';
     display: block;
