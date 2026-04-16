@@ -1145,10 +1145,11 @@ function loadRecommendedSection(allProds) {
     if (!section || !grid || !_recommendedPool) return;
 
     const hasAct  = hasUserActivity();
-    // Limitar: 2 filas en desktop (≥768px), 3 filas en mobile
+    // Limitar: 2 filas siempre (6 productos en app-mode mobile, variable en web)
     const _w = window.innerWidth;
-    const _cols = _w >= 1280 ? 5 : _w >= 1024 ? 4 : _w >= 768 ? 3 : 2;
-    const _maxRows = _cols >= 3 ? 2 : 3;
+    const isAppMode = document.body.classList.contains('app-mode');
+    const _cols = isAppMode && _w < 768 ? 3 : (_w >= 1280 ? 5 : _w >= 1024 ? 4 : _w >= 768 ? 3 : 2);
+    const _maxRows = isAppMode ? 2 : (_cols >= 3 ? 2 : 3);
     const products = getRecommendedProducts(_recommendedPool, _cols * _maxRows);
 
     if (!products.length) { section.style.display = 'none'; return; }
@@ -1185,3 +1186,18 @@ function loadRecommendedSection(allProds) {
         }
     });
 }
+
+// ══════════════════════════════════════════════════════════════════
+// LISTENERS PARA APP-MODE (PWA)
+// ══════════════════════════════════════════════════════════════════
+document.addEventListener('openFavoritesFromApp', function() {
+    if (typeof openFavoritesModal === 'function') {
+        openFavoritesModal();
+    }
+});
+
+document.addEventListener('openOrdersFromApp', function() {
+    if (typeof openOrdersModal === 'function') {
+        openOrdersModal();
+    }
+});

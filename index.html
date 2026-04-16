@@ -493,6 +493,11 @@
 
         function _getGridCols() {
             const w = window.innerWidth;
+            const isAppMode = document.body.classList.contains('app-mode');
+            
+            // En app-mode (PWA), usar 3 columnas en mobile
+            if (isAppMode && w < 768) return 3;
+            
             if (w >= 1280) return 5;
             if (w >= 1024) return 4;
             if (w >= 768)  return 3;
@@ -509,9 +514,10 @@
                 return;
             }
 
-            // Limitar: 2 filas en desktop (≥768px), 3 filas en mobile
+            // Limitar: 2 filas siempre (6 productos en app-mode, variable en web)
             const cols     = _getGridCols();
-            const maxRows  = cols >= 3 ? 2 : 3;
+            const isAppMode = document.body.classList.contains('app-mode');
+            const maxRows  = isAppMode ? 2 : (cols >= 3 ? 2 : 3);
             const maxItems = cols * maxRows;
             const visible  = onSale.slice(0, maxItems);
             const hasMore  = onSale.length > maxItems;

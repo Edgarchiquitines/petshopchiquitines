@@ -117,19 +117,13 @@
 
         document.body.appendChild(nav);
 
-        // Favoritos: abrir modal si existe, si no navegar a index (que tiene el modal)
+        // Favoritos: delegar el evento al documento para asegurar que siempre funcione
         const favBtn = nav.querySelector('#bnFavBtn');
         if (favBtn) {
             favBtn.addEventListener('click', function (e) {
                 e.preventDefault();
-                if (typeof openFavoritesModal === 'function') {
-                    openFavoritesModal();
-                } else {
-                    // Estamos en una página sin el modal de favoritos, navegar a index
-                    window.location.href = 'index.html';
-                    // Guardar flag para que index.html abra el modal al cargar
-                    sessionStorage.setItem('openFavOnLoad', '1');
-                }
+                // Disparar evento personalizado que app.js escuchará
+                document.dispatchEvent(new CustomEvent('openFavoritesFromApp'));
             });
         }
 

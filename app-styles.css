@@ -44,6 +44,11 @@ body.app-mode .mobile-menu {
     display: none !important;
 }
 
+/* Ocultar botones de favoritos y pedidos del header (están en bottom nav) */
+body.app-mode .header-icon-btn {
+    display: none !important;
+}
+
 /* Header-content: los íconos de acción a la derecha */
 body.app-mode .header-content {
     justify-content: flex-end;
@@ -118,9 +123,9 @@ body.app-mode .btn-primary {
     font-size: 0.88rem;
 }
 
-/* ── Grilla de productos: 2 columnas en app ─────────────────────── */
+/* ── Grilla de productos: 3 columnas en app ─────────────────────── */
 body.app-mode .products-grid {
-    grid-template-columns: repeat(2, 1fr) !important;
+    grid-template-columns: repeat(3, 1fr) !important;
     gap: 0.5rem;
     padding: 0.5rem;
 }
