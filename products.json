@@ -6763,7 +6763,7 @@
   },
   {
     "id": "438",
-    "name": "Huspet Arena Sanitaria de madera",
+    "name": "Huspet colchon Sanitaria de madera",
     "brand": "Huspet",
     "price": 38000,
     "originalPrice": 38000,
@@ -7753,5 +7753,21 @@
     "isOnSale": false,
     "description": "Desinfectante para mascotas",
     "code": "26996"
+  },
+  {
+    "id": "514",
+    "name": "Bedywood colchon Sanitaria de madera",
+    "brand": "Lysoform",
+    "price": 30000,
+    "originalPrice": 30000,
+    "discountPercent": 0,
+    "stock": 10,
+    "weight": "3.9kg",
+    "petType": ["perro","gato","roedor"],
+    "category": "salud",
+    "imageUrl": "assets/img/img514.png",
+    "isOnSale": false,
+    "description": "Colchon de madera",
+    "code": "40060"
   }
 ]
