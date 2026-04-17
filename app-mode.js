@@ -14,11 +14,21 @@
 (function () {
 
     function isAppMode() {
-        return (
+        // Solo activar app-mode si es PWA Y es un dispositivo móvil real
+        const isStandalone = (
             window.matchMedia('(display-mode: standalone)').matches ||
             navigator.standalone === true ||
             document.referrer.includes('android-app://')
         );
+        
+        // Detectar si es un dispositivo móvil real
+        const isMobileDevice = (
+            /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
+            ('ontouchstart' in window && window.innerWidth < 1024)
+        );
+        
+        // Solo activar app-mode en PWA instalada en móviles
+        return isStandalone && isMobileDevice;
     }
 
     function init() {
