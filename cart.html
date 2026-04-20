@@ -330,8 +330,8 @@
                 </div>
                 <div class="form-group" role="group" aria-labelledby="paymentLabel">
                     <label id="paymentLabel">Método de Pago *</label>
-                    <div class="radio-group">
-                        <label class="radio-option"><input type="radio" name="payment" value="efectivo" checked aria-required="true"><span>Efectivo</span></label>
+                    <div class="radio-group" id="paymentOptions">
+                        <label class="radio-option" id="efectivoOption"><input type="radio" name="payment" value="efectivo" checked aria-required="true"><span>Efectivo</span></label>
                         <label class="radio-option"><input type="radio" name="payment" value="transferencia"><span>Transferencia</span></label>
                     </div>
                 </div>
@@ -358,6 +358,31 @@
                 nameInput.addEventListener('input', () => {
                     if (nameInput.value.trim()) { nameInput.classList.remove('input-error'); clearError('nameError'); }
                 });
+            }
+
+            // Delivery → pago: delivery solo permite transferencia
+            document.querySelectorAll('input[name="Envio por Bolt"]').forEach(function(radio) {
+                radio.addEventListener('change', updatePaymentOptions);
+            });
+            updatePaymentOptions();
+        }
+
+        function updatePaymentOptions() {
+            var deliveryChecked = document.querySelector('input[name="Envio por Bolt"]:checked');
+            if (!deliveryChecked) return;
+            var isDelivery = deliveryChecked.value !== 'pickup';
+            var efectivoOption = document.getElementById('efectivoOption');
+            var transferenciaRadio = document.querySelector('input[name="payment"][value="transferencia"]');
+            var efectivoRadio = document.querySelector('input[name="payment"][value="efectivo"]');
+            if (!efectivoOption || !transferenciaRadio || !efectivoRadio) return;
+            if (isDelivery) {
+                // Ocultar efectivo, forzar transferencia
+                efectivoOption.style.display = 'none';
+                transferenciaRadio.checked = true;
+                efectivoRadio.checked = false;
+            } else {
+                // Pickup: mostrar ambas
+                efectivoOption.style.display = '';
             }
         }
 
