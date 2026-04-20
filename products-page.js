@@ -113,8 +113,6 @@ function _applyURLParams() {
     if (sort)     { ['sortFilter','sortFilterMobile'].forEach(id => { const el = document.getElementById(id); if (el) el.value = sort; }); }
     if (sale === '1') {
         ['saleFilter','saleFilterMobile'].forEach(id => { const el = document.getElementById(id); if (el) el.checked = true; });
-        // Guardar en variable global para que applyFilters lo use
-        window._filterSaleOnly = true;
     }
     if (search)   {
         ['searchInput','searchInputSidebar','searchInputMobile'].forEach(id => { const el = document.getElementById(id); if (el) el.value = search; });
@@ -141,6 +139,7 @@ function applyFilters() {
     const petType    = document.getElementById('petTypeFilter').value;
     const brand      = document.getElementById('brandFilter').value;
     const sort       = document.getElementById('sortFilter').value;
+    const saleOnly   = document.getElementById('saleFilter')?.checked || false;
 
     filteredProducts = [...allProducts];
 
@@ -160,7 +159,9 @@ function applyFilters() {
     );
     if (brand)    filteredProducts = filteredProducts.filter(p => p.brand === brand);
     filteredProducts = filteredProducts.filter(p => p.price >= priceMin && p.price <= priceMax);
-    if (window._filterSaleOnly) filteredProducts = filteredProducts.filter(p => p.isOnSale);
+    
+    // Aplicar filtro de ofertas desde el checkbox
+    if (saleOnly) filteredProducts = filteredProducts.filter(p => p.isOnSale);
 
     if (sort === 'price-asc')       filteredProducts.sort((a, b) => a.price - b.price);
     else if (sort === 'price-desc') filteredProducts.sort((a, b) => b.price - a.price);
@@ -170,7 +171,7 @@ function applyFilters() {
     renderedCount = 0;
     displayProducts();
     updateFilterCount();
-    syncURL(searchTerm, category, petType, brand, sort);
+    syncURL(searchTerm, category, petType, brand, sort, saleOnly);
 }
 
 function displayProducts() {
@@ -179,8 +180,9 @@ function displayProducts() {
     grid.setAttribute('aria-busy', 'false');
 
     // Mostrar/ocultar banner de filtro de ofertas
+    const saleOnly = document.getElementById('saleFilter')?.checked || false;
     const banner = document.getElementById('saleBanner');
-    if (banner) banner.style.display = window._filterSaleOnly ? 'flex' : 'none';
+    if (banner) banner.style.display = saleOnly ? 'flex' : 'none';
 
     count.textContent = `${filteredProducts.length} producto${filteredProducts.length !== 1 ? 's' : ''} encontrado${filteredProducts.length !== 1 ? 's' : ''}`;
 
@@ -497,13 +499,14 @@ function updateFilterCount() {
     else { filterCount.style.display = 'none'; }
 }
 
-function syncURL(search, category, petType, brand, sort) {
+function syncURL(search, category, petType, brand, sort, saleOnly) {
     const params = new URLSearchParams();
     if (search)   params.set('q', search);
     if (category) params.set('category', category);
     if (petType)  params.set('pet', petType);
     if (brand)    params.set('brand', brand);
     if (sort)     params.set('sort', sort);
+    if (saleOnly) params.set('sale', '1');
     if (priceMin > globalPriceMin) params.set('pmin', priceMin);
     if (priceMax < globalPriceMax) params.set('pmax', priceMax);
     history.replaceState(null, '', params.toString()
