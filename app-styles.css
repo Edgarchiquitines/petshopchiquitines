@@ -257,6 +257,21 @@ body.app-mode .bn-badge {
 /* ══════════════════════════════════════════════════════════════════
    PANEL DE FILTROS MÓVIL — slide desde abajo en app
    ══════════════════════════════════════════════════════════════════ */
+
+/* Overlay oscuro */
+body.app-mode .filters-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 997;
+    -webkit-tap-highlight-color: transparent;
+}
+body.app-mode .filters-overlay.filters-overlay--open {
+    display: block;
+}
+
+/* Panel: siempre en el DOM pero fuera de pantalla cuando cerrado */
 body.app-mode #filtersSidebarMobile {
     position: fixed !important;
     bottom: 0 !important;
@@ -265,19 +280,23 @@ body.app-mode #filtersSidebarMobile {
     top: auto !important;
     width: 100% !important;
     max-height: 80dvh !important;
-    max-height: 80vh !important;
     overflow-y: auto !important;
     -webkit-overflow-scrolling: touch;
     border-radius: 1.25rem 1.25rem 0 0 !important;
     background: #fff !important;
     z-index: 998 !important;
-    padding: 1rem !important;
+    padding: 1.25rem 1rem !important;
     padding-bottom: calc(var(--bn-height) + var(--safe-bottom) + 1rem) !important;
+    transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1),
+                visibility 0.3s;
+    /* Cerrado por defecto */
     transform: translateY(100%);
-    transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1);
+    visibility: hidden;
+    /* Sobreescribir display:none de .mobile-hidden */
     display: block !important;
 }
 
+/* Drag pill */
 body.app-mode #filtersSidebarMobile::before {
     content: '';
     display: block;
@@ -288,27 +307,10 @@ body.app-mode #filtersSidebarMobile::before {
     margin: 0 auto 1rem;
 }
 
-body.app-mode #filtersSidebarMobile:not(.mobile-hidden) {
-    transform: translateY(0);
-}
-
-body.app-mode #filtersSidebarMobile.mobile-hidden {
-    transform: translateY(100%) !important;
-    pointer-events: none;
-}
-
-/* Overlay oscuro detrás del panel de filtros */
-body.app-mode .filters-overlay {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 997;
-    -webkit-tap-highlight-color: transparent;
-}
-
-body.app-mode .filters-overlay.filters-overlay--open {
-    display: block;
+/* Abierto — la clase mobile-hidden se QUITA al abrir */
+body.app-mode #filtersSidebarMobile.filters-panel--open {
+    transform: translateY(0) !important;
+    visibility: visible !important;
 }
 
 /* ══════════════════════════════════════════════════════════════════

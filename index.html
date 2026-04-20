@@ -514,14 +514,14 @@
                 return;
             }
 
-            // Limitar a 10 productos máximo en la sección de ofertas
+            // Limitar a 10 productos máximo en ofertas
             const maxItems = 10;
             const visible  = onSale.slice(0, maxItems);
             const hasMore  = onSale.length > maxItems;
 
             grid.innerHTML = visible.map(product => createProductCard(product)).join('');
 
-            // Botón "Ver todas las ofertas" si hay más de 10 productos
+            // Botón "Ver todas las ofertas"
             const seeAllBtn = document.getElementById('seeAllOffersBtn');
             if (seeAllBtn) seeAllBtn.style.display = hasMore ? 'flex' : 'none';
 
