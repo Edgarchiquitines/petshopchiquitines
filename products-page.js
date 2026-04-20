@@ -528,6 +528,8 @@ function syncURL(search, category, petType, brand, sort, saleOnly) {
 
 // UI MISC
 function setupFilterToggle() {
+    // En app-mode, app-mode.js maneja el toggle con overlay — no duplicar
+    if (document.body.classList.contains('app-mode')) return;
     const toggleBtn = document.getElementById('filterToggleBtn');
     const sidebar   = document.getElementById('filtersSidebarMobile');
     if (toggleBtn && sidebar) {

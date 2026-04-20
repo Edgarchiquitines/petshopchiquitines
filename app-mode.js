@@ -43,6 +43,7 @@
         preventPullToRefresh();
         markActiveNavItem();
         injectCartWhatsAppButton();
+        injectFiltersOverlay();
     }
 
     /**
@@ -329,6 +330,64 @@
         msg += '¿Cuál es tu nombre y dirección de entrega?';
 
         window.open('https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(msg), '_blank');
+    }
+
+    /**
+     * En products.html: convierte el panel de filtros móvil en un
+     * overlay desde abajo, con fondo oscuro al abrirse.
+     */
+    function injectFiltersOverlay() {
+        if (!window.location.pathname.includes('products')) return;
+
+        // Crear overlay
+        const overlay = document.createElement('div');
+        overlay.className = 'filters-overlay';
+        overlay.id = 'filtersOverlay';
+        document.body.appendChild(overlay);
+
+        // Cerrar al tocar el overlay
+        overlay.addEventListener('click', closeFiltersPanel);
+
+        // Interceptar el botón de toggle existente
+        function hookToggleBtn() {
+            const toggleBtn = document.getElementById('filterToggleBtn');
+            const panel     = document.getElementById('filtersSidebarMobile');
+            if (!toggleBtn || !panel) return false;
+
+            toggleBtn.addEventListener('click', function () {
+                if (panel.classList.contains('mobile-hidden')) {
+                    openFiltersPanel();
+                } else {
+                    closeFiltersPanel();
+                }
+            });
+            return true;
+        }
+
+        function openFiltersPanel() {
+            const panel = document.getElementById('filtersSidebarMobile');
+            const btn   = document.getElementById('filterToggleBtn');
+            if (panel) panel.classList.remove('mobile-hidden');
+            if (btn)   btn.setAttribute('aria-expanded', 'true');
+            overlay.classList.add('filters-overlay--open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeFiltersPanel() {
+            const panel = document.getElementById('filtersSidebarMobile');
+            const btn   = document.getElementById('filterToggleBtn');
+            if (panel) panel.classList.add('mobile-hidden');
+            if (btn)   btn.setAttribute('aria-expanded', 'false');
+            overlay.classList.remove('filters-overlay--open');
+            document.body.style.overflow = '';
+        }
+
+        // Exponer para que setupFilterToggle en products-page.js no interfiera
+        window._appModeCloseFilters = closeFiltersPanel;
+
+        if (!hookToggleBtn()) {
+            document.addEventListener('DOMContentLoaded', hookToggleBtn);
+        }
     }
 
     // ── API pública ─────────────────────────────────────────────────
