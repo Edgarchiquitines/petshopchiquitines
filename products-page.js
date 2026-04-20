@@ -473,7 +473,10 @@ function clearFilters() {
      'brandFilter','brandFilterMobile','sortFilter','sortFilterMobile'].forEach(id => {
         const el = document.getElementById(id); if (el) el.value = '';
     });
-    window._filterSaleOnly = false;
+    ['saleFilter', 'saleFilterMobile'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.checked = false;
+    });
     const banner = document.getElementById('saleBanner');
     if (banner) banner.style.display = 'none';
     initPriceRange(globalPriceMin, globalPriceMax);
@@ -481,8 +484,16 @@ function clearFilters() {
     applyFilters();
 }
 
+function syncSaleFilter(source, targetId) {
+    const target = document.getElementById(targetId);
+    if (target) target.checked = source.checked;
+}
+
 function clearSaleFilter() {
-    window._filterSaleOnly = false;
+    ['saleFilter', 'saleFilterMobile'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.checked = false;
+    });
     const banner = document.getElementById('saleBanner');
     if (banner) banner.style.display = 'none';
     history.replaceState(null, '', location.pathname);
@@ -491,7 +502,8 @@ function clearSaleFilter() {
 
 function updateFilterCount() {
     const priceActive = priceMin > globalPriceMin || priceMax < globalPriceMax;
-    const saleActive  = window._filterSaleOnly ? 1 : 0;
+    const saleEl      = document.getElementById('saleFilter');
+    const saleActive  = (saleEl && saleEl.checked) ? 1 : 0;
     const activeFilters = ['categoryFilter','petTypeFilter','brandFilter','sortFilter']
         .map(id => document.getElementById(id).value).filter(Boolean).length + (priceActive ? 1 : 0) + saleActive;
     const filterCount = document.getElementById('filterCount');

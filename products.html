@@ -280,6 +280,12 @@
                             <option value="name-desc">Nombre: Z-A</option>
                         </select>
                     </div>
+                    <div class="filter-group">
+                        <label class="sale-checkbox-label" style="display:flex;align-items:center;gap:0.5rem;cursor:pointer;font-weight:600;">
+                            <input type="checkbox" id="saleFilterMobile" onchange="syncSaleFilter(this, 'saleFilter'); applyFilters()" style="width:1rem;height:1rem;accent-color:#FF6B35;cursor:pointer;">
+                            🔥 Solo Ofertas
+                        </label>
+                    </div>
                 </aside>
             </div>
 
@@ -372,6 +378,12 @@
                             <option value="name-asc">Nombre: A-Z</option>
                             <option value="name-desc">Nombre: Z-A</option>
                         </select>
+                    </div>
+                    <div class="filter-group">
+                        <label class="sale-checkbox-label" style="display:flex;align-items:center;gap:0.5rem;cursor:pointer;font-weight:600;">
+                            <input type="checkbox" id="saleFilter" onchange="syncSaleFilter(this, 'saleFilterMobile'); applyFilters()" style="width:1rem;height:1rem;accent-color:#FF6B35;cursor:pointer;">
+                            🔥 Solo Ofertas
+                        </label>
                     </div>
                 </aside>
 
