@@ -505,7 +505,7 @@
         }
 
         function _renderOffers(products, grid) {
-            const onSale = products.filter(p => p.isOnSale && p.stock > 0);
+            const onSale = products.filter(p => p.isOnSale);
             window._lastProducts = products; // para resize
             grid.setAttribute('aria-busy', 'false');
 
