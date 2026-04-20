@@ -3642,7 +3642,7 @@
     "petType": "perro",
     "category": "alimentos",
     "imageUrl": "assets/img/img233.webp",
-    "isOnSale": false,
+    "isOnSale": true,
     "description": "Alimento balanceado para perros",
     "code": "57635"
   },
@@ -3658,7 +3658,7 @@
     "petType": "perro",
     "category": "alimentos",
     "imageUrl": "assets/img/img235.webp",
-    "isOnSale": false,
+    "isOnSale": true,
     "description": "Alimento balanceado para perros",
     "code": "57550"
   },
