@@ -263,6 +263,7 @@ body.app-mode .filters-overlay {
     display: none;
     position: fixed;
     inset: 0;
+    bottom: calc(var(--bn-height) + var(--safe-bottom));
     background: rgba(0, 0, 0, 0.5);
     z-index: 997;
     -webkit-tap-highlight-color: transparent;
@@ -274,7 +275,7 @@ body.app-mode .filters-overlay.filters-overlay--open {
 /* Panel: siempre en el DOM pero fuera de pantalla cuando cerrado */
 body.app-mode #filtersSidebarMobile {
     position: fixed !important;
-    bottom: 0 !important;
+    bottom: calc(var(--bn-height) + var(--safe-bottom)) !important;
     left: 0 !important;
     right: 0 !important;
     top: auto !important;
@@ -286,12 +287,13 @@ body.app-mode #filtersSidebarMobile {
     background: #fff !important;
     z-index: 998 !important;
     padding: 1.25rem 1rem !important;
-    padding-bottom: calc(var(--bn-height) + var(--safe-bottom) + 1rem) !important;
+    padding-bottom: 1.5rem !important;
     transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1),
                 visibility 0.3s;
     /* Cerrado por defecto */
     transform: translateY(100%);
     visibility: hidden;
+    pointer-events: none;
     /* Sobreescribir display:none de .mobile-hidden */
     display: block !important;
 }
@@ -311,6 +313,7 @@ body.app-mode #filtersSidebarMobile::before {
 body.app-mode #filtersSidebarMobile.filters-panel--open {
     transform: translateY(0) !important;
     visibility: visible !important;
+    pointer-events: auto !important;
 }
 
 /* ══════════════════════════════════════════════════════════════════

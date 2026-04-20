@@ -345,10 +345,13 @@
             const panel = document.getElementById('filtersSidebarMobile');
             const btn   = document.getElementById('filterToggleBtn');
             if (!panel) return;
+            // Mover overlay ANTES del panel en el DOM para que no lo tape
+            if (overlay.nextSibling !== panel) {
+                panel.parentNode.insertBefore(overlay, panel);
+            }
             panel.classList.add('filters-panel--open');
             overlay.classList.add('filters-overlay--open');
             if (btn) btn.setAttribute('aria-expanded', 'true');
-            document.body.style.overflow = 'hidden';
         }
 
         function closePanel() {
@@ -358,7 +361,6 @@
             panel.classList.remove('filters-panel--open');
             overlay.classList.remove('filters-overlay--open');
             if (btn) btn.setAttribute('aria-expanded', 'false');
-            document.body.style.overflow = '';
         }
 
         overlay.addEventListener('click', closePanel);
