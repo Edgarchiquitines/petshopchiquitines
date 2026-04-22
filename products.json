@@ -7791,21 +7791,5 @@
     "isOnSale": false,
     "description": "Colchon de madera",
     "code": "40060"
-  },
-  {
-    "id": "515",
-    "name": "N&D Tropical gato castrado cerdo",
-    "brand": "Lysoform",
-    "price": 230000,
-    "originalPrice": 230000,
-    "discountPercent": 0,
-    "stock": 10,
-    "weight": "7g",
-    "petType": "gato",
-    "category": "alimentos",
-    "imageUrl": "assets/img/img515.png",
-    "isOnSale": false,
-    "description": "Alimento balanceado para gatos",
-    "code": "36720"
   }
 ]
