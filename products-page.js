@@ -528,16 +528,66 @@ function syncURL(search, category, petType, brand, sort, saleOnly) {
 
 // UI MISC
 function setupFilterToggle() {
-    // app-mode.js maneja el toggle con overlay — no duplicar listeners
-    if (document.body.classList.contains('app-mode')) return;
     const toggleBtn = document.getElementById('filterToggleBtn');
     const sidebar   = document.getElementById('filtersSidebarMobile');
-    if (toggleBtn && sidebar) {
-        toggleBtn.addEventListener('click', function() {
-            const isOpen = sidebar.classList.toggle('mobile-hidden') === false;
-            toggleBtn.setAttribute('aria-expanded', isOpen);
+    if (!toggleBtn || !sidebar) return;
+
+    // Modo app (PWA): overlay + slide desde abajo
+    if (document.body.classList.contains('app-mode')) {
+        // Asegurar overlay en el DOM
+        let overlay = document.getElementById('filtersOverlay');
+        if (!overlay) {
+            overlay = document.createElement('div');
+            overlay.className = 'filters-overlay';
+            overlay.id = 'filtersOverlay';
+            document.body.appendChild(overlay);
+            overlay.addEventListener('click', closeMobileFilters);
+        }
+
+        toggleBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            if (sidebar.classList.contains('filters-panel--open')) {
+                closeMobileFilters();
+            } else {
+                openMobileFilters();
+            }
         });
+        return;
     }
+
+    // Modo web normal: toggle mobile-hidden
+    toggleBtn.addEventListener('click', function() {
+        const isOpen = sidebar.classList.toggle('mobile-hidden') === false;
+        toggleBtn.setAttribute('aria-expanded', isOpen);
+    });
+}
+
+function openMobileFilters() {
+    const sidebar   = document.getElementById('filtersSidebarMobile');
+    const overlay   = document.getElementById('filtersOverlay');
+    const toggleBtn = document.getElementById('filterToggleBtn');
+    if (!sidebar) return;
+    sidebar.classList.remove('mobile-hidden');
+    // reflow para que la transición funcione
+    sidebar.getBoundingClientRect();
+    sidebar.classList.add('filters-panel--open');
+    if (overlay) overlay.classList.add('filters-overlay--open');
+    if (toggleBtn) toggleBtn.setAttribute('aria-expanded', 'true');
+}
+
+function closeMobileFilters() {
+    const sidebar   = document.getElementById('filtersSidebarMobile');
+    const overlay   = document.getElementById('filtersOverlay');
+    const toggleBtn = document.getElementById('filterToggleBtn');
+    if (!sidebar) return;
+    sidebar.classList.remove('filters-panel--open');
+    if (overlay) overlay.classList.remove('filters-overlay--open');
+    if (toggleBtn) toggleBtn.setAttribute('aria-expanded', 'false');
+    setTimeout(function() {
+        if (!sidebar.classList.contains('filters-panel--open')) {
+            sidebar.classList.add('mobile-hidden');
+        }
+    }, 320);
 }
 
 function setupScrollBehavior() {

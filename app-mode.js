@@ -43,7 +43,6 @@
         preventPullToRefresh();
         markActiveNavItem();
         injectCartWhatsAppButton();
-        injectFiltersOverlay();
     }
 
     /**
@@ -330,77 +329,6 @@
         msg += '¿Cuál es tu nombre y dirección de entrega?';
 
         window.open('https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(msg), '_blank');
-    }
-
-    function injectFiltersOverlay() {
-        if (!window.location.pathname.includes('products')) return;
-
-        // Crear overlay una sola vez
-        let overlay = document.getElementById('filtersOverlay');
-        if (!overlay) {
-            overlay = document.createElement('div');
-            overlay.className = 'filters-overlay';
-            overlay.id = 'filtersOverlay';
-            document.body.appendChild(overlay);
-            overlay.addEventListener('click', closePanel);
-        }
-
-        function openPanel() {
-            const panel = document.getElementById('filtersSidebarMobile');
-            const btn   = document.getElementById('filterToggleBtn');
-            if (!panel) return;
-            // Quitar mobile-hidden para que display:block del app-styles tome efecto
-            panel.classList.remove('mobile-hidden');
-            // Forzar reflow antes de añadir la clase de animación
-            panel.getBoundingClientRect();
-            panel.classList.add('filters-panel--open');
-            overlay.classList.add('filters-overlay--open');
-            if (btn) btn.setAttribute('aria-expanded', 'true');
-        }
-
-        function closePanel() {
-            const panel = document.getElementById('filtersSidebarMobile');
-            const btn   = document.getElementById('filterToggleBtn');
-            if (!panel) return;
-            panel.classList.remove('filters-panel--open');
-            overlay.classList.remove('filters-overlay--open');
-            if (btn) btn.setAttribute('aria-expanded', 'false');
-            // Devolver mobile-hidden tras la transición para que el DOM sea consistente
-            setTimeout(function() {
-                if (!panel.classList.contains('filters-panel--open')) {
-                    panel.classList.add('mobile-hidden');
-                }
-            }, 320);
-        }
-
-        function hookBtn() {
-            const btn = document.getElementById('filterToggleBtn');
-            if (!btn) return false;
-            // Clonar para limpiar listeners previos de products-page.js
-            const newBtn = btn.cloneNode(true);
-            btn.parentNode.replaceChild(newBtn, btn);
-            newBtn.addEventListener('click', function (e) {
-                e.stopPropagation();
-                const panel = document.getElementById('filtersSidebarMobile');
-                if (panel && panel.classList.contains('filters-panel--open')) {
-                    closePanel();
-                } else {
-                    openPanel();
-                }
-            });
-            return true;
-        }
-
-        function tryHook() {
-            if (hookBtn()) return;
-            setTimeout(tryHook, 100);
-        }
-
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', function() { setTimeout(tryHook, 300); });
-        } else {
-            setTimeout(tryHook, 300);
-        }
     }
 
     // ── API pública ─────────────────────────────────────────────────
