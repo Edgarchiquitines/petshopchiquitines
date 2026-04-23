@@ -354,3 +354,7 @@ body.app-mode select {
         display: none !important;
     }
 }
+/* ── Sticky filter toolbar: sin header, top: 0 ─────────────────── */
+body.app-mode .mobile-sticky-wrapper {
+    top: 0;
+}
