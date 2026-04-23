@@ -527,14 +527,17 @@ function syncURL(search, category, petType, brand, sort, saleOnly) {
 }
 
 // UI MISC
+// Referencia al nodo padre original del panel
+var _filtersPanelParent      = null;
+var _filtersPanelNextSibling = null;
+
 function setupFilterToggle() {
     const toggleBtn = document.getElementById('filterToggleBtn');
     const sidebar   = document.getElementById('filtersSidebarMobile');
     if (!toggleBtn || !sidebar) return;
 
-    // Modo app (PWA): overlay + slide desde abajo
     if (document.body.classList.contains('app-mode')) {
-        // Asegurar overlay en el DOM
+        // Crear overlay en body (fuera del overflow container)
         let overlay = document.getElementById('filtersOverlay');
         if (!overlay) {
             overlay = document.createElement('div');
@@ -543,10 +546,10 @@ function setupFilterToggle() {
             document.body.appendChild(overlay);
             overlay.addEventListener('click', closeMobileFilters);
         }
-
         toggleBtn.addEventListener('click', function(e) {
             e.stopPropagation();
-            if (sidebar.classList.contains('filters-panel--open')) {
+            const p = document.getElementById('filtersSidebarMobile');
+            if (p && p.classList.contains('filters-panel--open')) {
                 closeMobileFilters();
             } else {
                 openMobileFilters();
@@ -555,7 +558,7 @@ function setupFilterToggle() {
         return;
     }
 
-    // Modo web normal: toggle mobile-hidden
+    // Web normal
     toggleBtn.addEventListener('click', function() {
         const isOpen = sidebar.classList.toggle('mobile-hidden') === false;
         toggleBtn.setAttribute('aria-expanded', isOpen);
@@ -563,29 +566,41 @@ function setupFilterToggle() {
 }
 
 function openMobileFilters() {
-    const sidebar   = document.getElementById('filtersSidebarMobile');
-    const overlay   = document.getElementById('filtersOverlay');
-    const toggleBtn = document.getElementById('filterToggleBtn');
+    var sidebar   = document.getElementById('filtersSidebarMobile');
+    var overlay   = document.getElementById('filtersOverlay');
+    var toggleBtn = document.getElementById('filterToggleBtn');
     if (!sidebar) return;
+
+    // Mover panel al body para escapar del overflow:auto container
+    if (sidebar.parentNode !== document.body) {
+        _filtersPanelParent      = sidebar.parentNode;
+        _filtersPanelNextSibling = sidebar.nextSibling;
+        document.body.appendChild(sidebar);
+    }
+
     sidebar.classList.remove('mobile-hidden');
-    // reflow para que la transición funcione
-    sidebar.getBoundingClientRect();
+    sidebar.getBoundingClientRect(); // forzar reflow
     sidebar.classList.add('filters-panel--open');
-    if (overlay) overlay.classList.add('filters-overlay--open');
+    if (overlay)   overlay.classList.add('filters-overlay--open');
     if (toggleBtn) toggleBtn.setAttribute('aria-expanded', 'true');
 }
 
 function closeMobileFilters() {
-    const sidebar   = document.getElementById('filtersSidebarMobile');
-    const overlay   = document.getElementById('filtersOverlay');
-    const toggleBtn = document.getElementById('filterToggleBtn');
+    var sidebar   = document.getElementById('filtersSidebarMobile');
+    var overlay   = document.getElementById('filtersOverlay');
+    var toggleBtn = document.getElementById('filterToggleBtn');
     if (!sidebar) return;
+
     sidebar.classList.remove('filters-panel--open');
-    if (overlay) overlay.classList.remove('filters-overlay--open');
+    if (overlay)   overlay.classList.remove('filters-overlay--open');
     if (toggleBtn) toggleBtn.setAttribute('aria-expanded', 'false');
+
     setTimeout(function() {
-        if (!sidebar.classList.contains('filters-panel--open')) {
-            sidebar.classList.add('mobile-hidden');
+        if (sidebar.classList.contains('filters-panel--open')) return;
+        sidebar.classList.add('mobile-hidden');
+        // Devolver al DOM original
+        if (_filtersPanelParent && sidebar.parentNode !== _filtersPanelParent) {
+            _filtersPanelParent.insertBefore(sidebar, _filtersPanelNextSibling);
         }
     }, 320);
 }
