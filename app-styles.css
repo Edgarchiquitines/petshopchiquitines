@@ -358,3 +358,8 @@ body.app-mode select {
 body.app-mode .mobile-sticky-wrapper {
     top: 0;
 }
+
+/* ── Cart panel-body: espacio extra para el bottom nav ──────────── */
+body.app-mode .panel-body {
+    padding-bottom: calc(var(--bn-height) + var(--safe-bottom) + 1rem);
+}
