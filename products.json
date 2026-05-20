@@ -4013,7 +4013,7 @@
     "brand": "Max",
     "price": 85000,
     "originalPrice": 85000,
-    "stock": 10,
+    "stock": 0,
     "weight": "3kg",
     "petType": "gato",
     "category": "alimentos",
