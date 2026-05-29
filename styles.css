@@ -1998,7 +1998,7 @@ body {
     body { background: #fff; color: #000; }
     .cart-item, .order-form { box-shadow: none; border: 1px solid #ccc; }
 }
-/* ── Mini mapa en sección Nosotros ───────────────────────────── */
+/* ── Mini mapa ───────────────────────────── */
 .mini-map-wrapper {
     margin: 1.25rem auto 1.5rem;
     max-width: 520px;
