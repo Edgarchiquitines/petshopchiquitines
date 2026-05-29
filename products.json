@@ -3857,6 +3857,36 @@
     "description": "Alimento balanceado para gatos",
     "code": "15069"
   },
+    {
+    "id": "516",
+    "name": "Formula Natural Gato Urinary",
+    "brand": "Formula Natural",
+    "price": 440000,
+    "originalPrice": 440000,
+    "stock": 10,
+    "weight": "7kg",
+    "petType": "gato",
+    "category": "alimentos",
+    "imageUrl": "assets/img/img516",
+    "isOnSale": false,
+    "description": "Alimento balanceado para gato",
+    "code": "00437"
+  },
+    {
+    "id": "517",
+    "name": "Formula Natural Gato Urinary",
+    "brand": "Formula Natural",
+    "price": 40000,
+    "originalPrice": 40000,
+    "stock": 10,
+    "weight": "500g",
+    "petType": "gato",
+    "category": "alimentos",
+    "imageUrl": "assets/img/img517",
+    "isOnSale": false,
+    "description": "Alimento balanceado para gato",
+    "code": "04370"
+  },
   {
     "id": "249",
     "name": "Formula Natural Perro Adulto raza pequeña",
