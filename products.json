@@ -4064,6 +4064,7 @@
     "category": "alimentos",
     "imageUrl": "assets/img/img519.png",
     "isOnSale": false,
+    "isNew": true,
     "description": "Alimento balanceado para gatos",
     "code": "322300"
   },
@@ -7865,6 +7866,7 @@
     "category": "salud",
     "imageUrl": "assets/img/img520.png",
     "isOnSale": false,
+    "isNew": true,
     "description": "Medicamentos",
     "code": "001483"
   },
@@ -7881,6 +7883,7 @@
     "category": "salud",
     "imageUrl": "assets/img/img521.png",
     "isOnSale": false,
+    "isNew": true,
     "description": "Medicamentos",
     "code": "002060"
   },
@@ -7897,6 +7900,7 @@
     "category": "salud",
     "imageUrl": "assets/img/img522.png",
     "isOnSale": false,
+    "isNew": true,
     "description": "Medicamentos",
     "code": "002077"
   },
@@ -7913,6 +7917,7 @@
     "category": "salud",
     "imageUrl": "assets/img/img523.png",
     "isOnSale": false,
+    "isNew": true,
     "description": "Medicamentos",
     "code": "005160"
   },
@@ -7929,6 +7934,7 @@
     "category": "salud",
     "imageUrl": "assets/img/img524.png",
     "isOnSale": false,
+    "isNew": true,
     "description": "Medicamentos",
     "code": "005047"
   },
@@ -7945,6 +7951,7 @@
     "category": "salud",
     "imageUrl": "assets/img/img525.png",
     "isOnSale": false,
+    "isNew": true,
     "description": "Medicamentos",
     "code": "005078"
   },
@@ -7961,6 +7968,7 @@
     "category": "salud",
     "imageUrl": "assets/img/img526.png",
     "isOnSale": false,
+    "isNew": true,
     "description": "Medicamentos",
     "code": "65121"
   },
@@ -7977,6 +7985,7 @@
     "category": "salud",
     "imageUrl": "assets/img/img527.png",
     "isOnSale": false,
+    "isNew": true,
     "description": "Medicamentos",
     "code": "64025"
   },
@@ -7993,6 +8002,7 @@
     "category": "salud",
     "imageUrl": "assets/img/img528.png",
     "isOnSale": false,
+    "isNew": true,
     "description": "Medicamentos",
     "code": "60898"
   },
@@ -8009,6 +8019,7 @@
     "category": "salud",
     "imageUrl": "assets/img/img529.png",
     "isOnSale": false,
+    "isNew": true,
     "description": "Medicamentos",
     "code": "64018"
   },
