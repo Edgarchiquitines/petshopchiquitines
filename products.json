@@ -4053,6 +4053,21 @@
     "code": "58627"
   },
   {
+    "id": "519",
+    "name": "Special Cat Gato castrado",
+    "brand": "Special Cat",
+    "price": 335000,
+    "originalPrice": 335000,
+    "stock": 10,
+    "weight": "20kg",
+    "petType": "gato",
+    "category": "alimentos",
+    "imageUrl": "assets/img/img519.png",
+    "isOnSale": false,
+    "description": "Alimento balanceado para gatos",
+    "code": "322300"
+  },
+  {
     "id": "258",
     "name": "Equilibrio Gato castrado",
     "brand": "Equilibrio",
