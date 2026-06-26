@@ -4064,7 +4064,6 @@
     "category": "alimentos",
     "imageUrl": "assets/img/img519.png",
     "isOnSale": false,
-    "isNew": true,
     "description": "Alimento balanceado para gatos",
     "code": "322300"
   },
@@ -8012,5 +8011,5 @@
     "isOnSale": false,
     "description": "Medicamentos",
     "code": "64018"
-  },
+  }
 ]
