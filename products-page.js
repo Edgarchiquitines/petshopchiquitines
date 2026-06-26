@@ -616,7 +616,7 @@ function setupScrollBehavior() {
 }
 
 // ── Scroll-to-top button — ahora funciona en TODOS los tamaños ──
-// FIX: eliminada la condición if (window.innerWidth < 768) que
+// FIX: eliminada la condición if (window.innerWidth <768) que
 //      ocultaba el botón en desktop.
 (function() {
     const btn = document.getElementById('scrollTopBtn');

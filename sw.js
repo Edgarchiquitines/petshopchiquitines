@@ -4,7 +4,7 @@
 // reciban archivos nuevos, basta con guardar (tocar) este archivo.
 'use strict';
 
-// ── Versión automática: se actualiza sola cada vez que guardás el SW
+// ── Versión automática: se actualiza sola cada vez que guardás el SW 
 // Formato: chiquitines-YYYYMMDD-HHMM  (ej: chiquitines-20260320-1430)
 const _now = new Date();
 const _pad = n => String(n).padStart(2, '0');
