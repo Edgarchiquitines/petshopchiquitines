@@ -19,7 +19,7 @@ let   renderedCount = 0;
 let   isLoadingMore = false;
 
 // ── Caché de versión ─────────────────────────────────────────────
-const PRODUCTS_VERSION = 'v2';
+const PRODUCTS_VERSION = 'v1';
 const CACHE_KEY        = 'productsCache';
 const CACHE_VER_KEY    = 'productsCacheVersion';
 
@@ -106,7 +106,6 @@ function _applyURLParams() {
     const pmin     = params.get('pmin');
     const pmax     = params.get('pmax');
     const sale     = params.get('sale');
-    const isNew    = params.get('new');
 
     if (pet)      { ['petTypeFilter','petTypeFilterMobile'].forEach(id => { const el = document.getElementById(id); if (el) el.value = pet; }); }
     if (category) { ['categoryFilter','categoryFilterMobile'].forEach(id => { const el = document.getElementById(id); if (el) el.value = category; }); }
@@ -115,10 +114,7 @@ function _applyURLParams() {
     if (sale === '1') {
         ['saleFilter','saleFilterMobile'].forEach(id => { const el = document.getElementById(id); if (el) el.checked = true; });
     }
-    if (isNew === '1') {
-        ['newFilter','newFilterMobile'].forEach(id => { const el = document.getElementById(id); if (el) el.checked = true; });
-    }
-    if (search) {
+    if (search)   {
         ['searchInput','searchInputSidebar','searchInputMobile'].forEach(id => { const el = document.getElementById(id); if (el) el.value = search; });
         ['searchClearTop','searchClearMobile','searchClearSidebar'].forEach(id => { const el = document.getElementById(id); if (el) el.style.display = 'flex'; });
     }
@@ -144,28 +140,28 @@ function applyFilters() {
     const brand      = document.getElementById('brandFilter').value;
     const sort       = document.getElementById('sortFilter').value;
     const saleOnly   = document.getElementById('saleFilter')?.checked || false;
-    const newOnly    = document.getElementById('newFilter')?.checked || false;
 
     filteredProducts = [...allProducts];
 
     if (searchTerm) {
-        const normalizeSearch = str => (str || '').toLowerCase().replace(/&/g, 'y');
-        const normalizedTerm = normalizeSearch(searchTerm);
-        filteredProducts = filteredProducts.filter(p =>
-            normalizeSearch(p.name).includes(normalizedTerm) ||
-            normalizeSearch(p.description).includes(normalizedTerm) ||
-            normalizeSearch(p.brand).includes(normalizedTerm) ||
-            normalizeSearch(p.category).includes(normalizedTerm)
-        );
-    }
+    const normalizeSearch = str => (str || '').toLowerCase().replace(/&/g, 'y');
+    const normalizedTerm = normalizeSearch(searchTerm);
+    filteredProducts = filteredProducts.filter(p =>
+        normalizeSearch(p.name).includes(normalizedTerm) ||
+        normalizeSearch(p.description).includes(normalizedTerm) ||
+        normalizeSearch(p.brand).includes(normalizedTerm) ||
+        normalizeSearch(p.category).includes(normalizedTerm)
+    );
+}
     if (category) filteredProducts = filteredProducts.filter(p => p.category === category);
     if (petType)  filteredProducts = filteredProducts.filter(p =>
         Array.isArray(p.petType) ? p.petType.includes(petType) : p.petType === petType
     );
     if (brand)    filteredProducts = filteredProducts.filter(p => p.brand === brand);
     filteredProducts = filteredProducts.filter(p => p.price >= priceMin && p.price <= priceMax);
+    
+    // Aplicar filtro de ofertas desde el checkbox
     if (saleOnly) filteredProducts = filteredProducts.filter(p => p.isOnSale);
-    if (newOnly)  filteredProducts = filteredProducts.filter(p => p.isNew);
 
     if (sort === 'price-asc')       filteredProducts.sort((a, b) => a.price - b.price);
     else if (sort === 'price-desc') filteredProducts.sort((a, b) => b.price - a.price);
@@ -175,7 +171,7 @@ function applyFilters() {
     renderedCount = 0;
     displayProducts();
     updateFilterCount();
-    syncURL(searchTerm, category, petType, brand, sort, saleOnly, newOnly);
+    syncURL(searchTerm, category, petType, brand, sort, saleOnly);
 }
 
 function displayProducts() {
@@ -183,6 +179,7 @@ function displayProducts() {
     const count = document.getElementById('productsCount');
     grid.setAttribute('aria-busy', 'false');
 
+    // Mostrar/ocultar banner de filtro de ofertas
     const saleOnly = document.getElementById('saleFilter')?.checked || false;
     const banner = document.getElementById('saleBanner');
     if (banner) banner.style.display = saleOnly ? 'flex' : 'none';
@@ -190,14 +187,17 @@ function displayProducts() {
     count.textContent = `${filteredProducts.length} producto${filteredProducts.length !== 1 ? 's' : ''} encontrado${filteredProducts.length !== 1 ? 's' : ''}`;
 
     if (filteredProducts.length === 0) {
-        const category   = document.getElementById('categoryFilter').value;
-        const petType    = document.getElementById('petTypeFilter').value;
-        const brand      = document.getElementById('brandFilter').value;
+        // Detectar si hay un filtro de categoría activo
+        const category = document.getElementById('categoryFilter').value;
+        const petType = document.getElementById('petTypeFilter').value;
+        const brand = document.getElementById('brandFilter').value;
         const searchTerm = document.getElementById('searchInput').value;
-
+        
+        // Si hay algún filtro activo, mostrar "Próximamente"
         if (category || petType || brand || searchTerm) {
             grid.innerHTML = `<div class="empty-state"><p>🚀 Próximamente</p><p class="empty-state-subtitle">Estamos preparando productos para esta categoría</p><button onclick="clearFilters()" class="clear-btn">Limpiar filtros</button></div>`;
         } else {
+            // Si no hay filtros, mostrar el mensaje original
             grid.innerHTML = `<div class="empty-state"><p>No se encontraron productos</p><button onclick="clearFilters()" class="clear-btn">Limpiar filtros</button></div>`;
         }
         return;
@@ -281,10 +281,10 @@ function buildSuggestions(query) {
     const results = [], seen = new Set();
     const brands = [...new Set(allProducts.map(p => p.brand).filter(Boolean))];
     const normalizeSearch = str => (str || '').toLowerCase().replace(/&/g, 'y');
-    const normalizedQuery = normalizeSearch(query);
+const normalizedQuery = normalizeSearch(query);
 
-    brands.forEach(brand => {
-        if (normalizeSearch(brand).includes(normalizedQuery) && !seen.has('brand:' + brand)) {
+brands.forEach(brand => {
+    if (normalizeSearch(brand).includes(normalizedQuery) && !seen.has('brand:' + brand)) {
             seen.add('brand:' + brand);
             results.push({ type: 'brand', label: brand, icon: '🏷️' });
         }
@@ -473,7 +473,7 @@ function clearFilters() {
      'brandFilter','brandFilterMobile','sortFilter','sortFilterMobile'].forEach(id => {
         const el = document.getElementById(id); if (el) el.value = '';
     });
-    ['saleFilter','saleFilterMobile','newFilter','newFilterMobile'].forEach(id => {
+    ['saleFilter', 'saleFilterMobile'].forEach(id => {
         const el = document.getElementById(id);
         if (el) el.checked = false;
     });
@@ -503,18 +503,15 @@ function clearSaleFilter() {
 function updateFilterCount() {
     const priceActive = priceMin > globalPriceMin || priceMax < globalPriceMax;
     const saleEl      = document.getElementById('saleFilter');
-    const newEl       = document.getElementById('newFilter');
     const saleActive  = (saleEl && saleEl.checked) ? 1 : 0;
-    const newActive   = (newEl  && newEl.checked)  ? 1 : 0;
     const activeFilters = ['categoryFilter','petTypeFilter','brandFilter','sortFilter']
-        .map(id => document.getElementById(id).value).filter(Boolean).length
-        + (priceActive ? 1 : 0) + saleActive + newActive;
+        .map(id => document.getElementById(id).value).filter(Boolean).length + (priceActive ? 1 : 0) + saleActive;
     const filterCount = document.getElementById('filterCount');
     if (activeFilters > 0) { filterCount.textContent = activeFilters; filterCount.style.display = 'inline-block'; }
     else { filterCount.style.display = 'none'; }
 }
 
-function syncURL(search, category, petType, brand, sort, saleOnly, newOnly) {
+function syncURL(search, category, petType, brand, sort, saleOnly) {
     const params = new URLSearchParams();
     if (search)   params.set('q', search);
     if (category) params.set('category', category);
@@ -522,7 +519,6 @@ function syncURL(search, category, petType, brand, sort, saleOnly, newOnly) {
     if (brand)    params.set('brand', brand);
     if (sort)     params.set('sort', sort);
     if (saleOnly) params.set('sale', '1');
-    if (newOnly)  params.set('new', '1');
     if (priceMin > globalPriceMin) params.set('pmin', priceMin);
     if (priceMax < globalPriceMax) params.set('pmax', priceMax);
     history.replaceState(null, '', params.toString()
@@ -531,6 +527,7 @@ function syncURL(search, category, petType, brand, sort, saleOnly, newOnly) {
 }
 
 // UI MISC
+// Referencia al nodo padre original del panel
 var _filtersPanelParent      = null;
 var _filtersPanelNextSibling = null;
 
@@ -540,6 +537,7 @@ function setupFilterToggle() {
     if (!toggleBtn || !sidebar) return;
 
     if (document.body.classList.contains('app-mode')) {
+        // Crear overlay en body (fuera del overflow container)
         let overlay = document.getElementById('filtersOverlay');
         if (!overlay) {
             overlay = document.createElement('div');
@@ -560,6 +558,7 @@ function setupFilterToggle() {
         return;
     }
 
+    // Web normal
     toggleBtn.addEventListener('click', function() {
         const isOpen = sidebar.classList.toggle('mobile-hidden') === false;
         toggleBtn.setAttribute('aria-expanded', isOpen);
@@ -572,6 +571,7 @@ function openMobileFilters() {
     var toggleBtn = document.getElementById('filterToggleBtn');
     if (!sidebar) return;
 
+    // Mover panel al body para escapar del overflow:auto container
     if (sidebar.parentNode !== document.body) {
         _filtersPanelParent      = sidebar.parentNode;
         _filtersPanelNextSibling = sidebar.nextSibling;
@@ -579,7 +579,7 @@ function openMobileFilters() {
     }
 
     sidebar.classList.remove('mobile-hidden');
-    sidebar.getBoundingClientRect();
+    sidebar.getBoundingClientRect(); // forzar reflow
     sidebar.classList.add('filters-panel--open');
     if (overlay)   overlay.classList.add('filters-overlay--open');
     if (toggleBtn) toggleBtn.setAttribute('aria-expanded', 'true');
@@ -598,6 +598,7 @@ function closeMobileFilters() {
     setTimeout(function() {
         if (sidebar.classList.contains('filters-panel--open')) return;
         sidebar.classList.add('mobile-hidden');
+        // Devolver al DOM original
         if (_filtersPanelParent && sidebar.parentNode !== _filtersPanelParent) {
             _filtersPanelParent.insertBefore(sidebar, _filtersPanelNextSibling);
         }
@@ -614,6 +615,9 @@ function setupScrollBehavior() {
     observer.observe(searchBarTop);
 }
 
+// ── Scroll-to-top button — ahora funciona en TODOS los tamaños ──
+// FIX: eliminada la condición if (window.innerWidth < 768) que
+//      ocultaba el botón en desktop.
 (function() {
     const btn = document.getElementById('scrollTopBtn');
     if (!btn) return;
