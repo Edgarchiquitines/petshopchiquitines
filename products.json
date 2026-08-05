@@ -8046,7 +8046,7 @@
     "code": "31663"
   },
   {
-    "id": "561",
+    "id": "560",
     "name": "Shooter Premium Antiparasitario externo",
     "brand": "Shooter",
     "price": 40000,
@@ -8055,7 +8055,7 @@
     "weight": "40-60 kg",
     "petType": "perro",
     "category": "salud",
-    "imageUrl": "assets/img/img561.png",
+    "imageUrl": "assets/img/img560.png",
     "isOnSale": false,
     "description": "Antiparasitario canino",
     "code": "31670"
