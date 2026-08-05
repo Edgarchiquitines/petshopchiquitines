@@ -8011,5 +8011,21 @@
     "isOnSale": false,
     "description": "Medicamentos",
     "code": "64018"
+  },
+    {
+    "id": "530",
+    "name": "Green Paws gato castrado",
+    "brand": "Green Paws",
+    "price": 75000,
+    "originalPrice": 75000,
+    "discountPercent": 0,
+    "stock": 10,
+    "weight": "1,5kg",
+    "petType": "gato",
+    "category": "alimentos",
+    "imageUrl": "assets/img/img530.png",
+    "isOnSale": false,
+    "description": "alimentos para gatos",
+    "code": "01953"
   }
 ]
