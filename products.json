@@ -3979,8 +3979,8 @@
   },
   {
     "id": "252",
-    "name": "Bio Fresh Cachorro med y grande",
-    "brand": "Bio Fresh",
+    "name": "Biofresh Cachorro med y grande",
+    "brand": "Biofresh",
     "price": 170000,
     "originalPrice": 170000,
     "stock": 10,
@@ -3994,8 +3994,8 @@
   },
   {
     "id": "544",
-    "name": "Bio Fresh Adulto mini y peq",
-    "brand": "Bio Fresh",
+    "name": "Biofresh Adulto mini y peq",
+    "brand": "Biofresh",
     "price": 145000,
     "originalPrice": 145000,
     "stock": 10,
@@ -4009,8 +4009,8 @@
   },
   {
     "id": "253",
-    "name": "Bio Fresh Gato castrado salmon",
-    "brand": "Bio Fresh",
+    "name": "Biofresh Gato castrado salmon",
+    "brand": "Biofresh",
     "price": 115000,
     "originalPrice": 115000,
     "stock": 0,
@@ -8001,7 +8001,7 @@
     "code": "35111"
   },
   {
-    "id": "557",
+    "id": "558",
     "name": "Shooter Total Antiparasitario interno/externo",
     "brand": "Shooter",
     "price": 38000,
@@ -8010,13 +8010,13 @@
     "weight": "25-40 kg",
     "petType": "perro",
     "category": "salud",
-    "imageUrl": "assets/img/img557.png",
+    "imageUrl": "assets/img/img558.png",
     "isOnSale": false,
     "description": "Antiparasitario canino",
     "code": "35128"
   },
   {
-    "id": "558",
+    "id": "559",
     "name": "Shooter Premium Antiparasitario externo",
     "brand": "Shooter",
     "price": 30000,
@@ -8025,13 +8025,13 @@
     "weight": "10-20 kg",
     "petType": "perro",
     "category": "salud",
-    "imageUrl": "assets/img/img558.png",
+    "imageUrl": "assets/img/img559.png",
     "isOnSale": false,
     "description": "Antiparasitario canino",
     "code": "31656"
   },
   {
-    "id": "559",
+    "id": "560",
     "name": "Shooter Premium Antiparasitario externo",
     "brand": "Shooter",
     "price": 35000,
@@ -8040,13 +8040,13 @@
     "weight": "20-40 kg",
     "petType": "perro",
     "category": "salud",
-    "imageUrl": "assets/img/img559.png",
+    "imageUrl": "assets/img/img560.png",
     "isOnSale": false,
     "description": "Antiparasitario canino",
     "code": "31663"
   },
   {
-    "id": "560",
+    "id": "561",
     "name": "Shooter Premium Antiparasitario externo",
     "brand": "Shooter",
     "price": 40000,
@@ -8055,7 +8055,7 @@
     "weight": "40-60 kg",
     "petType": "perro",
     "category": "salud",
-    "imageUrl": "assets/img/img560.png",
+    "imageUrl": "assets/img/img561.png",
     "isOnSale": false,
     "description": "Antiparasitario canino",
     "code": "31670"
