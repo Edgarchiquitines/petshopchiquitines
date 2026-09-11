@@ -2068,7 +2068,7 @@
     "imageUrl": "assets/img/img131.png",
     "isOnSale": false,
     "description": "Galleta para gatos",
-    "code": "01442"
+    "code": "04504"
   },
   {
     "id": "132",
@@ -5680,8 +5680,8 @@
     "id": "360",
     "name": "Royal Canin Adulto mini",
     "brand": "Royal Canin",
-    "price": 315000,
-    "originalPrice": 315000,
+    "price": 320000,
+    "originalPrice": 320000,
     "stock": 10,
     "weight": "4kg",
     "petType": "perro",
