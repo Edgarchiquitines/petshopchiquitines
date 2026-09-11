@@ -117,14 +117,16 @@ body.app-mode .bottom-nav {
     right: 0;
     height: calc(var(--bn-height) + var(--safe-bottom));
     padding-bottom: var(--safe-bottom);
-    background: #fff;
-    border-top: 1px solid #e5e7eb;
+    background: rgba(15, 23, 42, 0.92);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
     display: flex;
     justify-content: space-around;
     align-items: flex-start;
     padding-top: 0.5rem;
     z-index: 999;
-    box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.3);
 }
 
 body.app-mode .bottom-nav-item {
@@ -133,7 +135,7 @@ body.app-mode .bottom-nav-item {
     align-items: center;
     justify-content: flex-start;
     gap: 0.2rem;
-    color: #9ca3af;
+    color: #64748b;
     text-decoration: none;
     padding: 0.25rem 0.5rem;
     flex: 1;
@@ -141,18 +143,19 @@ body.app-mode .bottom-nav-item {
     -webkit-touch-callout: none;
     user-select: none;
     -webkit-tap-highlight-color: transparent;
-    transition: color 0.15s;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 body.app-mode .bottom-nav-item svg {
     width: 24px;
     height: 24px;
     flex-shrink: 0;
-    stroke-width: 1.75;
+    stroke-width: 1.85;
+    transition: transform 0.2s ease, stroke 0.2s ease;
 }
 
 body.app-mode .bottom-nav-item > span:not(.bn-badge) {
-    font-size: 0.6rem;
+    font-size: 0.62rem;
     font-weight: 600;
     letter-spacing: 0.01em;
     white-space: nowrap;
@@ -164,23 +167,25 @@ body.app-mode .bottom-nav-item.active {
 
 body.app-mode .bottom-nav-item.active svg {
     stroke: var(--app-orange);
+    transform: translateY(-2px) scale(1.1);
 }
 
 body.app-mode .bottom-nav-item:active {
-    opacity: 0.6;
+    transform: scale(0.92);
 }
 
-/* Indicador activo: punto naranja debajo del ícono */
+/* Indicador activo: brillante e iluminado */
 body.app-mode .bottom-nav-item.active::after {
     content: '';
     position: absolute;
     bottom: 0.1rem;
     left: 50%;
     transform: translateX(-50%);
-    width: 0.35rem;
-    height: 0.35rem;
+    width: 0.4rem;
+    height: 0.4rem;
     background: var(--app-orange);
     border-radius: 50%;
+    box-shadow: 0 0 8px var(--app-orange);
 }
 
 /* ── Badge ──────────────────────────────────────────────────────── */
@@ -213,7 +218,9 @@ body.app-mode .filters-overlay {
     display: none;
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(17, 24, 39, 0.6);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
     z-index: 997;
     -webkit-tap-highlight-color: transparent;
 }
@@ -229,16 +236,17 @@ body.app-mode #filtersSidebarMobile {
     right: 0 !important;
     top: auto !important;
     width: 100% !important;
-    max-height: 80dvh !important;
+    max-height: 85dvh !important;
     overflow-y: auto !important;
     -webkit-overflow-scrolling: touch;
-    border-radius: 1.25rem 1.25rem 0 0 !important;
-    background: #fff !important;
+    border-radius: 1.75rem 1.75rem 0 0 !important;
+    background: #ffffff !important;
     z-index: 998 !important;
-    padding: 1.25rem 1rem !important;
-    padding-bottom: calc(var(--bn-height) + var(--safe-bottom) + 1rem) !important;
-    transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1),
-                visibility 0.3s;
+    padding: 1.5rem 1.25rem !important;
+    padding-bottom: calc(var(--bn-height) + var(--safe-bottom) + 1.25rem) !important;
+    box-shadow: 0 -10px 40px rgba(15, 23, 42, 0.25) !important;
+    transition: transform 0.35s cubic-bezier(0.32, 0.72, 0, 1),
+                visibility 0.35s;
     /* Cerrado por defecto */
     transform: translateY(100%);
     visibility: hidden;
@@ -250,11 +258,11 @@ body.app-mode #filtersSidebarMobile {
 body.app-mode #filtersSidebarMobile::before {
     content: '';
     display: block;
-    width: 2.5rem;
-    height: 0.25rem;
-    background: #d1d5db;
-    border-radius: 0.25rem;
-    margin: 0 auto 1rem;
+    width: 3rem;
+    height: 0.3rem;
+    background: #cbd5e1;
+    border-radius: 0.3rem;
+    margin: 0 auto 1.25rem;
 }
 
 /* Abierto — la clase mobile-hidden se QUITA al abrir */
@@ -267,29 +275,26 @@ body.app-mode #filtersSidebarMobile.filters-panel--open {
    PANELES LATERALES — slide desde abajo en app
    ══════════════════════════════════════════════════════════════════ */
 body.app-mode .side-panel {
-    /* En móvil/PWA: panel desde abajo con bordes redondeados arriba */
     top: auto !important;
     bottom: 0 !important;
     left: 0 !important;
     right: 0 !important;
     width: 100% !important;
-    height: 85dvh !important;
-    height: 85vh !important;
-    max-height: 85dvh !important;
-    max-height: 85vh !important;
-    border-radius: 1.25rem 1.25rem 0 0 !important;
-    /* Cuando está cerrado, se esconde debajo */
+    height: 88dvh !important;
+    height: 88vh !important;
+    max-height: 88dvh !important;
+    max-height: 88vh !important;
+    border-radius: 1.75rem 1.75rem 0 0 !important;
     transform: translateY(100%) !important;
 }
 
 body.app-mode .side-panel.panel--open {
-    /* Cuando está abierto, sube a su posición */
     transform: translateY(0) !important;
 }
 
 body.app-mode .panel-header {
-    border-radius: 1.25rem 1.25rem 0 0;
-    background: #000 !important;
+    border-radius: 1.75rem 1.75rem 0 0 !important;
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%) !important;
     color: #fff !important;
 }
 
@@ -362,4 +367,152 @@ body.app-mode .mobile-sticky-wrapper {
 /* ── Cart panel-body: espacio extra para el bottom nav ──────────── */
 body.app-mode .panel-body {
     padding-bottom: calc(var(--bn-height) + var(--safe-bottom) + 1rem);
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   MEJORAS GENERALES PARA MÓVIL — todas las páginas
+   ══════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 767px) {
+    /* Texto más legible en mobile */
+    body {
+        font-size: 15px;
+        -webkit-text-size-adjust: 100%;
+    }
+
+    /* Header compacto en mobile */
+    .header-content {
+        height: 3.75rem;
+    }
+
+    /* Tarjetas de producto más adaptadas a mobile */
+    .product-card {
+        border-radius: 1rem !important;
+    }
+
+    .product-name {
+        font-size: 0.85rem !important;
+    }
+
+    .current-price, .regular-price {
+        font-size: 1.05rem !important;
+    }
+
+    /* Botón de añadir al carrito — más accesible en touch */
+    .add-to-cart-btn {
+        min-height: 2.6rem;
+        font-size: 0.8rem;
+    }
+
+    /* Carrito — mejor espaciado */
+    .cart-item {
+        padding: 0.85rem !important;
+        border-radius: 1rem !important;
+    }
+
+    .cart-item-image {
+        width: 4rem !important;
+        height: 4rem !important;
+        border-radius: 0.75rem;
+    }
+
+    /* Formulario de pedido — inputs cómodos al tacto */
+    .order-form input,
+    .order-form select,
+    .order-form textarea {
+        font-size: 16px !important; /* Evita zoom en iOS */
+        min-height: 2.75rem;
+        border-radius: 0.75rem !important;
+    }
+
+    .radio-option {
+        padding: 0.85rem 1rem !important;
+        border-radius: 0.85rem !important;
+    }
+
+    .radio-option span {
+        font-size: 0.85rem !important;
+    }
+
+    /* Submit button — más grande y táctil */
+    .submit-btn {
+        min-height: 3.25rem !important;
+        font-size: 1rem !important;
+        border-radius: 1rem !important;
+    }
+
+    /* Botón volver arriba — posicionado sobre FAB WA */
+    .scroll-top-btn {
+        bottom: 5.5rem !important;
+        right: 1rem !important;
+        width: 3rem !important;
+        height: 3rem !important;
+    }
+
+    /* Section headers — más compactos */
+    .section-header h1 {
+        font-size: 1.65rem !important;
+    }
+
+    /* Título de carrito */
+    .cart-page h1 {
+        font-size: 1.65rem !important;
+    }
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   MEJORAS ESPECÍFICAS PWA (app-mode)
+   ══════════════════════════════════════════════════════════════════ */
+
+/* Bottom nav item — feedback más vivo en touch */
+body.app-mode .bottom-nav-item:active svg {
+    transform: translateY(-4px) scale(1.25) !important;
+    stroke: var(--app-orange) !important;
+}
+
+/* Transición al navegar entre páginas */
+body.app-mode #app-scroll-content {
+    scroll-behavior: smooth;
+}
+
+/* Tarjetas de producto en PWA — diseño card más profundo */
+body.app-mode .product-card {
+    border-radius: 1.15rem !important;
+    box-shadow: 0 4px 16px rgba(15, 23, 42, 0.07) !important;
+}
+
+/* Cart item en PWA */
+body.app-mode .cart-item {
+    border-radius: 1rem !important;
+    margin-bottom: 0.6rem !important;
+}
+
+/* Formulario en PWA — inputs sin zoom */
+body.app-mode .order-form input,
+body.app-mode .order-form select,
+body.app-mode .order-form textarea {
+    font-size: 16px !important;
+}
+
+/* Scroll-top-btn en app-mode */
+body.app-mode .scroll-top-btn {
+    bottom: calc(var(--bn-height) + var(--safe-bottom) + 5rem) !important;
+    right: 1rem !important;
+    width: 2.75rem !important;
+    height: 2.75rem !important;
+}
+
+/* Headline del catálogo en PWA más compacto */
+body.app-mode .section-header h1 {
+    font-size: 1.5rem !important;
+}
+
+body.app-mode .section-header p {
+    font-size: 0.85rem !important;
+}
+
+/* Mejora el filter toggle en PWA */
+body.app-mode .filter-toggle-btn {
+    border-radius: 0.75rem !important;
+    min-height: 2.6rem;
 }
