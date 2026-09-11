@@ -244,6 +244,7 @@
     /**
      * En cart.html: inyecta un botón "Pedir por WhatsApp" debajo del total.
      * El botón genera un mensaje con los productos del carrito y abre WhatsApp.
+     * En app-mode, se posiciona con margen suficiente sobre la bottom nav.
      */
     function injectCartWhatsAppButton() {
         if (!window.location.pathname.includes('cart')) return;
@@ -253,7 +254,7 @@
         function tryInject() {
             // Buscar el contenedor del total/resumen del carrito
             const orderSummary = document.querySelector('.order-summary, .cart-summary, .checkout-summary, #orderSummary, #cartSummary');
-            const checkoutForm = document.querySelector('.checkout-form, #checkoutForm, form');
+            const checkoutForm = document.querySelector('.checkout-form, #checkoutForm, form.order-form');
 
             const container = orderSummary || checkoutForm;
             if (!container) return false;
@@ -276,8 +277,8 @@
             btn.addEventListener('click', sendCartViaWhatsApp);
 
             // Intentar insertar al final del formulario/summary, antes del submit button
-            const existingSubmit = container.querySelector('button[type="submit"], .checkout-submit-btn, .place-order-btn, #submitOrderBtn');
-            if (existingSubmit) {
+            const existingSubmit = container.querySelector('button[type="submit"], .checkout-submit-btn, .place-order-btn, #submitOrderBtn, #submitBtn');
+            if (existingSubmit && existingSubmit.parentNode) {
                 existingSubmit.parentNode.insertBefore(btn, existingSubmit.nextSibling);
             } else {
                 container.appendChild(btn);

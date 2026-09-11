@@ -43,7 +43,7 @@ body.app-mode .header {
     overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
     padding-top: var(--safe-top);
-    padding-bottom: calc(var(--bn-height) + var(--safe-bottom) + 0.5rem);
+    padding-bottom: calc(var(--bn-height) + var(--safe-bottom) + 1.5rem);
 }
 
 /* ── Footer: oculto en app ──────────────────────────────────────── */

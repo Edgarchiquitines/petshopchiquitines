@@ -113,6 +113,12 @@
             flex-shrink: 0;
             padding: 0.2rem;
         }
+        
+        /* ── Formulario de pedido: padding extra en app-mode ── */
+        body.app-mode .order-form {
+            padding-bottom: calc(var(--bn-height) + var(--safe-bottom) + 1.5rem) !important;
+        }
+        
         @media (min-width: 768px) {
             .cart-item-image { width: 6rem; height: 6rem; }
             .cart-item-name {
@@ -125,6 +131,11 @@
             .cart-item-meta { font-size: 0.75rem; white-space: normal; }
             .cart-item-total { font-size: 1rem; }
             .cart-item-unit-price { font-size: 0.75rem; }
+            
+            /* En desktop, no necesita padding extra */
+            body.app-mode .order-form {
+                padding-bottom: 0 !important;
+            }
         }
     </style>
 </head>
