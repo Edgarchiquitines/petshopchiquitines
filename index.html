@@ -53,6 +53,7 @@
 
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="app-styles.css">
+    <link rel="stylesheet" href="app-native.css">
     <link rel="stylesheet" href="promo-modal.css">
 
     <!-- JSON-LD Structured Data -->
@@ -437,18 +438,21 @@
 }
 </script>
 
+    <!-- App Native Enhancement (carga primero para mejor UX) -->
+    <script src="app-native.js" defer></script>
+    
+    <!-- App Scripts -->
     <script src="app.js" defer></script>
     <script src="app-mode.js" defer></script>
     <script src="promo-modal.js" defer></script>
     
     <!-- Configuración del modal de promoción -->
     <script defer>
-        // IMPORTANTE: Personaliza estas URLs antes de deplojar
         window.promoConfig = {
-            imageUrl: 'assets/promo.webp',  // Cambia a tu imagen promocional
-            instagramUrl: 'https://www.instagram.com/p/DdJ4XbCBMcd/?stkn=aDBwbXI2MXU1NGFq',  // Cambia a tu perfil de Instagram
+            imageUrl: 'assets/promo.jpg',  // Tu imagen del sorteo
+            instagramUrl: 'https://www.instagram.com/p/DdJ4XbCBMcd/',  // Link del sorteo
             showOncePerSession: true,  // Mostrar solo 1 vez por sesión
-            delay: 800  // Delay en ms antes de mostrar (aumentado para que cargue bien)
+            delay: 800  // Delay en ms antes de mostrar
         };
     </script>
     <script defer>
