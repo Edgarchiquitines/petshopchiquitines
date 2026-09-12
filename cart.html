@@ -47,6 +47,7 @@
 
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="app-styles.css">
+    <link rel="stylesheet" href="promo-modal.css">
 
     <style>
         /* ── Fixes específicos para el carrito en mobile ── */
@@ -605,6 +606,19 @@
                 submitBtn.innerHTML = originalText;
             }
         }
+    </script>
+
+    <!-- Modal de promoción -->
+    <script src="promo-modal.js" defer></script>
+    
+    <!-- Configuración del modal de promoción -->
+    <script defer>
+        window.promoConfig = {
+            imageUrl: 'assets/promo.webp',
+            instagramUrl: 'https://instagram.com/petshopchiquitines',
+            showOncePerSession: true,
+            delay: 800
+        };
     </script>
 
     <!-- PWA Service Worker -->

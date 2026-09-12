@@ -53,6 +53,7 @@
 
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="app-styles.css">
+    <link rel="stylesheet" href="promo-modal.css">
 
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
@@ -438,6 +439,18 @@
 
     <script src="app.js" defer></script>
     <script src="app-mode.js" defer></script>
+    <script src="promo-modal.js" defer></script>
+    
+    <!-- Configuración del modal de promoción -->
+    <script defer>
+        // IMPORTANTE: Personaliza estas URLs antes de deplojar
+        window.promoConfig = {
+            imageUrl: 'assets/promo.webp',  // Cambia a tu imagen promocional
+            instagramUrl: 'https://instagram.com/petshopchiquitines',  // Cambia a tu perfil de Instagram
+            showOncePerSession: true,  // Mostrar solo 1 vez por sesión
+            delay: 800  // Delay en ms antes de mostrar (aumentado para que cargue bien)
+        };
+    </script>
     <script defer>
         'use strict';
 
