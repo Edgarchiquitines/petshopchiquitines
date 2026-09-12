@@ -25,7 +25,7 @@
     // ── Configuración por defecto ──────────────────────────────────
     const defaultConfig = {
         imageUrl: 'assets/promo.webp',
-        instagramUrl: 'https://instagram.com',
+        instagramUrl: 'https://www.instagram.com/p/DdJ4XbCBMcd/?stkn=aDBwbXI2MXU1NGFq',
         showOncePerSession: true,
         delay: 500,
         sessionKey: 'promo_modal_shown'
