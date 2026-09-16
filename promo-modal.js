@@ -1,20 +1,31 @@
 /**
- * PROMO MODAL - Sistema de anuncios promocionales
+ * PROMO MODAL - Sistema de anuncios promocionales con secuencia de imágenes
  * 
  * Características:
  * - Modal que aparece al cargar la página
- * - Imagen promocional clickeable que redirecciona a Instagram
- * - Botón X para cerrar
+ * - Soporta múltiples imágenes que aparecen una después de otra
+ * - Primera imagen es clickeable (redirecciona a Instagram)
+ * - Otras imágenes son solo para ver
+ * - Botón X para pasar a la siguiente imagen
  * - Se puede cerrar clickeando fuera de la imagen
  * - Control de frecuencia (configurable por sesión/día)
  * - Funciona en Desktop, Mobile y PWA
  * 
- * Configuración:
+ * Configuración con múltiples imágenes:
  *   window.promoConfig = {
- *       imageUrl: 'ruta/a/imagen.jpg',  // Requerido
- *       instagramUrl: 'https://instagram.com/...',  // Requerido
- *       showOncePerSession: true,  // Default: true (solo 1 vez por sesión)
- *       delay: 500  // Delay en ms antes de mostrar (default: 500)
+ *       images: [
+ *           {
+ *               url: 'assets/promo1.jpg',
+ *               link: 'https://instagram.com/...',
+ *               alt: 'Promoción 1'
+ *           },
+ *           {
+ *               url: 'assets/promo2.jpg',
+ *               alt: 'Promoción 2'  // Sin link = no clickeable
+ *           }
+ *       ],
+ *       showOncePerSession: true,
+ *       delay: 500
  *   };
  */
 
@@ -24,8 +35,13 @@
 
     // ── Configuración por defecto ──────────────────────────────────
     const defaultConfig = {
-        imageUrl: 'assets/promo.webp',
-        instagramUrl: 'https://www.instagram.com/p/DdJ4XbCBMcd/?stkn=aDBwbXI2MXU1NGFq',
+        images: [
+            {
+                url: 'assets/promo.jpg',
+                link: 'https://www.instagram.com/p/DdJ4XbCBMcd/',
+                alt: 'Promoción'
+            }
+        ],
         showOncePerSession: true,
         delay: 500,
         sessionKey: 'promo_modal_shown'
@@ -36,7 +52,23 @@
 
     // ── Mezclar config global si existe ────────────────────────────
     if (window.promoConfig) {
-        config = { ...config, ...window.promoConfig };
+        // Soporte para config antigua (imageUrl + instagramUrl)
+        if (window.promoConfig.imageUrl && !window.promoConfig.images) {
+            config = {
+                ...config,
+                images: [
+                    {
+                        url: window.promoConfig.imageUrl,
+                        link: window.promoConfig.instagramUrl,
+                        alt: 'Promoción'
+                    }
+                ],
+                showOncePerSession: window.promoConfig.showOncePerSession !== undefined ? window.promoConfig.showOncePerSession : true,
+                delay: window.promoConfig.delay || 500
+            };
+        } else {
+            config = { ...config, ...window.promoConfig };
+        }
     }
 
     // ── Estado del modal ───────────────────────────────────────────
@@ -44,6 +76,7 @@
     let modalElement = null;
     let imageElement = null;
     let closeBtn = null;
+    let currentImageIndex = 0;
 
     /**
      * Crear el HTML del modal
@@ -53,8 +86,8 @@
             <div class="promo-modal" id="promoModal">
                 <div class="promo-modal-content">
                     <img 
-                        src="${config.imageUrl}" 
-                        alt="Promoción especial" 
+                        src="${config.images[0].url}" 
+                        alt="${config.images[0].alt || 'Promoción'}" 
                         class="promo-image" 
                         id="promoImage"
                         loading="lazy"
@@ -63,8 +96,18 @@
                         type="button" 
                         class="promo-close-btn" 
                         id="promoCloseBtn" 
-                        aria-label="Cerrar anuncio promocional"
+                        aria-label="Siguiente imagen o cerrar"
                     >×</button>
+                    
+                    <!-- Indicador de progreso -->
+                    ${config.images.length > 1 ? `
+                        <div class="promo-progress">
+                            <span class="promo-counter" id="promoCounter">1 / ${config.images.length}</span>
+                            <div class="promo-progress-bar">
+                                <div class="promo-progress-fill" id="promoProgressFill" style="width: ${(1 / config.images.length) * 100}%"></div>
+                            </div>
+                        </div>
+                    ` : ''}
                 </div>
             </div>
         `;
@@ -94,33 +137,88 @@
     }
 
     /**
+     * Cambiar a la siguiente imagen
+     */
+    function nextImage() {
+        if (currentImageIndex < config.images.length - 1) {
+            currentImageIndex++;
+            updateImage();
+        } else {
+            // Se acabaron las imágenes, cerrar
+            closeModal();
+        }
+    }
+
+    /**
+     * Actualizar la imagen actual
+     */
+    function updateImage() {
+        const currentImage = config.images[currentImageIndex];
+        
+        // Fade out
+        imageElement.style.opacity = '0';
+        
+        setTimeout(() => {
+            // Cambiar imagen
+            imageElement.src = currentImage.url;
+            imageElement.alt = currentImage.alt || 'Promoción';
+            
+            // Actualizar indicador de progreso
+            if (config.images.length > 1) {
+                const counter = document.getElementById('promoCounter');
+                const progressFill = document.getElementById('promoProgressFill');
+                
+                if (counter) counter.textContent = `${currentImageIndex + 1} / ${config.images.length}`;
+                if (progressFill) {
+                    const progress = ((currentImageIndex + 1) / config.images.length) * 100;
+                    progressFill.style.width = `${progress}%`;
+                }
+            }
+            
+            // Fade in
+            imageElement.style.opacity = '1';
+        }, 200);
+    }
+
+    /**
      * Adjuntar event listeners
      */
     function attachEventListeners() {
-        // Botón cerrar
-        closeBtn.addEventListener('click', closeModal, false);
-
-        // Cerrar al hacer clic fuera de la imagen
-        modalElement.addEventListener('click', function (e) {
-            if (e.target === modalElement) {
+        // Botón cerrar/siguiente
+        closeBtn.addEventListener('click', () => {
+            if (currentImageIndex < config.images.length - 1) {
+                // Si no es la última, ir a la siguiente
+                nextImage();
+            } else {
+                // Si es la última, cerrar
                 closeModal();
             }
         }, false);
 
-        // Imagen: abrir Instagram
-        imageElement.addEventListener('click', function (e) {
-            e.preventDefault();
-            // Esperar a que se cierre la animación
-            setTimeout(function () {
-                window.open(config.instagramUrl, '_blank', 'noopener,noreferrer');
-            }, 100);
-            closeModal();
+        // Cerrar al hacer clic fuera de la imagen
+        modalElement.addEventListener('click', function (e) {
+            if (e.target === modalElement) {
+                if (currentImageIndex < config.images.length - 1) {
+                    nextImage();
+                } else {
+                    closeModal();
+                }
+            }
         }, false);
 
-        // Prevenir zoom en iOS al hacer double-tap
-        imageElement.addEventListener('touchend', function (e) {
-            if (e.touches.length === 0) {
-                // Doble tap detectado (simulado)
+        // Imagen: abrir Instagram (solo si tiene link)
+        imageElement.addEventListener('click', function (e) {
+            const currentImage = config.images[currentImageIndex];
+            
+            if (currentImage.link) {
+                e.preventDefault();
+                setTimeout(function () {
+                    window.open(currentImage.link, '_blank', 'noopener,noreferrer');
+                }, 100);
+                closeModal();
+            } else if (currentImageIndex < config.images.length - 1) {
+                // Si no tiene link pero no es la última, ir a la siguiente
+                nextImage();
             }
         }, false);
 
@@ -128,6 +226,13 @@
         document.addEventListener('keydown', function (e) {
             if (e.key === 'Escape' && modalElement && modalElement.classList.contains('active')) {
                 closeModal();
+            }
+        }, false);
+
+        // Prevenir zoom en iOS al hacer double-tap
+        imageElement.addEventListener('touchend', function (e) {
+            if (e.touches.length === 0) {
+                // Doble tap detectado
             }
         }, false);
     }
@@ -190,9 +295,14 @@
     function forceShow() {
         sessionStorage.removeItem(config.sessionKey);
         modalShown = false;
+        currentImageIndex = 0;
+        
         if (!modalElement) {
             injectModal();
+        } else {
+            updateImage();
         }
+        
         showModal();
     }
 
@@ -203,8 +313,11 @@
         show: showModal,
         close: closeModal,
         force: forceShow,
+        next: nextImage,
         init: init,
-        config: config
+        config: config,
+        currentIndex: () => currentImageIndex,
+        totalImages: () => config.images.length
     };
 
     /**
@@ -212,15 +325,17 @@
      */
     function init() {
         // Validaciones mínimas
-        if (!config.imageUrl) {
-            console.error('PromoModal: imageUrl es requerido en config');
+        if (!config.images || config.images.length === 0) {
+            console.error('PromoModal: images array es requerido en config');
             return;
         }
 
-        if (!config.instagramUrl) {
-            console.error('PromoModal: instagramUrl es requerido en config');
-            return;
-        }
+        // Validar que cada imagen tiene URL
+        config.images.forEach((img, idx) => {
+            if (!img.url) {
+                console.error(`PromoModal: Imagen ${idx} no tiene URL`);
+            }
+        });
 
         // Inyectar el modal en el DOM
         if (!injectModal()) {

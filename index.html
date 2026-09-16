@@ -405,7 +405,7 @@
 <!-- Footer -->
 <footer class="footer" role="contentinfo">
     <div class="container">
-        <p class="copyright">© 2026 Chiquitines Py - Asunción, Paraguay</p>
+        <p class="copyright">© 2026 Chiquitines - Asunción, Paraguay</p>
 <p>Todos los derechos reservados</p>
     </div>
 </footer>
@@ -443,11 +443,19 @@
     
     <!-- Configuración del modal de promoción -->
     <script defer>
-        // IMPORTANTE: Personaliza estas URLs antes de deplojar
         window.promoConfig = {
-            imageUrl: 'assets/promo.png',
-            instagramUrl: 'https://www.instagram.com/p/DdJ4XbCBMcd/?stkn=aDBwbXI2MXU1NGFq', 
-            showOncePerSession: true,  // Mostrar solo 1 vez por sesión
+            images: [
+                {
+                    url: 'assets/promo.png',
+                    link: 'https://www.instagram.com/p/DdJ4XbCBMcd/?stkn=aDBwbXI2MXU1NGFq',
+                    alt: 'Promoción Sorteo Pedigree'
+                },
+                {
+                    url: 'assets/promo2.png',
+                    alt: 'Promoción 2'
+                }
+            ],
+            showOncePerSession: true,
             delay: 800
         };
     </script>

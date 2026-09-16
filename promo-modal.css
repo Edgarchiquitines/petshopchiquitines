@@ -1,8 +1,10 @@
 /* ═══════════════════════════════════════════════════════════════
-   MODAL DE ANUNCIO PROMOCIONAL
+   MODAL DE ANUNCIO PROMOCIONAL - Múltiples imágenes
    - Funciona en Desktop, Mobile y PWA
    - Aparece al cargar la página
-   - Se puede cerrar con X o fuera de la imagen
+   - Soporta secuencia de imágenes
+   - Primera imagen clickeable a Instagram
+   - Otras imágenes solo para ver
    ═══════════════════════════════════════════════════════════════ */
 
 /* ── Overlay del modal ──────────────────────────────────────────── */
@@ -57,11 +59,12 @@
     max-height: 85vh;
     border-radius: 1.25rem;
     cursor: pointer;
-    transition: transform 0.2s ease, filter 0.2s ease;
+    transition: transform 0.2s ease, filter 0.2s ease, opacity 0.2s ease;
     -webkit-user-select: none;
     user-select: none;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
     object-fit: contain;
+    opacity: 1;
 }
 
 .promo-image:active {
@@ -101,6 +104,44 @@
     background: #f5f5f5;
 }
 
+/* ── Indicador de progreso (múltiples imágenes) ─────────────────── */
+.promo-progress {
+    position: absolute;
+    bottom: -4.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.promo-counter {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.promo-progress-bar {
+    width: 100%;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.promo-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #FF6B35, #FFA500);
+    border-radius: 2px;
+    transition: width 0.3s ease;
+    box-shadow: 0 0 8px rgba(255, 107, 53, 0.5);
+}
+
 /* ── Responsive: ajustes para pantallas pequeñas ─────────────────── */
 @media (max-width: 480px) {
     .promo-modal {
@@ -117,6 +158,10 @@
         width: 2.2rem;
         height: 2.2rem;
         font-size: 1.3rem;
+    }
+
+    .promo-progress {
+        bottom: -3.5rem;
     }
 }
 
@@ -148,5 +193,25 @@ body.app-mode .promo-modal {
 @media print {
     .promo-modal {
         display: none !important;
+    }
+}
+
+/* ── Dark mode support ─────────────────────────────────────────── */
+@media (prefers-color-scheme: dark) {
+    .promo-close-btn {
+        background: rgba(30, 30, 30, 0.95);
+        color: #FFFFFF;
+    }
+
+    .promo-close-btn:hover {
+        background: #3a3a3a;
+    }
+
+    .promo-counter {
+        color: rgba(255, 255, 255, 0.7);
+    }
+
+    .promo-progress-bar {
+        background: rgba(255, 255, 255, 0.1);
     }
 }
