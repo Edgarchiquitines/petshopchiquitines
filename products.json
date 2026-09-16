@@ -8147,7 +8147,7 @@
     "price": 25000,
     "originalPrice": 25000,
     "discountPercent": 0,
-    "stock": 0,
+    "stock": 10,
     "weight": "360g",
     "petType": ["perro","gato"],
     "category": "salud",
@@ -8159,7 +8159,7 @@
   {
     "id": "514",
     "name": "Bedywood colchon Sanitaria de madera",
-    "brand": "Lysoform",
+    "brand": "Bedywood",
     "price": 30000,
     "originalPrice": 30000,
     "discountPercent": 0,
