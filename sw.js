@@ -139,5 +139,4 @@ async function networkFirstHtml(request) {
         );
     }
 }
-//mod 16/09/26
 //mod 17/09/26
