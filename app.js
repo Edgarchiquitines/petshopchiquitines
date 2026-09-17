@@ -232,6 +232,185 @@ function shareProductWA(product) {
     window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
 }
 
+// IMAGE ZOOM LIGHTBOX
+function openImageZoom(src, alt) {
+    if (document.getElementById('imgZoomOverlay')) return;
+
+    const overlay = document.createElement('div');
+    overlay.id = 'imgZoomOverlay';
+    overlay.setAttribute('role', 'dialog');
+    overlay.setAttribute('aria-modal', 'true');
+    overlay.setAttribute('aria-label', 'Zoom de imagen: ' + alt);
+    overlay.innerHTML = `
+        <div class="imgzoom-backdrop"></div>
+        <div class="imgzoom-container">
+            <img class="imgzoom-img" src="${src}" alt="${alt}" draggable="false">
+            <button class="imgzoom-close" aria-label="Cerrar zoom">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true" focusable="false">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+            <div class="imgzoom-hint" aria-hidden="true">Pellizca para hacer zoom</div>
+        </div>
+    `;
+    document.body.appendChild(overlay);
+    requestAnimationFrame(() => overlay.classList.add('imgzoom--open'));
+
+    const img      = overlay.querySelector('.imgzoom-img');
+    const closeBtn = overlay.querySelector('.imgzoom-close');
+    const hint     = overlay.querySelector('.imgzoom-hint');
+
+    setTimeout(() => hint.classList.add('imgzoom-hint--hidden'), 2000);
+
+    function closeZoom() {
+        overlay.classList.remove('imgzoom--open');
+        overlay.classList.add('imgzoom--closing');
+        setTimeout(() => overlay.remove(), 250);
+    }
+
+    closeBtn.addEventListener('click', closeZoom);
+    overlay.querySelector('.imgzoom-backdrop').addEventListener('click', closeZoom);
+
+    function onKeyDown(e) {
+        if (e.key === 'Escape') { closeZoom(); document.removeEventListener('keydown', onKeyDown); }
+    }
+    document.addEventListener('keydown', onKeyDown);
+
+    let scale = 1, minScale = 1, maxScale = 5, posX = 0, posY = 0;
+    let lastDist = 0, isDragging = false, dragStartX = 0, dragStartY = 0;
+
+    function applyTransform() {
+        img.style.transform = `translate(${posX}px, ${posY}px) scale(${scale})`;
+    }
+
+    function clampPos() {
+        if (scale <= 1) { posX = 0; posY = 0; return; }
+        const rect   = img.getBoundingClientRect();
+        const parent = img.parentElement.getBoundingClientRect();
+        const overX  = Math.max(0, (rect.width  - parent.width)  / 2);
+        const overY  = Math.max(0, (rect.height - parent.height) / 2);
+        posX = Math.min(overX, Math.max(-overX, posX));
+        posY = Math.min(overY, Math.max(-overY, posY));
+    }
+
+    img.addEventListener('touchstart', (e) => {
+        if (e.touches.length === 2) {
+            lastDist = Math.hypot(
+                e.touches[0].clientX - e.touches[1].clientX,
+                e.touches[0].clientY - e.touches[1].clientY
+            );
+        } else if (e.touches.length === 1 && scale > 1) {
+            isDragging = true;
+            dragStartX = e.touches[0].clientX - posX;
+            dragStartY = e.touches[0].clientY - posY;
+        }
+    }, { passive: true });
+
+    img.addEventListener('touchmove', (e) => {
+        if (e.touches.length === 2) {
+            e.preventDefault();
+            const dist  = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
+            const delta = dist / lastDist;
+            scale = Math.min(maxScale, Math.max(minScale, scale * delta));
+            lastDist = dist;
+            clampPos(); applyTransform();
+        } else if (e.touches.length === 1 && isDragging) {
+            posX = e.touches[0].clientX - dragStartX;
+            posY = e.touches[0].clientY - dragStartY;
+            clampPos(); applyTransform();
+        }
+    }, { passive: false });
+
+    img.addEventListener('touchend', (e) => {
+        if (e.touches.length < 2) isDragging = false;
+        if (scale <= 1) { scale = 1; posX = 0; posY = 0; applyTransform(); }
+    }, { passive: true });
+
+    let lastTap = 0;
+    img.addEventListener('touchend', (e) => {
+        const now = Date.now();
+        if (now - lastTap < 300) {
+            scale = scale > 1 ? 1 : 2.5;
+            if (scale === 1) { posX = 0; posY = 0; }
+            applyTransform();
+        }
+        lastTap = now;
+    }, { passive: true });
+
+    overlay.querySelector('.imgzoom-container').addEventListener('wheel', (e) => {
+        e.preventDefault();
+        scale = Math.min(maxScale, Math.max(minScale, scale - e.deltaY * 0.002));
+        clampPos(); applyTransform();
+    }, { passive: false });
+}
+
+// fitProductNames — optimizado con ResizeObserver
+const _nameObservers = new WeakMap();
+
+function _fitOneName(el) {
+    const isDesktop = window.innerWidth >= 768;
+    const MAX_FONT  = isDesktop ? 17 : 15;
+    const MIN_FONT  = 12;
+
+    el.style.fontSize        = MAX_FONT + 'px';
+    el.style.webkitLineClamp = 'unset';
+    el.style.overflow        = 'visible';
+    el.style.display         = 'block';
+    el.style.maxHeight       = 'none';
+    el.style.whiteSpace      = 'normal';
+
+    let size = MAX_FONT;
+    while (size > MIN_FONT) {
+        el.style.fontSize = size + 'px';
+        const lh       = parseFloat(getComputedStyle(el).lineHeight) || size * 1.4;
+        const twoLines = lh * 2 + 2;
+        if (el.scrollHeight <= twoLines) break;
+        size--;
+    }
+}
+
+function fitProductNames() {
+    document.querySelectorAll('.product-name').forEach(_fitOneName);
+}
+
+function _observeCardResize(nameEl) {
+    const card = nameEl.closest('.product-card');
+    if (!card || _nameObservers.has(card)) return;
+
+    const ro = new ResizeObserver(() => {
+        if (typeof requestIdleCallback === 'function') {
+            requestIdleCallback(() => _fitOneName(nameEl), { timeout: 300 });
+        } else {
+            setTimeout(() => _fitOneName(nameEl), 80);
+        }
+    });
+    ro.observe(card);
+    _nameObservers.set(card, ro);
+}
+
+function fitAndObserveProductNames() {
+    document.querySelectorAll('.product-name').forEach(el => {
+        _fitOneName(el);
+        if ('ResizeObserver' in window) _observeCardResize(el);
+    });
+}
+
+function observeProductGrid() {
+    const grids = document.querySelectorAll('#productsGrid, #recommendedGrid');
+    if (!grids.length) return;
+
+    const observer = new MutationObserver(() => {
+        if (typeof requestIdleCallback === 'function') {
+            requestIdleCallback(fitAndObserveProductNames, { timeout: 500 });
+        } else {
+            setTimeout(fitAndObserveProductNames, 100);
+        }
+    });
+
+    grids.forEach(grid => observer.observe(grid, { childList: true, subtree: false }));
+}
+
 // NOTIFICACIONES
 function showAddedToCartNotification(product) {
     const existing = document.getElementById('atcNotif');
