@@ -141,14 +141,7 @@ function createProductCard(product) {
                     </svg>
                 </button>
                 <img src="${imgSrc}" alt="${p.name}" width="400" height="300" loading="lazy" decoding="async">
-                <div class="zoom-hint" aria-hidden="true">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true" focusable="false">
-                        <circle cx="11" cy="11" r="8"></circle>
-                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                        <line x1="11" y1="8" x2="11" y2="14"></line>
-                        <line x1="8" y1="11" x2="14" y2="11"></line>
-                    </svg>
-                </div>
+                
                 ${hasDiscount ? `
                     <div class="discount-badge" aria-label="Descuento ${discountPercent}%">
                         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
@@ -233,117 +226,7 @@ function shareProductWA(product) {
 }
 
 // IMAGE ZOOM LIGHTBOX
-function openImageZoom(src, alt) {
-    if (document.getElementById('imgZoomOverlay')) return;
-
-    const overlay = document.createElement('div');
-    overlay.id = 'imgZoomOverlay';
-    overlay.setAttribute('role', 'dialog');
-    overlay.setAttribute('aria-modal', 'true');
-    overlay.setAttribute('aria-label', 'Zoom de imagen: ' + alt);
-    overlay.innerHTML = `
-        <div class="imgzoom-backdrop"></div>
-        <div class="imgzoom-container">
-            <img class="imgzoom-img" src="${src}" alt="${alt}" draggable="false">
-            <button class="imgzoom-close" aria-label="Cerrar zoom">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true" focusable="false">
-                    <line x1="18" y1="6" x2="6" y2="18"></line>
-                    <line x1="6" y1="6" x2="18" y2="18"></line>
-                </svg>
-            </button>
-            <div class="imgzoom-hint" aria-hidden="true">Pellizca para hacer zoom</div>
-        </div>
-    `;
-    document.body.appendChild(overlay);
-    requestAnimationFrame(() => overlay.classList.add('imgzoom--open'));
-
-    const img      = overlay.querySelector('.imgzoom-img');
-    const closeBtn = overlay.querySelector('.imgzoom-close');
-    const hint     = overlay.querySelector('.imgzoom-hint');
-
-    setTimeout(() => hint.classList.add('imgzoom-hint--hidden'), 2000);
-
-    function closeZoom() {
-        overlay.classList.remove('imgzoom--open');
-        overlay.classList.add('imgzoom--closing');
-        setTimeout(() => overlay.remove(), 250);
-    }
-
-    closeBtn.addEventListener('click', closeZoom);
-    overlay.querySelector('.imgzoom-backdrop').addEventListener('click', closeZoom);
-
-    function onKeyDown(e) {
-        if (e.key === 'Escape') { closeZoom(); document.removeEventListener('keydown', onKeyDown); }
-    }
-    document.addEventListener('keydown', onKeyDown);
-
-    let scale = 1, minScale = 1, maxScale = 5, posX = 0, posY = 0;
-    let lastDist = 0, isDragging = false, dragStartX = 0, dragStartY = 0;
-
-    function applyTransform() {
-        img.style.transform = `translate(${posX}px, ${posY}px) scale(${scale})`;
-    }
-
-    function clampPos() {
-        if (scale <= 1) { posX = 0; posY = 0; return; }
-        const rect   = img.getBoundingClientRect();
-        const parent = img.parentElement.getBoundingClientRect();
-        const overX  = Math.max(0, (rect.width  - parent.width)  / 2);
-        const overY  = Math.max(0, (rect.height - parent.height) / 2);
-        posX = Math.min(overX, Math.max(-overX, posX));
-        posY = Math.min(overY, Math.max(-overY, posY));
-    }
-
-    img.addEventListener('touchstart', (e) => {
-        if (e.touches.length === 2) {
-            lastDist = Math.hypot(
-                e.touches[0].clientX - e.touches[1].clientX,
-                e.touches[0].clientY - e.touches[1].clientY
-            );
-        } else if (e.touches.length === 1 && scale > 1) {
-            isDragging = true;
-            dragStartX = e.touches[0].clientX - posX;
-            dragStartY = e.touches[0].clientY - posY;
-        }
-    }, { passive: true });
-
-    img.addEventListener('touchmove', (e) => {
-        if (e.touches.length === 2) {
-            e.preventDefault();
-            const dist  = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
-            const delta = dist / lastDist;
-            scale = Math.min(maxScale, Math.max(minScale, scale * delta));
-            lastDist = dist;
-            clampPos(); applyTransform();
-        } else if (e.touches.length === 1 && isDragging) {
-            posX = e.touches[0].clientX - dragStartX;
-            posY = e.touches[0].clientY - dragStartY;
-            clampPos(); applyTransform();
-        }
-    }, { passive: false });
-
-    img.addEventListener('touchend', (e) => {
-        if (e.touches.length < 2) isDragging = false;
-        if (scale <= 1) { scale = 1; posX = 0; posY = 0; applyTransform(); }
-    }, { passive: true });
-
-    let lastTap = 0;
-    img.addEventListener('touchend', (e) => {
-        const now = Date.now();
-        if (now - lastTap < 300) {
-            scale = scale > 1 ? 1 : 2.5;
-            if (scale === 1) { posX = 0; posY = 0; }
-            applyTransform();
-        }
-        lastTap = now;
-    }, { passive: true });
-
-    overlay.querySelector('.imgzoom-container').addEventListener('wheel', (e) => {
-        e.preventDefault();
-        scale = Math.min(maxScale, Math.max(minScale, scale - e.deltaY * 0.002));
-        clampPos(); applyTransform();
-    }, { passive: false });
-}
+function openImageZoom() {} // Función removida
 
 // fitProductNames — optimizado con ResizeObserver
 const _nameObservers = new WeakMap();
@@ -543,9 +426,7 @@ style.textContent = `
     @keyframes slideIn  { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0);    opacity: 1; } }
     @keyframes slideOut { from { transform: translateX(0);    opacity: 1; } to { transform: translateX(100%); opacity: 0; } }
 
-    .zoom-hint { display: none; }
     @media (hover: none) and (pointer: coarse) {
-        .zoom-hint {
             display: flex;
             position: absolute;
             bottom: 0.4rem;
@@ -561,7 +442,6 @@ style.textContent = `
             transition: opacity 0.3s;
         }
     }
-    .imgzoom-hint--hidden { opacity: 0 !important; }
 
     .low-stock-badge {
         position: absolute;
