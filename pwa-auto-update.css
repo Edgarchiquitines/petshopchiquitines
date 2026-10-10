@@ -1,0 +1,203 @@
+/* ═══════════════════════════════════════════════════════════════
+   NOTIFICACIONES DE ACTUALIZACIÓN PWA
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Banner de actualización disponible ────────────────────────── */
+
+.pwa-update-banner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(135deg, #FF6B35 0%, #FF8C42 100%);
+    color: white;
+    z-index: 9998;
+    box-shadow: 0 4px 20px rgba(255, 107, 53, 0.4);
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.pwa-update-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px;
+    max-width: 100%;
+    gap: 12px;
+}
+
+.pwa-update-text {
+    flex: 1;
+    margin: 0;
+}
+
+.pwa-update-text strong {
+    display: block;
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.pwa-update-text p {
+    margin: 0;
+    font-size: 13px;
+    opacity: 0.95;
+}
+
+/* Botón de actualizar */
+.pwa-update-btn {
+    background: rgba(255, 255, 255, 0.25);
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s;
+    flex-shrink: 0;
+    backdrop-filter: blur(10px);
+}
+
+.pwa-update-btn:hover {
+    background: rgba(255, 255, 255, 0.35);
+    border-color: rgba(255, 255, 255, 0.6);
+    transform: scale(1.05);
+}
+
+.pwa-update-btn:active {
+    transform: scale(0.98);
+}
+
+/* Botón de cerrar */
+.pwa-update-close {
+    background: rgba(255, 255, 255, 0.15);
+    border: none;
+    color: white;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    flex-shrink: 0;
+}
+
+.pwa-update-close:hover {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+.pwa-update-close:active {
+    transform: scale(0.9);
+}
+
+/* ── Notificación de actualización aplicada ──────────────────── */
+
+.pwa-update-applied {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+    z-index: 9999;
+    animation: slideUpIn 0.3s ease, slideUpOut 0.3s ease 3.7s forwards;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+@keyframes slideUpIn {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideUpOut {
+    from {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+}
+
+/* ── Responsive ────────────────────────────────────────────────── */
+
+@media (max-width: 480px) {
+    .pwa-update-content {
+        flex-direction: column;
+        gap: 10px;
+        padding: 12px;
+    }
+
+    .pwa-update-text {
+        width: 100%;
+    }
+
+    .pwa-update-btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    .pwa-update-applied {
+        bottom: 16px;
+        right: 16px;
+        left: 16px;
+        text-align: center;
+    }
+}
+
+/* ── Dark Mode ──────────────────────────────────────────────────── */
+
+@media (prefers-color-scheme: dark) {
+    .pwa-update-banner {
+        background: linear-gradient(135deg, #FF6B35 0%, #FF8C42 100%);
+    }
+
+    .pwa-update-applied {
+        background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+    }
+}
+
+/* ── En PWA instalada, ajustar para bottom-nav ────────────────── */
+
+body.app-mode .pwa-update-applied {
+    bottom: calc(20px + var(--bn-height, 70px));
+}
+
+/* ── Animación de carga ─────────────────────────────────────────── */
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+}
+
+.pwa-update-banner {
+    animation: slideDown 0.3s ease;
+}
