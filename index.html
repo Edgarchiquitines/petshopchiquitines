@@ -81,6 +81,7 @@
       ]
     }
     </script>
+    <link rel="stylesheet" href="mejoras.css">
 </head>
 <body>
     <!-- Header -->
@@ -405,7 +406,7 @@
 <!-- Footer -->
 <footer class="footer" role="contentinfo">
     <div class="container">
-        <p class="copyright">© 2026 Chiquitines Py - Asunción, Paraguay</p>
+        <p class="copyright">© 2026 Chiquitines - Asunción, Paraguay</p>
 <p>Todos los derechos reservados</p>
     </div>
 </footer>
@@ -441,20 +442,8 @@
     <script src="app-mode.js" defer></script>
     <script src="promo-modal.js" defer></script>
     
-    <!-- Configuración del modal de promoción -->
-    <script defer>
-        window.promoConfig = {
-            images: [
-                {
-                    url: 'assets/promo.png',
-                    link: 'https://www.instagram.com/p/DdJ4XbCBMcd/?stkn=aDBwbXI2MXU1NGFq',
-                    alt: 'Promoción Sorteo Pedigree'
-                }
-            ],
-            showOncePerSession: true,
-            delay: 800
-        };
-    </script>
+    <!-- Sistema de configuración del promo modal -->
+    <script src="promo-config.js" defer></script>
     <script defer>
         'use strict';
 
@@ -565,5 +554,6 @@
             }, { passive: true });
         }
     </script>
+    <script src="mejoras.js" defer></script>
 </body>
 </html>
