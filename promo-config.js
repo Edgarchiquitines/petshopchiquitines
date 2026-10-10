@@ -13,7 +13,7 @@
 
 const PROMO_SETTINGS = {
     // ACTIVAR O DESACTIVAR PROMO MODAL
-    enabled: true,  // ← CAMBIA A 'false' PARA DESACTIVAR, 'true' PARA ACTIVAR
+    enabled: false,  // ← CAMBIA A 'false' PARA DESACTIVAR, 'true' PARA ACTIVAR
     
     // IMÁGENES DEL PROMO
     images: [
