@@ -7402,7 +7402,7 @@
     "weight": "unidad",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img575.png",
+    "imageUrl": "assets/img/img575.jpg",
     "isOnSale": false,
     "description": "Snacks para perros",
     "code": "07556"
@@ -7417,7 +7417,7 @@
     "weight": "100g",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img576.png",
+    "imageUrl": "assets/img/img576.jpg",
     "isOnSale": false,
     "description": "Snacks para perros",
     "code": "10143"
@@ -7432,7 +7432,7 @@
     "weight": "250g",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img576.png",
+    "imageUrl": "assets/img/img576.jpg",
     "isOnSale": false,
     "description": "Snacks para perros",
     "code": "07556"
@@ -8889,7 +8889,7 @@
     "weight": "5ml",
     "petType": ["perro", "gato", "caballo"],
     "category": "salud",
-    "imageUrl": "assets/img/img585.png",
+    "imageUrl": "assets/img/img585.jpg",
     "isOnSale": false,
     "description": "Medicamentos",
   "code": "21196"
@@ -8905,7 +8905,7 @@
     "weight": "5ml",
     "petType": "perro",
     "category": "salud",
-    "imageUrl": "assets/img/img586.png",
+    "imageUrl": "assets/img/img586.jpg",
     "isOnSale": false,
     "description": "Medicamentos",
   "code": "00536"
@@ -8921,7 +8921,7 @@
     "weight": "125ml",
     "petType": "perro",
     "category": "salud",
-    "imageUrl": "assets/img/img587.png",
+    "imageUrl": "assets/img/img587.jpg",
     "isOnSale": false,
     "description": "Medicamentos",
   "code": "02745"
@@ -8937,7 +8937,7 @@
     "weight": "125ml",
     "petType": "gato",
     "category": "salud",
-    "imageUrl": "assets/img/img588.png",
+    "imageUrl": "assets/img/img588.jpg",
     "isOnSale": false,
     "description": "Medicamentos",
   "code": "02769"
