@@ -6689,7 +6689,7 @@
     "price": 40000,
     "originalPrice": 40000,
     "discountPercent": 0,
-    "stock": 1  0,
+    "stock": 10,
     "weight": "5L",
     "petType": "gato",
     "category": "higiene",
