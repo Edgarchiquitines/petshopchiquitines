@@ -6040,7 +6040,7 @@
     "weight": "Caja x12",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img566.png",
+    "imageUrl": "assets/img/img375.png",
     "isOnSale": false,
     "description": "Alimento balanceado para gatos",
     "code": "08936"
@@ -6055,7 +6055,7 @@
     "weight": "Caja x12",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img567.png",
+    "imageUrl": "assets/img/img376.png",
     "isOnSale": false,
     "description": "Alimento balanceado para gatos",
     "code": "13564"
@@ -6070,7 +6070,7 @@
     "weight": "Caja x12",
     "petType": "gato",
     "category": "alimentos",
-    "imageUrl": "assets/img/img568.png",
+    "imageUrl": "assets/img/img377.png",
     "isOnSale": false,
     "description": "Alimento balanceado para gatos",
     "code": "08936"
@@ -7537,7 +7537,7 @@
     "weight": "paq",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img578.png",
+    "imageUrl": "assets/img/img466.png",
     "isOnSale": false,
     "description": "Snacks para perros",
     "code": "87056"
@@ -7552,7 +7552,7 @@
     "weight": "paq",
     "petType": "perro",
     "category": "alimentos",
-    "imageUrl": "assets/img/img579.png",
+    "imageUrl": "assets/img/img467.png",
     "isOnSale": false,
     "description": "Snacks para perros",
     "code": "87032"
